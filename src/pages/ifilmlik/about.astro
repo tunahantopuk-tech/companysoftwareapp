@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#E61806';
+---
+
+<Layout
+  title="iFilmlik — Hakkında"
+  description="iFilmlik uygulaması hakkında."
+>
+  <Header />
+
+  <main style="padding-top: 64px;">
+
+    <!-- Hero -->
+    <section style="padding: 64px 24px 56px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <a href="/ifilmlik" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px;">
+          <img src="/images/logo-ifilmlik.png" alt="iFilmlik" style="width: 44px; height: 44px; border-radius: 10px;" />
+          <span class="font-heading" style="font-size: 1.125rem; font-weight: 600; color: #fff;">iFilmlik</span>
+        </a>
+        <h1 class="font-heading" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: #fff; line-height: 1.2;">
+          Uygulama Hakkında
+        </h1>
+      </div>
+    </section>
+
+    <!-- İçerik -->
+    <section style="max-width: 720px; margin: 0 auto; padding: 56px 24px 80px;">
+      <div style="display: flex; flex-direction: column; gap: 0;">
+
+        <!-- Uygulama Hakkında -->
+        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
+            <span style="font-size: 16px;">🎬</span>
+          </div>
+          <div style="flex: 1;">
+            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Uygulama Hakkında</h2>
+            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
+              iFilmlik, film ve dizi severlere özel geliştirilmiş kişisel bir izleme asistanıdır. Film/dizi arama, izleme listesi yönetimi, yapay zeka destekli öneri sistemi ve oyunlaştırılmış keşif deneyimi sunar.
+            </p>
+          </div>
+        </div>
+
+        <!-- iFi -->
+        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
+            <span style="font-size: 16px;">🤖</span>
+          </div>
+          <div style="flex: 1;">
+            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">iFi Yapay Zeka Asistanı</h2>
+            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
+              iFi, Google Gemini API ile güçlendirilmiş film öneri asistanıdır. Ruh halinize, tür tercihlerinize ve izleme geçmişinize göre kişiselleştirilmiş öneriler sunar.
+            </p>
+          </div>
+        </div>
+
+        <!-- TMDB -->
+        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
+            <span style="font-size: 16px;">🎞️</span>
+          </div>
+          <div style="flex: 1;">
+            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Powered by TMDB</h2>
+            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 8px;">
+              Film ve dizi verileri The Movie Database (TMDB) tarafından sağlanmaktadır.
+            </p>
+            <a
+              href="https://www.themoviedb.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={`font-size: 0.875rem; color: ${accent}; text-decoration: none;`}
+            >
+              themoviedb.org ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- İletişim -->
+        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
+            <span style="font-size: 16px;">✉️</span>
+          </div>
+          <div style="flex: 1;">
+            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">İletişim</h2>
+            <a
+              href="mailto:support@ifilmlik.com"
+              style={`font-size: 0.9rem; font-weight: 500; color: ${accent}; text-decoration: none;`}
+            >
+              support@ifilmlik.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Telif -->
+        <div style="padding: 32px 0; text-align: center;">
+          <p style="font-size: 0.875rem; color: #334155;">© 2026 iFilmlik. Tüm hakları saklıdır.</p>
+        </div>
+
+      </div>
+
+      <!-- Geri dön -->
+      <div style="text-align: center;">
+        <a href="/ifilmlik" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
+          ← iFilmlik'e Dön
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

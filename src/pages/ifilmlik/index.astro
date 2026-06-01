@@ -1,0 +1,383 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const storeUrl = 'https://apps.apple.com/us/app/ifilmlik/id6760693864';
+
+const scrollFeatures = [
+  {
+    title: 'Asistan iFi',
+    sub: 'Filmini Bul, Film Önersin',
+    description: 'Yapay zeka destekli film asistanın iFi, aradığın filmi bulur ve sana özel öneriler sunar.',
+  },
+  {
+    title: 'Mini Oyunlar',
+    sub: 'Sessiz Sinema, Anlat Bakalım, iFishing, DedektiFi, iFiMoji',
+    description: 'Beş farklı mini oyunla film bilgini test et, arkadaşlarınla yarış, eğlenceyi bir üst seviyeye taşı.',
+  },
+  {
+    title: 'Keşfet',
+    sub: 'Aradığını Bul, Hemen Bul',
+    description: 'Güçlü arama ve keşif ekranıyla istediğin içeriğe saniyeler içinde ulaş.',
+  },
+  {
+    title: 'Liste',
+    sub: 'Listeni Oluştur ve Rozet Kazan',
+    description: 'Kendi film listelerini oluştur, tamamladıkça rozet kazan, başarılarını sergile.',
+  },
+  {
+    title: 'Detaylar',
+    sub: 'Platformlarda Kaybolma',
+    description: 'Her film ve dizi için hangi platformda olduğunu anında gör. Artık nerede izleyeceğini aramaya son.',
+  },
+];
+---
+
+<Layout
+  title="iFilmlik"
+  description="Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin."
+>
+  <Header />
+
+  <main style="padding-top: 64px;">
+
+    <!-- Hero -->
+    <section
+      style="position: relative; padding: 80px 24px 72px; text-align: center; overflow: hidden; background-image: radial-gradient(rgba(99,102,241,0.18) 1.5px, transparent 1.5px); background-size: 28px 28px;"
+    >
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;" aria-hidden="true">
+        <div style="width: 500px; height: 500px; background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%); border-radius: 50%;"></div>
+      </div>
+
+      <div style="position: relative; z-index: 10; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+        <img
+          src="/images/logo-ifilmlik.png"
+          alt="iFilmlik"
+          width="100"
+          height="100"
+          style="width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 24px 60px rgba(0,0,0,0.5);"
+        />
+        <div>
+          <h1 class="font-heading" style="font-size: clamp(2.5rem, 6vw, 3.75rem); font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.1;">
+            iFilmlik
+          </h1>
+          <p style="color: #94A3B8; font-size: 1.125rem; line-height: 1.7; max-width: 480px; margin: 0 auto;">
+            Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin.
+          </p>
+        </div>
+        <a
+          href={storeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display: inline-flex; align-items: center; gap: 12px; background: #111; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 12px 24px; color: white; text-decoration: none;"
+        >
+          <svg style="width: 24px; height: 24px; flex-shrink: 0;" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+          </svg>
+          <div style="text-align: left;">
+            <p style="font-size: 11px; color: #94A3B8; line-height: 1; margin-bottom: 3px;">App Store'dan İndir</p>
+            <p style="font-size: 14px; font-weight: 600; line-height: 1;">iOS için Ücretsiz</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Scroll phone -->
+    <section style="max-width: 1152px; margin: 0 auto; padding: 32px 24px;">
+      <div class="scroll-grid">
+
+        <!-- Sol: scroll feature'lar -->
+        <div>
+          {scrollFeatures.map((f, i) => (
+            <div class="scroll-feature" data-index={i} style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 64px 0; max-width: 420px;">
+              <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #6366F1; margin-bottom: 16px;">iFilmlik</p>
+              <h2 class="font-heading" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.15;">{f.title}</h2>
+              <p class="font-heading" style="font-size: 1.05rem; font-weight: 500; color: #818CF8; margin-bottom: 20px;">{f.sub}</p>
+              <p style="font-size: 1.05rem; color: #94A3B8; line-height: 1.75;">{f.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Sağ: sticky telefon -->
+        <div class="phone-sticky-col">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <div class="phone-frame">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+
+                <!-- Ekran 0: Asistan iFi -->
+                <div class="phone-shot active" data-shot="0">
+                  <div class="shot-ui" style="background: linear-gradient(180deg, #0d0820 0%, #1a0f35 100%);">
+                    <div class="shot-statusbar"></div>
+                    <div style="padding: 0 14px; display: flex; flex-direction: column; height: calc(100% - 46px);">
+                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">ASISTAN</p>
+                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">iFi</p>
+                      <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                        <div style="align-self: flex-end; background: rgba(99,102,241,0.8); border-radius: 16px 16px 4px 16px; padding: 8px 12px; max-width: 80%;">
+                          <p style="color: #fff; font-size: 12px; font-family: sans-serif;">Bilim kurgu filmi önerir misin?</p>
+                        </div>
+                        <div style="align-self: flex-start; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px 16px 16px 4px; padding: 8px 12px; max-width: 85%;">
+                          <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif; line-height: 1.5;">Tabii! Interstellar, Dune ve Arrival harika seçenekler. Hangisini izlemek istersin?</p>
+                        </div>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;">
+                          {['Interstellar', 'Dune', 'Arrival'].map(chip => (
+                            <div style="background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.4); border-radius: 20px; padding: 5px 10px;">
+                              <p style="color: #818CF8; font-size: 11px; font-family: sans-serif;">{chip}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <div style="align-self: flex-end; background: rgba(99,102,241,0.8); border-radius: 16px 16px 4px 16px; padding: 8px 12px; max-width: 80%; margin-top: 4px;">
+                          <p style="color: #fff; font-size: 12px; font-family: sans-serif;">Interstellar</p>
+                        </div>
+                      </div>
+                      <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <p style="color: rgba(255,255,255,0.25); font-size: 12px; font-family: sans-serif; flex: 1;">Film veya dizi sor…</p>
+                        <div style="width: 28px; height: 28px; background: #6366F1; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                          <div style="width: 0; height: 0; border-left: 6px solid white; border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-left: 2px;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ekran 1: Mini Oyunlar -->
+                <div class="phone-shot" data-shot="1">
+                  <div class="shot-ui" style="background: linear-gradient(180deg, #071a12 0%, #0d2a1e 100%);">
+                    <div class="shot-statusbar"></div>
+                    <div style="padding: 0 14px;">
+                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">EĞLENCE</p>
+                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Mini Oyunlar</p>
+                      <div style="display: flex; flex-direction: column; gap: 8px;">
+                        {[
+                          { name: 'Sessiz Sinema', color: '#10B981', icon: '🎭' },
+                          { name: 'Anlat Bakalım', color: '#F59E0B', icon: '💬' },
+                          { name: 'iFishing', color: '#3B82F6', icon: '🎣' },
+                          { name: 'DedektiFi', color: '#8B5CF6', icon: '🔍' },
+                          { name: 'iFiMoji', color: '#EC4899', icon: '😎' },
+                        ].map(game => (
+                          <div style={`display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 10px 12px;`}>
+                            <div style={`width: 40px; height: 40px; border-radius: 10px; background: ${game.color}25; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;`}>{game.icon}</div>
+                            <p style="color: #e2e8f0; font-size: 13px; font-weight: 600; font-family: sans-serif;">{game.name}</p>
+                            <div style="margin-left: auto; width: 8px; height: 8px; border-right: 2px solid rgba(255,255,255,0.2); border-top: 2px solid rgba(255,255,255,0.2); transform: rotate(45deg);"></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ekran 2: Keşfet -->
+                <div class="phone-shot" data-shot="2">
+                  <div class="shot-ui" style="background: linear-gradient(180deg, #071520 0%, #0d2035 100%);">
+                    <div class="shot-statusbar"></div>
+                    <div style="padding: 0 14px;">
+                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">KEŞFET</p>
+                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 12px;">Ara & Bul</p>
+                      <div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 9px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                        <div style="width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.25); border-radius: 50%; flex-shrink: 0;"></div>
+                        <p style="color: rgba(255,255,255,0.25); font-size: 12px; font-family: sans-serif;">Film, dizi, oyuncu ara…</p>
+                      </div>
+                      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+                        {['#6366F1','#22D3EE','#F59E0B','#EC4899','#10B981','#8B5CF6','#3B82F6','#F97316','#6366F1'].map(color => (
+                          <div style={`aspect-ratio: 2/3; border-radius: 8px; background: ${color}40; border: 1px solid ${color}30;`}></div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ekran 3: Liste -->
+                <div class="phone-shot" data-shot="3">
+                  <div class="shot-ui" style="background: linear-gradient(180deg, #110820 0%, #1c0d33 100%);">
+                    <div class="shot-statusbar"></div>
+                    <div style="padding: 0 14px;">
+                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">LİSTELER</p>
+                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Liste</p>
+                      <div style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px;">
+                        {[
+                          { label: 'En İyi Filmler', count: '24', done: true },
+                          { label: '2024 Sineması', count: '12', done: true },
+                          { label: 'Sci-Fi Favori', count: '8', done: false },
+                          { label: 'Arkadaş Önerileri', count: '6', done: false },
+                        ].map(item => (
+                          <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 9px 12px;">
+                            <div style={`width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; ${item.done ? 'background: #7C3AED;' : 'border: 1.5px solid rgba(255,255,255,0.2);'}`}>
+                              {item.done && <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>}
+                            </div>
+                            <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif; flex: 1;">{item.label}</p>
+                            <p style="color: rgba(255,255,255,0.3); font-size: 11px; font-family: sans-serif;">{item.count}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;">Rozetlerim</p>
+                      <div style="display: flex; gap: 8px;">
+                        {[{c:'#F59E0B',e:'🏆'},{c:'#6366F1',e:'⭐'},{c:'#10B981',e:'🎬'},{c:'#EC4899',e:'🎯'}].map(b => (
+                          <div style={`width: 40px; height: 40px; border-radius: 50%; background: ${b.c}20; border: 1.5px solid ${b.c}50; display: flex; align-items: center; justify-content: center; font-size: 18px;`}>{b.e}</div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ekran 4: Detaylar -->
+                <div class="phone-shot" data-shot="4">
+                  <div class="shot-ui" style="background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%);">
+                    <div class="shot-statusbar"></div>
+                    <div style="padding: 0 14px;">
+                      <div style="width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #1e1b4b, #312e81); margin-bottom: 12px; position: relative; overflow: hidden;">
+                        <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);"></div>
+                        <div style="position: absolute; bottom: 10px; left: 12px;">
+                          <p style="color: #fff; font-size: 14px; font-weight: 700; font-family: sans-serif;">Film Başlığı</p>
+                          <p style="color: rgba(255,255,255,0.5); font-size: 11px; font-family: sans-serif;">2024 • Aksiyon • 2s 18d</p>
+                        </div>
+                      </div>
+                      <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px;">
+                          <p style="color: #F59E0B; font-size: 12px; font-family: sans-serif; font-weight: 600;">★ 8.4</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px;">
+                          <p style="color: rgba(255,255,255,0.5); font-size: 12px; font-family: sans-serif;">IMDb</p>
+                        </div>
+                      </div>
+                      <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;">Platformlar</p>
+                      <div style="display: flex; flex-direction: column; gap: 6px;">
+                        {[
+                          { name: 'Netflix', color: '#E50914' },
+                          { name: 'Prime Video', color: '#00A8E0' },
+                          { name: 'Disney+', color: '#113CCF' },
+                        ].map(p => (
+                          <div style={`display: flex; align-items: center; gap: 10px; background: ${p.color}12; border: 1px solid ${p.color}30; border-radius: 10px; padding: 8px 12px;`}>
+                            <div style={`width: 8px; height: 8px; border-radius: 50%; background: ${p.color}; flex-shrink: 0;`}></div>
+                            <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif;">{p.name}</p>
+                            <p style={`margin-left: auto; font-size: 11px; font-family: sans-serif; color: ${p.color};`}>İzle →</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div><!-- /phone-screen -->
+            </div><!-- /phone-frame -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Alt linkler -->
+    <div style="max-width: 1152px; margin: 0 auto; padding: 32px 24px 64px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <a
+        href={storeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        style="display: inline-flex; align-items: center; gap: 10px; background: #111; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 10px 20px; color: white; text-decoration: none;"
+      >
+        <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+        </svg>
+        App Store'dan İndir
+      </a>
+      <div style="display: flex; gap: 24px;">
+        <a href="/ifilmlik/about" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
+          Hakkında
+        </a>
+        <a href="/ifilmlik/privacy-policy" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
+          Gizlilik Politikası
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .scroll-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .scroll-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+  }
+
+  .phone-sticky-col {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .phone-sticky-col {
+      display: block;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+    }
+  }
+
+  .phone-frame {
+    width: 260px;
+    height: 540px;
+    background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
+    border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
+    position: relative;
+    padding: 13px;
+  }
+  .phone-island {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 32px;
+    background: #000;
+    border-radius: 18px;
+    z-index: 10;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 38px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+  }
+  .phone-shot {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .phone-shot.active { opacity: 1; }
+  .shot-ui { width: 100%; height: 100%; display: flex; flex-direction: column; }
+  .shot-statusbar { height: 46px; flex-shrink: 0; }
+</style>
+
+<script>
+  const features = document.querySelectorAll<HTMLElement>('.scroll-feature');
+  const shots = document.querySelectorAll<HTMLElement>('.phone-shot');
+
+  function setActive(index: number) {
+    shots.forEach((s, i) => s.classList.toggle('active', i === index));
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = parseInt((entry.target as HTMLElement).dataset.index ?? '0', 10);
+          setActive(idx);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  features.forEach((f) => observer.observe(f));
+</script>

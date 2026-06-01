@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#E61806';
+const lastUpdated = '6 Mayıs 2025';
+
+const sections = [
+  {
+    title: 'Toplanan Veriler',
+    content: 'İzleme listesi, favoriler ve geçmiş gibi uygulama verileri yalnızca cihazınızda saklanır. Bu veriler hiçbir sunucuya gönderilmez ve üçüncü taraflarla paylaşılmaz.',
+  },
+  {
+    title: 'Kimlik Doğrulama',
+    content: 'Uygulamaya Apple veya Google hesabınızla giriş yapabilirsiniz. Bu süreçte yalnızca adınız ve e-posta adresiniz alınır. Şifreniz hiçbir zaman iFilmlik ile paylaşılmaz.',
+  },
+  {
+    title: 'Yapay Zeka Hizmeti (iFi)',
+    content: 'iFi asistanı, Google Gemini API kullanılarak güçlendirilmiştir. Asistanla gerçekleştirdiğiniz sohbet geçmişi yalnızca cihazınızda saklanır ve dışarıya aktarılmaz. Google\'ın gizlilik politikası için: policies.google.com/privacy',
+    link: { text: 'policies.google.com/privacy', href: 'https://policies.google.com/privacy' },
+  },
+  {
+    title: 'TMDB Verileri',
+    content: 'Film ve dizi bilgileri The Movie Database (TMDB) API\'si aracılığıyla sağlanmaktadır. TMDB\'nin gizlilik politikası için: themoviedb.org/privacy-policy',
+    link: { text: 'themoviedb.org/privacy-policy', href: 'https://www.themoviedb.org/privacy-policy' },
+  },
+  {
+    title: 'Üçüncü Taraf Paylaşımı',
+    content: 'Kişisel verileriniz hiçbir koşulda üçüncü taraflara satılmaz veya kiralanmaz. Yukarıda belirtilen hizmet sağlayıcılar (Google, TMDB) dışında herhangi bir veri paylaşımı yapılmamaktadır.',
+  },
+  {
+    title: 'Veri Silme',
+    content: 'Hesabınıza ve tüm verilerinize ait kalıcı silme işlemi için uygulama içindeki Profil sayfasına gidin ve "Üyeliği Sil" seçeneğini kullanın. Bu işlem geri alınamaz.',
+  },
+  {
+    title: 'Çocukların Gizliliği',
+    content: 'iFilmlik, 13 yaşın altındaki bireylere yönelik değildir. Bilerek 13 yaşın altındaki kullanıcılardan kişisel veri toplamıyoruz. Eğer bu durumdan haberdar olursak ilgili verileri derhal sileriz.',
+  },
+  {
+    title: 'Politika Değişiklikleri',
+    content: 'Bu gizlilik politikası zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim aracılığıyla kullanıcılara duyurulur. Değişikliklerin yürürlüğe girmesi, bildirim tarihinden itibaren geçerlidir.',
+  },
+  {
+    title: 'İletişim',
+    content: 'Gizlilik politikamıza ilişkin sorularınız için bizimle iletişime geçebilirsiniz:',
+    email: 'support@ifilmlik.com',
+  },
+];
+---
+
+<Layout
+  title="iFilmlik — Gizlilik Politikası"
+  description="iFilmlik uygulaması gizlilik politikası."
+>
+  <Header />
+
+  <main style="padding-top: 64px;">
+
+    <!-- Hero -->
+    <section style="padding: 64px 24px 56px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <a href="/ifilmlik" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px;">
+          <img src="/images/logo-ifilmlik.png" alt="iFilmlik" style="width: 44px; height: 44px; border-radius: 10px;" />
+          <span class="font-heading" style="font-size: 1.125rem; font-weight: 600; color: #fff;">iFilmlik</span>
+        </a>
+        <h1 class="font-heading" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: #fff; line-height: 1.2;">
+          Gizlilik Politikası
+        </h1>
+        <p style="font-size: 0.875rem; color: #475569;">
+          Son güncelleme: <span style={`color: ${accent};`}>{lastUpdated}</span>
+        </p>
+        <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.7; max-width: 520px;">
+          iFilmlik olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızın hangi verileri nasıl işlediğini açıklar.
+        </p>
+      </div>
+    </section>
+
+    <!-- Maddeler -->
+    <section style="max-width: 720px; margin: 0 auto; padding: 56px 24px 80px;">
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        {sections.map((s, i) => (
+          <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
+            <!-- Numara -->
+            <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
+              <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>{i + 1}</span>
+            </div>
+
+            <!-- İçerik -->
+            <div style="flex: 1;">
+              <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">{s.title}</h2>
+              <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">{s.content}</p>
+              {s.link && (
+                <a
+                  href={s.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={`display: inline-block; margin-top: 8px; font-size: 0.85rem; color: ${accent}; text-decoration: none;`}
+                >
+                  {s.link.text} ↗
+                </a>
+              )}
+              {s.email && (
+                <a
+                  href={`mailto:${s.email}`}
+                  style={`display: inline-block; margin-top: 8px; font-size: 0.9rem; color: ${accent}; text-decoration: none; font-weight: 500;`}
+                >
+                  {s.email}
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Geri dön -->
+      <div style="margin-top: 48px; text-align: center;">
+        <a href="/ifilmlik" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
+          ← iFilmlik'e Dön
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

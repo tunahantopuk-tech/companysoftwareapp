@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/tunahantopuk/.nvm/versions/**)",
+      "Bash(npm --version)",
+      "Bash(brew *)",
+      "WebFetch(domain:www.hungrystudio.com)"
+    ]
+  }
+}
