@@ -4,54 +4,56 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
 const accent = '#C41A1A';
-const lastUpdated = '6 Mayıs 2025';
+const lastUpdated = '2 Haziran 2025';
 
 const sections = [
   {
-    title: 'Toplanan Veriler',
-    content: 'İzleme listesi, favoriler ve geçmiş gibi uygulama verileri yalnızca cihazınızda saklanır. Bu veriler hiçbir sunucuya gönderilmez ve üçüncü taraflarla paylaşılmaz.',
+    title: 'Kabul',
+    content: 'iFilmlik uygulamasını indirerek veya kullanarak bu kullanım koşullarını kabul etmiş sayılırsınız. Koşulları kabul etmiyorsanız lütfen uygulamayı kullanmayınız.',
   },
   {
-    title: 'Kimlik Doğrulama',
-    content: 'Uygulamaya Apple veya Google hesabınızla giriş yapabilirsiniz. Bu süreçte yalnızca adınız ve e-posta adresiniz alınır. Şifreniz hiçbir zaman iFilmlik ile paylaşılmaz.',
+    title: 'Hizmetin Kapsamı',
+    content: 'iFilmlik; film ve dizi takip, izleme listesi oluşturma ve yapay zeka destekli öneri (iFi) hizmetleri sunar. Hizmet içeriği önceden bildirim yapılmaksızın değiştirilebilir veya kısıtlanabilir.',
   },
   {
-    title: 'Yapay Zeka Hizmeti (iFi)',
-    content: 'iFi asistanı, Google Gemini API kullanılarak güçlendirilmiştir. Asistanla gerçekleştirdiğiniz sohbet geçmişi yalnızca cihazınızda saklanır ve dışarıya aktarılmaz.',
-    link: { text: 'Google Gizlilik Politikası ↗', href: 'https://policies.google.com/privacy' },
+    title: 'Kullanıcı Hesabı',
+    content: 'Apple veya Google ile kimlik doğrulaması yaparak hesap oluşturabilirsiniz. Hesabınızın güvenliğinden siz sorumlusunuz. Şüpheli bir etkinlik fark ederseniz lütfen bizimle iletişime geçin.',
   },
   {
-    title: 'TMDB Verileri',
-    content: 'Film ve dizi bilgileri The Movie Database (TMDB) API\'si aracılığıyla sağlanmaktadır.',
-    link: { text: 'TMDB Gizlilik Politikası ↗', href: 'https://www.themoviedb.org/privacy-policy' },
+    title: 'Fikri Mülkiyet',
+    content: 'Uygulama arayüzü, tasarımı ve özgün içerikleri Company Software App\'e aittir. Film ve dizi verileri TMDB API\'si aracılığıyla lisanslı olarak kullanılmaktadır; bu veriler üzerindeki haklar ilgili sahiplerine aittir.',
   },
   {
-    title: 'Üçüncü Taraf Paylaşımı',
-    content: 'Kişisel verileriniz hiçbir koşulda üçüncü taraflara satılmaz veya kiralanmaz. Yukarıda belirtilen hizmet sağlayıcılar (Google, TMDB) dışında herhangi bir veri paylaşımı yapılmamaktadır.',
+    title: 'Kabul Edilemez Kullanım',
+    content: 'Uygulamayı yasadışı amaçlarla, başkalarının haklarını ihlal edecek biçimde veya hizmetin bütünlüğünü bozacak şekilde kullanamazsınız. Bu tür kullanımlar hesap askıya alınması veya silinmesiyle sonuçlanabilir.',
   },
   {
-    title: 'Veri Silme',
-    content: 'Hesabınıza ve tüm verilerinize ait kalıcı silme işlemi için uygulama içindeki Profil sayfasına gidin ve "Üyeliği Sil" seçeneğini kullanın. Bu işlem geri alınamaz.',
+    title: 'Sorumluluk Reddi',
+    content: 'iFilmlik "olduğu gibi" sunulmaktadır. Kesintisiz veya hatasız bir hizmet garanti edilmez. Uygulama, TMDB ve Google Gemini gibi üçüncü taraf hizmetlerin kullanılabilirliğine bağlıdır.',
   },
   {
-    title: 'Çocukların Gizliliği',
-    content: 'iFilmlik, 13 yaşın altındaki bireylere yönelik değildir. Bilerek 13 yaşın altındaki kullanıcılardan kişisel veri toplamıyoruz. Eğer bu durumdan haberdar olursak ilgili verileri derhal sileriz.',
+    title: 'Hesap Silme',
+    content: 'Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için uygulama içindeki Profil sayfasına gidin ve "Üyeliği Sil" seçeneğini kullanın. Bu işlem geri alınamaz.',
   },
   {
-    title: 'Politika Değişiklikleri',
-    content: 'Bu gizlilik politikası zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim aracılığıyla kullanıcılara duyurulur.',
+    title: 'Değişiklikler',
+    content: 'Bu koşullar zaman zaman güncellenebilir. Önemli değişiklikler uygulama içi bildirim aracılığıyla duyurulur. Uygulamayı kullanmaya devam etmeniz güncel koşulları kabul ettiğiniz anlamına gelir.',
+  },
+  {
+    title: 'Geçerli Hukuk',
+    content: 'Bu kullanım koşulları Türkiye Cumhuriyeti kanunlarına tabidir. Anlaşmazlıklarda İstanbul mahkemeleri yetkilidir.',
   },
   {
     title: 'İletişim',
-    content: 'Gizlilik politikamıza ilişkin sorularınız için bizimle iletişime geçebilirsiniz:',
+    content: 'Kullanım koşullarına ilişkin sorularınız için bizimle iletişime geçebilirsiniz:',
     email: 'support@companysoftware.app',
   },
 ];
 ---
 
 <Layout
-  title="iFilmlik — Gizlilik Politikası"
-  description="iFilmlik uygulaması gizlilik politikası."
+  title="iFilmlik — Kullanım Koşulları"
+  description="iFilmlik uygulaması kullanım koşulları ve hizmet şartları."
 >
   <Header />
 
@@ -63,9 +65,9 @@ const sections = [
           <img src="/images/logo-ifilmlik.png" alt="iFilmlik" class="doc-app-logo" />
           <span class="doc-app-name">iFilmlik</span>
         </a>
-        <h1 class="doc-title">Gizlilik Politikası</h1>
+        <h1 class="doc-title">Kullanım Koşulları</h1>
         <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
-        <p class="doc-intro">iFilmlik olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızın hangi verileri nasıl işlediğini açıklar.</p>
+        <p class="doc-intro">iFilmlik'i kullanmadan önce lütfen aşağıdaki koşulları okuyunuz.</p>
       </div>
     </section>
 
@@ -78,11 +80,6 @@ const sections = [
           <div class="doc-content">
             <h2>{s.title}</h2>
             <p>{s.content}</p>
-            {s.link && (
-              <a href={s.link.href} target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
-                {s.link.text}
-              </a>
-            )}
             {s.email && (
               <a href={`mailto:${s.email}`} class="doc-link" style={`color:${accent};`}>
                 {s.email}

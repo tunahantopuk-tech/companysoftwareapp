@@ -134,9 +134,16 @@ const steps = [
           <p class="form-lead">Projenizi anlatın, size en kısa sürede dönelim.</p>
         </div>
 
-        <form class="contact-form reveal" action="" method="POST" novalidate>
+        <p class="form-email-note reveal">
+          Formu doldurun veya direkt olarak
+          <a href="mailto:support@companysoftware.app">support@companysoftware.app</a>
+          adresine yazın.
+        </p>
 
-          <!-- Ad Soyad + onay checkbox -->
+        <form class="contact-form reveal" id="project-form" novalidate>
+          <input type="hidden" name="_subject" value="Yeni Proje Başvurusu — companysoftware.app" />
+
+          <!-- Ad Soyad -->
           <div class="field">
             <label for="name">Ad Soyad</label>
             <input id="name" name="name" type="text" placeholder="Adınız Soyadınız" required />
@@ -154,10 +161,10 @@ const steps = [
             <div class="select-wrap">
               <select id="type" name="type" required>
                 <option value="" disabled selected>Seçiniz…</option>
-                <option value="mobile">Mobil Uygulama</option>
-                <option value="game">Oyun</option>
-                <option value="web">Web</option>
-                <option value="other">Diğer</option>
+                <option value="Mobil Uygulama">Mobil Uygulama</option>
+                <option value="Oyun">Oyun</option>
+                <option value="Web">Web</option>
+                <option value="Diğer">Diğer</option>
               </select>
               <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M6 9l6 6 6-6"/>
@@ -185,8 +192,8 @@ const steps = [
             <span class="check-text">Kişisel verilerimin iletişim amacıyla işlenmesine onay veriyorum.</span>
           </label>
 
-          <button type="submit" class="btn-submit">
-            Gönder
+          <button type="submit" class="btn-submit" id="submit-btn">
+            <span class="btn-label">Gönder</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <line x1="5" y1="12" x2="19" y2="12"/>
               <polyline points="12 5 19 12 12 19"/>
@@ -194,6 +201,18 @@ const steps = [
           </button>
 
         </form>
+
+        <!-- Başarı mesajı -->
+        <div id="form-success" class="form-success" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <div>
+            <p class="success-title">Mesajınız iletildi!</p>
+            <p class="success-sub">En kısa sürede size dönüş yapacağız.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -212,6 +231,61 @@ const steps = [
     { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
   );
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Form → Formspree
+  const FORMSPREE_ID = 'mpqnvwra';
+
+  const form = document.getElementById('project-form') as HTMLFormElement | null;
+  const btn  = document.getElementById('submit-btn')   as HTMLButtonElement | null;
+  const success = document.getElementById('form-success') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const label = btn?.querySelector<HTMLElement>('.btn-label');
+    if (btn)  { btn.disabled = true; }
+    if (label){ label.textContent = 'Gönderiliyor…'; }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        // Formu sıfırla, göster — tekrar doldurulabilir
+        form.reset();
+        if (btn)  { btn.disabled = false; }
+        if (label){ label.textContent = 'Gönder'; }
+
+        // Bildirimi göster, scroll et
+        if (success) {
+          success.hidden = false;
+          success.classList.remove('fade-out');
+          requestAnimationFrame(() => {
+            success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+
+          // 5 saniye sonra fade-out ile gizle
+          setTimeout(() => {
+            success.classList.add('fade-out');
+            success.addEventListener('animationend', () => {
+              success.hidden = true;
+              success.classList.remove('fade-out');
+            }, { once: true });
+          }, 5000);
+        }
+      } else {
+        if (label){ label.textContent = 'Hata oluştu, tekrar deneyin'; }
+        if (btn)  { btn.disabled = false; }
+      }
+    } catch {
+      if (label){ label.textContent = 'Bağlantı hatası, tekrar deneyin'; }
+      if (btn)  { btn.disabled = false; }
+    }
+  });
 </script>
 
 <style>
@@ -386,6 +460,19 @@ const steps = [
   /* ── Form ──────────────────────────────────────── */
   .form-lead { font-size: 17px; color: var(--color-muted); margin-bottom: 40px; line-height: 1.6; }
 
+  .form-email-note {
+    font-size: 14px;
+    color: var(--color-subtle);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .form-email-note a {
+    color: var(--bordo);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .form-email-note a:hover { text-decoration: underline; }
+
   .contact-form { display: flex; flex-direction: column; gap: 22px; }
 
   .field { display: flex; flex-direction: column; gap: 8px; }
@@ -505,4 +592,34 @@ const steps = [
   .btn-submit:hover  { opacity: 0.84; transform: translateY(-1px); }
   .btn-submit:active { opacity: 1;    transform: translateY(0);    }
   .btn-icon { width: 16px; height: 16px; }
+
+  /* ── Success state ─────────────────────────────── */
+  .form-success {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(160,0,32,0.06);
+    border: 1px solid rgba(160,0,32,0.2);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-top: 8px;
+  }
+  .form-success svg {
+    width: 40px; height: 40px;
+    color: var(--bordo); flex-shrink: 0;
+  }
+  .success-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--color-text); margin-bottom: 4px;
+  }
+  .success-sub { font-size: 14px; color: var(--color-muted); }
+
+  .form-success.fade-out {
+    animation: successFade 0.5s ease forwards;
+  }
+  @keyframes successFade {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+  }
 </style>

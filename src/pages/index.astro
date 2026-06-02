@@ -14,13 +14,25 @@ import Footer from '../components/Footer.astro';
 
     <!-- ─────────────── Hero ─────────────── -->
     <section class="hero">
-      <img src="/images/logo-company.png" alt="Company Software App" class="hero-logo hero-reveal" />
-      <h1 class="hero-heading hero-reveal hero-reveal-d1">
-        Harika uygulamalar,<br>harika deneyimler.
-      </h1>
-      <p class="hero-sub hero-reveal hero-reveal-d2">
-        iOS, Android ve ötesi için yalın, güçlü dijital deneyimler tasarlıyoruz.
-      </p>
+      <div class="mesh" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+      </div>
+      <div class="hero-content">
+        <img src="/logo-icon-light.svg" alt="Company Software App" class="hero-logo hero-reveal" />
+        <h1 class="hero-heading">
+          <span class="word-wrap"><span class="word" style="--d:0.05s">Harika</span></span>
+          <span class="word-wrap"><span class="word" style="--d:0.15s">uygulamalar,</span></span><br aria-hidden="true">
+          <span class="word-wrap"><span class="word" style="--d:0.25s">harika</span></span>
+          <span class="word-wrap"><span class="word" style="--d:0.35s">deneyimler.</span></span>
+        </h1>
+        <p class="hero-sub hero-sub-reveal">
+          iOS, Android ve ötesi için yalın, güçlü dijital deneyimler tasarlıyoruz.
+        </p>
+        <a href="#uygulamalar" class="hero-cta">Uygulamaları Keşfet</a>
+      </div>
     </section>
 
     <hr class="divider">
@@ -127,27 +139,76 @@ import Footer from '../components/Footer.astro';
   );
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // 3D tilt
-  document.querySelectorAll<HTMLElement>('.game-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+  // Parallax — desktop only
+  (function () {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
+    const content = document.querySelector<HTMLElement>('.hero-content');
+    const mesh    = document.querySelector<HTMLElement>('.mesh');
+    if (!content || !mesh) return;
+
+    let ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          content.style.transform = `translateY(${y * 0.35}px)`;
+          mesh.style.transform    = `translateY(${y * 0.12}px)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // 3D tilt + shine — pointer devices only
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    document.querySelectorAll<HTMLElement>('.game-card').forEach(card => {
+      const shine = document.createElement('div');
+      shine.className = 'card-shine';
+      card.appendChild(shine);
+
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.15s ease, box-shadow 0.3s ease';
+      });
+
+      card.addEventListener('mousemove', (e: MouseEvent) => {
+        const r  = card.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width;
+        const ny = (e.clientY - r.top)  / r.height;
+        const rx =  (nx - 0.5) * 24;   // –12 … +12 deg
+        const ry = -(ny - 0.5) * 24;
+
+        card.style.transition = '';
+        card.style.transform  = `perspective(900px) rotateY(${rx}deg) rotateX(${ry}deg) scale(1.03)`;
+
+        shine.style.background = `radial-gradient(
+          circle at ${nx * 100}% ${ny * 100}%,
+          rgba(255,255,255,0.14) 0%,
+          transparent 62%
+        )`;
+        shine.style.opacity = '1';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.55s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease';
+        card.style.transform  = '';
+        shine.style.opacity   = '0';
+      });
     });
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.018)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease';
-      card.style.transform = '';
-    });
-  });
+  })();
 </script>
 
 <style>
   /* ── Hero ───────────────────────────────────────── */
   .hero {
+    position: relative;
+    overflow: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -156,13 +217,84 @@ import Footer from '../components/Footer.astro';
     text-align: center;
     padding: 120px 24px 80px;
   }
+
+  /* Mesh background */
+  .mesh {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .blob-1 {
+    width: 520px; height: 520px;
+    top: -12%; left: -8%;
+    background: radial-gradient(circle, rgba(139,26,26,0.20) 0%, transparent 68%);
+    filter: blur(72px);
+    animation: drift1 26s ease-in-out infinite alternate;
+  }
+  .blob-2 {
+    width: 440px; height: 440px;
+    top: -18%; right: -6%;
+    background: radial-gradient(circle, rgba(80,16,16,0.15) 0%, transparent 68%);
+    filter: blur(64px);
+    animation: drift2 34s ease-in-out infinite alternate;
+  }
+  .blob-3 {
+    width: 580px; height: 580px;
+    bottom: -22%; left: 18%;
+    background: radial-gradient(circle, rgba(110,18,18,0.14) 0%, transparent 68%);
+    filter: blur(88px);
+    animation: drift3 20s ease-in-out infinite alternate;
+  }
+  .blob-4 {
+    width: 380px; height: 380px;
+    bottom: -8%; right: -4%;
+    background: radial-gradient(circle, rgba(40,10,10,0.12) 0%, transparent 68%);
+    filter: blur(56px);
+    animation: drift4 38s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift1 {
+    from { transform: translate(0, 0)       scale(1);    }
+    to   { transform: translate(64px, 80px) scale(1.12); }
+  }
+  @keyframes drift2 {
+    from { transform: translate(0, 0)        scale(1.04); }
+    to   { transform: translate(-56px, 72px) scale(0.91); }
+  }
+  @keyframes drift3 {
+    from { transform: translate(0, 0)         scale(1);    }
+    to   { transform: translate(-72px, -60px) scale(1.09); }
+  }
+  @keyframes drift4 {
+    from { transform: translate(0, 0)        scale(0.94); }
+    to   { transform: translate(48px, -76px) scale(1.10); }
+  }
+
+  /* Hero content above mesh */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    will-change: transform;
+  }
   .hero-logo {
     display: block;
-    height: clamp(280px, 45vh, 600px);
+    height: clamp(160px, 28vh, 320px);
     width: auto;
     max-width: 90vw;
     object-fit: contain;
-    margin: 0 auto 32px;
+    margin: 0 auto 20px;
   }
   .hero-eyebrow {
     font-size: 13px;
@@ -176,16 +308,74 @@ import Footer from '../components/Footer.astro';
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(44px, 7.5vw, 84px);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.15;
     letter-spacing: -0.025em;
     color: var(--color-text);
-    margin-bottom: 26px;
+    margin-bottom: 16px;
   }
+
+  /* Word stagger */
+  .word-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.08em;
+  }
+  .word {
+    display: inline-block;
+    animation: wordUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes wordUp {
+    from { transform: translateY(110%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* Subtitle slide-in from left */
+  .hero-sub-reveal {
+    animation: subSlide 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 0.65s;
+  }
+  @keyframes subSlide {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0);     }
+  }
+
   .hero-sub {
     font-size: clamp(17px, 2.2vw, 21px);
     color: var(--color-muted);
     max-width: 520px;
     line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  /* CTA scale-in */
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 30px;
+    background: #8B1A1A;
+    color: #ffffff;
+    border-radius: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: ctaScale 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: 1.25s;
+  }
+  .hero-cta::after { content: '→'; font-size: 16px; }
+  .hero-cta:hover  {
+    background: #6b1313;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139,26,26,0.28);
+  }
+  @keyframes ctaScale {
+    from { opacity: 0; transform: scale(0.82); }
+    to   { opacity: 1; transform: scale(1);    }
   }
 
   /* ── Divider ────────────────────────────────────── */
@@ -208,59 +398,6 @@ import Footer from '../components/Footer.astro';
     margin-bottom: 48px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-  }
-
-  /* ── iFilmlik showcase ─────────────────────────── */
-  .showcase {
-    background: var(--bg-card);
-    border-radius: 28px;
-    padding: 72px 48px;
-    text-align: center;
-    box-shadow: var(--shadow-card);
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .showcase-logo-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 36px;
-  }
-  .showcase-logo {
-    width: 128px;
-    height: 128px;
-    border-radius: 26px;
-    object-fit: contain;
-    box-shadow: 0 10px 36px rgba(0,0,0,0.18);
-  }
-  .showcase-cat {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #A00020;
-    margin-bottom: 10px;
-  }
-  .showcase-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(40px, 5.5vw, 58px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--color-text);
-    margin-bottom: 16px;
-  }
-  .showcase-desc {
-    font-size: 18px;
-    color: var(--color-muted);
-    max-width: 420px;
-    margin: 0 auto 40px;
-    line-height: 1.65;
-  }
-  .showcase-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
   }
 
   /* ── Buttons ────────────────────────────────────── */
@@ -291,19 +428,15 @@ import Footer from '../components/Footer.astro';
   }
   .btn-learn:hover { opacity: 0.7; }
 
-  /* ── Card action row (iFilmlik içi) ─────────────── */
+  /* ── Card action row ────────────────────────────── */
   .card-actions {
     display: flex;
     flex-direction: column;
     gap: 14px;
     margin-top: auto;
   }
-  .card-actions .btn-store {
-    justify-content: center;
-  }
-  .card-actions .btn-learn {
-    text-align: center;
-  }
+  .card-actions .btn-store { justify-content: center; }
+  .card-actions .btn-learn { text-align: center; }
 
   /* ── Games grid ─────────────────────────────────── */
   .games-grid {
@@ -316,6 +449,8 @@ import Footer from '../components/Footer.astro';
   }
 
   .game-card {
+    position: relative;
+    overflow: hidden;
     background: var(--bg-card);
     border-radius: 24px;
     padding: 52px 44px;
@@ -327,13 +462,21 @@ import Footer from '../components/Footer.astro';
     transform-style: preserve-3d;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
+  .card-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
   .game-card:hover {
     box-shadow: 0 20px 52px rgba(160,0,32,0.18), 0 4px 12px rgba(0,0,0,0.12);
   }
 
   .game-logo {
-    width: 96px;
-    height: 96px;
+    width: 96px; height: 96px;
     border-radius: 20px;
     object-fit: contain;
     margin-bottom: 28px;
@@ -351,24 +494,8 @@ import Footer from '../components/Footer.astro';
     margin-bottom: 16px;
     width: fit-content;
   }
-  /* showcase içinde badge'i ortala */
-  .showcase .badge { margin-left: auto; margin-right: auto; display: block; width: fit-content; }
-  .badge-soon {
-    background: rgba(6,182,212,0.12);
-    color: #0891b2;
-  }
-  :global(:root.light) .badge-soon {
-    background: rgba(6,182,212,0.10);
-    color: #0e7490;
-  }
-  .badge-dev {
-    background: rgba(160,0,32,0.12);
-    color: #D04060;
-  }
-  :global(:root.light) .badge-dev {
-    background: rgba(160,0,32,0.10);
-    color: #7A0018;
-  }
+  .badge-soon { background: rgba(6,182,212,0.12); color: #0e7490; }
+  .badge-dev  { background: rgba(160,0,32,0.10);  color: #7A0018; }
 
   .game-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -385,6 +512,7 @@ import Footer from '../components/Footer.astro';
     flex: 1;
     margin-bottom: 16px;
   }
+
   .social-row {
     display: flex;
     gap: 8px;
@@ -393,8 +521,7 @@ import Footer from '../components/Footer.astro';
     margin-top: 14px;
   }
   .social-btn {
-    width: 38px;
-    height: 38px;
+    width: 38px; height: 38px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -404,9 +531,6 @@ import Footer from '../components/Footer.astro';
     text-decoration: none;
     transition: color 0.15s ease, background 0.15s ease;
   }
-  .social-btn:hover {
-    color: #A00020;
-    background: rgba(160,0,32,0.10);
-  }
+  .social-btn:hover { color: #A00020; background: rgba(160,0,32,0.10); }
   .social-btn svg { width: 19px; height: 19px; }
 </style>

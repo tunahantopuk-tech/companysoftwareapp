@@ -1,10 +1,234 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const email = 'support@companysoftware.app';
+
+const topics = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+    title: 'Genel Destek',
+    desc: 'Uygulama sorunları, hesap işlemleri ve teknik yardım.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></svg>`,
+    title: 'Proje & İş Birliği',
+    desc: 'Yeni proje teklifi veya iş ortaklığı için bize yazın.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Gizlilik & Veri',
+    desc: 'Kişisel verilerinize ilişkin talepler ve gizlilik soruları.',
+  },
+];
 ---
 
 <Layout
   title="İletişim | Company Software App"
-  description="Company Software App ile iletişime geçin. Proje fikrinizi paylaşın, birlikte üretelim."
+  description="Company Software App ile iletişime geçin. Destek, proje teklifleri ve tüm sorularınız için bize yazın."
 >
-  <!-- İletişim Sayfası -->
+  <Header />
+
+  <main class="page-main">
+
+    <!-- ── Hero ─────────────────────────────────────── -->
+    <section class="hero">
+      <p class="eyebrow hero-reveal">İletişim</p>
+      <h1 class="hero-heading hero-reveal hero-reveal-d1">Bize Yazın</h1>
+      <p class="hero-sub hero-reveal hero-reveal-d2">
+        Her türlü soru, öneri veya iş birliği teklifiniz için<br class="br-desk" />
+        aşağıdaki e-posta adresinden bize ulaşabilirsiniz.
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── E-posta Kartı ──────────────────────────── -->
+    <section class="section">
+      <div class="inner">
+
+        <div class="email-card reveal">
+          <div class="email-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <p class="email-label">Destek & İletişim</p>
+          <a href={`mailto:${email}`} class="email-address">{email}</a>
+          <p class="email-note">E-postanıza genellikle 1–2 iş günü içinde yanıt veriyoruz.</p>
+          <a href={`mailto:${email}`} class="btn-mail">
+            E-posta Gönder
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── Konu Başlıkları ───────────────────────── -->
+    <section class="section alt-bg">
+      <div class="inner">
+        <p class="section-label reveal">Ne Konusunda Yardımcı Olabiliriz?</p>
+        <div class="topics-grid">
+          {topics.map((t, i) => (
+            <div class={`topic-card reveal reveal-delay-${i + 1}`}>
+              <div class="topic-icon" set:html={t.icon} />
+              <h3 class="topic-title">{t.title}</h3>
+              <p class="topic-desc">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
 </Layout>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<style>
+  :root { --bordo: #A00020; --bordo-glow: rgba(160,0,32,0.12); }
+
+  .page-main { padding-top: 48px; }
+  .divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
+  .section { padding: 96px 24px; }
+  .alt-bg  { background-color: var(--bg-section-alt); }
+  .inner   { max-width: 1080px; margin: 0 auto; }
+
+  /* Hero */
+  .hero {
+    min-height: 46vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 96px 24px 64px;
+  }
+  .eyebrow {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--color-muted); margin-bottom: 18px;
+  }
+  .hero-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 700; line-height: 1.07;
+    letter-spacing: -0.022em;
+    color: var(--color-text); margin-bottom: 22px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--color-muted); line-height: 1.65; max-width: 480px;
+  }
+  .br-desk { display: none; }
+  @media (min-width: 600px) { .br-desk { display: block; } }
+
+  /* Email card */
+  .email-card {
+    max-width: 560px; margin: 0 auto;
+    background: var(--bg-card);
+    border-radius: 28px;
+    padding: 56px 48px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-faint);
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .email-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: rgba(160,0,32,0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bordo);
+    margin-bottom: 24px;
+  }
+  .email-icon svg { width: 28px; height: 28px; }
+  .email-label {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-subtle); margin-bottom: 12px;
+  }
+  .email-address {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 700; letter-spacing: -0.01em;
+    color: var(--bordo); text-decoration: none;
+    transition: opacity 0.15s ease;
+    margin-bottom: 16px;
+    word-break: break-all;
+  }
+  .email-address:hover { opacity: 0.75; }
+  .email-note {
+    font-size: 14px; color: var(--color-subtle);
+    line-height: 1.6; margin-bottom: 32px;
+  }
+  .btn-mail {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bordo); color: #ffffff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px; font-weight: 600;
+    padding: 13px 28px; border-radius: 980px;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .btn-mail svg { width: 15px; height: 15px; }
+  .btn-mail:hover { opacity: 0.84; transform: translateY(-1px); }
+
+  @media (max-width: 480px) {
+    .email-card { padding: 40px 28px; }
+  }
+
+  /* Topics */
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 700; letter-spacing: 0.03em;
+    text-transform: uppercase; color: var(--color-muted);
+    margin-bottom: 48px;
+  }
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 720px) { .topics-grid { grid-template-columns: 1fr; } }
+
+  .topic-card {
+    background: var(--bg-card);
+    border-radius: 20px; padding: 36px 28px;
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column; gap: 14px;
+    border: 1px solid var(--border-faint);
+    transition: border-color 0.2s ease, box-shadow 0.25s ease;
+  }
+  .topic-card:hover {
+    border-color: rgba(160,0,32,0.25);
+    box-shadow: 0 8px 32px rgba(160,0,32,0.10);
+  }
+  .topic-icon { width: 40px; height: 40px; color: var(--bordo); }
+  .topic-icon svg { width: 100%; height: 100%; }
+  .topic-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--color-text);
+  }
+  .topic-desc { font-size: 14px; color: var(--color-muted); line-height: 1.65; }
+</style>

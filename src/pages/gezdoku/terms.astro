@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-const accent = '#22D3EE';
+const accent = '#0e7490';
 const lastUpdated = '31 Mayıs 2026';
 ---
 
@@ -13,246 +13,307 @@ const lastUpdated = '31 Mayıs 2026';
 >
   <Header />
 
-  <main style="padding-top: 64px;">
+  <main class="doc-page">
 
-    <!-- Hero -->
-    <section style="padding: 64px 24px 56px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="/gezdoku" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px;">
-          <img src="/images/logo-gezdoku.png" alt="GezDoku" style="width: 44px; height: 44px; border-radius: 10px;" />
-          <span class="font-heading" style="font-size: 1.125rem; font-weight: 600; color: #fff;">GezDoku</span>
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/gezdoku" class="doc-app-link">
+          <img src="/images/logo-gezdoku.png" alt="GezDoku" class="doc-app-logo" />
+          <span class="doc-app-name">GezDoku</span>
         </a>
-        <h1 class="font-heading" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: #fff; line-height: 1.2;">
-          Kullanım Koşulları
-        </h1>
-        <p style="font-size: 0.875rem; color: #475569;">
-          Son güncelleme: <span style={`color: ${accent};`}>{lastUpdated}</span>
-        </p>
-        <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.7; max-width: 520px;">
-          Bu uygulamayı indirerek veya kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız.
-        </p>
+        <h1 class="doc-title">Kullanım Koşulları</h1>
+        <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">Bu uygulamayı indirerek veya kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız.</p>
       </div>
     </section>
 
-    <!-- Maddeler -->
-    <section style="max-width: 720px; margin: 0 auto; padding: 56px 24px 80px;">
-      <div style="display: flex; flex-direction: column; gap: 0;">
+    <div class="doc-body">
 
-        {/* 1. Kabul */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>1</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Kabul</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Bu uygulamayı indirerek veya kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız. Kabul etmiyorsanız uygulamayı kullanmayınız.
-            </p>
-          </div>
+      <!-- 1. Kabul -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>1</span>
         </div>
+        <div class="doc-content">
+          <h2>Kabul</h2>
+          <p>Bu uygulamayı indirerek veya kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız. Kabul etmiyorsanız uygulamayı kullanmayınız.</p>
+        </div>
+      </div>
 
-        {/* 2. Lisans */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>2</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Lisans</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 14px;">
-              GezDoku size kişisel, devredilemez, münhasır olmayan bir kullanım lisansı verir.
-            </p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-              <div style="background: rgba(34,211,238,0.06); border: 1px solid rgba(34,211,238,0.2); border-radius: 12px; padding: 14px;">
-                <p style={`font-size: 0.8rem; font-weight: 700; color: ${accent}; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em;`}>İzin Verilenler</p>
-                {['Kişisel amaçlarla kullanmak', 'Kendi cihazlarına indirmek'].map(item => (
-                  <div style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px;">
-                    <span style={`color: ${accent}; font-size: 12px; flex-shrink: 0; margin-top: 2px;`}>✓</span>
-                    <p style="font-size: 0.8rem; color: #94A3B8; line-height: 1.5;">{item}</p>
-                  </div>
-                ))}
-              </div>
-              <div style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; padding: 14px;">
-                <p style="font-size: 0.8rem; font-weight: 700; color: #F87171; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em;">Yasak Olanlar</p>
-                {['Kopyalamak, değiştirmek veya dağıtmak', 'Tersine mühendislik yapmak', 'Ticari amaçla kullanmak', 'Kiralamak veya satmak'].map(item => (
-                  <div style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px;">
-                    <span style="color: #F87171; font-size: 12px; flex-shrink: 0; margin-top: 2px;">✕</span>
-                    <p style="font-size: 0.8rem; color: #94A3B8; line-height: 1.5;">{item}</p>
-                  </div>
-                ))}
-              </div>
+      <!-- 2. Lisans -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>2</span>
+        </div>
+        <div class="doc-content">
+          <h2>Lisans</h2>
+          <p>GezDoku size kişisel, devredilemez, münhasır olmayan bir kullanım lisansı verir.</p>
+          <div class="doc-grid-2">
+            <div class="doc-permit-card" style={`background:${accent}06; border:1px solid ${accent}20;`}>
+              <p class="doc-permit-label" style={`color:${accent};`}>İzin Verilenler</p>
+              <ul class="doc-list">
+                <li>Kişisel amaçlarla kullanmak</li>
+                <li>Kendi cihazlarına indirmek</li>
+              </ul>
+            </div>
+            <div class="doc-permit-card" style="background:rgba(220,38,38,0.04); border:1px solid rgba(220,38,38,0.18);">
+              <p class="doc-permit-label" style="color:#b91c1c;">Yasak Olanlar</p>
+              <ul class="doc-list">
+                <li>Kopyalamak, değiştirmek veya dağıtmak</li>
+                <li>Tersine mühendislik yapmak</li>
+                <li>Ticari amaçla kullanmak</li>
+                <li>Kiralamak veya satmak</li>
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* 3. Uygulama İçi Satın Almalar */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>3</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Uygulama İçi Satın Almalar ve Reklamlar</h2>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              {[
-                'Uygulama, ödüllü reklamlar aracılığıyla oyun içi içerik (kargo, güç) sunmaktadır.',
-                'Reklam izleme zorunlu değildir; isteğe bağlıdır.',
-                'Uygulama içi satın almalar yapılmışsa, Apple\'ın iade politikası geçerlidir.',
-                'Reklam karşılığı kazanılan oyun içi ödüller gerçek para değeri taşımaz ve nakde çevrilemez.',
-              ].map(item => (
-                <div style="display: flex; gap: 10px; align-items: flex-start;">
-                  <div style={`width: 6px; height: 6px; border-radius: 50%; background: ${accent}; flex-shrink: 0; margin-top: 7px;`}></div>
-                  <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+      <!-- 3. Uygulama İçi Satın Almalar -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>3</span>
         </div>
-
-        {/* 4. Kullanıcı Davranışı */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>4</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Kullanıcı Davranışı</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 12px;">Aşağıdaki davranışlar yasaktır:</p>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              {[
-                'Oyun içi verileri hile yoluyla değiştirmek',
-                'Lider tablolarını manipüle etmek',
-                'Uygulamayı başkalarına zarar verecek şekilde kullanmak',
-                'Uygulamanın altyapısına yetkisiz erişim sağlamaya çalışmak',
-              ].map(item => (
-                <div style="display: flex; gap: 10px; align-items: flex-start;">
-                  <div style="width: 6px; height: 6px; border-radius: 50%; background: #F87171; flex-shrink: 0; margin-top: 7px;"></div>
-                  <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div class="doc-content">
+          <h2>Uygulama İçi Satın Almalar ve Reklamlar</h2>
+          <ul class="doc-list">
+            <li>Uygulama, ödüllü reklamlar aracılığıyla oyun içi içerik (kargo, güç) sunmaktadır.</li>
+            <li>Reklam izleme zorunlu değildir; isteğe bağlıdır.</li>
+            <li>Uygulama içi satın almalar yapılmışsa, Apple'ın iade politikası geçerlidir.</li>
+            <li>Reklam karşılığı kazanılan oyun içi ödüller gerçek para değeri taşımaz ve nakde çevrilemez.</li>
+          </ul>
         </div>
+      </div>
 
-        {/* 5. Fikri Mülkiyet */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>5</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Fikri Mülkiyet</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Uygulamadaki tüm içerikler (tasarım, bulmacalar, görseller, ses efektleri, metin) GezDoku'ya aittir ve telif hukuku ile korunmaktadır. İzinsiz kullanılamaz.
-            </p>
-          </div>
+      <!-- 4. Kullanıcı Davranışı -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>4</span>
         </div>
-
-        {/* 6. Üçüncü Taraf Hizmetleri */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>6</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Üçüncü Taraf Hizmetleri</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 14px;">
-              Uygulama; Unity Ads ve Apple Game Center gibi üçüncü taraf hizmetler içermektedir. Bu hizmetlerin kullanım koşulları kendi sağlayıcılarına aittir:
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              {[
-                { label: 'Unity Kullanım Koşulları', href: 'https://unity.com/legal/terms-of-service' },
-                { label: 'Apple Medya Hizmetleri Koşulları', href: 'https://www.apple.com/legal/internet-services/itunes/tr/terms.html' },
-              ].map(link => (
-                <a href={link.href} target="_blank" rel="noopener noreferrer" style={`display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; color: ${accent}; text-decoration: none;`}>
-                  <span>{link.label} ↗</span>
-                </a>
-              ))}
-            </div>
-          </div>
+        <div class="doc-content">
+          <h2>Kullanıcı Davranışı</h2>
+          <p>Aşağıdaki davranışlar yasaktır:</p>
+          <ul class="doc-list doc-list-red">
+            <li>Oyun içi verileri hile yoluyla değiştirmek</li>
+            <li>Lider tablolarını manipüle etmek</li>
+            <li>Uygulamayı başkalarına zarar verecek şekilde kullanmak</li>
+            <li>Uygulamanın altyapısına yetkisiz erişim sağlamaya çalışmak</li>
+          </ul>
         </div>
+      </div>
 
-        {/* 7. Sorumluluk Reddi */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>7</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 12px;">Sorumluluk Reddi</h2>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              {[
-                'Uygulama "olduğu gibi" sunulmaktadır; kesintisiz veya hatasız çalışacağı garanti edilmez.',
-                'Uygulama kullanımından doğabilecek doğrudan veya dolaylı zararlardan sorumlu değiliz.',
-                'Bulmaca içerikleri eğlence amaçlıdır; herhangi bir konuda profesyonel tavsiye niteliği taşımaz.',
-              ].map(item => (
-                <div style="display: flex; gap: 10px; align-items: flex-start;">
-                  <div style={`width: 6px; height: 6px; border-radius: 50%; background: ${accent}; flex-shrink: 0; margin-top: 7px;`}></div>
-                  <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+      <!-- 5. Fikri Mülkiyet -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>5</span>
         </div>
-
-        {/* 8. Fesih */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>8</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Fesih</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Bu koşulları ihlal etmeniz durumunda lisansınız otomatik olarak sona erer ve uygulamayı kullanma hakkınızı kaybedersiniz.
-            </p>
-          </div>
+        <div class="doc-content">
+          <h2>Fikri Mülkiyet</h2>
+          <p>Uygulamadaki tüm içerikler (tasarım, bulmacalar, görseller, ses efektleri, metin) GezDoku'ya aittir ve telif hukuku ile korunmaktadır. İzinsiz kullanılamaz.</p>
         </div>
+      </div>
 
-        {/* 9. Değişiklikler */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>9</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Değişiklikler</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Kullanım koşullarını önceden bildirim yapmaksızın değiştirme hakkımız saklıdır. Güncel koşullar her zaman bu sayfada yayımlanır. Uygulamayı kullanmaya devam etmeniz değişiklikleri kabul ettiğiniz anlamına gelir.
-            </p>
-          </div>
+      <!-- 6. Üçüncü Taraf Hizmetleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>6</span>
         </div>
-
-        {/* 10. Uygulanacak Hukuk */}
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>10</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Uygulanacak Hukuk</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Bu koşullar <strong style="color: #e2e8f0;">Türkiye Cumhuriyeti</strong> hukukuna tabidir. Anlaşmazlıklarda <strong style="color: #e2e8f0;">İstanbul</strong> mahkemeleri yetkilidir.
-            </p>
-          </div>
-        </div>
-
-        {/* 11. İletişim */}
-        <div style="display: flex; gap: 20px; padding: 32px 0;">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>11</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">İletişim</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 8px;">Sorularınız için bizimle iletişime geçebilirsiniz:</p>
-            <a href="mailto:support@iflimlik.com" style={`display: inline-block; font-size: 0.9rem; font-weight: 500; color: ${accent}; text-decoration: none;`}>
-              support@iflimlik.com
+        <div class="doc-content">
+          <h2>Üçüncü Taraf Hizmetleri</h2>
+          <p>Uygulama; Unity Ads ve Apple Game Center gibi üçüncü taraf hizmetler içermektedir. Bu hizmetlerin kullanım koşulları kendi sağlayıcılarına aittir:</p>
+          <div class="doc-links-list">
+            <a href="https://unity.com/legal/terms-of-service" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              Unity Kullanım Koşulları ↗
+            </a>
+            <a href="https://www.apple.com/legal/internet-services/itunes/tr/terms.html" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              Apple Medya Hizmetleri Koşulları ↗
             </a>
           </div>
         </div>
-
       </div>
 
-      <!-- Geri dön -->
-      <div style="margin-top: 48px; text-align: center;">
-        <a href="/gezdoku" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
-          ← GezDoku'ya Dön
-        </a>
+      <!-- 7. Sorumluluk Reddi -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>7</span>
+        </div>
+        <div class="doc-content">
+          <h2>Sorumluluk Reddi</h2>
+          <ul class="doc-list">
+            <li>Uygulama "olduğu gibi" sunulmaktadır; kesintisiz veya hatasız çalışacağı garanti edilmez.</li>
+            <li>Uygulama kullanımından doğabilecek doğrudan veya dolaylı zararlardan sorumlu değiliz.</li>
+            <li>Bulmaca içerikleri eğlence amaçlıdır; herhangi bir konuda profesyonel tavsiye niteliği taşımaz.</li>
+          </ul>
+        </div>
       </div>
-    </section>
+
+      <!-- 8. Fesih -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>8</span>
+        </div>
+        <div class="doc-content">
+          <h2>Fesih</h2>
+          <p>Bu koşulları ihlal etmeniz durumunda lisansınız otomatik olarak sona erer ve uygulamayı kullanma hakkınızı kaybedersiniz.</p>
+        </div>
+      </div>
+
+      <!-- 9. Değişiklikler -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>9</span>
+        </div>
+        <div class="doc-content">
+          <h2>Değişiklikler</h2>
+          <p>Kullanım koşullarını önceden bildirim yapmaksızın değiştirme hakkımız saklıdır. Güncel koşullar her zaman bu sayfada yayımlanır. Uygulamayı kullanmaya devam etmeniz değişiklikleri kabul ettiğiniz anlamına gelir.</p>
+        </div>
+      </div>
+
+      <!-- 10. Uygulanacak Hukuk -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>10</span>
+        </div>
+        <div class="doc-content">
+          <h2>Uygulanacak Hukuk</h2>
+          <p>Bu koşullar <strong>Türkiye Cumhuriyeti</strong> hukukuna tabidir. Anlaşmazlıklarda <strong>İstanbul</strong> mahkemeleri yetkilidir.</p>
+        </div>
+      </div>
+
+      <!-- 11. İletişim -->
+      <div class="doc-section doc-section-last">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>11</span>
+        </div>
+        <div class="doc-content">
+          <h2>İletişim</h2>
+          <p>Sorularınız için bizimle iletişime geçebilirsiniz:</p>
+          <a href="mailto:support@companysoftware.app" class="doc-link" style={`color:${accent};`}>
+            support@companysoftware.app
+          </a>
+        </div>
+      </div>
+
+      <div class="doc-back">
+        <a href="/gezdoku">← GezDoku'ya Dön</a>
+      </div>
+    </div>
 
   </main>
 
   <Footer />
 </Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section-last { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .doc-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin: 0;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75; margin: 0;
+  }
+  .doc-content strong { color: var(--color-text); font-weight: 600; }
+
+  .doc-grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  @media (max-width: 520px) { .doc-grid-2 { grid-template-columns: 1fr; } }
+
+  .doc-permit-card {
+    border-radius: 12px; padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .doc-permit-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem !important; font-weight: 700 !important;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin: 0 !important;
+  }
+
+  .doc-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .doc-list li {
+    font-size: 0.875rem; color: var(--color-muted); line-height: 1.6;
+    padding-left: 14px; position: relative;
+  }
+  .doc-list li::before {
+    content: '·'; position: absolute; left: 0;
+    color: var(--color-subtle); font-weight: 700;
+  }
+  .doc-list-red li::before { color: #b91c1c; }
+
+  .doc-links-list {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-link {
+    display: inline-block;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-back { margin-top: 48px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>

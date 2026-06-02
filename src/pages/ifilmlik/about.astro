@@ -3,113 +3,169 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-const accent = '#E61806';
+const accent = '#C41A1A';
+
+const sections = [
+  {
+    icon: '🎬',
+    title: 'Uygulama Hakkında',
+    content: 'iFilmlik, film ve dizi severlere özel geliştirilmiş kişisel bir izleme asistanıdır. Film/dizi arama, izleme listesi yönetimi, yapay zeka destekli öneri sistemi ve oyunlaştırılmış keşif deneyimi sunar.',
+  },
+  {
+    icon: '🤖',
+    title: 'iFi Yapay Zeka Asistanı',
+    content: 'iFi, Google Gemini API ile güçlendirilmiş film öneri asistanıdır. Ruh halinize, tür tercihlerinize ve izleme geçmişinize göre kişiselleştirilmiş öneriler sunar.',
+  },
+  {
+    icon: '🎞️',
+    title: 'Powered by TMDB',
+    content: 'Film ve dizi verileri The Movie Database (TMDB) tarafından sağlanmaktadır.',
+    link: { text: 'themoviedb.org ↗', href: 'https://www.themoviedb.org' },
+  },
+  {
+    icon: '✉️',
+    title: 'İletişim',
+    content: 'Destek ve tüm sorularınız için bize yazabilirsiniz:',
+    email: 'support@companysoftware.app',
+  },
+];
 ---
 
 <Layout
   title="iFilmlik — Hakkında"
-  description="iFilmlik uygulaması hakkında."
+  description="iFilmlik uygulaması hakkında bilgi edinin."
 >
   <Header />
 
-  <main style="padding-top: 64px;">
+  <main class="doc-page">
 
-    <!-- Hero -->
-    <section style="padding: 64px 24px 56px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="/ifilmlik" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px;">
-          <img src="/images/logo-ifilmlik.png" alt="iFilmlik" style="width: 44px; height: 44px; border-radius: 10px;" />
-          <span class="font-heading" style="font-size: 1.125rem; font-weight: 600; color: #fff;">iFilmlik</span>
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/ifilmlik" class="doc-app-link">
+          <img src="/images/logo-ifilmlik.png" alt="iFilmlik" class="doc-app-logo" />
+          <span class="doc-app-name">iFilmlik</span>
         </a>
-        <h1 class="font-heading" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: #fff; line-height: 1.2;">
-          Uygulama Hakkında
-        </h1>
+        <h1 class="doc-title">Uygulama Hakkında</h1>
+        <p class="doc-intro">Film ve dizi takibini kolaylaştıran, yapay zeka destekli kişisel izleme asistanı.</p>
       </div>
     </section>
 
-    <!-- İçerik -->
-    <section style="max-width: 720px; margin: 0 auto; padding: 56px 24px 80px;">
-      <div style="display: flex; flex-direction: column; gap: 0;">
-
-        <!-- Uygulama Hakkında -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style="font-size: 16px;">🎬</span>
+    <div class="doc-body">
+      {sections.map(s => (
+        <div class="doc-section">
+          <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+            <span class="doc-icon">{s.icon}</span>
           </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Uygulama Hakkında</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              iFilmlik, film ve dizi severlere özel geliştirilmiş kişisel bir izleme asistanıdır. Film/dizi arama, izleme listesi yönetimi, yapay zeka destekli öneri sistemi ve oyunlaştırılmış keşif deneyimi sunar.
-            </p>
-          </div>
-        </div>
-
-        <!-- iFi -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style="font-size: 16px;">🤖</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">iFi Yapay Zeka Asistanı</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              iFi, Google Gemini API ile güçlendirilmiş film öneri asistanıdır. Ruh halinize, tür tercihlerinize ve izleme geçmişinize göre kişiselleştirilmiş öneriler sunar.
-            </p>
+          <div class="doc-content">
+            <h2>{s.title}</h2>
+            <p>{s.content}</p>
+            {s.link && (
+              <a href={s.link.href} target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+                {s.link.text}
+              </a>
+            )}
+            {s.email && (
+              <a href={`mailto:${s.email}`} class="doc-link" style={`color:${accent};`}>
+                {s.email}
+              </a>
+            )}
           </div>
         </div>
+      ))}
 
-        <!-- TMDB -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style="font-size: 16px;">🎞️</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Powered by TMDB</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 8px;">
-              Film ve dizi verileri The Movie Database (TMDB) tarafından sağlanmaktadır.
-            </p>
-            <a
-              href="https://www.themoviedb.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={`font-size: 0.875rem; color: ${accent}; text-decoration: none;`}
-            >
-              themoviedb.org ↗
-            </a>
-          </div>
-        </div>
-
-        <!-- İletişim -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style="font-size: 16px;">✉️</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">İletişim</h2>
-            <a
-              href="mailto:support@ifilmlik.com"
-              style={`font-size: 0.9rem; font-weight: 500; color: ${accent}; text-decoration: none;`}
-            >
-              support@ifilmlik.com
-            </a>
-          </div>
-        </div>
-
-        <!-- Telif -->
-        <div style="padding: 32px 0; text-align: center;">
-          <p style="font-size: 0.875rem; color: #334155;">© 2026 iFilmlik. Tüm hakları saklıdır.</p>
-        </div>
-
+      <div class="doc-footer-note">
+        <p>© 2026 iFilmlik. Tüm hakları saklıdır.</p>
       </div>
 
-      <!-- Geri dön -->
-      <div style="text-align: center;">
-        <a href="/ifilmlik" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
-          ← iFilmlik'e Dön
-        </a>
+      <div class="doc-back">
+        <a href="/ifilmlik">← iFilmlik'e Dön</a>
       </div>
-    </section>
+    </div>
 
   </main>
 
   <Footer />
 </Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 500px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-icon { font-size: 1rem; line-height: 1; }
+
+  .doc-content { flex: 1; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 10px;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+  }
+  .doc-link {
+    display: inline-block; margin-top: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-footer-note {
+    padding: 28px 0 0; text-align: center;
+  }
+  .doc-footer-note p {
+    font-size: 0.85rem; color: var(--color-subtle);
+  }
+  .doc-back {
+    margin-top: 16px; text-align: center;
+  }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>

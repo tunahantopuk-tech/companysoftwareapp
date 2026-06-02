@@ -4,22 +4,6 @@
 
 /* ─── Apple-inspired color system ──────────────────── */
 :root {
-  /* Dark mode — default, Apple dark aesthetic */
-  --border-input: rgba(255,255,255,0.28);
-  --bg-page:        #000000;
-  --bg-section-alt: #111111;
-  --bg-card:        #1c1c1e;
-  --bg-header:      rgba(0,0,0,0.85);
-  --color-text:     #f5f5f7;
-  --color-muted:    #98989d;
-  --color-subtle:   #636366;
-  --border-faint:   rgba(255,255,255,0.08);
-  --dot-color:      rgba(255,255,255,0.04);
-  --shadow-card:    0 0 0 1px rgba(255,255,255,0.08);
-  --hover-overlay:  rgba(255,255,255,0.06);
-}
-
-:root.light {
   /* Light mode — Apple.com aesthetic */
   --border-input: rgba(0,0,0,0.28);
   --bg-page:        #ffffff;
@@ -41,20 +25,19 @@ html { scroll-behavior: smooth; }
 body {
   background-color: var(--bg-page);
   color: var(--color-text);
-  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* ─── Light mode Tailwind overrides (for other pages) ─ */
-:root.light .text-white              { color: var(--color-text)   !important; }
-:root.light .text-slate-100          { color: var(--color-text)   !important; }
-:root.light .text-slate-400          { color: var(--color-muted)  !important; }
-:root.light .text-slate-500          { color: var(--color-subtle) !important; }
-:root.light .text-slate-600          { color: var(--color-muted)  !important; }
-:root.light .hover\:text-white:hover { color: var(--color-text)   !important; }
-:root.light .group:hover .group-hover\:text-white { color: #4f46e5 !important; }
-:root.light .text-cyan-400           { color: #0e7490  !important; }
-:root.light .text-violet-400         { color: #6d28d9  !important; }
-:root.light .text-indigo-400         { color: #7A0018  !important; }
+/* ─── Tailwind color overrides ─────────────────────── */
+.text-white              { color: var(--color-text)   !important; }
+.text-slate-100          { color: var(--color-text)   !important; }
+.text-slate-400          { color: var(--color-muted)  !important; }
+.text-slate-500          { color: var(--color-subtle) !important; }
+.text-slate-600          { color: var(--color-muted)  !important; }
+.hover\:text-white:hover { color: var(--color-text)   !important; }
+.group:hover .group-hover\:text-white { color: #4f46e5 !important; }
+.text-cyan-400           { color: #0e7490  !important; }
+.text-violet-400         { color: #6d28d9  !important; }
+.text-indigo-400         { color: #7A0018  !important; }
 
 /* ─── Scroll to top button ────────────────────────── */
 .scroll-top {

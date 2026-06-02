@@ -10,7 +10,7 @@ interface Props {
 const {
   title,
   description = 'iOS, Android ve web için profesyonel uygulama ve oyun geliştirme.',
-  ogImage = '/images/logo-company.png',
+  ogImage = '/logo-icon.svg',
 } = Astro.props;
 
 const siteUrl = 'https://companysoftware.app';
@@ -46,7 +46,7 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
     <meta name="twitter:image"       content={ogImageUrl} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/logo-company.png" />
+    <link rel="icon" type="image/svg+xml" href="/logo-icon.svg" />
 
     <ViewTransitions />
 

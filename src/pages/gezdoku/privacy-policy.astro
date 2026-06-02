@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-const accent = '#22D3EE';
+const accent = '#0e7490';
 const lastUpdated = '31 Mayıs 2026';
 ---
 
@@ -13,184 +13,265 @@ const lastUpdated = '31 Mayıs 2026';
 >
   <Header />
 
-  <main style="padding-top: 64px;">
+  <main class="doc-page">
 
-    <!-- Hero -->
-    <section style="padding: 64px 24px 56px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
-      <div style="max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px;">
-        <a href="/gezdoku" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px;">
-          <img src="/images/logo-gezdoku.png" alt="GezDoku" style="width: 44px; height: 44px; border-radius: 10px;" />
-          <span class="font-heading" style="font-size: 1.125rem; font-weight: 600; color: #fff;">GezDoku</span>
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/gezdoku" class="doc-app-link">
+          <img src="/images/logo-gezdoku.png" alt="GezDoku" class="doc-app-logo" />
+          <span class="doc-app-name">GezDoku</span>
         </a>
-        <h1 class="font-heading" style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: #fff; line-height: 1.2;">
-          Gizlilik Politikası
-        </h1>
-        <p style="font-size: 0.875rem; color: #475569;">
-          Son güncelleme: <span style={`color: ${accent};`}>{lastUpdated}</span>
-        </p>
-        <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.7; max-width: 520px;">
-          GezDoku olarak gizliliğinize önem veriyoruz. Bu politika, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklar.
-        </p>
+        <h1 class="doc-title">Gizlilik Politikası</h1>
+        <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">GezDoku olarak gizliliğinize önem veriyoruz. Bu politika, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklar.</p>
       </div>
     </section>
 
-    <!-- Maddeler -->
-    <section style="max-width: 720px; margin: 0 auto; padding: 56px 24px 80px;">
-      <div style="display: flex; flex-direction: column; gap: 0;">
+    <div class="doc-body">
 
-        <!-- 1. Genel Bakış -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>1</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Genel Bakış</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              GezDoku, kullanıcılarının gizliliğine saygı gösterir. Bu politika, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklar.
-            </p>
-          </div>
+      <!-- 1. Genel Bakış -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>1</span>
         </div>
-
-        <!-- 2. Topladığımız Veriler -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>2</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Topladığımız Veriler</h2>
-            <div style={`background: ${accent}08; border: 1px solid ${accent}20; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px;`}>
-              <p style={`font-size: 0.875rem; font-weight: 600; color: ${accent}; margin-bottom: 6px;`}>Geliştirici olarak biz hiçbir kişisel veri toplamıyoruz.</p>
-            </div>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Oyun ilerlemeniz (tamamlanan bulmacalar, bakiyeler, rozet durumları), ayarlarınız ve envanter bilgileriniz <strong style="color: #e2e8f0;">yalnızca cihazınızda</strong> saklanır. Bu veriler bizim sunucularımıza gönderilmez.
-            </p>
-          </div>
+        <div class="doc-content">
+          <h2>Genel Bakış</h2>
+          <p>GezDoku, kullanıcılarının gizliliğine saygı gösterir. Bu politika, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklar.</p>
         </div>
+      </div>
 
-        <!-- 3. Üçüncü Taraf Hizmetleri -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>3</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 16px;">Üçüncü Taraf Hizmetleri</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 16px;">
-              Uygulama aşağıdaki üçüncü taraf hizmetlerini kullanmaktadır. Bu hizmetler kendi gizlilik politikalarına tabidir:
-            </p>
-
-            <!-- Unity Ads -->
-            <div style="background: #12121A; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px; margin-bottom: 10px;">
-              <p class="font-heading" style="font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 8px;">Unity Ads</p>
-              <p style="font-size: 0.875rem; color: #94A3B8; line-height: 1.7; margin-bottom: 10px;">
-                Uygulamada ödüllü reklam gösterimi için Unity Ads SDK kullanılmaktadır. Unity Ads; reklam kişiselleştirmesi amacıyla cihaz tanımlayıcıları (IDFA/GAID), IP adresi ve reklam etkileşim verileri toplayabilir.
-              </p>
-              <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={`display: inline-block; font-size: 0.85rem; color: ${accent}; text-decoration: none; margin-bottom: 10px;`}>
-                unity.com/legal/privacy-policy ↗
-              </a>
-              <p style="font-size: 0.8rem; color: #64748B; line-height: 1.6;">
-                Reklam takibini devre dışı bırakmak için: <strong style="color: #94A3B8;">iOS Ayarlar → Gizlilik ve Güvenlik → İzleme → GezDoku</strong> izni kapatılabilir.
-              </p>
-            </div>
-
-            <!-- Apple Game Center -->
-            <div style="background: #12121A; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px;">
-              <p class="font-heading" style="font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 8px;">Apple Game Center</p>
-              <p style="font-size: 0.875rem; color: #94A3B8; line-height: 1.7; margin-bottom: 10px;">
-                Lider tabloları ve oyuncu kimlik doğrulaması için Apple Game Center kullanılmaktadır. Bu hizmet Apple'ın gizlilik politikasına tabidir.
-              </p>
-              <a href="https://www.apple.com/legal/privacy/tr/" target="_blank" rel="noopener noreferrer" style={`display: inline-block; font-size: 0.85rem; color: ${accent}; text-decoration: none;`}>
-                apple.com/legal/privacy ↗
-              </a>
-            </div>
-          </div>
+      <!-- 2. Topladığımız Veriler -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>2</span>
         </div>
-
-        <!-- 4. Veri Saklama -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>4</span>
+        <div class="doc-content">
+          <h2>Topladığımız Veriler</h2>
+          <div class="doc-highlight" style={`background:${accent}08; border:1px solid ${accent}20;`}>
+            <p style={`color:${accent}; font-weight:600;`}>Geliştirici olarak biz hiçbir kişisel veri toplamıyoruz.</p>
           </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Veri Saklama</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Cihazınızda saklanan oyun verileri (ilerleme, ayarlar) uygulamayı sildiğinizde kalıcı olarak silinir. Bulut yedekleme kullanıyorsanız (iCloud) bu veriler Apple altyapısında saklanabilir; bu durum Apple'ın politikasına tabidir.
-            </p>
-          </div>
+          <p>Oyun ilerlemeniz (tamamlanan bulmacalar, bakiyeler, rozet durumları), ayarlarınız ve envanter bilgileriniz <strong>yalnızca cihazınızda</strong> saklanır. Bu veriler bizim sunucularımıza gönderilmez.</p>
         </div>
+      </div>
 
-        <!-- 5. Çocukların Gizliliği -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>5</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Çocukların Gizliliği</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Uygulama 4 yaş ve üzeri kullanıcılar için tasarlanmıştır. 13 yaş altı kullanıcılardan bilerek kişisel veri toplamıyoruz. Unity Ads, çocuklara yönelik içeriklerde kişiselleştirilmiş reklam göstermemektedir.
-            </p>
-          </div>
+      <!-- 3. Üçüncü Taraf Hizmetleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>3</span>
         </div>
+        <div class="doc-content">
+          <h2>Üçüncü Taraf Hizmetleri</h2>
+          <p>Uygulama aşağıdaki üçüncü taraf hizmetlerini kullanmaktadır. Bu hizmetler kendi gizlilik politikalarına tabidir:</p>
 
-        <!-- 6. Haklarınız -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>6</span>
+          <div class="doc-card">
+            <h3>Unity Ads</h3>
+            <p>Uygulamada ödüllü reklam gösterimi için Unity Ads SDK kullanılmaktadır. Unity Ads; reklam kişiselleştirmesi amacıyla cihaz tanımlayıcıları (IDFA/GAID), IP adresi ve reklam etkileşim verileri toplayabilir.</p>
+            <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              unity.com/legal/privacy-policy ↗
+            </a>
+            <p class="doc-tip">Reklam takibini devre dışı bırakmak için: <strong>iOS Ayarlar → Gizlilik ve Güvenlik → İzleme → GezDoku</strong> iznini kapatabilirsiniz.</p>
           </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Haklarınız</h2>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              {[
-                'Uygulamayı silerek cihazınızdaki tüm yerel verileri kaldırabilirsiniz.',
-                'iOS Ayarlar üzerinden reklam takip iznini iptal edebilirsiniz.',
-                'Game Center hesabınızı Apple üzerinden yönetebilirsiniz.',
-              ].map(item => (
-                <div style="display: flex; gap: 10px; align-items: flex-start;">
-                  <div style={`width: 6px; height: 6px; border-radius: 50%; background: ${accent}; flex-shrink: 0; margin-top: 7px;`}></div>
-                  <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
-        <!-- 7. Politika Değişiklikleri -->
-        <div style="display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.04);">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>7</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">Politika Değişiklikleri</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75;">
-              Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişiklikler olması durumunda bu sayfa güncellenecektir. Uygulamayı kullanmaya devam etmeniz güncel politikayı kabul ettiğiniz anlamına gelir.
-            </p>
-          </div>
-        </div>
-
-        <!-- 8. İletişim -->
-        <div style="display: flex; gap: 20px; padding: 32px 0;">
-          <div style={`width: 32px; height: 32px; border-radius: 8px; background: ${accent}18; border: 1px solid ${accent}35; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;`}>
-            <span style={`font-size: 0.75rem; font-weight: 700; color: ${accent}; font-family: sans-serif;`}>8</span>
-          </div>
-          <div style="flex: 1;">
-            <h2 class="font-heading" style="font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 10px;">İletişim</h2>
-            <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.75; margin-bottom: 8px;">Sorularınız için bizimle iletişime geçebilirsiniz:</p>
-            <a href="mailto:support@iflimlik.com" style={`display: inline-block; font-size: 0.9rem; font-weight: 500; color: ${accent}; text-decoration: none;`}>
-              support@iflimlik.com
+          <div class="doc-card">
+            <h3>Apple Game Center</h3>
+            <p>Lider tabloları ve oyuncu kimlik doğrulaması için Apple Game Center kullanılmaktadır. Bu hizmet Apple'ın gizlilik politikasına tabidir.</p>
+            <a href="https://www.apple.com/legal/privacy/tr/" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              apple.com/legal/privacy ↗
             </a>
           </div>
         </div>
-
       </div>
 
-      <!-- Geri dön -->
-      <div style="margin-top: 48px; text-align: center;">
-        <a href="/gezdoku" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
-          ← GezDoku'ya Dön
-        </a>
+      <!-- 4. Veri Saklama -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>4</span>
+        </div>
+        <div class="doc-content">
+          <h2>Veri Saklama</h2>
+          <p>Cihazınızda saklanan oyun verileri (ilerleme, ayarlar) uygulamayı sildiğinizde kalıcı olarak silinir. Bulut yedekleme kullanıyorsanız (iCloud) bu veriler Apple altyapısında saklanabilir; bu durum Apple'ın politikasına tabidir.</p>
+        </div>
       </div>
-    </section>
+
+      <!-- 5. Çocukların Gizliliği -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>5</span>
+        </div>
+        <div class="doc-content">
+          <h2>Çocukların Gizliliği</h2>
+          <p>Uygulama 4 yaş ve üzeri kullanıcılar için tasarlanmıştır. 13 yaş altı kullanıcılardan bilerek kişisel veri toplamıyoruz. Unity Ads, çocuklara yönelik içeriklerde kişiselleştirilmiş reklam göstermemektedir.</p>
+        </div>
+      </div>
+
+      <!-- 6. Haklarınız -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>6</span>
+        </div>
+        <div class="doc-content">
+          <h2>Haklarınız</h2>
+          <ul class="doc-list">
+            <li>Uygulamayı silerek cihazınızdaki tüm yerel verileri kaldırabilirsiniz.</li>
+            <li>iOS Ayarlar üzerinden reklam takip iznini iptal edebilirsiniz.</li>
+            <li>Game Center hesabınızı Apple üzerinden yönetebilirsiniz.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7. Politika Değişiklikleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>7</span>
+        </div>
+        <div class="doc-content">
+          <h2>Politika Değişiklikleri</h2>
+          <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişiklikler olması durumunda bu sayfa güncellenecektir. Uygulamayı kullanmaya devam etmeniz güncel politikayı kabul ettiğiniz anlamına gelir.</p>
+        </div>
+      </div>
+
+      <!-- 8. İletişim -->
+      <div class="doc-section doc-section-last">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>8</span>
+        </div>
+        <div class="doc-content">
+          <h2>İletişim</h2>
+          <p>Sorularınız için bizimle iletişime geçebilirsiniz:</p>
+          <a href="mailto:support@companysoftware.app" class="doc-link" style={`color:${accent};`}>
+            support@companysoftware.app
+          </a>
+        </div>
+      </div>
+
+      <div class="doc-back">
+        <a href="/gezdoku">← GezDoku'ya Dön</a>
+      </div>
+    </div>
 
   </main>
 
   <Footer />
 </Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section-last { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .doc-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 0;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75; margin: 0;
+  }
+  .doc-content strong { color: var(--color-text); font-weight: 600; }
+
+  .doc-highlight {
+    border-radius: 10px; padding: 12px 16px;
+  }
+  .doc-highlight p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+
+  .doc-card {
+    background: var(--bg-section-alt);
+    border: 1px solid var(--border-faint);
+    border-radius: 14px; padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-card + .doc-card { margin-top: 10px; }
+  .doc-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--color-text); margin: 0;
+  }
+  .doc-card p {
+    font-size: 0.875rem; color: var(--color-muted); line-height: 1.7; margin: 0;
+  }
+  .doc-tip {
+    font-size: 0.8rem !important;
+    color: var(--color-subtle) !important;
+    line-height: 1.6 !important;
+  }
+  .doc-tip strong { color: var(--color-muted); }
+
+  .doc-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-list li {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+    padding-left: 16px; position: relative;
+  }
+  .doc-list li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--color-subtle); font-weight: 700;
+  }
+
+  .doc-link {
+    display: inline-block;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-back { margin-top: 48px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>
