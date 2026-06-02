@@ -14,7 +14,7 @@ const scrollFeatures = [
   {
     title: 'Pasaportunu Doldur',
     sub: 'Yeni Yerler Keşfet',
-    description: 'Her çözdüğün bulmaca pasaportunuza bir damga ekler. Türkiye\'nin dört bir yanını keşfet, pasaportunuzu tüm damgalarla doldur.',
+    description: "Her çözdüğün bulmaca pasaportunuza bir damga ekler. Türkiye'nin dört bir yanını keşfet, pasaportunuzu tüm damgalarla doldur.",
   },
   {
     title: 'Sonsuz Mod',
@@ -35,59 +35,63 @@ const scrollFeatures = [
 ---
 
 <Layout
-  title="GezDoku"
-  description="Mahalle, ilçe ve şehir bulmacalarını çöz, yeni yerler keşfet, rozetler kazan."
+  title="GezDoku | Company Software App"
+  description="Mahalle, ilçe ve şehir bulmacalarını çöz, yeni yerler keşfet, rozetler kazan. Çok yakında."
+  ogImage="/images/logo-gezdoku.png"
 >
   <Header />
 
-  <main style="padding-top: 64px;">
+  <main style="padding-top: 56px;">
 
-    <!-- Hero -->
-    <section style="position: relative; padding: 80px 24px 72px; text-align: center; overflow: hidden; background-image: radial-gradient(rgba(34,211,238,0.15) 1.5px, transparent 1.5px); background-size: 28px 28px;">
-      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;" aria-hidden="true">
-        <div style="width: 500px; height: 500px; background: radial-gradient(circle, rgba(34,211,238,0.18) 0%, transparent 70%); border-radius: 50%;"></div>
-      </div>
-
-      <div style="position: relative; z-index: 10; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+    <!-- ── Hero ──────────────────────────────────── -->
+    <section class="hero-section">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
         <img
           src="/images/logo-gezdoku.png"
           alt="GezDoku"
-          width="96"
-          height="96"
-          style="width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 24px 60px rgba(0,0,0,0.5);"
+          width="96" height="96"
+          class="hero-logo"
         />
         <div>
-          <h1 class="font-heading" style="font-size: clamp(2.5rem, 6vw, 3.75rem); font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.1;">
-            GezDoku
-          </h1>
-          <p style="color: #94A3B8; font-size: 1.125rem; line-height: 1.7; max-width: 480px; margin: 0 auto;">
+          <h1 class="hero-title font-heading">GezDoku</h1>
+          <p class="hero-desc">
             Mahalle, ilçe ve şehir bulmacalarını çöz. Türkiye'yi keşfet, pasaportunuzu doldur, liderlik tablolarında zirveye ulaş.
           </p>
         </div>
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.25); border-radius: 100px; padding: 8px 20px;">
-          <div style="width: 7px; height: 7px; border-radius: 50%; background: #22D3EE;"></div>
-          <span style="font-size: 0.875rem; font-weight: 600; color: #22D3EE;">Yakında</span>
+        <div class="badge-coming-soon">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Yakında</span>
+        </div>
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="GezDoku Instagram" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="GezDoku X" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Scroll phone -->
+    <hr class="page-divider" />
+
+    <!-- ── Scroll features ────────────────────────── -->
     <section style="max-width: 1152px; margin: 0 auto; padding: 32px 24px;">
       <div class="scroll-grid">
 
-        <!-- Sol: scroll feature'lar -->
         <div>
           {scrollFeatures.map((f, i) => (
             <div class="scroll-feature" data-index={i} style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 64px 0; max-width: 420px;">
-              <p style={`font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: ${accent}; margin-bottom: 16px;`}>GezDoku</p>
-              <h2 class="font-heading" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.15;">{f.title}</h2>
-              <p class="font-heading" style={`font-size: 1.05rem; font-weight: 500; color: ${accent}; margin-bottom: 20px; opacity: 0.85;`}>{f.sub}</p>
-              <p style="font-size: 1.05rem; color: #94A3B8; line-height: 1.75;">{f.description}</p>
+              <p class="feature-eyebrow">GezDoku</p>
+              <h2 class="feature-heading font-heading">{f.title}</h2>
+              <p class="feature-sub font-heading" style={`color: ${accent};`}>{f.sub}</p>
+              <p class="feature-desc">{f.description}</p>
             </div>
           ))}
         </div>
 
-        <!-- Sağ: sticky telefon -->
+        <!-- Sticky phone -->
         <div class="phone-sticky-col">
           <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
             <div class="phone-frame">
@@ -135,13 +139,11 @@ const scrollFeatures = [
                     <div style="padding: 0 14px;">
                       <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">PASAPORT</p>
                       <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Keşif Haritam</p>
-                      <!-- Passport card -->
                       <div style="background: linear-gradient(135deg, #0c4a6e, #164e63); border: 1px solid rgba(34,211,238,0.2); border-radius: 16px; padding: 14px; margin-bottom: 12px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                           <p style="color: #22D3EE; font-size: 11px; font-weight: 700; font-family: sans-serif; letter-spacing: 0.1em;">GEZDoku PASSport</p>
                           <span style="font-size: 20px;">🗺️</span>
                         </div>
-                        <!-- City stamps grid -->
                         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
                           {[
                             {label:'İST',done:true},{label:'ANK',done:true},{label:'İZM',done:true},{label:'BUR',done:true},
@@ -154,18 +156,12 @@ const scrollFeatures = [
                         </div>
                       </div>
                       <div style="display: flex; justify-content: space-between;">
-                        <div style="text-align: center;">
-                          <p style="color: #22D3EE; font-size: 20px; font-weight: 800; font-family: sans-serif; line-height: 1;">47</p>
-                          <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 2px;">Keşfedilen</p>
-                        </div>
-                        <div style="text-align: center;">
-                          <p style="color: #22D3EE; font-size: 20px; font-weight: 800; font-family: sans-serif; line-height: 1;">81</p>
-                          <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 2px;">Toplam Şehir</p>
-                        </div>
-                        <div style="text-align: center;">
-                          <p style="color: #22D3EE; font-size: 20px; font-weight: 800; font-family: sans-serif; line-height: 1;">58%</p>
-                          <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 2px;">Tamamlanan</p>
-                        </div>
+                        {[{v:'47',l:'Keşfedilen'},{v:'81',l:'Toplam Şehir'},{v:'58%',l:'Tamamlanan'}].map(s => (
+                          <div style="text-align: center;">
+                            <p style="color: #22D3EE; font-size: 20px; font-weight: 800; font-family: sans-serif; line-height: 1;">{s.v}</p>
+                            <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 2px;">{s.l}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -178,11 +174,9 @@ const scrollFeatures = [
                     <div style="padding: 0 14px;">
                       <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">SONSUZ MOD</p>
                       <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 16px;">∞ Bitmez, Tükenmez</p>
-                      <!-- Big infinity symbol -->
                       <div style="text-align: center; padding: 20px 0 16px;">
                         <p style="font-size: 64px; line-height: 1; background: linear-gradient(135deg, #22D3EE, #6366F1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">∞</p>
                       </div>
-                      <!-- Mode options -->
                       <div style="display: flex; flex-direction: column; gap: 8px;">
                         {[
                           { label: 'Rastgele Mahalle', color: '#22D3EE' },
@@ -209,28 +203,23 @@ const scrollFeatures = [
                     <div style="padding: 0 14px;">
                       <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">KESİNTİSİZ MOD</p>
                       <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Ne Kadar Gidebilirsin?</p>
-                      <!-- Current streak -->
                       <div style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); border-radius: 16px; padding: 16px; text-align: center; margin-bottom: 14px;">
                         <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.1em;">Mevcut Seri</p>
                         <p style="color: #F59E0B; font-size: 48px; font-weight: 800; font-family: sans-serif; line-height: 1;">12</p>
                         <p style="color: rgba(255,255,255,0.3); font-size: 11px; font-family: sans-serif; margin-top: 4px;">bulmaca üst üste</p>
                       </div>
-                      <!-- Lives -->
                       <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 14px;">
-                        {[1,2,3].map(life => (
+                        {[1,2,3].map(() => (
                           <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(239,68,68,0.15); border: 1.5px solid rgba(239,68,68,0.4); display: flex; align-items: center; justify-content: center; font-size: 18px;">❤️</div>
                         ))}
                       </div>
-                      <!-- Records -->
                       <div style="display: flex; gap: 8px;">
-                        <div style="flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 10px; text-align: center;">
-                          <p style="color: #F59E0B; font-size: 22px; font-weight: 800; font-family: sans-serif; line-height: 1;">38</p>
-                          <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 3px;">En İyi Seri</p>
-                        </div>
-                        <div style="flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 10px; text-align: center;">
-                          <p style="color: #22D3EE; font-size: 22px; font-weight: 800; font-family: sans-serif; line-height: 1;">247</p>
-                          <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 3px;">Toplam Çözülen</p>
-                        </div>
+                        {[{v:'38',c:'#F59E0B',l:'En İyi Seri'},{v:'247',c:'#22D3EE',l:'Toplam Çözülen'}].map(s => (
+                          <div style="flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 10px; text-align: center;">
+                            <p style={`color: ${s.c}; font-size: 22px; font-weight: 800; font-family: sans-serif; line-height: 1;`}>{s.v}</p>
+                            <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 3px;">{s.l}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -243,7 +232,6 @@ const scrollFeatures = [
                     <div style="padding: 0 14px;">
                       <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">SKOR TABLOSU</p>
                       <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 12px;">Game Center</p>
-                      <!-- Tabs -->
                       <div style="display: flex; gap: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 3px; margin-bottom: 14px;">
                         <div style="flex: 1; background: #22D3EE; border-radius: 7px; padding: 6px; text-align: center;">
                           <p style="color: #000; font-size: 12px; font-weight: 700; font-family: sans-serif;">Yerel</p>
@@ -252,14 +240,13 @@ const scrollFeatures = [
                           <p style="color: rgba(255,255,255,0.4); font-size: 12px; font-family: sans-serif;">Global</p>
                         </div>
                       </div>
-                      <!-- Leaderboard -->
                       <div style="display: flex; flex-direction: column; gap: 6px;">
                         {[
-                          { rank: 1, name: 'Ahmet K.', score: '1.842', medal: '🥇' },
-                          { rank: 2, name: 'Zeynep A.', score: '1.654', medal: '🥈' },
-                          { rank: 3, name: 'Mehmet Y.', score: '1.521', medal: '🥉' },
+                          { rank: 1, name: 'Ahmet K.', score: '1.842', medal: '🥇', isMe: false },
+                          { rank: 2, name: 'Zeynep A.', score: '1.654', medal: '🥈', isMe: false },
+                          { rank: 3, name: 'Mehmet Y.', score: '1.521', medal: '🥉', isMe: false },
                           { rank: 4, name: 'Sen', score: '1.203', medal: null, isMe: true },
-                          { rank: 5, name: 'Ayşe T.', score: '1.102', medal: null },
+                          { rank: 5, name: 'Ayşe T.', score: '1.102', medal: null, isMe: false },
                         ].map(row => (
                           <div style={`display: flex; align-items: center; gap: 10px; border-radius: 12px; padding: 9px 12px; ${row.isMe ? 'background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.3);' : 'background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);'}`}>
                             <p style="color: rgba(255,255,255,0.3); font-size: 12px; font-family: sans-serif; width: 16px; text-align: center;">{row.medal ?? row.rank}</p>
@@ -272,24 +259,20 @@ const scrollFeatures = [
                   </div>
                 </div>
 
-              </div><!-- /phone-screen -->
-            </div><!-- /phone-frame -->
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Alt -->
-    <div style="max-width: 1152px; margin: 0 auto; padding: 32px 24px 64px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; gap: 16px;">
-      <p style="font-size: 0.875rem; color: #475569;">Yakında App Store ve Google Play'de</p>
-      <div style="display: flex; gap: 24px;">
-        <a href="/gezdoku/privacy-policy" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
-          Gizlilik Politikası
-        </a>
-        <a href="/gezdoku/terms" style="font-size: 0.875rem; color: #475569; text-decoration: none;">
-          Kullanım Koşulları
-        </a>
+    <!-- ── Alt bağlantılar ───────────────────── -->
+    <div class="page-footer-strip">
+      <p class="page-footer-note">Yakında App Store ve Google Play'de</p>
+      <div class="page-footer-links">
+        <a href="/gezdoku/privacy-policy" class="page-footer-link">Gizlilik Politikası</a>
+        <a href="/gezdoku/terms" class="page-footer-link">Kullanım Koşulları</a>
       </div>
     </div>
 
@@ -299,56 +282,115 @@ const scrollFeatures = [
 </Layout>
 
 <style>
-  .scroll-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+  /* ── Hero ───────────────────────────────── */
+  .hero-section {
+    position: relative; padding: 88px 24px 72px;
+    text-align: center; overflow: hidden;
+    background-color: var(--bg-section-alt);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
   }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(34,211,238,0.08) 0%, transparent 65%);
+  }
+  .hero-inner {
+    position: relative; z-index: 10;
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+  }
+  .hero-logo {
+    width: 96px; height: 96px; border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3); object-fit: contain;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.75rem); font-weight: 700;
+    color: var(--color-text); margin-bottom: 14px;
+    line-height: 1.08; letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 1.1rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 460px; margin: 0 auto;
+  }
+
+  /* ── Coming soon badge ──────────────────── */
+  .badge-coming-soon {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.25);
+    border-radius: 100px; padding: 8px 20px;
+  }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22D3EE; }
+  .badge-text { font-size: 0.875rem; font-weight: 600; color: #22D3EE; }
+
+  /* ── Social buttons ─────────────────────── */
+  .social-row { display: flex; gap: 8px; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--hover-overlay); color: var(--color-muted);
+    text-decoration: none; transition: background 0.15s, color 0.15s;
+  }
+  .social-btn:hover { background: rgba(160,0,32,0.12); color: #A00020; }
+
+  /* ── Divider ─────────────────────────────── */
+  .page-divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
+
+  /* ── Feature text ────────────────────────── */
+  .feature-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: #A00020; margin-bottom: 16px;
+  }
+  .feature-heading {
+    font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;
+    color: var(--color-text); margin-bottom: 8px; line-height: 1.15;
+  }
+  .feature-sub { font-size: 1.05rem; font-weight: 500; margin-bottom: 20px; opacity: 0.9; }
+  .feature-desc { font-size: 1.05rem; color: var(--color-muted); line-height: 1.75; }
+
+  /* ── Bottom strip ────────────────────────── */
+  .page-footer-strip {
+    max-width: 1152px; margin: 0 auto;
+    padding: 32px 24px 64px;
+    border-top: 1px solid var(--border-faint);
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .page-footer-note { font-size: 0.875rem; color: var(--color-subtle); }
+  .page-footer-links { display: flex; gap: 24px; }
+  .page-footer-link {
+    font-size: 0.875rem; color: var(--color-subtle); text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .page-footer-link:hover { color: var(--color-text); }
+
+  /* ── Phone mockup ────────────────────────── */
+  .scroll-grid { display: grid; grid-template-columns: 1fr; }
   @media (min-width: 1024px) {
     .scroll-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
   }
-
   .phone-sticky-col { display: none; }
   @media (min-width: 1024px) {
     .phone-sticky-col {
-      display: block;
-      position: sticky;
-      top: 0;
-      align-self: start;
-      height: 100vh;
+      display: block; position: sticky; top: 0;
+      align-self: start; height: 100vh;
     }
   }
-
   .phone-frame {
-    width: 260px;
-    height: 540px;
+    width: 260px; height: 540px;
     background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
-    border-radius: 50px;
-    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.12);
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
-    position: relative;
-    padding: 13px;
+    position: relative; padding: 13px;
   }
   .phone-island {
-    position: absolute;
-    top: 13px; left: 50%;
-    transform: translateX(-50%);
-    width: 100px; height: 32px;
-    background: #000;
-    border-radius: 18px;
-    z-index: 10;
+    position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 32px; background: #000; border-radius: 18px; z-index: 10;
   }
   .phone-screen {
-    width: 100%; height: 100%;
-    border-radius: 38px;
-    overflow: hidden;
-    background: #000;
-    position: relative;
+    width: 100%; height: 100%; border-radius: 38px;
+    overflow: hidden; background: #000; position: relative;
   }
-  .phone-shot {
-    position: absolute; inset: 0;
-    opacity: 0;
-    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .phone-shot { position: absolute; inset: 0; opacity: 0; transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
   .phone-shot.active { opacity: 1; }
   .shot-ui { width: 100%; height: 100%; display: flex; flex-direction: column; }
   .shot-statusbar { height: 46px; flex-shrink: 0; }
@@ -373,6 +415,5 @@ const scrollFeatures = [
     },
     { threshold: 0.5 }
   );
-
   features.forEach((f) => observer.observe(f));
 </script>

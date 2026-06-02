@@ -2,8 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+/* ─── Apple-inspired color system ──────────────────── */
+:root {
+  /* Dark mode — default, Apple dark aesthetic */
+  --border-input: rgba(255,255,255,0.28);
+  --bg-page:        #000000;
+  --bg-section-alt: #111111;
+  --bg-card:        #1c1c1e;
+  --bg-header:      rgba(0,0,0,0.85);
+  --color-text:     #f5f5f7;
+  --color-muted:    #98989d;
+  --color-subtle:   #636366;
+  --border-faint:   rgba(255,255,255,0.08);
+  --dot-color:      rgba(255,255,255,0.04);
+  --shadow-card:    0 0 0 1px rgba(255,255,255,0.08);
+  --hover-overlay:  rgba(255,255,255,0.06);
 }
+
+:root.light {
+  /* Light mode — Apple.com aesthetic */
+  --border-input: rgba(0,0,0,0.28);
+  --bg-page:        #ffffff;
+  --bg-section-alt: #f5f5f7;
+  --bg-card:        #ffffff;
+  --bg-header:      rgba(255,255,255,0.85);
+  --color-text:     #1d1d1f;
+  --color-muted:    #6e6e73;
+  --color-subtle:   #86868b;
+  --border-faint:   rgba(0,0,0,0.10);
+  --dot-color:      rgba(0,0,0,0.05);
+  --shadow-card:    0 2px 24px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04);
+  --hover-overlay:  rgba(0,0,0,0.04);
+}
+
+/* ─── Base ────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-page);
+  color: var(--color-text);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ─── Light mode Tailwind overrides (for other pages) ─ */
+:root.light .text-white              { color: var(--color-text)   !important; }
+:root.light .text-slate-100          { color: var(--color-text)   !important; }
+:root.light .text-slate-400          { color: var(--color-muted)  !important; }
+:root.light .text-slate-500          { color: var(--color-subtle) !important; }
+:root.light .text-slate-600          { color: var(--color-muted)  !important; }
+:root.light .hover\:text-white:hover { color: var(--color-text)   !important; }
+:root.light .group:hover .group-hover\:text-white { color: #4f46e5 !important; }
+:root.light .text-cyan-400           { color: #0e7490  !important; }
+:root.light .text-violet-400         { color: #6d28d9  !important; }
+:root.light .text-indigo-400         { color: #7A0018  !important; }
+
+/* ─── Scroll to top button ────────────────────────── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px; z-index: 40;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-faint);
+  color: var(--color-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.15s ease, background 0.15s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+.scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.scroll-top:hover   { color: var(--color-text); background: var(--hover-overlay); }
+
+/* ─── Page fade-in ─────────────────────────────────── */
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main { animation: pageFade 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ─── Scroll reveal ───────────────────────────────── */
+.reveal { opacity: 0; }
+.reveal.visible {
+  animation: revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal-delay-1.visible { animation-delay: 0.1s; }
+.reveal-delay-2.visible { animation-delay: 0.2s; }
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ─── Hero load animation ─────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.hero-reveal    { animation: heroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-reveal-d1 { animation-delay: 0.12s; }
+.hero-reveal-d2 { animation-delay: 0.24s; }
+.hero-reveal-d3 { animation-delay: 0.36s; }

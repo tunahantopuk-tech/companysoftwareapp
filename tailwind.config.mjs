@@ -7,8 +7,8 @@ export default {
         base: '#0A0A0F',
         card: '#12121A',
         'card-hover': '#1A1A28',
-        primary: '#6366F1',
-        accent: '#22D3EE',
+        primary: '#A00020',
+        accent: '#C0002A',
         muted: '#94A3B8',
       },
       fontFamily: {

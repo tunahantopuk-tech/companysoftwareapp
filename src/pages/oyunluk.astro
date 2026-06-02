@@ -1,7 +1,158 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Oyunluk" description="Geliştirme aşamasındaki uygulama">
-  <!-- Oyunluk Sayfası -->
+<Layout
+  title="Oyunluk | Company Software App"
+  description="Oyunluk — Geliştirme aşamasında olan yeni uygulamamız. Yakında duyurulacak."
+  ogImage="/images/logo-oyunluk.png"
+>
+  <Header />
+
+  <main style="padding-top: 56px;">
+
+    <!-- ── Hero ──────────────────────────────── -->
+    <section class="hero-section">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <img
+          src="/images/logo-oyunluk.png"
+          alt="Oyunluk"
+          width="96" height="96"
+          class="hero-logo hero-reveal"
+        />
+        <div>
+          <h1 class="hero-title font-heading hero-reveal hero-reveal-d1">Oyunluk</h1>
+          <p class="hero-desc hero-reveal hero-reveal-d2">
+            Geliştirme aşamasında olan yeni uygulamamız. Daha fazla bilgi yakında paylaşılacak.
+          </p>
+        </div>
+        <span class="badge-dev hero-reveal hero-reveal-d2">Geliştiriliyor</span>
+        <div class="social-row hero-reveal hero-reveal-d3">
+          <a href="#" class="social-btn" aria-label="Oyunluk Instagram" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Oyunluk X" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="page-divider" />
+
+    <!-- ── Yakında bölümü ───────────────────── -->
+    <section class="info-section">
+      <div class="info-inner">
+        <div class="info-card reveal">
+          <p class="info-label">Durum</p>
+          <h2 class="info-heading font-heading">Geliştirme Sürecinde</h2>
+          <p class="info-desc">
+            Oyunluk üzerinde aktif olarak çalışıyoruz. Uygulamanın detaylarını hazır olduğunda burada paylaşacağız. Takipte kalın.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
 </Layout>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<style>
+  /* ── Hero ───────────────────────────────── */
+  .hero-section {
+    position: relative; padding: 88px 24px 80px;
+    text-align: center; overflow: hidden;
+    background-color: var(--bg-section-alt);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    min-height: 60vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.10) 0%, transparent 65%);
+  }
+  .hero-inner {
+    position: relative; z-index: 10;
+    max-width: 600px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+  }
+  .hero-logo {
+    width: 96px; height: 96px; border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3); object-fit: contain;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.75rem); font-weight: 700;
+    color: var(--color-text); margin-bottom: 14px;
+    line-height: 1.08; letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 1.1rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 440px; margin: 0 auto;
+  }
+
+  /* ── Badge ──────────────────────────────── */
+  .badge-dev {
+    display: inline-block;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px;
+    background: rgba(160,0,32,0.12);
+    color: #D04060;
+  }
+  :global(:root.light) .badge-dev {
+    background: rgba(160,0,32,0.10);
+    color: #7A0018;
+  }
+
+  /* ── Social buttons ─────────────────────── */
+  .social-row { display: flex; gap: 8px; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--hover-overlay); color: var(--color-muted);
+    text-decoration: none; transition: background 0.15s, color 0.15s;
+  }
+  .social-btn:hover { background: rgba(160,0,32,0.12); color: #A00020; }
+
+  /* ── Divider ─────────────────────────────── */
+  .page-divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
+
+  /* ── Info section ────────────────────────── */
+  .info-section { padding: 96px 24px; }
+  .info-inner { max-width: 640px; margin: 0 auto; }
+  .info-card {
+    background: var(--bg-card);
+    border-radius: 28px; padding: 56px 48px;
+    text-align: center; box-shadow: var(--shadow-card);
+  }
+  .info-label {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #A00020; margin-bottom: 12px;
+  }
+  .info-heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700;
+    color: var(--color-text); margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+  .info-desc {
+    font-size: 17px; color: var(--color-muted); line-height: 1.7;
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="404 — Sayfa Bulunamadı | Company Software App"
+  description="Aradığınız sayfa bulunamadı."
+>
+  <Header />
+
+  <main class="not-found">
+    <div class="nf-inner">
+      <p class="nf-code hero-reveal">404</p>
+      <h1 class="nf-title font-heading hero-reveal hero-reveal-d1">
+        Kaybolunuz.
+      </h1>
+      <p class="nf-desc hero-reveal hero-reveal-d2">
+        Bu sayfa var olmaktan vazgeçti.<br />Ya da hiç var olmamıştı.
+      </p>
+      <a href="/" class="nf-btn hero-reveal hero-reveal-d2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Ana Sayfaya Dön
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    background-color: var(--bg-page);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+  .nf-inner {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    max-width: 560px;
+  }
+  .nf-code {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(96px, 20vw, 160px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #A00020, #D04060);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0;
+  }
+  .nf-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .nf-desc {
+    font-size: 18px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .nf-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #A00020;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 980px;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .nf-btn:hover  { opacity: 0.85; transform: translateY(-2px); }
+  .nf-btn:active { opacity: 1;    transform: translateY(0); }
+</style>

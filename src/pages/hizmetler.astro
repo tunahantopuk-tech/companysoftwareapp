@@ -1,0 +1,508 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="0.5" fill="currentColor"/></svg>`,
+    title: 'iOS & Android Uygulama Geliştirme',
+    desc: "React Native ve Swift ile native performanslı, App Store ve Google Play'e hazır uygulamalar geliştiriyoruz.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    title: 'Oyun Geliştirme',
+    desc: 'React Native ve Unity ile mobil oyunlar. Kullanıcıyı bağlayan mekanikler ve akıcı bir oyun deneyimi.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>`,
+    title: 'Web Tasarım & Geliştirme',
+    desc: 'Modern, hızlı ve şık web siteleri. Performans odaklı, SEO uyumlu ve her cihazda kusursuz görünen tasarımlar.',
+  },
+];
+
+const reasons = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+    title: 'Hızlı Teslimat',
+    desc: 'Zamanında, söz verilen sürede teslim. Sprint bazlı çalışma modeliyle her aşamayı şeffaf takip edersiniz.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    title: 'Temiz Kod',
+    desc: 'Sürdürülebilir, okunabilir ve test edilmiş kod. Teknik borç bırakmayan, ölçeklenebilir mimari.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    title: 'Modern Tasarım',
+    desc: 'Kullanıcı odaklı, şık ve işlevsel arayüzler. Her piksel ve etkileşim dikkatlice tasarlanır.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+    title: 'Sürekli Destek',
+    desc: 'Yayın sonrasında da yanınızdayız. Sorunu çıkmadan önce tespit eden proaktif teknik destek.',
+  },
+];
+
+const steps = [
+  { num: '01', title: 'Fikir & Keşif',  desc: 'Projenizi dinliyor, hedeflerinizi ve ihtiyaçlarınızı birlikte belirliyoruz.' },
+  { num: '02', title: 'Tasarım',        desc: 'Wireframe ve UI tasarımıyla ürünün görsel dilini oluşturuyoruz.' },
+  { num: '03', title: 'Geliştirme',     desc: 'Kod yazımı, entegrasyonlar ve kapsamlı testler.' },
+  { num: '04', title: 'Yayın & Destek', desc: 'Deploy sürecini yönetiyor, sonrasında teknik destek sağlıyoruz.' },
+];
+---
+
+<Layout
+  title="Hizmetler | Company Software App"
+  description="Mobil uygulama, oyun ve web tasarımı alanlarında profesyonel çözümler. React Native, Swift, Unity ve modern web teknolojileri."
+>
+  <Header />
+
+  <main class="page-main">
+
+    <!-- ── Hero ───────────────────────────────── -->
+    <section class="hero">
+      <p class="hero-eyebrow hero-reveal">Hizmetlerimiz</p>
+      <h1 class="hero-heading hero-reveal hero-reveal-d1">Birlikte Üretelim</h1>
+      <p class="hero-sub hero-reveal hero-reveal-d2">
+        Mobil uygulama, oyun ve web tasarımı alanlarında<br class="br-desk" />
+        profesyonel çözümler sunuyoruz.
+      </p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── Hizmetler ──────────────────────────── -->
+    <section class="section alt-bg">
+      <div class="inner">
+        <p class="section-label reveal">Hizmetler</p>
+        <div class="cards-grid">
+          {services.map((s, i) => (
+            <div class={`svc-card reveal reveal-delay-${i + 1}`}>
+              <div class="svc-icon" set:html={s.icon} />
+              <h3 class="svc-title">{s.title}</h3>
+              <p class="svc-desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── Nasıl Çalışıyoruz ──────────────────── -->
+    <section class="section">
+      <div class="inner">
+        <p class="section-label reveal">Nasıl Çalışıyoruz</p>
+        <div class="steps-grid">
+          {steps.map((s, i) => (
+            <div class={`step-card reveal reveal-delay-${i + 1}`}>
+              <span class="step-num">{s.num}</span>
+              <h3 class="step-title">{s.title}</h3>
+              <p class="step-desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── Neden Biz ─────────────────────────── -->
+    <section class="section">
+      <div class="inner">
+        <p class="section-label reveal">Neden Biz?</p>
+        <div class="reasons-grid">
+          {reasons.map((r, i) => (
+            <div class={`reason-card reveal reveal-delay-${i + 1}`}>
+              <div class="reason-icon" set:html={r.icon} />
+              <h3 class="reason-title">{r.title}</h3>
+              <p class="reason-desc">{r.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── İletişim Formu ─────────────────────── -->
+    <section class="section alt-bg form-section">
+      <div class="inner inner-narrow">
+        <div class="form-header reveal">
+          <p class="section-label" style="margin-bottom: 12px;">Proje Başlat</p>
+          <p class="form-lead">Projenizi anlatın, size en kısa sürede dönelim.</p>
+        </div>
+
+        <form class="contact-form reveal" action="" method="POST" novalidate>
+
+          <!-- Ad Soyad + onay checkbox -->
+          <div class="field">
+            <label for="name">Ad Soyad</label>
+            <input id="name" name="name" type="text" placeholder="Adınız Soyadınız" required />
+          </div>
+
+          <!-- E-posta -->
+          <div class="field">
+            <label for="email">E-posta</label>
+            <input id="email" name="email" type="email" placeholder="ornek@email.com" required />
+          </div>
+
+          <!-- Proje türü -->
+          <div class="field">
+            <label for="type">Proje Türü</label>
+            <div class="select-wrap">
+              <select id="type" name="type" required>
+                <option value="" disabled selected>Seçiniz…</option>
+                <option value="mobile">Mobil Uygulama</option>
+                <option value="game">Oyun</option>
+                <option value="web">Web</option>
+                <option value="other">Diğer</option>
+              </select>
+              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Proje açıklaması -->
+          <div class="field">
+            <label for="desc">Proje Açıklaması</label>
+            <textarea id="desc" name="description" rows="5"
+              placeholder="Projeniz hakkında kısaca bilgi verin…" required></textarea>
+          </div>
+
+          <!-- KVKK onayı -->
+          <label class="check-label kvkk">
+            <span class="check-box-wrap">
+              <input type="checkbox" name="kvkk" class="check-input" required />
+              <span class="check-box" aria-hidden="true">
+                <svg viewBox="0 0 12 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1 5 4.5 9 11 1"/>
+                </svg>
+              </span>
+            </span>
+            <span class="check-text">Kişisel verilerimin iletişim amacıyla işlenmesine onay veriyorum.</span>
+          </label>
+
+          <button type="submit" class="btn-submit">
+            Gönder
+            <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<style>
+  /* ── Bordo aksan ─────────────────────────────── */
+  :root { --bordo: #A00020; --bordo-glow: rgba(160,0,32,0.15); }
+
+  /* ── Layout ────────────────────────────────────── */
+  .page-main { padding-top: 56px; }
+  .divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
+  .section  { padding: 96px 24px; }
+  .alt-bg   { background-color: var(--bg-section-alt); }
+  .inner    { max-width: 1080px; margin: 0 auto; }
+  .inner-narrow { max-width: 720px; }
+
+  /* ── Hero ──────────────────────────────────────── */
+  .hero {
+    min-height: 52vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 24px 72px;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 18px;
+  }
+  .hero-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.07;
+    letter-spacing: -0.022em;
+    color: var(--color-text);
+    margin-bottom: 22px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 500px;
+  }
+  .br-desk { display: none; }
+  @media (min-width: 600px) { .br-desk { display: block; } }
+
+  /* ── Section label ────────────────────────────── */
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 48px;
+  }
+
+  /* ── Service cards ─────────────────────────────── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 860px) { .cards-grid { grid-template-columns: 1fr; } }
+
+  .svc-card {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 44px 36px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+  }
+  .svc-card:hover {
+    transform: translateY(-5px) scale(1.012);
+    box-shadow: 0 16px 48px rgba(160,0,32,0.16), 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .svc-icon { width: 48px; height: 48px; color: var(--bordo); transition: transform 0.35s ease; }
+  .svc-icon svg { width: 100%; height: 100%; }
+  .svc-card:hover .svc-icon { animation: icon-anim 0.55s ease; }
+
+  @keyframes icon-anim {
+    0%   { transform: scale(1)    rotate(0deg); }
+    30%  { transform: scale(1.18) rotate(-8deg); }
+    60%  { transform: scale(1.12) rotate(6deg); }
+    100% { transform: scale(1)    rotate(0deg); }
+  }
+
+  /* ── Neden Biz ─────────────────────────── */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px)  { .reasons-grid { grid-template-columns: 1fr; } }
+
+  .reason-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 36px 28px;
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column; gap: 12px;
+    border: 1px solid var(--border-faint);
+    transition: border-color 0.2s ease, box-shadow 0.25s ease;
+  }
+  .reason-card:hover {
+    border-color: rgba(160,0,32,0.3);
+    box-shadow: 0 8px 32px rgba(160,0,32,0.12);
+  }
+  .reason-icon { width: 40px; height: 40px; color: var(--bordo); }
+  .reason-icon svg { width: 100%; height: 100%; }
+  .reason-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--color-text);
+  }
+  .reason-desc { font-size: 14px; color: var(--color-muted); line-height: 1.65; }
+
+  /* ── Form section ──────────────────────── */
+  .form-section { border-top: 3px solid var(--bordo); }
+  .form-header { margin-bottom: 40px; }
+  .svc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+  .svc-desc { font-size: 15px; color: var(--color-muted); line-height: 1.65; }
+
+  /* ── Process steps ─────────────────────────────── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px)  { .steps-grid { grid-template-columns: 1fr; } }
+
+  .step-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 36px 28px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--bordo);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .step-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .step-desc { font-size: 14px; color: var(--color-muted); line-height: 1.65; }
+
+  /* ── Form ──────────────────────────────────────── */
+  .form-lead { font-size: 17px; color: var(--color-muted); margin-bottom: 40px; line-height: 1.6; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 22px; }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+
+  .field label:first-child {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-muted);
+  }
+
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea,
+  .select-wrap select {
+    background: var(--bg-card);
+    color: var(--color-text);
+    border: 1.5px solid #5a5a5e;
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+  }
+  :global(:root.light) .field input[type="text"],
+  :global(:root.light) .field input[type="email"],
+  :global(:root.light) .field textarea,
+  :global(:root.light) .select-wrap select {
+    border-color: #a0a0a5;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--color-subtle); }
+
+  .field input[type="text"]:focus,
+  .field input[type="email"]:focus,
+  .field textarea:focus,
+  .select-wrap select:focus {
+    border-color: var(--bordo);
+    box-shadow: 0 0 0 3px var(--bordo-glow);
+  }
+  .field textarea { resize: vertical; min-height: 130px; }
+
+  /* ── Select ────────────────────────────────────── */
+  .select-wrap { position: relative; }
+  .select-wrap select { cursor: pointer; padding-right: 42px; }
+  .select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--color-subtle);
+    pointer-events: none;
+  }
+
+  /* ── Checkbox ──────────────────────────────────── */
+  .check-label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 4px;
+  }
+  .check-box-wrap { flex-shrink: 0; position: relative; }
+  .check-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .check-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border-faint);
+    background: var(--bg-card);
+    transition: background 0.15s ease, border-color 0.15s ease;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .check-box svg { width: 12px; height: 10px; opacity: 0; transition: opacity 0.15s ease; stroke: #fff; }
+  .check-input:checked ~ .check-box {
+    background: var(--bordo);
+    border-color: var(--bordo);
+  }
+  .check-input:checked ~ .check-box svg { opacity: 1; }
+  .check-input:focus-visible ~ .check-box { box-shadow: 0 0 0 3px var(--bordo-glow); }
+
+  .check-text { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
+  .kvkk       { margin-top: 4px; }
+
+  /* ── Submit button ─────────────────────────────── */
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bordo);
+    color: #ffffff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 34px;
+    border-radius: 980px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .btn-submit:hover  { opacity: 0.84; transform: translateY(-1px); }
+  .btn-submit:active { opacity: 1;    transform: translateY(0);    }
+  .btn-icon { width: 16px; height: 16px; }
+</style>

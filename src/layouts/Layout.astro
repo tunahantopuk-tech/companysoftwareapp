@@ -1,10 +1,20 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description = 'Company Software App — iOS, Android ve ötesi için dijital deneyimler.' } = Astro.props;
+const {
+  title,
+  description = 'iOS, Android ve web için profesyonel uygulama ve oyun geliştirme.',
+  ogImage = '/images/logo-company.png',
+} = Astro.props;
+
+const siteUrl = 'https://companysoftware.app';
+const ogImageUrl = `${siteUrl}${ogImage}`;
 ---
 
 <!doctype html>
@@ -12,17 +22,62 @@ const { title, description = 'Company Software App — iOS, Android ve ötesi i�
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:site_name"    content="Company Software App" />
+    <meta property="og:title"        content={title} />
+    <meta property="og:description"  content={description} />
+    <meta property="og:image"        content={ogImageUrl} />
+    <meta property="og:image:width"  content="742" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:locale"       content="tr_TR" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/logo-company.png" />
+
+    <ViewTransitions />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>{title} | Company Software App</title>
   </head>
-  <body class="text-slate-100 font-body antialiased" style="background-color: #0A0A0F;">
+  <body class="font-body antialiased">
     <slot />
+
+    <!-- Scroll-to-top -->
+    <button id="scroll-top" class="scroll-top" aria-label="Başa dön">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    </button>
+
+    <script is:inline>
+      (function () {
+        const btn = document.getElementById('scroll-top');
+        if (!btn) return;
+        window.addEventListener('scroll', function () {
+          btn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        btn.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
   </body>
 </html>

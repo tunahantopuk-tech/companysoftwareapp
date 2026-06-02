@@ -6,7 +6,16 @@
       "Read(//Users/tunahantopuk/.nvm/versions/**)",
       "Bash(npm --version)",
       "Bash(brew *)",
-      "WebFetch(domain:www.hungrystudio.com)"
+      "WebFetch(domain:www.hungrystudio.com)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
+      "Bash(curl -s http://localhost:4322/)",
+      "Bash(pkill -f \"astro dev\")",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(identify /Users/tunahantopuk/Desktop/Companysoftwareapp/public/images/logo-company.png)",
+      "Bash(python3 *)",
+      "Bash(sips *)",
+      "Bash(swift *)"
     ]
   }
 }

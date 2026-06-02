@@ -1,26 +1,48 @@
 ---
 const navItems = [
   { label: 'Uygulamalar', href: '/#uygulamalar' },
-  { label: 'İletişim', href: '/iletisim' },
+  { label: 'Oyunlar',     href: '/#oyunlar' },
+  { label: 'Hizmetler',  href: '/hizmetler' },
+  { label: 'İletişim',   href: '/iletisim' },
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-md" style="background-color: rgba(10,10,15,0.80);">
-  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="font-heading font-semibold text-white text-lg tracking-tight">
-      Company Software <span style="color: #6366F1;">App</span>
+<header
+  class="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-xl"
+  style="background-color: var(--bg-header); border-color: var(--border-faint);"
+>
+  <nav class="max-w-[1080px] mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="/" class="nav-logo">
+      Company <span class="logo-accent">Software App</span>
     </a>
-    <ul class="flex items-center gap-8">
+
+    <ul class="flex items-center gap-7">
       {navItems.map(item => (
         <li>
-          <a
-            href={item.href}
-            class="text-sm text-slate-400 hover:text-white transition-colors duration-200"
-          >
-            {item.label}
-          </a>
+          <a href={item.href} class="nav-link">{item.label}</a>
         </li>
       ))}
     </ul>
   </nav>
 </header>
+
+<style>
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .logo-accent { color: #961628; }
+
+  .nav-link {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .nav-link:hover { color: var(--color-text); }
+</style>

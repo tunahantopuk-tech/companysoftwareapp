@@ -2,125 +2,112 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-const apps = [
-  {
-    id: 'ifilmlik',
-    name: 'iFilmlik',
-    logo: '/images/logo-ifilmlik.png',
-    description: 'Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin.',
-    pageHref: '/ifilmlik',
-    storeUrl: 'https://apps.apple.com/us/app/ifilmlik/id6760693864',
-    badge: null,
-    badgeClass: '',
-  },
-  {
-    id: 'gezdoku',
-    name: 'GezDoku',
-    logo: '/images/logo-gezdoku.png',
-    description: 'Sizi farklı dünyalara götürecek yeni bir oyun deneyimi. Çok yakında.',
-    pageHref: '/gezdoku',
-    storeUrl: null,
-    badge: 'Yakında',
-    badgeClass: 'bg-cyan-500/10 text-cyan-400',
-  },
-  {
-    id: 'oyunluk',
-    name: 'Oyunluk',
-    logo: '/images/logo-oyunluk.png',
-    description: 'Geliştirme aşamasında. Daha fazla bilgi yakında paylaşılacak.',
-    pageHref: '/oyunluk',
-    storeUrl: null,
-    badge: 'Geliştiriliyor',
-    badgeClass: 'bg-violet-500/10 text-violet-400',
-  },
-];
 ---
 
 <Layout
-  title="Ana Sayfa"
-  description="Company Software App — iOS, Android ve ötesi için dijital deneyimler."
+  title="Company Software App | Mobil Uygulama & Oyun Geliştirme"
+  description="iOS, Android ve web için profesyonel uygulama ve oyun geliştirme. iFilmlik, GezDoku ve daha fazlası."
 >
   <Header />
 
-  <main class="pt-16">
+  <main>
 
-    <!-- Hero -->
-    <section
-      style="position: relative; min-height: calc(100vh - 64px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; overflow: hidden; background-image: radial-gradient(rgba(99,102,241,0.22) 1.5px, transparent 1.5px); background-size: 28px 28px;"
-    >
-      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;" aria-hidden="true">
-        <div style="width: 640px; height: 640px; background: radial-gradient(circle, rgba(99,102,241,0.28) 0%, rgba(34,211,238,0.08) 50%, transparent 70%); border-radius: 50%;"></div>
-      </div>
+    <!-- ─────────────── Hero ─────────────── -->
+    <section class="hero">
+      <img src="/images/logo-company.png" alt="Company Software App" class="hero-logo hero-reveal" />
+      <h1 class="hero-heading hero-reveal hero-reveal-d1">
+        Harika uygulamalar,<br>harika deneyimler.
+      </h1>
+      <p class="hero-sub hero-reveal hero-reveal-d2">
+        iOS, Android ve ötesi için yalın, güçlü dijital deneyimler tasarlıyoruz.
+      </p>
+    </section>
 
-      <div style="position: relative; z-index: 10; max-width: 768px;">
-        <p class="text-xs font-medium text-slate-500 tracking-[0.2em] uppercase mb-5">
-          Company Software App
-        </p>
-        <h1 class="font-heading text-5xl md:text-7xl font-bold leading-tight mb-5">
-          <span style="background: linear-gradient(90deg, #818cf8, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-            Harika uygulamalar
-          </span>
-          <br />
-          <span class="text-white">hayatı kolaylaştırır.</span>
-        </h1>
-        <p class="text-slate-400 text-lg md:text-xl max-w-xl mx-auto mb-8 leading-relaxed">
-          iOS, Android ve ötesi için yalın, güçlü dijital deneyimler tasarlıyoruz.
-        </p>
-        <a
-          href="#uygulamalar"
-          class="inline-flex items-center gap-2 text-white font-medium px-7 py-3.5 rounded-xl transition-colors duration-200"
-          style="background-color: #6366F1;"
-        >
-          Uygulamalarımız
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
+    <hr class="divider">
+
+    <!-- ─────────────── Uygulamalar ─────────────── -->
+    <section id="uygulamalar" class="products-section" style="background-color: var(--bg-section-alt);">
+      <div class="products-inner">
+
+        <p class="section-eyebrow reveal">Uygulamalar</p>
+
+        <div class="games-grid">
+
+          <!-- iFilmlik -->
+          <div class="game-card reveal reveal-delay-1">
+            <img src="/images/logo-ifilmlik.png" alt="iFilmlik" class="game-logo" />
+            <h3 class="game-title">iFilmlik</h3>
+            <p class="game-desc">
+              Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin.
+            </p>
+            <div class="card-actions">
+              <a href="https://apps.apple.com/us/app/ifilmlik/id6760693864" class="btn-store" target="_blank" rel="noopener noreferrer">
+                <svg class="apple-icon" viewBox="0 0 14 17" fill="currentColor" aria-hidden="true"><path d="M11.47 8.58c-.02-1.88 1.54-2.79 1.6-2.83-.87-1.28-2.24-1.45-2.72-1.47-1.16-.12-2.26.68-2.85.68-.59 0-1.5-.66-2.46-.64-1.27.02-2.44.74-3.09 1.87-1.31 2.27-.34 5.65.94 7.5.63.9 1.37 1.91 2.35 1.88.94-.04 1.3-.61 2.44-.61 1.14 0 1.46.61 2.46.59 1.02-.02 1.66-.92 2.28-1.82.02-.01.03-.02.05-.04-.98-.38-1.7-1.43-1.7-2.32zm-1.75-5.6c.52-.63.87-1.5.77-2.37-.75.03-1.65.5-2.19 1.13-.48.56-.9 1.45-.79 2.3.84.07 1.7-.43 2.21-1.07z"/></svg>
+                App Store'da İndir
+              </a>
+              <a href="/ifilmlik" class="btn-learn">Daha fazla bilgi ›</a>
+            </div>
+            <div class="social-row">
+              <a href="#" class="social-btn" aria-label="iFilmlik Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="iFilmlik X" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Oyunluk -->
+          <div class="game-card reveal reveal-delay-2">
+            <img src="/images/logo-oyunluk.png" alt="Oyunluk" class="game-logo" />
+            <span class="badge badge-dev">Geliştiriliyor</span>
+            <h3 class="game-title">Oyunluk</h3>
+            <p class="game-desc">
+              Geliştirme aşamasında. Daha fazla bilgi yakında paylaşılacak.
+            </p>
+            <a href="/oyunluk" class="btn-learn" style="margin-top: auto;">Daha fazla bilgi ›</a>
+            <div class="social-row">
+              <a href="#" class="social-btn" aria-label="Oyunluk Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="Oyunluk X" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
-    <!-- Uygulamalar -->
-    <section id="uygulamalar" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-3">Uygulama ve Oyunlar</h2>
-        <p class="text-slate-400 text-lg">Her biri farklı bir deneyim sunuyor.</p>
-      </div>
+    <hr class="divider">
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {apps.map(app => (
-          <a
-            href={app.pageHref}
-            class="app-card group flex flex-col gap-5 rounded-2xl p-7 border transition-all duration-300"
-            style="background-color: #12121A; border-color: rgba(255,255,255,0.05);"
-          >
-            <img src={app.logo} alt={app.name} width="64" height="64" class="w-16 h-16 rounded-xl shrink-0 object-contain" />
+    <!-- ─────────────── Oyunlar ─────────────── -->
+    <section id="oyunlar" class="products-section">
+      <div class="products-inner">
 
-            <div class="flex-1 flex flex-col gap-2">
-              <div class="flex items-center gap-2.5">
-                <h3 class="font-heading text-xl font-semibold text-white">{app.name}</h3>
-                {app.badge && (
-                  <span class={`text-xs font-medium px-2 py-0.5 rounded-full ${app.badgeClass}`}>{app.badge}</span>
-                )}
-              </div>
-              <p class="text-slate-400 text-sm leading-relaxed">{app.description}</p>
+        <p class="section-eyebrow reveal">Oyunlar</p>
+
+        <div class="games-grid">
+          <div class="game-card reveal">
+            <img src="/images/logo-gezdoku.png" alt="GezDoku" class="game-logo" />
+            <span class="badge badge-soon">Yakında</span>
+            <h3 class="game-title">GezDoku</h3>
+            <p class="game-desc">
+              Sizi farklı dünyalara götürecek yeni bir oyun deneyimi. Çok yakında.
+            </p>
+            <a href="/gezdoku" class="btn-learn" style="margin-top: auto;">Daha fazla bilgi ›</a>
+            <div class="social-row">
+              <a href="#" class="social-btn" aria-label="GezDoku Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="GezDoku X" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
             </div>
-
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-slate-500 group-hover:text-white transition-colors">
-                Daha fazla →
-              </span>
-              {app.storeUrl && (
-                <span
-                  class="text-sm font-medium px-4 py-1.5 rounded-lg text-indigo-400"
-                  style="background-color: rgba(99,102,241,0.1);"
-                >
-                  App Store ↗
-                </span>
-              )}
-            </div>
-          </a>
-        ))}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -129,9 +116,297 @@ const apps = [
   <Footer />
 </Layout>
 
+<script>
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      }
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // 3D tilt
+  document.querySelectorAll<HTMLElement>('.game-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+    });
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.018)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease';
+      card.style.transform = '';
+    });
+  });
+</script>
+
 <style>
-  .app-card:hover {
-    border-color: rgba(99,102,241,0.35);
-    box-shadow: 0 0 40px rgba(99,102,241,0.09);
+  /* ── Hero ───────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
   }
+  .hero-logo {
+    display: block;
+    height: clamp(280px, 45vh, 600px);
+    width: auto;
+    max-width: 90vw;
+    object-fit: contain;
+    margin: 0 auto 32px;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 22px;
+  }
+  .hero-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(44px, 7.5vw, 84px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    margin-bottom: 26px;
+  }
+  .hero-sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--color-muted);
+    max-width: 520px;
+    line-height: 1.65;
+  }
+
+  /* ── Divider ────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    border: none;
+    background: var(--border-faint);
+    margin: 0;
+  }
+
+  /* ── Section structure ─────────────────────────── */
+  .products-section { padding: 96px 24px; }
+  .products-inner   { max-width: 1080px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(40px, 5.5vw, 56px);
+    font-weight: 700;
+    color: var(--color-muted);
+    margin-bottom: 48px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── iFilmlik showcase ─────────────────────────── */
+  .showcase {
+    background: var(--bg-card);
+    border-radius: 28px;
+    padding: 72px 48px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .showcase-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+  .showcase-logo {
+    width: 128px;
+    height: 128px;
+    border-radius: 26px;
+    object-fit: contain;
+    box-shadow: 0 10px 36px rgba(0,0,0,0.18);
+  }
+  .showcase-cat {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #A00020;
+    margin-bottom: 10px;
+  }
+  .showcase-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(40px, 5.5vw, 58px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+  .showcase-desc {
+    font-size: 18px;
+    color: var(--color-muted);
+    max-width: 420px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .showcase-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Buttons ────────────────────────────────────── */
+  .btn-store {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #111111;
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 26px;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-store:hover { opacity: 0.82; }
+  .apple-icon { width: 13px; height: 16px; flex-shrink: 0; }
+
+  .btn-learn {
+    color: #A00020;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+  }
+  .btn-learn:hover { opacity: 0.7; }
+
+  /* ── Card action row (iFilmlik içi) ─────────────── */
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: auto;
+  }
+  .card-actions .btn-store {
+    justify-content: center;
+  }
+  .card-actions .btn-learn {
+    text-align: center;
+  }
+
+  /* ── Games grid ─────────────────────────────────── */
+  .games-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 680px) {
+    .games-grid { grid-template-columns: 1fr; }
+  }
+
+  .game-card {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 52px 44px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    box-shadow: var(--shadow-card);
+    will-change: transform;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .game-card:hover {
+    box-shadow: 0 20px 52px rgba(160,0,32,0.18), 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .game-logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 20px;
+    object-fit: contain;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+  /* showcase içinde badge'i ortala */
+  .showcase .badge { margin-left: auto; margin-right: auto; display: block; width: fit-content; }
+  .badge-soon {
+    background: rgba(6,182,212,0.12);
+    color: #0891b2;
+  }
+  :global(:root.light) .badge-soon {
+    background: rgba(6,182,212,0.10);
+    color: #0e7490;
+  }
+  .badge-dev {
+    background: rgba(160,0,32,0.12);
+    color: #D04060;
+  }
+  :global(:root.light) .badge-dev {
+    background: rgba(160,0,32,0.10);
+    color: #7A0018;
+  }
+
+  .game-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+    margin-bottom: 10px;
+  }
+  .game-desc {
+    font-size: 15px;
+    color: var(--color-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
+  }
+  .social-row {
+    display: flex;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-faint);
+    margin-top: 14px;
+  }
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-subtle);
+    background: var(--hover-overlay);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .social-btn:hover {
+    color: #A00020;
+    background: rgba(160,0,32,0.10);
+  }
+  .social-btn svg { width: 19px; height: 19px; }
 </style>
