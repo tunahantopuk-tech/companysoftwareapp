@@ -1,0 +1,14 @@
+{
+  "ifilmlik": {
+    "downloads": 100,
+    "show": true
+  },
+  "gezdoku": {
+    "downloads": 0,
+    "show": false
+  },
+  "oyunluk": {
+    "downloads": 0,
+    "show": false
+  }
+}

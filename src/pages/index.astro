@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import stats from '../data/stats.json';
 ---
 
 <Layout
@@ -35,7 +36,10 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <hr class="divider">
+    <!-- Progress Divider 1 -->
+    <div class="progress-divider-wrapper">
+      <div class="progress-divider" data-divider="1"></div>
+    </div>
 
     <!-- ─────────────── Uygulamalar ─────────────── -->
     <section id="uygulamalar" class="products-section" style="background-color: var(--bg-section-alt);">
@@ -46,8 +50,19 @@ import Footer from '../components/Footer.astro';
         <div class="games-grid">
 
           <!-- iFilmlik -->
-          <div class="game-card reveal reveal-delay-1">
+          <div class="game-card reveal reveal-delay-1" data-app="ifilmlik">
             <img src="/images/logo-ifilmlik.png" alt="iFilmlik" class="game-logo" />
+            {stats.ifilmlik.show && (
+              <div class="download-badge">
+                <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span class="download-count" data-target={stats.ifilmlik.downloads}>0</span>
+                <span class="download-label">İndirme</span>
+              </div>
+            )}
             <h3 class="game-title">iFilmlik</h3>
             <p class="game-desc">
               Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin.
@@ -93,7 +108,10 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <hr class="divider">
+    <!-- Progress Divider 2 -->
+    <div class="progress-divider-wrapper">
+      <div class="progress-divider" data-divider="2"></div>
+    </div>
 
     <!-- ─────────────── Oyunlar ─────────────── -->
     <section id="oyunlar" class="products-section">
@@ -115,6 +133,37 @@ import Footer from '../components/Footer.astro';
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
               <a href="#" class="social-btn" aria-label="GezDoku X" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress Divider 3 -->
+    <div class="progress-divider-wrapper">
+      <div class="progress-divider" data-divider="3"></div>
+    </div>
+
+    <!-- ─────────────── Web ─────────────── -->
+    <section id="web" class="products-section" style="background-color: var(--bg-section-alt);">
+      <div class="products-inner">
+
+        <p class="section-eyebrow reveal">Web</p>
+
+        <div class="games-grid">
+          <div class="game-card reveal web-card">
+            <img src="/logo-icon-light.svg" alt="Company Software App" class="game-logo" />
+            <h3 class="game-title">Company Software App</h3>
+            <p class="game-desc">
+              Profesyonel Web Tasarımları ve Mükemmel Çözümler
+            </p>
+            <div class="social-row">
+              <a href="#" class="social-btn" aria-label="Company Software Instagram" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-btn" aria-label="Company Software X" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
             </div>
@@ -162,6 +211,91 @@ import Footer from '../components/Footer.astro';
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // Progress Dividers Scroll Animation
+  (function () {
+    const dividers = document.querySelectorAll<HTMLElement>('.progress-divider');
+
+    function updateProgress() {
+      dividers.forEach(divider => {
+        const wrapper = divider.parentElement;
+        if (!wrapper) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // Eleman viewport'un üstünden ne kadar geçti
+        const elementTop = rect.top;
+        const elementHeight = rect.height;
+
+        // Progress hesaplama: element viewport'a girdiğinde 0%, viewport'un ortasından geçerken 100%
+        let progress = 0;
+
+        if (elementTop < windowHeight && elementTop > -elementHeight) {
+          // Viewport içinde
+          const scrolled = windowHeight - elementTop;
+          const total = windowHeight + elementHeight;
+          progress = Math.min(Math.max((scrolled / total) * 100, 0), 100);
+        } else if (elementTop <= -elementHeight) {
+          // Tamamen geçildi
+          progress = 100;
+        }
+
+        divider.style.width = `${progress}%`;
+      });
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress(); // İlk yükleme
+  })();
+
+  // Animated Download Counter
+  (function () {
+    const counters = document.querySelectorAll<HTMLElement>('.download-count');
+
+    function animateCounter(element: HTMLElement) {
+      const target = parseInt(element.dataset.target ?? '0', 10);
+      const duration = 2000; // 2 seconds
+      const startTime = performance.now();
+
+      function update(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function (ease-out cubic)
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easeProgress * target);
+
+        element.textContent = currentValue.toString();
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = target.toString();
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // Intersection Observer to start animation when visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counter = entry.target as HTMLElement;
+            if (counter.textContent === '0') {
+              animateCounter(counter);
+            }
+            observer.unobserve(counter);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
   })();
 
   // 3D tilt + shine — pointer devices only
@@ -386,6 +520,29 @@ import Footer from '../components/Footer.astro';
     margin: 0;
   }
 
+  /* ── Progress Divider ───────────────────────────── */
+  .progress-divider-wrapper {
+    position: relative;
+    height: 3px;
+    background: var(--border-faint);
+    overflow: hidden;
+  }
+
+  .progress-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,
+      rgba(160,0,32,0.3) 0%,
+      rgba(160,0,32,0.8) 50%,
+      rgba(160,0,32,1) 100%
+    );
+    box-shadow: 0 0 12px rgba(160,0,32,0.4);
+    transition: width 0.1s linear;
+  }
+
   /* ── Section structure ─────────────────────────── */
   .products-section { padding: 96px 24px; }
   .products-inner   { max-width: 1080px; margin: 0 auto; }
@@ -441,11 +598,15 @@ import Footer from '../components/Footer.astro';
   /* ── Games grid ─────────────────────────────────── */
   .games-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  @media (max-width: 680px) {
-    .games-grid { grid-template-columns: 1fr; }
+
+  @media (max-width: 768px) {
+    .games-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
   }
 
   .game-card {
@@ -461,6 +622,21 @@ import Footer from '../components/Footer.astro';
     will-change: transform;
     transform-style: preserve-3d;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .game-card {
+      padding: 40px 28px;
+      border-radius: 20px;
+    }
+
+    .game-title {
+      font-size: 24px;
+    }
+
+    .game-desc {
+      font-size: 14px;
+    }
   }
   .card-shine {
     position: absolute;
@@ -481,6 +657,141 @@ import Footer from '../components/Footer.astro';
     object-fit: contain;
     margin-bottom: 28px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  /* ── Download Badge ─────────────────────────────── */
+  .download-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #8B1A1A 0%, #6b1313 100%);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 10px 20px 10px 14px;
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+    overflow: hidden;
+  }
+
+  .download-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.15) 0%,
+      rgba(255,255,255,0.08) 25%,
+      transparent 50%,
+      rgba(0,0,0,0.05) 75%,
+      rgba(0,0,0,0.1) 100%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .download-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,0.1) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: badgeShine 3s ease-in-out infinite;
+  }
+
+  @keyframes badgeShine {
+    0%, 100% { left: -50%; opacity: 0; }
+    10% { opacity: 1; }
+    50% { left: 150%; opacity: 0.8; }
+    100% { left: 150%; opacity: 0; }
+  }
+
+  .game-card:hover .download-badge {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 16px rgba(139,26,26,0.35),
+      0 2px 8px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.15),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .game-card:hover .download-badge::before {
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.2) 0%,
+      rgba(255,255,255,0.12) 25%,
+      transparent 50%,
+      rgba(0,0,0,0.05) 75%,
+      rgba(0,0,0,0.1) 100%
+    );
+  }
+
+  .download-icon {
+    width: 18px;
+    height: 18px;
+    color: #fff;
+    flex-shrink: 0;
+    opacity: 0.95;
+    animation: downloadBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes downloadBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  .download-count {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    min-width: 32px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .download-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+
+  @media (max-width: 680px) {
+    .download-badge {
+      top: 16px;
+      right: 16px;
+      padding: 8px 16px 8px 12px;
+      gap: 6px;
+    }
+    .download-icon {
+      width: 16px;
+      height: 16px;
+    }
+    .download-count {
+      font-size: 18px;
+      min-width: 28px;
+    }
+    .download-label {
+      font-size: 12px;
+    }
   }
 
   .badge {
@@ -533,4 +844,5 @@ import Footer from '../components/Footer.astro';
   }
   .social-btn:hover { color: #A00020; background: rgba(160,0,32,0.10); }
   .social-btn svg { width: 19px; height: 19px; }
+
 </style>

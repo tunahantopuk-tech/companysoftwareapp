@@ -10,18 +10,57 @@ const navItems = [
 <header class="site-header">
   <nav class="max-w-[1080px] mx-auto px-6 h-12 flex items-center justify-between">
     <a href="/" class="nav-logo">
-      <img src="/logo-wordmark.svg" alt="Company Software App" height="28" style="height:28px;width:auto;display:block;" />
+      <img src="/logo-wordmark.svg" alt="Company Software App" height="36" style="height:36px;width:auto;display:block;" />
     </a>
 
-    <ul class="flex items-center gap-7">
+    <!-- Desktop Nav -->
+    <ul class="nav-desktop">
       {navItems.map(item => (
         <li>
           <a href={item.href} class="nav-link">{item.label}</a>
         </li>
       ))}
     </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="hamburger" aria-label="Menü" id="hamburger">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-nav">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href} class="mobile-link">{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </header>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu?.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+  });
+
+  // Close menu when clicking on a link
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('active');
+      mobileMenu?.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+</script>
 
 <style>
   .site-header {
@@ -38,6 +77,24 @@ const navItems = [
     text-decoration: none;
     display: flex;
     align-items: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  }
+
+  .nav-logo:hover {
+    transform: translateY(-2px) scale(1.02);
+    opacity: 0.85;
+  }
+
+  .nav-logo:active {
+    transform: translateY(0) scale(1);
+  }
+
+  .nav-logo img {
+    transition: filter 0.3s ease;
+  }
+
+  .nav-logo:hover img {
+    filter: brightness(1.1) saturate(1.2);
   }
 
   .nav-link {
@@ -45,7 +102,144 @@ const navItems = [
     font-weight: 400;
     color: var(--color-muted);
     text-decoration: none;
-    transition: color 0.15s ease;
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.25s ease, transform 0.2s ease;
+    display: inline-block;
   }
-  .nav-link:hover { color: var(--color-text); }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bordo, #A00020);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    transform: translateY(-1px);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:active {
+    transform: translateY(0);
+  }
+
+  /* Desktop Nav */
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-faint);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 99;
+  }
+
+  .mobile-menu.active {
+    max-height: 300px;
+  }
+
+  .mobile-nav {
+    list-style: none;
+    margin: 0;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-link {
+    display: block;
+    padding: 12px 16px;
+    color: var(--color-muted);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-link:hover {
+    background: rgba(160,0,32,0.08);
+    color: var(--color-text);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-desktop {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+
+    .nav-logo img {
+      height: 28px !important;
+    }
+
+    :global(body.menu-open) {
+      overflow: hidden;
+    }
+  }
 </style>

@@ -12,6 +12,21 @@ const scrollFeatures = [
     description: 'Mahalle, ilçe ve şehir seviyelerinde bulmacaları çöz. Her tamamlanan bulmaca seni bir adım öne taşır ve özel rozetler kazandırır.',
   },
   {
+    title: 'Mahalle',
+    sub: '928 Farklı Mahalle Bulmacası',
+    description: 'Mahalle seviyesinde 928 benzersiz bulmaca seni bekliyor. En küçük sokaktan en büyük caddelere kadar her köşeyi keşfet.',
+  },
+  {
+    title: 'İlçe',
+    sub: '973 İlçe Bulmacası ile Keşfet',
+    description: 'Türkiye\'nin 973 ilçesini bulmacalarla tanı. Her ilçenin kendine özgü yapısını keşfet, bilgini test et.',
+  },
+  {
+    title: 'Şehir',
+    sub: '81 Şehir, 81 Macera',
+    description: 'Türkiye\'nin tüm şehirlerinde bulmaca çöz. Her şehrin kendine özgü zorluğu ve güzelliğiyle karşılaş.',
+  },
+  {
     title: 'Pasaportunu Doldur',
     sub: 'Yeni Yerler Keşfet',
     description: "Her çözdüğün bulmaca pasaportunuza bir damga ekler. Türkiye'nin dört bir yanını keşfet, pasaportunuzu tüm damgalarla doldur.",
@@ -25,11 +40,6 @@ const scrollFeatures = [
     title: 'Kesintisiz Mod',
     sub: 'Gidebildiğin Yere Git',
     description: 'Kesintisiz modda ne kadar ileri gidebilirsin? Hatayla karşılaşmadan zincirleme bulmacaları çöz, rekorunu kır.',
-  },
-  {
-    title: 'Game Center',
-    sub: 'Yerel ve Global Yarış',
-    description: 'Yakın çevrende ve tüm dünyada yarış. Yerel ve global liderlik tablolarında en üste çıkmak için mücadele et.',
   },
 ];
 ---
@@ -95,168 +105,48 @@ const scrollFeatures = [
         <div class="phone-sticky-col">
           <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
             <div class="phone-frame">
+              <!-- Buttons -->
+              <div class="phone-button phone-button-left" style="top: 140px; height: 32px;"></div>
+              <div class="phone-button phone-button-left" style="top: 190px; height: 52px;"></div>
+              <div class="phone-button phone-button-left" style="top: 256px; height: 52px;"></div>
+              <div class="phone-button phone-button-right" style="top: 180px; height: 82px;"></div>
+
               <div class="phone-island"></div>
               <div class="phone-screen">
 
                 <!-- Ekran 0: Üç Farklı Bulmaca -->
                 <div class="phone-shot active" data-shot="0">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #071a20 0%, #0a2535 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">BULMACALAR</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 16px;">Seviye Seç</p>
-                      <div style="display: flex; flex-direction: column; gap: 10px;">
-                        {[
-                          { name: 'Mahalle', desc: '928 bulmaca', color: '#22D3EE', icon: '🏘️', badge: '12' },
-                          { name: 'İlçe', desc: '973 bulmaca', color: '#06B6D4', icon: '🏙️', badge: '5' },
-                          { name: 'Şehir', desc: '81 bulmaca', color: '#0891B2', icon: '🌆', badge: '2' },
-                        ].map(lvl => (
-                          <div style={`background: ${lvl.color}12; border: 1px solid ${lvl.color}30; border-radius: 16px; padding: 14px;`}>
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                              <span style="font-size: 22px;">{lvl.icon}</span>
-                              <div style="flex: 1;">
-                                <p style="color: #fff; font-size: 14px; font-weight: 700; font-family: sans-serif;">{lvl.name}</p>
-                                <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif;">{lvl.desc}</p>
-                              </div>
-                              <div style={`background: ${lvl.color}25; border: 1px solid ${lvl.color}50; border-radius: 20px; padding: 3px 10px;`}>
-                                <p style={`color: ${lvl.color}; font-size: 11px; font-weight: 700; font-family: sans-serif;`}>{lvl.badge} rozet</p>
-                              </div>
-                            </div>
-                            <div style="height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;">
-                              <div style={`height: 100%; width: ${lvl.badge === '12' ? '65%' : lvl.badge === '5' ? '30%' : '15%'}; background: ${lvl.color}; border-radius: 2px;`}></div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/gezdoku/screen-0.png" alt="Üç Farklı Bulmaca" class="screenshot-img" />
                 </div>
 
-                <!-- Ekran 1: Pasaportunu Doldur -->
+                <!-- Ekran 1: Mahalle -->
                 <div class="phone-shot" data-shot="1">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #050f1a 0%, #0a1f30 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">PASAPORT</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Keşif Haritam</p>
-                      <div style="background: linear-gradient(135deg, #0c4a6e, #164e63); border: 1px solid rgba(34,211,238,0.2); border-radius: 16px; padding: 14px; margin-bottom: 12px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                          <p style="color: #22D3EE; font-size: 11px; font-weight: 700; font-family: sans-serif; letter-spacing: 0.1em;">GEZDoku PASSport</p>
-                          <span style="font-size: 20px;">🗺️</span>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
-                          {[
-                            {label:'İST',done:true},{label:'ANK',done:true},{label:'İZM',done:true},{label:'BUR',done:true},
-                            {label:'ANT',done:true},{label:'KON',done:false},{label:'GAZ',done:false},{label:'ADN',done:false},
-                          ].map(city => (
-                            <div style={`aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; ${city.done ? 'background: rgba(34,211,238,0.2); border: 1.5px solid rgba(34,211,238,0.5);' : 'background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.12);'}`}>
-                              <p style={`font-size: 9px; font-weight: 700; font-family: sans-serif; ${city.done ? 'color: #22D3EE;' : 'color: rgba(255,255,255,0.2);'}`}>{city.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div style="display: flex; justify-content: space-between;">
-                        {[{v:'47',l:'Keşfedilen'},{v:'81',l:'Toplam Şehir'},{v:'58%',l:'Tamamlanan'}].map(s => (
-                          <div style="text-align: center;">
-                            <p style="color: #22D3EE; font-size: 20px; font-weight: 800; font-family: sans-serif; line-height: 1;">{s.v}</p>
-                            <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 2px;">{s.l}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/gezdoku/screen-1.png" alt="Mahalle" class="screenshot-img" />
                 </div>
 
-                <!-- Ekran 2: Sonsuz Mod -->
+                <!-- Ekran 2: İlçe -->
                 <div class="phone-shot" data-shot="2">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #0a0a1a 0%, #0f0f2a 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">SONSUZ MOD</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 16px;">∞ Bitmez, Tükenmez</p>
-                      <div style="text-align: center; padding: 20px 0 16px;">
-                        <p style="font-size: 64px; line-height: 1; background: linear-gradient(135deg, #22D3EE, #6366F1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">∞</p>
-                      </div>
-                      <div style="display: flex; flex-direction: column; gap: 8px;">
-                        {[
-                          { label: 'Rastgele Mahalle', color: '#22D3EE' },
-                          { label: 'Rastgele İlçe', color: '#06B6D4' },
-                          { label: 'Rastgele Şehir', color: '#0891B2' },
-                          { label: 'Karışık', color: '#6366F1' },
-                        ].map(opt => (
-                          <div style={`display: flex; align-items: center; justify-content: space-between; background: ${opt.color}10; border: 1px solid ${opt.color}25; border-radius: 12px; padding: 10px 14px;`}>
-                            <p style="color: #e2e8f0; font-size: 13px; font-family: sans-serif;">{opt.label}</p>
-                            <div style={`width: 28px; height: 28px; border-radius: 50%; background: ${opt.color}; display: flex; align-items: center; justify-content: center;`}>
-                              <div style="width: 0; height: 0; border-left: 7px solid white; border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-left: 2px;"></div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/gezdoku/screen-2.png" alt="İlçe" class="screenshot-img" />
                 </div>
 
-                <!-- Ekran 3: Kesintisiz Mod -->
+                <!-- Ekran 3: Şehir -->
                 <div class="phone-shot" data-shot="3">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #0f0a00 0%, #1a1200 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">KESİNTİSİZ MOD</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Ne Kadar Gidebilirsin?</p>
-                      <div style="background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); border-radius: 16px; padding: 16px; text-align: center; margin-bottom: 14px;">
-                        <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.1em;">Mevcut Seri</p>
-                        <p style="color: #F59E0B; font-size: 48px; font-weight: 800; font-family: sans-serif; line-height: 1;">12</p>
-                        <p style="color: rgba(255,255,255,0.3); font-size: 11px; font-family: sans-serif; margin-top: 4px;">bulmaca üst üste</p>
-                      </div>
-                      <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 14px;">
-                        {[1,2,3].map(() => (
-                          <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(239,68,68,0.15); border: 1.5px solid rgba(239,68,68,0.4); display: flex; align-items: center; justify-content: center; font-size: 18px;">❤️</div>
-                        ))}
-                      </div>
-                      <div style="display: flex; gap: 8px;">
-                        {[{v:'38',c:'#F59E0B',l:'En İyi Seri'},{v:'247',c:'#22D3EE',l:'Toplam Çözülen'}].map(s => (
-                          <div style="flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 10px; text-align: center;">
-                            <p style={`color: ${s.c}; font-size: 22px; font-weight: 800; font-family: sans-serif; line-height: 1;`}>{s.v}</p>
-                            <p style="color: rgba(255,255,255,0.3); font-size: 10px; font-family: sans-serif; margin-top: 3px;">{s.l}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/gezdoku/screen-3.png" alt="Şehir" class="screenshot-img" />
                 </div>
 
-                <!-- Ekran 4: Game Center -->
+                <!-- Ekran 4: Pasaportunu Doldur -->
                 <div class="phone-shot" data-shot="4">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #080a14 0%, #0e1220 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">SKOR TABLOSU</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 12px;">Game Center</p>
-                      <div style="display: flex; gap: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 3px; margin-bottom: 14px;">
-                        <div style="flex: 1; background: #22D3EE; border-radius: 7px; padding: 6px; text-align: center;">
-                          <p style="color: #000; font-size: 12px; font-weight: 700; font-family: sans-serif;">Yerel</p>
-                        </div>
-                        <div style="flex: 1; border-radius: 7px; padding: 6px; text-align: center;">
-                          <p style="color: rgba(255,255,255,0.4); font-size: 12px; font-family: sans-serif;">Global</p>
-                        </div>
-                      </div>
-                      <div style="display: flex; flex-direction: column; gap: 6px;">
-                        {[
-                          { rank: 1, name: 'Ahmet K.', score: '1.842', medal: '🥇', isMe: false },
-                          { rank: 2, name: 'Zeynep A.', score: '1.654', medal: '🥈', isMe: false },
-                          { rank: 3, name: 'Mehmet Y.', score: '1.521', medal: '🥉', isMe: false },
-                          { rank: 4, name: 'Sen', score: '1.203', medal: null, isMe: true },
-                          { rank: 5, name: 'Ayşe T.', score: '1.102', medal: null, isMe: false },
-                        ].map(row => (
-                          <div style={`display: flex; align-items: center; gap: 10px; border-radius: 12px; padding: 9px 12px; ${row.isMe ? 'background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.3);' : 'background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);'}`}>
-                            <p style="color: rgba(255,255,255,0.3); font-size: 12px; font-family: sans-serif; width: 16px; text-align: center;">{row.medal ?? row.rank}</p>
-                            <p style={`font-size: 13px; font-family: sans-serif; flex: 1; ${row.isMe ? 'color: #22D3EE; font-weight: 700;' : 'color: #e2e8f0;'}`}>{row.name}</p>
-                            <p style={`font-size: 12px; font-weight: 700; font-family: sans-serif; ${row.isMe ? 'color: #22D3EE;' : 'color: rgba(255,255,255,0.5);'}`}>{row.score}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/gezdoku/screen-4.png" alt="Pasaportunu Doldur" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 5: Sonsuz Mod -->
+                <div class="phone-shot" data-shot="5">
+                  <img src="/images/gezdoku/screen-5.png" alt="Sonsuz Mod" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 6: Kesintisiz Mod -->
+                <div class="phone-shot" data-shot="6">
+                  <img src="/images/gezdoku/screen-6.png" alt="Kesintisiz Mod" class="screenshot-img" />
                 </div>
 
               </div>
@@ -364,36 +254,239 @@ const scrollFeatures = [
   .page-footer-link:hover { color: var(--color-text); }
 
   /* ── Phone mockup ────────────────────────── */
-  .scroll-grid { display: grid; grid-template-columns: 1fr; }
-  @media (min-width: 1024px) {
-    .scroll-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+  .scroll-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
-  .phone-sticky-col { display: none; }
+
   @media (min-width: 1024px) {
-    .phone-sticky-col {
-      display: block; position: sticky; top: 0;
-      align-self: start; height: 100vh;
+    .scroll-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
     }
   }
+
+  .phone-sticky-col {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 1024px) {
+    .phone-sticky-col {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .scroll-feature {
+      min-height: auto !important;
+      padding: 32px 0 !important;
+      text-align: center;
+    }
+  }
+
+  /* iPhone 17 Pro Max Design */
   .phone-frame {
-    width: 260px; height: 540px;
-    background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
-    border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.12);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
-    position: relative; padding: 13px;
+    width: 300px;
+    height: 620px;
+    position: relative;
+    background: linear-gradient(145deg, #3a3a3c 0%, #1c1c1e 50%, #2c2c2e 100%);
+    border-radius: 58px;
+    padding: 4px;
+    box-shadow:
+      0 0 0 0.5px rgba(255,255,255,0.05),
+      0 2px 4px rgba(0,0,0,0.2),
+      0 8px 16px rgba(0,0,0,0.25),
+      0 24px 48px rgba(0,0,0,0.35),
+      0 48px 96px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.02),
+      inset 0 1px 2px rgba(255,255,255,0.08);
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform 0.3s ease;
   }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 58px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(255,255,255,0.05) 25%,
+      transparent 50%,
+      rgba(0,0,0,0.1) 75%,
+      rgba(0,0,0,0.2) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .phone-frame::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0.25) 50%,
+      rgba(255,255,255,0.15) 80%,
+      transparent 100%
+    );
+    border-radius: 0 0 4px 4px;
+    opacity: 0.6;
+  }
+
   .phone-island {
-    position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
-    width: 100px; height: 32px; background: #000; border-radius: 18px; z-index: 10;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 24px;
+    z-index: 10;
+    box-shadow:
+      inset 0 1px 2px rgba(0,0,0,0.8),
+      inset 0 -1px 1px rgba(255,255,255,0.05),
+      0 2px 8px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
   }
+
+  .phone-island::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #1a1a2e 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .phone-island::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #0a1a2a 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+
   .phone-screen {
-    width: 100%; height: 100%; border-radius: 38px;
-    overflow: hidden; background: #000; position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 54px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    padding: 8px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      inset 0 2px 4px rgba(0,0,0,0.4);
   }
-  .phone-shot { position: absolute; inset: 0; opacity: 0; transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+
+  .phone-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.05) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(0,0,0,0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.3;
+  }
+
+  .phone-shot {
+    position: absolute;
+    inset: 8px;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 46px;
+    overflow: hidden;
+  }
   .phone-shot.active { opacity: 1; }
   .shot-ui { width: 100%; height: 100%; display: flex; flex-direction: column; }
   .shot-statusbar { height: 46px; flex-shrink: 0; }
+
+  .screenshot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: #000;
+  }
+
+  /* Phone Buttons */
+  .phone-button {
+    position: absolute;
+    width: 3px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(50,50,50,0.6) 100%
+    );
+    border-radius: 0 2px 2px 0;
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -1px 1px rgba(0,0,0,0.5),
+      1px 0 2px rgba(0,0,0,0.3);
+  }
+
+  .phone-button-left {
+    left: -3px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg,
+      rgba(50,50,50,0.6) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(255,255,255,0.1) 100%
+    );
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -1px 1px rgba(0,0,0,0.5),
+      -1px 0 2px rgba(0,0,0,0.3);
+  }
+
+  .phone-button-right {
+    right: -3px;
+  }
+
+  /* Mobile Phone Size */
+  @media (max-width: 1023px) {
+    .phone-frame {
+      width: 240px;
+      height: 496px;
+    }
+
+    .phone-island {
+      width: 100px;
+      height: 30px;
+    }
+
+    .phone-button {
+      display: none;
+    }
+  }
 </style>
 
 <script>

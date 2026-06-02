@@ -106,159 +106,38 @@ const scrollFeatures = [
         <div class="phone-sticky-col">
           <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
             <div class="phone-frame">
+              <!-- Buttons -->
+              <div class="phone-button phone-button-left" style="top: 140px; height: 32px;"></div>
+              <div class="phone-button phone-button-left" style="top: 190px; height: 52px;"></div>
+              <div class="phone-button phone-button-left" style="top: 256px; height: 52px;"></div>
+              <div class="phone-button phone-button-right" style="top: 180px; height: 82px;"></div>
+
               <div class="phone-island"></div>
               <div class="phone-screen">
 
                 <!-- Ekran 0: Asistan iFi -->
                 <div class="phone-shot active" data-shot="0">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #0d0820 0%, #1a0f35 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px; display: flex; flex-direction: column; height: calc(100% - 46px);">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">ASISTAN</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">iFi</p>
-                      <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
-                        <div style="align-self: flex-end; background: rgba(99,102,241,0.8); border-radius: 16px 16px 4px 16px; padding: 8px 12px; max-width: 80%;">
-                          <p style="color: #fff; font-size: 12px; font-family: sans-serif;">Bilim kurgu filmi önerir misin?</p>
-                        </div>
-                        <div style="align-self: flex-start; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px 16px 16px 4px; padding: 8px 12px; max-width: 85%;">
-                          <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif; line-height: 1.5;">Tabii! Interstellar, Dune ve Arrival harika seçenekler. Hangisini izlemek istersin?</p>
-                        </div>
-                        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;">
-                          {['Interstellar', 'Dune', 'Arrival'].map(chip => (
-                            <div style="background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.4); border-radius: 20px; padding: 5px 10px;">
-                              <p style="color: #818CF8; font-size: 11px; font-family: sans-serif;">{chip}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <div style="align-self: flex-end; background: rgba(99,102,241,0.8); border-radius: 16px 16px 4px 16px; padding: 8px 12px; max-width: 80%; margin-top: 4px;">
-                          <p style="color: #fff; font-size: 12px; font-family: sans-serif;">Interstellar</p>
-                        </div>
-                      </div>
-                      <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                        <p style="color: rgba(255,255,255,0.25); font-size: 12px; font-family: sans-serif; flex: 1;">Film veya dizi sor…</p>
-                        <div style="width: 28px; height: 28px; background: #6366F1; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                          <div style="width: 0; height: 0; border-left: 6px solid white; border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-left: 2px;"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/ifilmlik/screen-0.png" alt="Asistan iFi" class="screenshot-img" />
                 </div>
 
                 <!-- Ekran 1: Mini Oyunlar -->
                 <div class="phone-shot" data-shot="1">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #071a12 0%, #0d2a1e 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">EĞLENCE</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Mini Oyunlar</p>
-                      <div style="display: flex; flex-direction: column; gap: 8px;">
-                        {[
-                          { name: 'Sessiz Sinema', color: '#10B981', icon: '🎭' },
-                          { name: 'Anlat Bakalım', color: '#F59E0B', icon: '💬' },
-                          { name: 'iFishing', color: '#3B82F6', icon: '🎣' },
-                          { name: 'DedektiFi', color: '#8B5CF6', icon: '🔍' },
-                          { name: 'iFiMoji', color: '#EC4899', icon: '😎' },
-                        ].map(game => (
-                          <div style={`display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 10px 12px;`}>
-                            <div style={`width: 40px; height: 40px; border-radius: 10px; background: ${game.color}25; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;`}>{game.icon}</div>
-                            <p style="color: #e2e8f0; font-size: 13px; font-weight: 600; font-family: sans-serif;">{game.name}</p>
-                            <div style="margin-left: auto; width: 8px; height: 8px; border-right: 2px solid rgba(255,255,255,0.2); border-top: 2px solid rgba(255,255,255,0.2); transform: rotate(45deg);"></div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/ifilmlik/screen-1.png" alt="Mini Oyunlar" class="screenshot-img" />
                 </div>
 
                 <!-- Ekran 2: Keşfet -->
                 <div class="phone-shot" data-shot="2">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #071520 0%, #0d2035 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">KEŞFET</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 12px;">Ara & Bul</p>
-                      <div style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 9px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
-                        <div style="width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.25); border-radius: 50%; flex-shrink: 0;"></div>
-                        <p style="color: rgba(255,255,255,0.25); font-size: 12px; font-family: sans-serif;">Film, dizi, oyuncu ara…</p>
-                      </div>
-                      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-                        {['#6366F1','#22D3EE','#F59E0B','#EC4899','#10B981','#8B5CF6','#3B82F6','#F97316','#6366F1'].map(color => (
-                          <div style={`aspect-ratio: 2/3; border-radius: 8px; background: ${color}40; border: 1px solid ${color}30;`}></div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/ifilmlik/screen-2.png" alt="Keşfet" class="screenshot-img" />
                 </div>
 
                 <!-- Ekran 3: Liste -->
                 <div class="phone-shot" data-shot="3">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #110820 0%, #1c0d33 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <p style="color: rgba(255,255,255,0.4); font-size: 11px; font-family: sans-serif; margin-bottom: 4px;">LİSTELER</p>
-                      <p style="color: #fff; font-size: 18px; font-weight: 700; font-family: sans-serif; margin-bottom: 14px;">Liste</p>
-                      <div style="display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px;">
-                        {[
-                          { label: 'En İyi Filmler', count: '24', done: true },
-                          { label: '2024 Sineması', count: '12', done: true },
-                          { label: 'Sci-Fi Favori', count: '8', done: false },
-                          { label: 'Arkadaş Önerileri', count: '6', done: false },
-                        ].map(item => (
-                          <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 9px 12px;">
-                            <div style={`width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; ${item.done ? 'background: #7C3AED;' : 'border: 1.5px solid rgba(255,255,255,0.2);'}`}>
-                              {item.done && <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>}
-                            </div>
-                            <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif; flex: 1;">{item.label}</p>
-                            <p style="color: rgba(255,255,255,0.3); font-size: 11px; font-family: sans-serif;">{item.count}</p>
-                          </div>
-                        ))}
-                      </div>
-                      <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;">Rozetlerim</p>
-                      <div style="display: flex; gap: 8px;">
-                        {[{c:'#F59E0B',e:'🏆'},{c:'#6366F1',e:'⭐'},{c:'#10B981',e:'🎬'},{c:'#EC4899',e:'🎯'}].map(b => (
-                          <div style={`width: 40px; height: 40px; border-radius: 50%; background: ${b.c}20; border: 1.5px solid ${b.c}50; display: flex; align-items: center; justify-content: center; font-size: 18px;`}>{b.e}</div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/ifilmlik/screen-3.png" alt="Liste" class="screenshot-img" />
                 </div>
 
                 <!-- Ekran 4: Detaylar -->
                 <div class="phone-shot" data-shot="4">
-                  <div class="shot-ui" style="background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%);">
-                    <div class="shot-statusbar"></div>
-                    <div style="padding: 0 14px;">
-                      <div style="width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #1e1b4b, #312e81); margin-bottom: 12px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);"></div>
-                        <div style="position: absolute; bottom: 10px; left: 12px;">
-                          <p style="color: #fff; font-size: 14px; font-weight: 700; font-family: sans-serif;">Film Başlığı</p>
-                          <p style="color: rgba(255,255,255,0.5); font-size: 11px; font-family: sans-serif;">2024 • Aksiyon • 2s 18d</p>
-                        </div>
-                      </div>
-                      <div style="display: flex; gap: 6px; margin-bottom: 12px;">
-                        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px;">
-                          <p style="color: #F59E0B; font-size: 12px; font-family: sans-serif; font-weight: 600;">★ 8.4</p>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px;">
-                          <p style="color: rgba(255,255,255,0.5); font-size: 12px; font-family: sans-serif;">IMDb</p>
-                        </div>
-                      </div>
-                      <p style="color: rgba(255,255,255,0.4); font-size: 10px; font-family: sans-serif; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;">Platformlar</p>
-                      <div style="display: flex; flex-direction: column; gap: 6px;">
-                        {[
-                          { name: 'Netflix', color: '#E50914' },
-                          { name: 'Prime Video', color: '#00A8E0' },
-                          { name: 'Disney+', color: '#113CCF' },
-                        ].map(p => (
-                          <div style={`display: flex; align-items: center; gap: 10px; background: ${p.color}12; border: 1px solid ${p.color}30; border-radius: 10px; padding: 8px 12px;`}>
-                            <div style={`width: 8px; height: 8px; border-radius: 50%; background: ${p.color}; flex-shrink: 0;`}></div>
-                            <p style="color: #e2e8f0; font-size: 12px; font-family: sans-serif;">{p.name}</p>
-                            <p style={`margin-left: auto; font-size: 11px; font-family: sans-serif; color: ${p.color};`}>İzle →</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <img src="/images/ifilmlik/screen-4.png" alt="Detaylar" class="screenshot-img" />
                 </div>
 
               </div>
@@ -409,37 +288,238 @@ const scrollFeatures = [
   .page-footer-link:hover { color: var(--color-text); }
 
   /* ── Phone mockup ────────────────────────── */
-  .scroll-grid { display: grid; grid-template-columns: 1fr; }
-  @media (min-width: 1024px) {
-    .scroll-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+  .scroll-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
-  .phone-sticky-col { display: none; }
+
   @media (min-width: 1024px) {
-    .phone-sticky-col {
-      display: block; position: sticky; top: 0;
-      align-self: start; height: 100vh;
+    .scroll-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
     }
   }
+
+  .phone-sticky-col {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 1024px) {
+    .phone-sticky-col {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .scroll-feature {
+      min-height: auto !important;
+      padding: 32px 0 !important;
+      text-align: center;
+    }
+  }
+
+  /* iPhone 17 Pro Max Design */
   .phone-frame {
-    width: 260px; height: 540px;
-    background: linear-gradient(145deg, #2c2c2e, #1c1c1e);
-    border-radius: 50px;
-    border: 1.5px solid rgba(255,255,255,0.12);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08);
-    position: relative; padding: 13px;
+    width: 300px;
+    height: 620px;
+    position: relative;
+    background: linear-gradient(145deg, #3a3a3c 0%, #1c1c1e 50%, #2c2c2e 100%);
+    border-radius: 58px;
+    padding: 4px;
+    box-shadow:
+      0 0 0 0.5px rgba(255,255,255,0.05),
+      0 2px 4px rgba(0,0,0,0.2),
+      0 8px 16px rgba(0,0,0,0.25),
+      0 24px 48px rgba(0,0,0,0.35),
+      0 48px 96px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.02),
+      inset 0 1px 2px rgba(255,255,255,0.08);
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform 0.3s ease;
   }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 58px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(255,255,255,0.05) 25%,
+      transparent 50%,
+      rgba(0,0,0,0.1) 75%,
+      rgba(0,0,0,0.2) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .phone-frame::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0.25) 50%,
+      rgba(255,255,255,0.15) 80%,
+      transparent 100%
+    );
+    border-radius: 0 0 4px 4px;
+    opacity: 0.6;
+  }
+
   .phone-island {
-    position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
-    width: 100px; height: 32px; background: #000; border-radius: 18px; z-index: 10;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 24px;
+    z-index: 10;
+    box-shadow:
+      inset 0 1px 2px rgba(0,0,0,0.8),
+      inset 0 -1px 1px rgba(255,255,255,0.05),
+      0 2px 8px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
   }
+
+  .phone-island::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #1a1a2e 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .phone-island::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #0a1a2a 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+
   .phone-screen {
-    width: 100%; height: 100%; border-radius: 38px;
-    overflow: hidden; background: #000; position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 54px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    padding: 8px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      inset 0 2px 4px rgba(0,0,0,0.4);
   }
-  .phone-shot { position: absolute; inset: 0; opacity: 0; transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+
+  .phone-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.05) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(0,0,0,0.1) 100%
+    );
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.3;
+  }
+
+  /* Phone Buttons */
+  .phone-button {
+    position: absolute;
+    width: 3px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(50,50,50,0.6) 100%
+    );
+    border-radius: 0 2px 2px 0;
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -1px 1px rgba(0,0,0,0.5),
+      1px 0 2px rgba(0,0,0,0.3);
+  }
+
+  .phone-button-left {
+    left: -3px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg,
+      rgba(50,50,50,0.6) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(255,255,255,0.1) 100%
+    );
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -1px 1px rgba(0,0,0,0.5),
+      -1px 0 2px rgba(0,0,0,0.3);
+  }
+
+  .phone-button-right {
+    right: -3px;
+  }
+
+  /* Mobile Phone Size */
+  @media (max-width: 1023px) {
+    .phone-frame {
+      width: 240px;
+      height: 496px;
+    }
+
+    .phone-island {
+      width: 100px;
+      height: 30px;
+    }
+
+    .phone-button {
+      display: none;
+    }
+  }
+
+  .phone-shot {
+    position: absolute;
+    inset: 8px;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 46px;
+    overflow: hidden;
+  }
   .phone-shot.active { opacity: 1; }
   .shot-ui { width: 100%; height: 100%; display: flex; flex-direction: column; }
   .shot-statusbar { height: 46px; flex-shrink: 0; }
+  .screenshot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: #000;
+  }
 </style>
 
 <script>

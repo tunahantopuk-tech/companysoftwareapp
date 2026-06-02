@@ -221,36 +221,54 @@ const steps = [
   <Footer />
 </Layout>
 
-<script>
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      }
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+<script is:inline>
+(function() {
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
-  // Form → Formspree
-  const FORMSPREE_ID = 'mpqnvwra';
+  function init() {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  const form = document.getElementById('project-form') as HTMLFormElement | null;
-  const btn  = document.getElementById('submit-btn')   as HTMLButtonElement | null;
-  const success = document.getElementById('form-success') as HTMLElement | null;
+    // Form → Formspree
+    const FORMSPREE_ID = 'mpqnvwra';
 
-  form?.addEventListener('submit', async (e) => {
+    const form = document.getElementById('project-form');
+    const btn  = document.getElementById('submit-btn');
+    const success = document.getElementById('form-success');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    e.stopPropagation();
 
-    const label = btn?.querySelector<HTMLElement>('.btn-label');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const label = btn ? btn.querySelector('.btn-label') : null;
     if (btn)  { btn.disabled = true; }
     if (label){ label.textContent = 'Gönderiliyor…'; }
+
+    const formData = new FormData(form);
 
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { Accept: 'application/json' },
       });
 
@@ -281,11 +299,13 @@ const steps = [
         if (label){ label.textContent = 'Hata oluştu, tekrar deneyin'; }
         if (btn)  { btn.disabled = false; }
       }
-    } catch {
+    } catch (error) {
       if (label){ label.textContent = 'Bağlantı hatası, tekrar deneyin'; }
       if (btn)  { btn.disabled = false; }
     }
-  });
+    }, false);
+  }
+})();
 </script>
 
 <style>
@@ -353,7 +373,13 @@ const steps = [
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-  @media (max-width: 860px) { .cards-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 1024px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
 
   .svc-card {
     background: var(--bg-card);
@@ -364,6 +390,13 @@ const steps = [
     flex-direction: column;
     gap: 18px;
     transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .svc-card {
+      padding: 32px 24px;
+      border-radius: 20px;
+    }
   }
   .svc-card:hover {
     transform: translateY(-5px) scale(1.012);
@@ -386,8 +419,19 @@ const steps = [
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
-  @media (max-width: 900px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px)  { .reasons-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 1024px) {
+    .reasons-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .reason-card {
     background: var(--bg-card);
@@ -429,8 +473,19 @@ const steps = [
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
-  @media (max-width: 900px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px)  { .steps-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 1024px) {
+    .steps-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .step-card {
     background: var(--bg-card);
@@ -536,7 +591,7 @@ const steps = [
   .check-label {
     display: inline-flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
     user-select: none;
     margin-top: 4px;
@@ -552,25 +607,45 @@ const steps = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 6px;
-    border: 1.5px solid var(--border-faint);
+    border: 2px solid var(--bordo);
     background: var(--bg-card);
-    transition: background 0.15s ease, border-color 0.15s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
   }
-  .check-box svg { width: 12px; height: 10px; opacity: 0; transition: opacity 0.15s ease; stroke: #fff; }
+  .check-box svg { width: 14px; height: 12px; opacity: 0; transition: opacity 0.2s ease; stroke: #fff; stroke-width: 2.5; }
   .check-input:checked ~ .check-box {
     background: var(--bordo);
     border-color: var(--bordo);
+    transform: scale(1.05);
   }
   .check-input:checked ~ .check-box svg { opacity: 1; }
   .check-input:focus-visible ~ .check-box { box-shadow: 0 0 0 3px var(--bordo-glow); }
+  .check-label:hover .check-box {
+    border-color: var(--bordo);
+    box-shadow: 0 0 0 2px var(--bordo-glow);
+  }
 
-  .check-text { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
-  .kvkk       { margin-top: 4px; }
+  .check-text { font-size: 14px; color: var(--color-text); line-height: 1.6; font-weight: 500; }
+
+  .kvkk {
+    margin-top: 8px;
+    padding: 18px 20px;
+    background: rgba(160,0,32,0.04);
+    border: 1.5px solid rgba(160,0,32,0.15);
+    border-radius: 12px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .kvkk:hover {
+    background: rgba(160,0,32,0.06);
+    border-color: rgba(160,0,32,0.25);
+  }
+  .check-input:checked ~ .check-box + .check-text {
+    color: var(--color-text);
+  }
 
   /* ── Submit button ─────────────────────────────── */
   .btn-submit {
@@ -595,7 +670,7 @@ const steps = [
 
   /* ── Success state ─────────────────────────────── */
   .form-success {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 20px;
     background: rgba(160,0,32,0.06);
@@ -604,21 +679,65 @@ const steps = [
     padding: 32px 36px;
     margin-top: 8px;
   }
+  .form-success:not([hidden]) {
+    display: flex;
+    animation: successSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
   .form-success svg {
     width: 40px; height: 40px;
     color: var(--bordo); flex-shrink: 0;
+    animation: checkRotate 0.6s ease 0.2s backwards;
   }
   .success-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 18px; font-weight: 700;
     color: var(--color-text); margin-bottom: 4px;
+    animation: textFadeIn 0.5s ease 0.3s backwards;
   }
-  .success-sub { font-size: 14px; color: var(--color-muted); }
+  .success-sub {
+    font-size: 14px;
+    color: var(--color-muted);
+    animation: textFadeIn 0.5s ease 0.4s backwards;
+  }
 
   .form-success.fade-out {
-    animation: successFade 0.5s ease forwards;
+    animation: successFadeOut 0.5s ease forwards;
   }
-  @keyframes successFade {
+
+  @keyframes successSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.95);
+    }
+    to   {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes checkRotate {
+    from {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes textFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes successFadeOut {
     from { opacity: 1; transform: translateY(0); }
     to   { opacity: 0; transform: translateY(-8px); }
   }
