@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const isProduction = import.meta.env.PROD;
+---
+
+<Layout title="Admin Login" description="Admin panel">
+  <div class="login-container">
+    <div class="login-box">
+      <img src="/logo-icon-light.svg" alt="Logo" class="login-logo" />
+      <h1>Admin Panel</h1>
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="username">Kullanıcı Adı</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            autocomplete="username"
+            placeholder="Kullanıcı adınızı girin"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            autocomplete="current-password"
+            placeholder="Şifrenizi girin"
+          />
+        </div>
+        <button type="submit" class="btn-login">Giriş Yap</button>
+        <div id="error" class="error-message"></div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('loginForm') as HTMLFormElement;
+  const errorDiv = document.getElementById('error') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorDiv.textContent = '';
+
+    const formData = new FormData(form);
+    const username = formData.get('username') as string;
+    const password = formData.get('password') as string;
+
+    // Simple authentication (you can enhance this)
+    if (username === 'admin' && password === 'admin123') {
+      // Store session
+      sessionStorage.setItem('adminAuth', 'true');
+      sessionStorage.setItem('adminUser', username);
+
+      // Redirect to dashboard
+      window.location.href = '/admin/dashboard';
+    } else {
+      errorDiv.textContent = 'Kullanıcı adı veya şifre hatalı!';
+    }
+  });
+
+  // Check if already logged in
+  if (sessionStorage.getItem('adminAuth') === 'true') {
+    window.location.href = '/admin/dashboard';
+  }
+</script>
+
+<style>
+  .login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 24px;
+  }
+
+  .login-box {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .login-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    display: block;
+  }
+
+  .login-box h1 {
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 32px;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  .form-group input {
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+
+  .form-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .btn-login {
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  .btn-login:active {
+    transform: translateY(0);
+  }
+
+  .error-message {
+    color: #e53e3e;
+    font-size: 14px;
+    text-align: center;
+    min-height: 20px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 480px) {
+    .login-box {
+      padding: 32px 24px;
+    }
+  }
+</style>

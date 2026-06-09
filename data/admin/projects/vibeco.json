@@ -1,0 +1,29 @@
+{
+  "id": "vibeco",
+  "name": "VibeCo",
+  "logo": "/images/VibeCo.png",
+  "description": "Geliştiriciler için tasarlanmış modern bir proje hafızasıdır. Görevlerinizi, notlarınızı, promptlarınızı ve proje kararlarınızı tek bir yerde yönetin.",
+  "platform": "Web",
+  "status": "Geliştiriliyor",
+  "createdAt": "2026-06-09",
+  "updatedAt": "2026-06-09",
+  "prompts": [],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Proje Listesi ve Dashboard",
+      "description": "Ana dashboard ekranı tasarlanacak. Tüm projelerin listesi, durum kartları ve hızlı erişim özellikleri eklenecek.",
+      "completed": false,
+      "createdAt": "2026-06-09",
+      "completedAt": null
+    },
+    {
+      "id": "2",
+      "title": "Görev Yönetimi Sistemi",
+      "description": "ToDo list formatında görev yönetimi sistemi. Görev ekleme, tamamlama, Claude prompt oluşturma özellikleri dahil.",
+      "completed": false,
+      "createdAt": "2026-06-09",
+      "completedAt": null
+    }
+  ]
+}

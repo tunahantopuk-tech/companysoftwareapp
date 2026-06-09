@@ -1,0 +1,21 @@
+{
+  "id": "gezdoku",
+  "name": "GezDoku",
+  "logo": "/images/logo-gezdoku.png",
+  "description": "Sizi farklı dünyalara götürecek yeni bir oyun deneyimi. Çok yakında.",
+  "platform": "iOS, Android",
+  "status": "Yakında",
+  "createdAt": "2026-06-09",
+  "updatedAt": "2026-06-09",
+  "prompts": [],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Konsept Çalışması ve Sketçler",
+      "description": "Oyunun temel konsepti belirleniyor. İlk karakter ve ortam sketçleri hazırlanıyor.",
+      "completed": false,
+      "createdAt": "2026-06-05",
+      "completedAt": null
+    }
+  ]
+}

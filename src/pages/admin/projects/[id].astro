@@ -1,0 +1,1526 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { readFile, readdir } from 'fs/promises';
+import { join } from 'path';
+
+export async function getStaticPaths() {
+  const projectsDir = join(process.cwd(), 'data', 'admin', 'projects');
+  let paths = [];
+
+  try {
+    const files = await readdir(projectsDir);
+    const jsonFiles = files.filter(f => f.endsWith('.json'));
+
+    paths = jsonFiles.map(file => ({
+      params: { id: file.replace('.json', '') }
+    }));
+  } catch (error) {
+    console.error('Error loading projects for static paths:', error);
+  }
+
+  return paths;
+}
+
+const { id } = Astro.params;
+
+// Load project data
+const projectFile = join(process.cwd(), 'data', 'admin', 'projects', `${id}.json`);
+let project = null;
+let prompts = [];
+let tasks = [];
+
+try {
+  const content = await readFile(projectFile, 'utf-8');
+  project = JSON.parse(content);
+  prompts = project.prompts || [];
+  tasks = project.tasks || [];
+} catch (error) {
+  return Astro.redirect('/admin/dashboard');
+}
+
+if (!project) {
+  return Astro.redirect('/admin/dashboard');
+}
+
+// Load markdown notes
+const notesDir = join(process.cwd(), 'data', 'admin', 'projects', id, 'notes');
+let notes = [];
+try {
+  const noteFiles = await readdir(notesDir);
+  notes = noteFiles.filter(f => f.endsWith('.md'));
+} catch (error) {
+  // Notes directory doesn't exist yet
+}
+
+// Sort tasks
+const pendingTasks = tasks.filter(t => !t.completed).sort((a, b) =>
+  new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+);
+const completedTasks = tasks.filter(t => t.completed).sort((a, b) =>
+  new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+);
+---
+
+<Layout title={`${project.name} - Admin`} description={project.description}>
+  <div class="project-detail">
+
+    <!-- Header -->
+    <header class="project-header">
+      <div class="header-content">
+        <a href="/admin/dashboard" class="btn-back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Dashboard
+        </a>
+        <div class="header-project">
+          <img src={project.logo} alt={project.name} class="header-logo" />
+          <div>
+            <h1>{project.name}</h1>
+            <p class="header-subtitle">{project.platform}</p>
+          </div>
+        </div>
+        <span class={`header-status status-${project.status.toLowerCase().replace(/ı/g, 'i')}`}>
+          {project.status}
+        </span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-main">
+      <div class="project-container">
+
+        <!-- Task/Journal Section -->
+        <section class="section">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <div>
+              <h2>Proje Günlüğü & Görevler</h2>
+              <p class="section-desc">{pendingTasks.length} aktif görev • {completedTasks.length} tamamlandı</p>
+            </div>
+            <button class="btn-add" id="addTaskBtn" onclick="window.openTaskModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Yeni Görev
+            </button>
+          </div>
+
+          <div class="task-tabs">
+            <button class="task-tab active" data-tab="pending">
+              Aktif
+              <span class="tab-badge">{pendingTasks.length}</span>
+            </button>
+            <button class="task-tab" data-tab="completed">
+              Tamamlanan
+              <span class="tab-badge">{completedTasks.length}</span>
+            </button>
+          </div>
+
+          <!-- Pending Tasks -->
+          <div class="task-tab-content active" data-tab-content="pending">
+            {pendingTasks.length === 0 ? (
+              <div class="empty-state-inline">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 11 12 14 22 4"></polyline>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <p>Tüm görevler tamamlandı!</p>
+              </div>
+            ) : (
+              <div class="task-list-modern">
+                {pendingTasks.map((task, index) => (
+                  <div class="task-item-modern">
+                    <div class="task-check-wrapper">
+                      <input
+                        type="checkbox"
+                        class="task-check"
+                        id={`t-${task.id}`}
+                        data-task-id={task.id}
+                      />
+                      <label for={`t-${task.id}`} class="task-check-label"></label>
+                    </div>
+                    <div class="task-item-content">
+                      <p class="task-item-title">{task.title}</p>
+                      <span class="task-item-date">
+                        {new Date(task.createdAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </span>
+                    </div>
+                    <div class="task-actions">
+                      <button class="btn-task-action btn-expand" data-task-id={task.id} title="Detayları Göster">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                      <button class="btn-task-action btn-prompt" data-task-id={task.id} data-task-title={task.title} data-task-description={task.description} title="Claude Prompt Oluştur">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="task-detail" data-task-detail={task.id} style="display: none;">
+                      <div class="task-description">
+                        <p>{task.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <!-- Completed Tasks -->
+          <div class="task-tab-content" data-tab-content="completed">
+            {completedTasks.length === 0 ? (
+              <div class="empty-state-inline">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>Henüz tamamlanmış görev yok</p>
+              </div>
+            ) : (
+              <div class="task-list-modern">
+                {completedTasks.map((task, index) => (
+                  <div class="task-item-modern completed">
+                    <div class="task-check-wrapper">
+                      <input
+                        type="checkbox"
+                        class="task-check"
+                        checked
+                        id={`tc-${task.id}`}
+                        data-task-id={task.id}
+                      />
+                      <label for={`tc-${task.id}`} class="task-check-label"></label>
+                    </div>
+                    <div class="task-item-content">
+                      <p class="task-item-title">{task.title}</p>
+                      <span class="task-item-date completed-badge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        {new Date(task.completedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Prompt Modal -->
+    <div class="modal" id="promptModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h3>Claude Prompt</h3>
+          <button class="modal-close" id="closePromptModal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="prompt-preview">
+            <pre id="generatedPrompt"></pre>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-download" id="downloadPromptBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              .md İndir
+            </button>
+            <button type="button" class="btn-submit" id="copyPromptBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Kopyala
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal" id="addTaskModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Yeni Görev Ekle</h3>
+          <button class="modal-close" id="closeTaskModal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addTaskForm">
+            <div class="form-group">
+              <label for="taskTitle">Görev Başlığı</label>
+              <input
+                type="text"
+                id="taskTitle"
+                name="taskTitle"
+                placeholder="Örn: StoreKit Abonelik Sistemi"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="taskDescription">Kısa Açıklama</label>
+              <textarea
+                id="taskDescription"
+                name="taskDescription"
+                rows="4"
+                placeholder="Ne yapılacak? Claude'un anlayacağı şekilde kısa ve öz yazın..."
+                required
+              ></textarea>
+              <small class="form-hint">Bu açıklama Claude için prompt oluşturmada kullanılacak</small>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-cancel" id="cancelTaskBtn">İptal</button>
+              <button type="submit" class="btn-submit">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                Kaydet
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script define:vars={{ project, prompts, tasks }}>
+  // Check authentication
+  if (sessionStorage.getItem('adminAuth') !== 'true') {
+    window.location.href = '/admin';
+  }
+
+  // Load from localStorage and merge
+  const storageKey = `vibeco_tasks_${project.id}`;
+  const localTasks = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+  const taskMap = new Map();
+  tasks.forEach(task => taskMap.set(task.id, task));
+  localTasks.forEach(task => taskMap.set(task.id, task));
+
+  let allTasks = Array.from(taskMap.values());
+
+  // Re-render tasks
+  function renderTasks() {
+    const pendingTasksList = allTasks.filter(t => !t.completed).sort((a, b) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+    const completedTasksList = allTasks.filter(t => t.completed).sort((a, b) =>
+      new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+    );
+
+    // Render pending tasks
+    const pendingContainer = document.querySelector('[data-tab-content="pending"] .task-list-modern');
+    if (pendingContainer) {
+      if (pendingTasksList.length === 0) {
+        pendingContainer.innerHTML = '<div class="empty-state-inline"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><p>Tüm görevler tamamlandı!</p></div>';
+      } else {
+        pendingContainer.innerHTML = pendingTasksList.map(task => `
+          <div class="task-item-modern">
+            <div class="task-check-wrapper">
+              <input type="checkbox" class="task-check" id="t-${task.id}" data-task-id="${task.id}" />
+              <label for="t-${task.id}" class="task-check-label"></label>
+            </div>
+            <div class="task-item-content">
+              <p class="task-item-title">${task.title}</p>
+              <span class="task-item-date">${new Date(task.createdAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+            <div class="task-actions">
+              <button class="btn-task-action btn-expand" data-task-id="${task.id}" title="Detayları Göster">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <button class="btn-task-action btn-prompt" data-task-id="${task.id}" data-task-title="${task.title}" data-task-description="${task.description}" title="Claude Prompt Oluştur">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </button>
+            </div>
+            <div class="task-detail" data-task-detail="${task.id}" style="display: none;">
+              <div class="task-description"><p>${task.description}</p></div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Render completed tasks
+    const completedContainer = document.querySelector('[data-tab-content="completed"] .task-list-modern');
+    if (completedContainer) {
+      if (completedTasksList.length === 0) {
+        completedContainer.innerHTML = '<div class="empty-state-inline"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><p>Henüz tamamlanmış görev yok</p></div>';
+      } else {
+        completedContainer.innerHTML = completedTasksList.map(task => `
+          <div class="task-item-modern completed">
+            <div class="task-check-wrapper">
+              <input type="checkbox" class="task-check" checked id="tc-${task.id}" data-task-id="${task.id}" />
+              <label for="tc-${task.id}" class="task-check-label"></label>
+            </div>
+            <div class="task-item-content">
+              <p class="task-item-title">${task.title}</p>
+              <span class="task-item-date completed-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                ${new Date(task.completedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Re-attach event listeners
+    attachTaskEventListeners();
+  }
+
+  // Initial render
+  renderTasks();
+
+  // Task tabs
+  const taskTabs = document.querySelectorAll('.task-tab');
+  const taskTabContents = document.querySelectorAll('.task-tab-content');
+
+  taskTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.dataset.tab;
+
+      taskTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      taskTabContents.forEach(content => {
+        if (content.dataset.tabContent === targetTab) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // Copy to clipboard helper
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
+
+  // Modal functionality
+  const addTaskModal = document.getElementById('addTaskModal');
+  const addTaskBtn = document.getElementById('addTaskBtn');
+  const closeTaskModal = document.getElementById('closeTaskModal');
+  const cancelTaskBtn = document.getElementById('cancelTaskBtn');
+  const addTaskForm = document.getElementById('addTaskForm');
+  const taskModalOverlay = addTaskModal?.querySelector('.modal-overlay');
+
+  function openModal() {
+    console.log('Opening modal...', addTaskModal);
+    if (addTaskModal) {
+      addTaskModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal() {
+    if (addTaskModal) {
+      addTaskModal.classList.remove('active');
+      document.body.style.overflow = '';
+      addTaskForm?.reset();
+    }
+  }
+
+  // Make openModal global for onclick
+  window.openTaskModal = openModal;
+
+  if (addTaskBtn) {
+    console.log('addTaskBtn found, attaching listener');
+    addTaskBtn.addEventListener('click', openModal);
+  } else {
+    console.error('addTaskBtn not found!');
+  }
+
+  closeTaskModal?.addEventListener('click', closeModal);
+  cancelTaskBtn?.addEventListener('click', closeModal);
+  taskModalOverlay?.addEventListener('click', closeModal);
+
+  // Handle form submission
+  addTaskForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const taskTitle = document.getElementById('taskTitle').value;
+    const taskDescription = document.getElementById('taskDescription').value;
+    const today = new Date().toISOString().split('T')[0];
+
+    if (taskTitle.trim() && taskDescription.trim()) {
+      const newTask = {
+        id: Date.now().toString(),
+        title: taskTitle,
+        description: taskDescription,
+        completed: false,
+        createdAt: today,
+        completedAt: null
+      };
+
+      // Save to localStorage
+      const storageKey = `vibeco_tasks_${project.id}`;
+      const existingTasks = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      existingTasks.push(newTask);
+      localStorage.setItem(storageKey, JSON.stringify(existingTasks));
+
+      // Add to allTasks array
+      allTasks.push(newTask);
+
+      // Re-render tasks
+      renderTasks();
+
+      // Close modal and reset form
+      closeModal();
+    }
+  });
+
+
+  // Prompt Modal
+  const promptModal = document.getElementById('promptModal');
+  const closePromptModal = document.getElementById('closePromptModal');
+  const generatedPrompt = document.getElementById('generatedPrompt');
+  const copyPromptBtn = document.getElementById('copyPromptBtn');
+  const downloadPromptBtn = document.getElementById('downloadPromptBtn');
+  let currentPromptText = '';
+
+  function openPromptModal(title, description) {
+    const prompt = `# Task: ${title}
+
+## Project Context
+- **Project:** ${project.name}
+- **Platform:** ${project.platform}
+- **Status:** ${project.status}
+
+## Task Description
+${description}
+
+## Requirements
+Please implement this task for the ${project.name} project. Follow best practices and ensure the code is clean, maintainable, and well-documented.
+
+## Additional Context
+- Keep the implementation consistent with the existing codebase
+- Consider edge cases and error handling
+- Write clear commit messages when done
+
+---
+Generated by VibeCo - Project Management for Developers`;
+
+    currentPromptText = prompt;
+    generatedPrompt.textContent = prompt;
+    promptModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePromptModalFn() {
+    promptModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closePromptModal?.addEventListener('click', closePromptModalFn);
+  promptModal?.querySelector('.modal-overlay')?.addEventListener('click', closePromptModalFn);
+
+  copyPromptBtn?.addEventListener('click', () => {
+    copyToClipboard(currentPromptText);
+    copyPromptBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Kopyalandı!';
+    setTimeout(() => {
+      copyPromptBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Kopyala';
+    }, 2000);
+  });
+
+  downloadPromptBtn?.addEventListener('click', () => {
+    const blob = new Blob([currentPromptText], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${project.id}-task-prompt-${Date.now()}.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // Attach event listeners to tasks
+  function attachTaskEventListeners() {
+    // Expand/Collapse task details
+    document.querySelectorAll('.btn-expand').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const taskId = btn.dataset.taskId;
+        const detail = document.querySelector(`[data-task-detail="${taskId}"]`);
+        const isExpanded = detail.style.display === 'block';
+
+        detail.style.display = isExpanded ? 'none' : 'block';
+        btn.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+      });
+    });
+
+    // Generate Prompt
+    document.querySelectorAll('.btn-prompt').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const title = btn.dataset.taskTitle;
+        const description = btn.dataset.taskDescription;
+        openPromptModal(title, description);
+      });
+    });
+
+    // Checkbox handling
+    document.querySelectorAll('.task-check').forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        const today = new Date().toISOString().split('T')[0];
+        const taskId = checkbox.dataset.taskId;
+        const isChecked = checkbox.checked;
+
+        // Find task and update
+        const task = allTasks.find(t => t.id === taskId);
+        if (task) {
+          task.completed = isChecked;
+          task.completedAt = isChecked ? today : null;
+
+          // Save to localStorage
+          const storageKey = `vibeco_tasks_${project.id}`;
+          localStorage.setItem(storageKey, JSON.stringify(allTasks));
+
+          // Re-render
+          renderTasks();
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .project-detail {
+    min-height: 100vh;
+    background: #f8f9fa;
+  }
+
+  /* ─── Header ────────────────────────────────────── */
+  .project-header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 24px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #374151;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-back:hover {
+    background: #e5e7eb;
+    transform: translateX(-2px);
+  }
+
+  .header-project {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .header-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    object-fit: contain;
+    background: #f9fafb;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .header-project h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 4px 0 0;
+  }
+
+  .header-status {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .status-gelistiriliyor {
+    background: rgba(160,0,32,0.1);
+    color: #7A0018;
+  }
+
+  .status-yakinda {
+    background: rgba(6,182,212,0.12);
+    color: #0e7490;
+  }
+
+  .status-yayinda {
+    background: rgba(72,187,120,0.12);
+    color: #22543d;
+  }
+
+  /* ─── Main Content ──────────────────────────────── */
+  .project-main {
+    padding: 32px 40px;
+  }
+
+  .project-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-icon svg {
+    color: white;
+  }
+
+  .section-header > div {
+    flex: 1;
+  }
+
+  .section-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .btn-add {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #667eea;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-add:hover {
+    background: #5568d3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  /* ─── Context Builder ───────────────────────────── */
+  .context-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+  }
+
+  .context-section .section-icon {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .context-section h2,
+  .context-section .section-desc {
+    color: white;
+  }
+
+  .context-section .section-desc {
+    opacity: 0.9;
+  }
+
+  .btn-context {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-context:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .context-output {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .context-label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: white;
+  }
+
+  .context-output pre {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 16px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  /* ─── Tasks ─────────────────────────────────────── */
+  .task-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 4px;
+  }
+
+  .task-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .task-tab.active {
+    background: white;
+    color: #111827;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .tab-badge {
+    background: #e5e7eb;
+    color: #6b7280;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .task-tab.active .tab-badge {
+    background: #667eea;
+    color: white;
+  }
+
+  .task-tab-content {
+    display: none;
+  }
+
+  .task-tab-content.active {
+    display: block;
+  }
+
+  .task-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-item-modern {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 18px;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .task-item-modern::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .task-item-modern:hover::before {
+    opacity: 1;
+  }
+
+  .task-item-modern:hover {
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .task-item-modern.completed {
+    opacity: 0.6;
+    background: #f9fafb;
+  }
+
+  .task-item-modern.completed:hover {
+    transform: none;
+  }
+
+  .task-check-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .task-check {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .task-check-label {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .task-check:checked + .task-check-label {
+    background: #667eea;
+    border-color: #667eea;
+  }
+
+  .task-check:checked + .task-check-label::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .task-item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .task-item-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+
+  .task-item-modern.completed .task-item-title {
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  .task-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .btn-task-action {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-task-action:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+
+  .btn-task-action svg {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-task-action:hover svg {
+    transform: scale(1.1);
+  }
+
+  .btn-expand {
+    transition: all 0.3s ease;
+  }
+
+  .task-detail {
+    width: 100%;
+    padding: 16px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    margin-top: -8px;
+  }
+
+  .task-description {
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .task-description p {
+    margin: 0;
+  }
+
+  .task-item-date {
+    font-size: 13px;
+    color: #9ca3af;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .completed-badge {
+    color: #48bb78;
+  }
+
+  /* ─── Prompts ───────────────────────────────────── */
+  .prompts-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .prompt-card-modern {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .prompt-card-modern:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .prompt-header-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .prompt-header-modern h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+  }
+
+  .btn-copy-prompt {
+    padding: 8px;
+    background: #667eea;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .btn-copy-prompt:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+  }
+
+  .prompt-content-modern {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #374151;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+  }
+
+  /* ─── Notes ─────────────────────────────────────── */
+  .notes-list-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .note-item-modern {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .note-item-modern:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .note-item-modern svg {
+    color: #667eea;
+    flex-shrink: 0;
+  }
+
+  .note-item-modern span {
+    flex: 1;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .btn-export {
+    padding: 6px 14px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-export:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #374151;
+  }
+
+  /* ─── Empty State ───────────────────────────────── */
+  .empty-state-inline {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .empty-state-inline svg {
+    color: #d1d5db;
+    margin-bottom: 16px;
+  }
+
+  .empty-state-inline p {
+    font-size: 15px;
+    color: #9ca3af;
+    margin: 0;
+  }
+
+  /* ─── Modal ─────────────────────────────────────── */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-content {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .modal-header h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+  }
+
+  .modal-close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .modal-close:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+
+  .modal-body {
+    padding: 24px 28px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+  }
+
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111827;
+    resize: vertical;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+
+  .form-group textarea:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111827;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+
+  .form-group input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .form-group input::placeholder {
+    color: #9ca3af;
+  }
+
+  .form-group textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .form-hint {
+    display: block;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .btn-cancel {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+
+  .btn-cancel:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+
+  .btn-submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  .btn-download {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-download:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+
+  .modal-large {
+    max-width: 800px;
+  }
+
+  .prompt-preview {
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .prompt-preview pre {
+    color: #e5e7eb;
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .prompt-preview::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .prompt-preview::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 4px;
+  }
+
+  .prompt-preview::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+  }
+
+  .prompt-preview::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  /* ─── Responsive ────────────────────────────────── */
+  @media (max-width: 768px) {
+    .project-header {
+      padding: 20px;
+    }
+
+    .header-content {
+      flex-wrap: wrap;
+    }
+
+    .project-main {
+      padding: 20px;
+    }
+
+    .section {
+      padding: 24px 20px;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .btn-add {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

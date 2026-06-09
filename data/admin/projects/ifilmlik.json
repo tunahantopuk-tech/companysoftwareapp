@@ -1,0 +1,64 @@
+{
+  "id": "ifilmlik",
+  "name": "iFilmlik",
+  "logo": "/images/logo-ifilmlik.png",
+  "description": "Film ve dizi takip uygulaması. İzlediğiniz ve izleyeceğiniz her şeyi tek yerde takip edin.",
+  "platform": "iOS",
+  "status": "Yayında",
+  "createdAt": "2025-12-01",
+  "updatedAt": "2026-06-09",
+  "prompts": [
+    {
+      "id": "1",
+      "title": "Film Detay Ekranı Tasarımı",
+      "content": "SwiftUI ile film detay ekranı tasarla. Özellikler:\n- Film posteri (büyük)\n- Başlık ve yıl\n- IMDb puanı ve kendi puanımız\n- Özet (expandable)\n- Oyuncu listesi (yatay scroll)\n- İzledim/İzleyeceğim butonları\n- Favorilere ekle\n- Smooth animasyonlar"
+    },
+    {
+      "id": "2",
+      "title": "App Store Screenshot Açıklaması",
+      "content": "iFilmlik için App Store screenshot açıklamaları yaz. Her screenshot için kısa, çarpıcı başlıklar:\n1. Ana ekran\n2. Film arama\n3. İzleme listeleri\n4. Profil ve istatistikler\n5. Karanlık mod desteği"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "App Store Yayın ve Geri Bildirimler",
+      "description": "App Store'da yayında. İlk kullanıcı geri bildirimleri toplandı ve analiz edildi.",
+      "completed": true,
+      "createdAt": "2026-06-09",
+      "completedAt": "2026-06-09"
+    },
+    {
+      "id": "2",
+      "title": "App Store Review Onayı",
+      "description": "App Store review süreci tamamlandı. Apple'dan onay alındı ve yayına geçildi.",
+      "completed": true,
+      "createdAt": "2026-06-05",
+      "completedAt": "2026-06-05"
+    },
+    {
+      "id": "3",
+      "title": "iCloud Watchlist Senkronizasyonu",
+      "description": "iCloud kullanarak watchlist senkronizasyonu eklenecek. Kullanıcılar farklı cihazlarda izleme listelerini görebilecek.",
+      "completed": false,
+      "createdAt": "2026-06-09",
+      "completedAt": null
+    },
+    {
+      "id": "4",
+      "title": "Widget Desteği",
+      "description": "iOS widget desteği ekle. Ana ekranda son izlenen filmler ve izleme listesi gösterilecek.",
+      "completed": false,
+      "createdAt": "2026-06-09",
+      "completedAt": null
+    },
+    {
+      "id": "5",
+      "title": "Sosyal Paylaşım Özelliği",
+      "description": "Kullanıcılar izledikleri filmleri sosyal medyada paylaşabilecek. Film posteri ve kişisel puan dahil edilecek.",
+      "completed": false,
+      "createdAt": "2026-06-09",
+      "completedAt": null
+    }
+  ]
+}
