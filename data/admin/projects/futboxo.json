@@ -19,54 +19,5 @@
       "content": "Futboxo için çekici bir App Store açıklaması yaz. Vurgular:\n- 3 farklı oyun modu (XOX, Ortak Oyuncu, İpucu)\n- Arkadaşlarla rekabet\n- Günlük güncellemeler\n- Ücretsiz ve reklamsız\n- Futbol bilgisini eğlenceli şekilde test etme"
     }
   ],
-  "tasks": [
-    {
-      "id": "1",
-      "title": "Oyuncu Kartı Tasarımı",
-      "description": "SwiftUI ile modern oyuncu kartı tasarla. Oyuncu fotoğrafı, isim, pozisyon, kulüp logosu, overall rating ve temel istatistikleri (hız, şut, pas) içermeli. Gradient arka plan ve smooth animasyonlar ekle.",
-      "completed": true,
-      "createdAt": "2026-06-07",
-      "completedAt": "2026-06-07"
-    },
-    {
-      "id": "2",
-      "title": "XOX Oyun Modu",
-      "description": "XOX oyun modunun temel mekanikleri kodlanmalı. 3x3 grid sistemi, oyuncu seçimi, doğru/yanlış kontrolü ve oyuncu veritabanı entegrasyonu yapılacak.",
-      "completed": true,
-      "createdAt": "2026-06-06",
-      "completedAt": "2026-06-06"
-    },
-    {
-      "id": "3",
-      "title": "StoreKit Abonelik Sistemi",
-      "description": "iOS için StoreKit kullanarak abonelik sistemi entegre edilmeli. Premium özellikler, geri yükleme ve receipt validation yapılacak.",
-      "completed": false,
-      "createdAt": "2026-06-08",
-      "completedAt": null
-    },
-    {
-      "id": "4",
-      "title": "Oyuncu Kartı Animasyonları",
-      "description": "Oyuncu kartlarına flip animasyonu, fade-in efektleri ve smooth transitions ekle. Kartların girişinde ve etkileşimlerde animasyonlar olmalı.",
-      "completed": false,
-      "createdAt": "2026-06-08",
-      "completedAt": null
-    },
-    {
-      "id": "5",
-      "title": "KVKK Ekranı",
-      "description": "KVKK uyumluluğu için gizlilik politikası ve kullanım şartları ekranı tasarla ve entegre et. İlk açılışta kullanıcı onayı alınmalı.",
-      "completed": false,
-      "createdAt": "2026-06-09",
-      "completedAt": null
-    },
-    {
-      "id": "6",
-      "title": "Push Notification",
-      "description": "Firebase Cloud Messaging ile push notification sistemi kur. Günlük hatırlatıcılar ve özel bildirimler gönderilebilmeli.",
-      "completed": false,
-      "createdAt": "2026-06-09",
-      "completedAt": null
-    }
-  ]
+  "tasks": []
 }

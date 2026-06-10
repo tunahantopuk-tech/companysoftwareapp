@@ -7,8 +7,9 @@ const isProduction = import.meta.env.PROD;
 <Layout title="Admin Login" description="Admin panel">
   <div class="login-container">
     <div class="login-box">
-      <img src="/logo-icon-light.svg" alt="Logo" class="login-logo" />
+      <img src="/logo-icon.svg" alt="Logo" class="login-logo" />
       <h1>Admin Panel</h1>
+      <p class="login-tagline">Company Software — Proje Yönetimi</p>
       <form id="loginForm" class="login-form">
         <div class="form-group">
           <label for="username">Kullanıcı Adı</label>
@@ -76,7 +77,7 @@ const isProduction = import.meta.env.PROD;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #faf9f7;
     padding: 24px;
   }
 
@@ -86,90 +87,100 @@ const isProduction = import.meta.env.PROD;
     padding: 48px;
     width: 100%;
     max-width: 420px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    border: 1px solid #f0ede8;
   }
 
   .login-logo {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 24px;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
     display: block;
+    filter: brightness(0) saturate(100%) invert(38%) sepia(74%) saturate(800%) hue-rotate(12deg) brightness(95%) contrast(97%);
   }
 
   .login-box h1 {
     text-align: center;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 32px;
+    color: #1c1917;
+    margin-bottom: 8px;
+  }
+
+  .login-tagline {
+    text-align: center;
+    font-size: 14px;
+    color: #78716c;
+    margin: 0 0 32px;
   }
 
   .login-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .form-group label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: #4a5568;
+    color: #44403c;
+    letter-spacing: 0.01em;
   }
 
   .form-group input {
-    padding: 14px 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 16px;
+    padding: 12px 16px;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 10px;
+    font-size: 15px;
     transition: all 0.2s ease;
     outline: none;
+    background: #fafaf9;
+    color: #1c1917;
   }
 
   .form-group input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #d4650c;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(212, 101, 12, 0.1);
   }
 
   .btn-login {
-    padding: 16px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 14px;
+    background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
     color: white;
     border: none;
-    border-radius: 12px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     margin-top: 8px;
+    letter-spacing: 0.02em;
   }
 
   .btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(212, 101, 12, 0.35);
   }
 
-  .btn-login:active {
-    transform: translateY(0);
-  }
+  .btn-login:active { transform: translateY(0); }
 
   .error-message {
-    color: #e53e3e;
-    font-size: 14px;
+    color: #dc2626;
+    font-size: 13px;
     text-align: center;
-    min-height: 20px;
+    min-height: 18px;
     font-weight: 500;
   }
 
   @media (max-width: 480px) {
-    .login-box {
-      padding: 32px 24px;
-    }
+    .login-box { padding: 32px 24px; }
   }
 </style>

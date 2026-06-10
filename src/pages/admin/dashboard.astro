@@ -55,26 +55,41 @@ const completedTasks = allTasks.filter(t => t.completed);
 <Layout title="Admin Dashboard" description="Project management dashboard">
   <div class="dashboard-layout">
 
+    <!-- Mobile Top Bar -->
+    <div class="mobile-topbar" id="mobileTopbar">
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü Aç">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <span class="mobile-brand">Projeler</span>
+      <button class="btn-mobile-newtask" id="btnMobileNewTask" aria-label="Yeni Görev">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
+      <button class="btn-sidebar-close" id="btnSidebarClose" aria-label="Kapat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
       <div class="sidebar-header">
         <img src="/logo-icon-light.svg" alt="Logo" class="sidebar-logo" />
         <h1>Projeler</h1>
       </div>
 
       <div class="sidebar-content">
-        <div class="filter-section">
-          <button class="filter-btn active" data-filter="all">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-            </svg>
-            Tümü
-          </button>
-        </div>
-
         <div class="projects-list">
           {projects.map(project => (
             <a href={`/admin/projects/${project.id}`} class="project-item" data-project-id={project.id}>
@@ -94,6 +109,13 @@ const completedTasks = allTasks.filter(t => t.completed);
       </div>
 
       <div class="sidebar-footer">
+        <a href="https://platform.claude.com/dashboard" target="_blank" class="btn-claude-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.304 2.578c-.35-.9-1.513-.9-1.862 0l-1.44 3.714a.694.694 0 0 1-.406.406l-3.714 1.44c-.9.35-.9 1.513 0 1.862l3.714 1.44a.694.694 0 0 1 .406.406l1.44 3.714c.35.9 1.513.9 1.862 0l1.44-3.714a.694.694 0 0 1 .406-.406l3.714-1.44c.9-.35.9-1.513 0-1.862l-3.714-1.44a.694.694 0 0 1-.406-.406L17.304 2.578z" fill="currentColor"/>
+            <path d="M8.014 13.21c-.234-.603-1.01-.603-1.244 0l-.87 2.243a.463.463 0 0 1-.271.271l-2.243.87c-.603.234-.603 1.01 0 1.244l2.243.87a.463.463 0 0 1 .271.271l.87 2.243c.234.603 1.01.603 1.244 0l.87-2.243a.463.463 0 0 1 .271-.271l2.243-.87c.603-.234.603-1.01 0-1.244l-2.243-.87a.463.463 0 0 1-.271-.271l-.87-2.243z" fill="currentColor"/>
+          </svg>
+          Claude Dashboard
+        </a>
         <button id="logoutBtn" class="btn-logout">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -108,21 +130,54 @@ const completedTasks = allTasks.filter(t => t.completed);
     <!-- Main Content -->
     <main class="main-content">
       <header class="content-header">
-        <div>
-          <h1 class="content-title">Görevler</h1>
+        <div class="content-title-block">
+          <h1 class="content-title">Proje Günlüğü & Görevler</h1>
           <p class="content-subtitle">
-            <span id="taskCount">{pendingTasks.length}</span> aktif görev
+            <span id="taskCount">0</span> aktif görev
           </p>
         </div>
-        <div class="header-actions">
+        <div class="header-toolbar">
+          <div class="search-wrapper" id="searchWrapper">
+            <button class="btn-search-toggle" id="searchToggle" title="Görev Ara">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+            <div class="search-input-container" id="searchInputContainer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="searchInput" class="search-input" placeholder="Başlık veya açıklama ara..." autocomplete="off" />
+              <button class="btn-search-clear" id="searchClear" title="Temizle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button class="btn-new-task" id="openNewTaskModal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Yeni Görev
+          </button>
           <div class="view-toggle">
             <button class="view-btn active" data-view="pending">
               Aktif
-              <span class="badge-count">{pendingTasks.length}</span>
+              <span class="badge-count" id="badge-pending">0</span>
             </button>
             <button class="view-btn" data-view="completed">
               Tamamlanan
-              <span class="badge-count">{completedTasks.length}</span>
+              <span class="badge-count" id="badge-completed">0</span>
+            </button>
+            <button class="view-btn" data-view="trash">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+              Çöp Kutusu
+              <span class="badge-count" id="badge-trash">0</span>
             </button>
           </div>
         </div>
@@ -177,11 +232,11 @@ const completedTasks = allTasks.filter(t => t.completed);
                     />
                     <label for={`task-${task.id}`} class="checkbox-label"></label>
                   </div>
-                  <div class="task-content">
+                  <div class="task-card-body">
                     <p class="task-text">{task.title || task.text || 'Görev'}</p>
                     <div class="task-meta">
                       <a href={`/admin/projects/${task.projectId}`} class="task-project">
-                        <img src={task.projectLogo} alt={task.projectName} width="16" height="16" />
+                        <img src={task.projectLogo} alt={task.projectName} width="14" height="14" />
                         <span>{task.projectName}</span>
                       </a>
                       <span class="task-date">
@@ -189,17 +244,50 @@ const completedTasks = allTasks.filter(t => t.completed);
                       </span>
                     </div>
                   </div>
-                  <button
-                    class="btn-task-prompt"
-                    data-task-title={task.title || task.text}
-                    data-task-description={task.description || task.text}
-                    data-project-name={task.projectName}
-                    title="Claude Prompt Oluştur"
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                  </button>
+                  <div class="task-card-footer">
+                    {(task.description || task.text) && (
+                      <button
+                        class="btn-dash-expand"
+                        data-task-id={task.id}
+                        title="Detayları Göster"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    )}
+                    <button
+                      class="btn-task-prompt"
+                      data-task-id={task.id}
+                      data-project-id={task.projectId}
+                      data-task-title={task.title || task.text}
+                      data-task-description={task.description || task.text}
+                      data-project-name={task.projectName}
+                      title="Claude Prompt Oluştur"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                      </svg>
+                    </button>
+                    <button
+                      class="btn-dash-delete"
+                      data-task-id={task.id}
+                      data-project-id={task.projectId}
+                      title="Görevi Sil"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                        <path d="M10 11v6"></path><path d="M14 11v6"></path>
+                        <path d="M9 6V4h6v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  {(task.description || task.text) && (
+                    <div class="task-detail-dash" data-detail-id={task.id} style="display:none;">
+                      <p>{task.description || task.text}</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -233,17 +321,14 @@ const completedTasks = allTasks.filter(t => t.completed);
                     />
                     <label for={`task-c-${task.id}`} class="checkbox-label"></label>
                   </div>
-                  <div class="task-content">
+                  <div class="task-card-body">
                     <p class="task-text">{task.title || task.text || 'Görev'}</p>
                     <div class="task-meta">
                       <a href={`/admin/projects/${task.projectId}`} class="task-project">
-                        <img src={task.projectLogo} alt={task.projectName} width="16" height="16" />
+                        <img src={task.projectLogo} alt={task.projectName} width="14" height="14" />
                         <span>{task.projectName}</span>
                       </a>
                       <span class="task-date completed-date">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
                         {new Date(task.completedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}
                       </span>
                     </div>
@@ -254,9 +339,64 @@ const completedTasks = allTasks.filter(t => t.completed);
           )}
         </div>
 
+        <!-- Trash View -->
+        <div class="tasks-view" data-view-content="trash">
+          <div class="trash-header">
+            <p class="trash-info">Silinen görevler burada saklanır. Kalıcı olarak silinmezler.</p>
+            <button class="btn-empty-trash" id="emptyTrashBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+              Tümünü Sil
+            </button>
+          </div>
+          <div class="task-list" id="trashList">
+            <div class="empty-state">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+              <h3>Çöp kutusu boş</h3>
+              <p>Silinen görevler burada görünecek.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
 
+  </div>
+
+  <!-- Yeni Görev Modal -->
+  <div class="modal" id="newTaskModal">
+    <div class="modal-overlay" id="newTaskOverlay"></div>
+    <div class="modal-card" style="max-width:520px;">
+      <div class="modal-header">
+        <h3>Yeni Görev</h3>
+        <button class="modal-close" id="closeNewTaskModal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div style="padding: 24px 28px; display:flex; flex-direction:column; gap:16px;">
+        <div class="nt-form-group">
+          <label class="nt-label">Proje</label>
+          <select id="ntProject" class="nt-select">
+            {projects.map(p => <option value={p.id} data-logo={p.logo} data-name={p.name}>{p.name}</option>)}
+          </select>
+        </div>
+        <div class="nt-form-group">
+          <label class="nt-label">Görev Başlığı</label>
+          <input type="text" id="ntTitle" class="nt-input" placeholder="Örn: StoreKit Abonelik Sistemi" />
+        </div>
+        <div class="nt-form-group">
+          <label class="nt-label">Kısa Açıklama</label>
+          <textarea id="ntDescription" class="nt-input" rows="3" placeholder="Ne yapılacak?"></textarea>
+        </div>
+        <div id="ntError" style="color:#ef4444; font-size:13px; display:none;">Lütfen tüm alanları doldurun.</div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-nt-cancel" id="cancelNewTask">İptal</button>
+        <button type="button" class="btn-nt-save" id="saveNewTask">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          Kaydet
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Prompt Modal -->
@@ -298,12 +438,15 @@ const completedTasks = allTasks.filter(t => t.completed);
 </Layout>
 
 <script define:vars={{ projects }}>
-  // Check authentication
   if (sessionStorage.getItem('adminAuth') !== 'true') {
     window.location.href = '/admin';
   }
 
-  // Load tasks from localStorage for all projects and merge
+  // ─── Trash ──────────────────────────────────────────────
+  function getTrash() { return JSON.parse(localStorage.getItem('vibeco_trash') || '[]'); }
+  function saveTrash(arr) { localStorage.setItem('vibeco_trash', JSON.stringify(arr)); }
+
+  // ─── Load tasks from localStorage ───────────────────────
   let allTasks = [];
 
   projects.forEach(project => {
@@ -350,98 +493,90 @@ const completedTasks = allTasks.filter(t => t.completed);
     return a.completed ? 1 : -1;
   });
 
-  const pendingTasks = allTasks.filter(t => !t.completed);
-  const completedTasks = allTasks.filter(t => t.completed);
+  let pendingTasks = allTasks.filter(t => !t.completed);
+  let completedTasks = allTasks.filter(t => t.completed);
 
-  // Re-render tasks
   renderDashboardTasks();
+  renderTrash();
 
   function renderDashboardTasks() {
-    // Update counts
-    const taskCountElement = document.getElementById('taskCount');
-    if (taskCountElement) {
-      taskCountElement.textContent = pendingTasks.length;
-    }
+    const taskCountEl = document.getElementById('taskCount');
+    if (taskCountEl) taskCountEl.textContent = pendingTasks.length;
+    const bp = document.getElementById('badge-pending');
+    const bc = document.getElementById('badge-completed');
+    if (bp) bp.textContent = pendingTasks.length;
+    if (bc) bc.textContent = completedTasks.length;
 
-    // Update badges
-    const viewBtns = document.querySelectorAll('.view-btn');
-    viewBtns.forEach(btn => {
-      const view = btn.dataset.view;
-      const badge = btn.querySelector('.badge-count');
-      if (badge) {
-        badge.textContent = view === 'pending' ? pendingTasks.length : completedTasks.length;
+    // ─── Pending ─────────────────────────────────────────
+    const pendingView = document.querySelector('[data-view-content="pending"]');
+    if (pendingView) {
+      if (pendingTasks.length === 0) {
+        pendingView.innerHTML = `<div class="empty-state"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><h3>Aktif görev yok</h3><p>Yeni görev eklemek için "Yeni Görev" butonunu kullanın.</p></div>`;
+      } else {
+        pendingView.innerHTML = `<div class="task-list">${pendingTasks.map(task => `
+          <div class="task-card" data-project-id="${task.projectId}" data-task-id="${task.id}">
+            <div class="task-checkbox-wrapper">
+              <input type="checkbox" class="task-checkbox" id="dash-t-${task.id}" data-project-id="${task.projectId}" data-task-id="${task.id}" />
+              <label for="dash-t-${task.id}" class="checkbox-label"></label>
+            </div>
+            <div class="task-card-body">
+              <p class="task-text">${task.title || task.text || 'Görev'}</p>
+              <div class="task-meta">
+                <a href="/admin/projects/${task.projectId}" class="task-project">
+                  <img src="${task.projectLogo}" alt="${task.projectName}" width="14" height="14" />
+                  <span>${task.projectName}</span>
+                </a>
+                <span class="task-date">${new Date(task.createdAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}</span>
+              </div>
+            </div>
+            <div class="task-card-footer">
+              ${(task.description || task.text) ? `<button class="btn-dash-expand" data-task-id="${task.id}" title="Detayları Göster"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>` : ''}
+              <button class="btn-task-prompt" data-task-id="${task.id}" data-task-title="${task.title}" data-task-description="${task.description || ''}" data-project-name="${task.projectName}" data-project-id="${task.projectId}" title="Claude Prompt Oluştur"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button>
+              <button class="btn-dash-delete" data-task-id="${task.id}" data-project-id="${task.projectId}" title="Görevi Sil"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></button>
+            </div>
+            ${(task.description || task.text) ? `<div class="task-detail-dash" data-detail-id="${task.id}" style="display:none;"><p>${task.description || task.text}</p></div>` : ''}
+          </div>`).join('')}</div>`;
+        attachCheckboxListeners();
+        attachPromptButtonListeners();
       }
+    }
+
+    // ─── Completed ───────────────────────────────────────
+    const completedView = document.querySelector('[data-view-content="completed"]');
+    if (completedView) {
+      if (completedTasks.length === 0) {
+        completedView.innerHTML = `<div class="empty-state"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><h3>Henüz tamamlanmış görev yok</h3><p>Görevleri tamamladıkça burada görünecekler.</p></div>`;
+      } else {
+        completedView.innerHTML = `<div class="task-list">${completedTasks.map(task => `
+          <div class="task-card completed" data-project-id="${task.projectId}" data-task-id="${task.id}">
+            <div class="task-checkbox-wrapper">
+              <input type="checkbox" class="task-checkbox" checked id="dash-tc-${task.id}" data-project-id="${task.projectId}" data-task-id="${task.id}" />
+              <label for="dash-tc-${task.id}" class="checkbox-label"></label>
+            </div>
+            <div class="task-card-body">
+              <p class="task-text">${task.title || task.text || 'Görev'}</p>
+              <div class="task-meta">
+                <a href="/admin/projects/${task.projectId}" class="task-project">
+                  <img src="${task.projectLogo}" alt="${task.projectName}" width="14" height="14" />
+                  <span>${task.projectName}</span>
+                </a>
+                <span class="task-date completed-date">${new Date(task.completedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}</span>
+              </div>
+            </div>
+            <div class="task-card-footer">
+              <button class="btn-dash-delete" data-task-id="${task.id}" data-project-id="${task.projectId}" title="Görevi Sil"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></button>
+            </div>
+          </div>`).join('')}</div>`;
+        attachCheckboxListeners();
+      }
+    }
+
+    // ─── Sidebar proje sayıları (localStorage'dan) ───────
+    projects.forEach(project => {
+      const projectTasks = allTasks.filter(t => t.projectId === project.id && !t.completed);
+      const countEl = document.querySelector(`.project-item[href="/admin/projects/${project.id}"] .project-task-count`);
+      if (countEl) countEl.textContent = projectTasks.length;
     });
-
-    // Re-render pending tasks
-    const pendingContainer = document.querySelector('[data-view-content="pending"] .task-list');
-    if (pendingContainer && pendingTasks.length > 0) {
-      pendingContainer.innerHTML = pendingTasks.map(task => `
-        <div class="task-card" data-project-id="${task.projectId}" data-task-id="${task.id}">
-          <div class="task-checkbox-wrapper">
-            <input type="checkbox" class="task-checkbox" id="dash-t-${task.id}" data-project-id="${task.projectId}" data-task-id="${task.id}" />
-            <label for="dash-t-${task.id}" class="checkbox-label"></label>
-          </div>
-          <div class="task-content">
-            <p class="task-text">${task.title || task.text || 'Görev'}</p>
-            <div class="task-meta">
-              <a href="/admin/projects/${task.projectId}" class="task-project">
-                <img src="${task.projectLogo}" alt="${task.projectName}" width="16" height="16" />
-                <span>${task.projectName}</span>
-              </a>
-              <span class="task-date">
-                ${new Date(task.createdAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}
-              </span>
-            </div>
-          </div>
-          <button
-            class="btn-task-prompt"
-            data-task-title="${task.title}"
-            data-task-description="${task.description || ''}"
-            data-project-name="${task.projectName}"
-            title="Claude Prompt Oluştur"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-        </div>
-      `).join('');
-
-      // Re-attach checkbox listeners
-      attachCheckboxListeners();
-      attachPromptButtonListeners();
-    }
-
-    // Re-render completed tasks
-    const completedContainer = document.querySelector('[data-view-content="completed"] .task-list');
-    if (completedContainer && completedTasks.length > 0) {
-      completedContainer.innerHTML = completedTasks.map(task => `
-        <div class="task-card completed" data-project-id="${task.projectId}" data-task-id="${task.id}">
-          <div class="task-checkbox-wrapper">
-            <input type="checkbox" class="task-checkbox" checked id="dash-tc-${task.id}" data-project-id="${task.projectId}" data-task-id="${task.id}" />
-            <label for="dash-tc-${task.id}" class="checkbox-label"></label>
-          </div>
-          <div class="task-content">
-            <p class="task-text">${task.title || task.text || 'Görev'}</p>
-            <div class="task-meta">
-              <a href="/admin/projects/${task.projectId}" class="task-project">
-                <img src="${task.projectLogo}" alt="${task.projectName}" width="16" height="16" />
-                <span>${task.projectName}</span>
-              </a>
-              <span class="task-date completed-date">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                ${new Date(task.completedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}
-              </span>
-            </div>
-          </div>
-        </div>
-      `).join('');
-
-      attachCheckboxListeners();
-    }
   }
 
   function attachCheckboxListeners() {
@@ -463,15 +598,8 @@ const completedTasks = allTasks.filter(t => t.completed);
           const projectTasks = allTasks.filter(t => t.projectId === projectId);
           localStorage.setItem(storageKey, JSON.stringify(projectTasks));
 
-          // Refresh lists
-          const pending = allTasks.filter(t => !t.completed);
-          const completed = allTasks.filter(t => t.completed);
-
-          pendingTasks.length = 0;
-          pendingTasks.push(...pending);
-          completedTasks.length = 0;
-          completedTasks.push(...completed);
-
+          pendingTasks = allTasks.filter(t => !t.completed);
+          completedTasks = allTasks.filter(t => t.completed);
           renderDashboardTasks();
         }
       });
@@ -485,32 +613,46 @@ const completedTasks = allTasks.filter(t => t.completed);
   const copyPromptBtn = document.getElementById('copyPromptBtn');
   const downloadPromptBtn = document.getElementById('downloadPromptBtn');
   let currentPromptText = '';
+  const promptCache = {};
 
-  function openPromptModal(title, description, projectName) {
-    const prompt = `# Task: ${title}
-
-## Project Context
-- **Project:** ${projectName}
-- **Status:** In Development
-
-## Task Description
-${description}
-
-## Requirements
-Please implement this task for the ${projectName} project. Follow best practices and ensure the code is clean, maintainable, and well-documented.
-
-## Additional Context
-- Keep the implementation consistent with the existing codebase
-- Consider edge cases and error handling
-- Write clear commit messages when done
-
----
-Generated by VibeCo - Project Management for Developers`;
-
-    currentPromptText = prompt;
-    generatedPrompt.textContent = prompt;
+  async function openPromptModal(title, description, projectName, projectId, taskId) {
+    currentPromptText = '';
+    generatedPrompt.textContent = '';
     promptModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    // Önbellekte varsa direkt göster
+    const cacheKey = taskId ? `${projectId}_${taskId}` : null;
+    if (cacheKey && promptCache[cacheKey]) {
+      currentPromptText = promptCache[cacheKey];
+      generatedPrompt.textContent = currentPromptText;
+      copyPromptBtn.disabled = false;
+      return;
+    }
+
+    generatedPrompt.innerHTML = '<span class="prompt-loading">Claude prompt hazırlıyor<span class="dots"><span>.</span><span>.</span><span>.</span></span></span>';
+    copyPromptBtn.disabled = true;
+
+    const project = projects.find(p => p.id === projectId);
+    const platform = project?.platform || 'Mobil/Web';
+
+    try {
+      const res = await fetch('/api/generate-prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description, projectName, platform })
+      });
+      const data = await res.json();
+      currentPromptText = data.prompt || data.error || 'Prompt oluşturulamadı.';
+      if (cacheKey) promptCache[cacheKey] = currentPromptText;
+      generatedPrompt.innerHTML = '';
+      generatedPrompt.textContent = currentPromptText;
+    } catch {
+      currentPromptText = 'Bağlantı hatası. Sunucunun çalıştığından emin olun.';
+      generatedPrompt.innerHTML = '';
+      generatedPrompt.textContent = currentPromptText;
+    }
+    copyPromptBtn.disabled = false;
   }
 
   function closePromptModalFn() {
@@ -549,19 +691,310 @@ Generated by VibeCo - Project Management for Developers`;
         const title = btn.dataset.taskTitle;
         const description = btn.dataset.taskDescription;
         const projectName = btn.dataset.projectName;
-        openPromptModal(title, description, projectName);
+        const projectId = btn.dataset.projectId;
+        const taskId = btn.dataset.taskId;
+        openPromptModal(title, description, projectName, projectId, taskId);
       });
     });
   }
 
+  // Expand — event delegation (re-render'dan etkilenmez)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-dash-expand');
+    if (!btn) return;
+    e.stopPropagation();
+    const taskId = btn.dataset.taskId;
+    const detail = document.querySelector(`.task-detail-dash[data-detail-id="${taskId}"]`);
+    if (!detail) return;
+    const isOpen = detail.style.display === 'block';
+    detail.style.display = isOpen ? 'none' : 'block';
+    btn.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  });
+
+  // ─── Delete → Trash ─────────────────────────────────────
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-dash-delete');
+    if (!btn) return;
+    e.stopPropagation();
+    const taskId = btn.dataset.taskId;
+    const projectId = btn.dataset.projectId;
+    const task = allTasks.find(t => t.id === taskId && t.projectId === projectId);
+    if (!task) return;
+    if (!confirm(`"${task.title || task.text}" çöp kutusuna taşınsın mı?`)) return;
+
+    // Move to trash
+    const trash = getTrash();
+    trash.push({ ...task, deletedAt: new Date().toISOString() });
+    saveTrash(trash);
+
+    // Remove from allTasks
+    const idx = allTasks.findIndex(t => t.id === taskId && t.projectId === projectId);
+    if (idx !== -1) allTasks.splice(idx, 1);
+
+    // Update project localStorage
+    const storageKey = `vibeco_tasks_${projectId}`;
+    const projectTasks = allTasks.filter(t => t.projectId === projectId)
+      .map(({ projectId: _p, projectName: _n, projectLogo: _l, projectStatus: _s, ...rest }) => rest);
+    localStorage.setItem(storageKey, JSON.stringify(projectTasks));
+
+    pendingTasks = allTasks.filter(t => !t.completed);
+    completedTasks = allTasks.filter(t => t.completed);
+    renderDashboardTasks();
+    renderTrash();
+  });
+
+  // ─── Trash render ────────────────────────────────────────
+  function renderTrash() {
+    const trash = getTrash();
+    const bt = document.getElementById('badge-trash');
+    if (bt) bt.textContent = trash.length;
+    const container = document.getElementById('trashList');
+    if (!container) return;
+    if (trash.length === 0) {
+      container.innerHTML = `<div class="empty-state"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg><h3>Çöp kutusu boş</h3><p>Silinen görevler burada görünecek.</p></div>`;
+      return;
+    }
+    container.innerHTML = trash.map((task, idx) => `
+      <div class="task-card trash-card">
+        <div class="task-card-body">
+          <p class="task-text" style="color:#6b7280;">${task.title || task.text || 'Görev'}</p>
+          <div class="task-meta">
+            <span class="task-project" style="color:#9ca3af;">
+              <img src="${task.projectLogo || ''}" width="14" height="14" style="border-radius:3px;" />
+              ${task.projectName || ''}
+            </span>
+            <span class="task-date">Silindi: ${new Date(task.deletedAt).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}</span>
+          </div>
+        </div>
+        <div class="task-card-footer">
+          <button class="btn-trash-restore" data-trash-idx="${idx}" title="Geri Yükle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            Geri Yükle
+          </button>
+          <button class="btn-trash-perm-delete" data-trash-idx="${idx}" title="Kalıcı Sil">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>
+            Sil
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Trash actions — event delegation
+  document.addEventListener('click', (e) => {
+    // Restore
+    const restoreBtn = e.target.closest('.btn-trash-restore');
+    if (restoreBtn) {
+      const idx = parseInt(restoreBtn.dataset.trashIdx);
+      const trash = getTrash();
+      const task = trash[idx];
+      if (!task) return;
+      // Restore to project localStorage
+      const { deletedAt, ...restoredTask } = task;
+      const storageKey = `vibeco_tasks_${task.projectId}`;
+      const existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      existing.push({ id: restoredTask.id, title: restoredTask.title, description: restoredTask.description, completed: restoredTask.completed, createdAt: restoredTask.createdAt, completedAt: restoredTask.completedAt });
+      localStorage.setItem(storageKey, JSON.stringify(existing));
+      // Remove from trash
+      trash.splice(idx, 1);
+      saveTrash(trash);
+      // Add back to allTasks
+      allTasks.push({ ...restoredTask });
+      pendingTasks = allTasks.filter(t => !t.completed);
+      completedTasks = allTasks.filter(t => t.completed);
+      renderDashboardTasks();
+      renderTrash();
+      return;
+    }
+    // Permanent delete
+    const permBtn = e.target.closest('.btn-trash-perm-delete');
+    if (permBtn) {
+      if (!confirm('Bu görev kalıcı olarak silinecek. Emin misin?')) return;
+      const idx = parseInt(permBtn.dataset.trashIdx);
+      const trash = getTrash();
+      trash.splice(idx, 1);
+      saveTrash(trash);
+      renderTrash();
+    }
+  });
+
+  // Empty all trash
+  document.getElementById('emptyTrashBtn')?.addEventListener('click', () => {
+    if (!confirm('Çöp kutusundaki tüm görevler kalıcı olarak silinecek. Emin misin?')) return;
+    saveTrash([]);
+    renderTrash();
+  });
+
+  // Clear localStorage (reset all task data)
+  document.getElementById('clearStorageBtn')?.addEventListener('click', () => {
+    if (!confirm('Tüm görev verileri (localStorage) sıfırlanacak. Bu işlem geri alınamaz. Devam edilsin mi?')) return;
+    projects.forEach(p => localStorage.removeItem(`vibeco_tasks_${p.id}`));
+    localStorage.removeItem('vibeco_trash');
+    allTasks = [];
+    pendingTasks = [];
+    completedTasks = [];
+    renderDashboardTasks();
+    renderTrash();
+  });
+
+  // ─── Yeni Görev Modal ────────────────────────────────────
+  const newTaskModal = document.getElementById('newTaskModal');
+  document.getElementById('openNewTaskModal')?.addEventListener('click', () => {
+    newTaskModal?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  function closeNewTaskModal() {
+    newTaskModal?.classList.remove('active');
+    document.body.style.overflow = '';
+    (document.getElementById('ntTitle')).value = '';
+    (document.getElementById('ntDescription')).value = '';
+    const err = document.getElementById('ntError');
+    if (err) err.style.display = 'none';
+  }
+  document.getElementById('closeNewTaskModal')?.addEventListener('click', closeNewTaskModal);
+  document.getElementById('cancelNewTask')?.addEventListener('click', closeNewTaskModal);
+  document.getElementById('newTaskOverlay')?.addEventListener('click', closeNewTaskModal);
+
+  document.getElementById('saveNewTask')?.addEventListener('click', () => {
+    const projectId = (document.getElementById('ntProject')).value;
+    const title = (document.getElementById('ntTitle')).value.trim();
+    const description = (document.getElementById('ntDescription')).value.trim();
+    const err = document.getElementById('ntError');
+    if (!title || !description) {
+      if (err) err.style.display = 'block';
+      return;
+    }
+    if (err) err.style.display = 'none';
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+    const today = new Date().toISOString().split('T')[0];
+    const newTask = { id: Date.now().toString(), title, description, completed: false, createdAt: today, completedAt: null };
+    // Save to project localStorage
+    const storageKey = `vibeco_tasks_${projectId}`;
+    const existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    existing.push(newTask);
+    localStorage.setItem(storageKey, JSON.stringify(existing));
+    // Add to allTasks
+    allTasks.push({ ...newTask, projectId: project.id, projectName: project.name, projectLogo: project.logo, projectStatus: project.status });
+    pendingTasks = allTasks.filter(t => !t.completed);
+    completedTasks = allTasks.filter(t => t.completed);
+    renderDashboardTasks();
+    closeNewTaskModal();
+  });
+
   // Initial attach
   attachPromptButtonListeners();
+
+  // ─── Arama ───────────────────────────────────────────────
+  const searchToggle = document.getElementById('searchToggle');
+  const searchInputContainer = document.getElementById('searchInputContainer');
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  let searchOpen = false;
+  let searchQuery = '';
+
+  searchToggle?.addEventListener('click', () => {
+    searchOpen = !searchOpen;
+    searchInputContainer.classList.toggle('open', searchOpen);
+    if (searchOpen) {
+      searchInput.focus();
+    } else {
+      searchInput.value = '';
+      searchQuery = '';
+      applySearch();
+    }
+  });
+
+  searchInput?.addEventListener('input', () => {
+    searchQuery = searchInput.value.trim().toLowerCase();
+    applySearch();
+  });
+
+  searchClear?.addEventListener('click', () => {
+    searchInput.value = '';
+    searchQuery = '';
+    applySearch();
+    searchInput.focus();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchOpen) {
+      searchOpen = false;
+      searchInputContainer.classList.remove('open');
+      searchInput.value = '';
+      searchQuery = '';
+      applySearch();
+    }
+  });
+
+  function applySearch() {
+    const cards = document.querySelectorAll('[data-view-content="pending"] .task-card, [data-view-content="completed"] .task-card');
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const titleEl = card.querySelector('.task-text');
+      const detailEl = card.querySelector('.task-detail-dash p');
+      const title = (titleEl?.textContent || '').toLowerCase();
+      const desc = (detailEl?.textContent || '').toLowerCase();
+      const match = !searchQuery || title.includes(searchQuery) || desc.includes(searchQuery);
+      card.style.display = match ? 'flex' : 'none';
+      if (match && card.closest('[data-view-content="pending"]')) visibleCount++;
+    });
+    const taskCountEl = document.getElementById('taskCount');
+    if (taskCountEl) taskCountEl.textContent = searchQuery ? visibleCount : pendingTasks.length;
+    // Show/hide no-results message
+    const pendingView = document.querySelector('[data-view-content="pending"]');
+    if (pendingView && searchQuery) {
+      let noRes = pendingView.querySelector('.search-no-result');
+      const anyVisible = Array.from(pendingView.querySelectorAll('.task-card')).some(c => c.style.display !== 'none');
+      if (!anyVisible) {
+        if (!noRes) {
+          noRes = document.createElement('div');
+          noRes.className = 'search-no-result';
+          noRes.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><p>"${searchInput.value}" için sonuç bulunamadı</p>`;
+          pendingView.appendChild(noRes);
+        } else {
+          noRes.querySelector('p').textContent = `"${searchInput.value}" için sonuç bulunamadı`;
+          noRes.style.display = 'flex';
+        }
+      } else if (noRes) {
+        noRes.style.display = 'none';
+      }
+    } else {
+      document.querySelector('.search-no-result')?.remove();
+    }
+  }
 
   // Logout
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
     sessionStorage.removeItem('adminAuth');
     sessionStorage.removeItem('adminUser');
     window.location.href = '/admin';
+  });
+
+  // ─── Mobile Sidebar ─────────────────────────────────────
+  const sidebar = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  const btnHamburger = document.getElementById('btnHamburger');
+  const btnSidebarClose = document.getElementById('btnSidebarClose');
+
+  function openMobileSidebar() {
+    sidebar?.classList.add('mobile-open');
+    sidebarOverlay?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileSidebar() {
+    sidebar?.classList.remove('mobile-open');
+    sidebarOverlay?.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  btnHamburger?.addEventListener('click', openMobileSidebar);
+  btnSidebarClose?.addEventListener('click', closeMobileSidebar);
+  sidebarOverlay?.addEventListener('click', closeMobileSidebar);
+
+  // Mobile "Yeni Görev" shortcut — same as desktop button
+  document.getElementById('btnMobileNewTask')?.addEventListener('click', () => {
+    document.getElementById('openNewTaskModal')?.click();
   });
 
   // View toggle
@@ -663,6 +1096,7 @@ Generated by VibeCo - Project Management for Developers`;
     width: 36px;
     height: 36px;
     margin-bottom: 12px;
+    filter: brightness(0) invert(1);
   }
 
   .sidebar-header h1 {
@@ -753,8 +1187,8 @@ Generated by VibeCo - Project Management for Developers`;
   }
 
   .project-item.active {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-    border-color: rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, rgba(212, 101, 12, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border-color: rgba(212, 101, 12, 0.3);
   }
 
   .project-item-logo {
@@ -812,21 +1246,67 @@ Generated by VibeCo - Project Management for Developers`;
     min-width: 24px;
     height: 24px;
     padding: 0 6px;
-    background: rgba(102, 126, 234, 0.2);
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: rgba(212, 101, 12, 0.2);
+    border: 1px solid rgba(212, 101, 12, 0.3);
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
     font-weight: 700;
-    color: #667eea;
+    color: #d4650c;
     flex-shrink: 0;
   }
 
   .sidebar-footer {
     padding: 16px;
     border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-claude-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(212, 101, 12, 0.15);
+    border: 1px solid rgba(212, 101, 12, 0.3);
+    border-radius: 10px;
+    color: #fed7aa;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn-claude-link:hover {
+    background: rgba(212, 101, 12, 0.25);
+    color: #ffedd5;
+  }
+
+  .btn-clear-storage {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 10px;
+    color: rgba(252, 165, 165, 0.7);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-clear-storage:hover {
+    background: rgba(239,68,68,0.1);
+    color: #fca5a5;
   }
 
   .btn-logout {
@@ -859,34 +1339,167 @@ Generated by VibeCo - Project Management for Developers`;
 
   .content-header {
     background: white;
-    padding: 32px 40px;
+    padding: 28px 40px 20px;
     border-bottom: 1px solid #e5e7eb;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 16px;
     position: sticky;
     top: 0;
     z-index: 10;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
 
+  .content-title-block {
+    text-align: center;
+  }
+
   .content-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     color: #111827;
     margin: 0 0 4px;
   }
 
   .content-subtitle {
-    font-size: 15px;
+    font-size: 14px;
     color: #6b7280;
     margin: 0;
   }
 
-  .header-actions {
+  .header-toolbar {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ─── Search ─────────────────────────────────────────── */
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .btn-search-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .btn-search-toggle:hover {
+    background: #fff7ed;
+    border-color: #d4650c;
+    color: #d4650c;
+  }
+
+  .search-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.2s ease;
+    background: white;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 0;
+    margin-left: 0;
+  }
+
+  .search-input-container.open {
+    width: 260px;
+    opacity: 1;
+    border-color: #d4650c;
+    padding: 0 10px;
+    margin-left: 8px;
+    box-shadow: 0 0 0 3px rgba(212, 101, 12, 0.1);
+  }
+
+  .search-icon {
+    color: #9ca3af;
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #111827;
+    background: transparent;
+    padding: 9px 0;
+    min-width: 0;
+  }
+
+  .search-input::placeholder {
+    color: #9ca3af;
+  }
+
+  .btn-search-clear {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    color: #9ca3af;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .btn-search-clear:hover {
+    background: #fee2e2;
+    color: #ef4444;
+  }
+
+  .search-no-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 12px;
+    padding: 60px 40px;
+    color: #9ca3af;
+    font-size: 14px;
+  }
+
+  .search-no-result p { margin: 0; }
+
+  .btn-new-task {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-new-task:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 101, 12, 0.4);
   }
 
   .view-toggle {
@@ -928,7 +1541,7 @@ Generated by VibeCo - Project Management for Developers`;
   }
 
   .view-btn.active .badge-count {
-    background: #667eea;
+    background: #d4650c;
     color: white;
   }
 
@@ -985,10 +1598,10 @@ Generated by VibeCo - Project Management for Developers`;
   }
 
   .project-filter-item.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-color: #667eea;
+    background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
+    border-color: #d4650c;
     color: white;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(212, 101, 12, 0.3);
   }
 
   .filter-icon-all {
@@ -997,7 +1610,7 @@ Generated by VibeCo - Project Management for Developers`;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(212, 101, 12, 0.1);
     border-radius: 6px;
   }
 
@@ -1030,196 +1643,7 @@ Generated by VibeCo - Project Management for Developers`;
     display: block;
   }
 
-  .task-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .task-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    background: white;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    margin-bottom: 12px;
-  }
-
-  .task-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    padding: 1.5px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-
-  .task-card:hover::before {
-    opacity: 1;
-  }
-
-  .task-card:hover {
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .task-card.completed {
-    opacity: 0.6;
-    background: #f9fafb;
-  }
-
-  .task-card.completed:hover {
-    transform: none;
-  }
-
-  .task-checkbox-wrapper {
-    position: relative;
-    flex-shrink: 0;
-  }
-
-  .task-checkbox {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    opacity: 0;
-    position: absolute;
-    z-index: 2;
-  }
-
-  .checkbox-label {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #d1d5db;
-    border-radius: 7px;
-    display: block;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .task-checkbox:checked + .checkbox-label {
-    background: #667eea;
-    border-color: #667eea;
-  }
-
-  .task-checkbox:checked + .checkbox-label::after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 3px;
-    width: 6px;
-    height: 11px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-
-  .task-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .task-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: #111827;
-    line-height: 1.5;
-    margin: 0 0 12px;
-  }
-
-  .task-card.completed .task-text {
-    text-decoration: line-through;
-    color: #9ca3af;
-  }
-
-  .task-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .task-project {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: #6b7280;
-    font-size: 13px;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-
-  .task-project:hover {
-    color: #667eea;
-  }
-
-  .task-project img {
-    width: 16px !important;
-    height: 16px !important;
-    border-radius: 4px;
-    object-fit: cover;
-  }
-
-  /* Global img fix for task cards */
-  .task-card img {
-    max-width: 20px;
-    max-height: 20px;
-  }
-
-  .btn-task-prompt {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-
-  .btn-task-prompt:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-color: #667eea;
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-  }
-
-  .btn-task-prompt svg {
-    transition: transform 0.2s ease;
-  }
-
-  .btn-task-prompt:hover svg {
-    transform: scale(1.1);
-  }
-
-  .task-date {
-    font-size: 13px;
-    color: #9ca3af;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .completed-date {
-    color: #48bb78;
-  }
+  /* task card stilleri is:global bloğunda */
 
   /* ─── Empty State ───────────────────────────────── */
   .empty-state {
@@ -1248,46 +1672,212 @@ Generated by VibeCo - Project Management for Developers`;
 
   /* ─── Responsive ────────────────────────────────── */
   @media (max-width: 1024px) {
-    .sidebar {
-      width: 280px;
-    }
+    .sidebar { width: 280px; }
   }
 
+  /* Mobile elements — hidden on desktop */
+  .mobile-topbar { display: none; }
+  .sidebar-overlay { display: none; pointer-events: none; }
+  .btn-sidebar-close { display: none; }
+
   @media (max-width: 768px) {
+    /* ── Layout ── */
     .dashboard-layout {
       flex-direction: column;
     }
 
+    /* ── Mobile Top Bar ── */
+    .mobile-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: linear-gradient(180deg, #1a1d29 0%, #0f111a 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 150;
+      flex-shrink: 0;
+    }
+
+    .btn-hamburger {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .mobile-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .btn-mobile-newtask {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── Sidebar → Fixed Drawer ── */
     .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 260px;
+      z-index: 200;
+      transform: translateX(-260px);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.mobile-open {
+      transform: translateX(0);
+      box-shadow: 8px 0 32px rgba(0,0,0,0.4);
+    }
+
+    .btn-sidebar-close {
+      display: flex;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    /* ── Sidebar Overlay ── */
+    .sidebar-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+      z-index: 199;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── Main Content ── */
+    .main-content {
       width: 100%;
-      height: auto;
-      position: relative;
     }
 
+    /* ── Content Header ── */
     .content-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 24px;
+      padding: 16px 16px 12px;
+      gap: 10px;
     }
 
-    .project-filter {
-      padding: 16px 20px;
+    .content-title {
+      font-size: 20px;
     }
 
-    .project-filter-item {
-      padding: 8px 14px;
+    .content-subtitle {
       font-size: 13px;
     }
 
-    .filter-project-logo,
-    .filter-icon-all {
-      width: 20px;
-      height: 20px;
+    .header-toolbar {
+      gap: 8px;
+      width: 100%;
     }
 
+    /* ── Search ── */
+    .search-input-container.open {
+      width: 180px;
+    }
+
+    /* ── Yeni Görev (desktop button hidden on mobile — topbar button used) ── */
+    .btn-new-task {
+      display: none;
+    }
+
+    /* ── View Toggle — scroll yatay ── */
+    .view-toggle {
+      overflow-x: auto;
+      flex-shrink: 0;
+      scrollbar-width: none;
+    }
+    .view-toggle::-webkit-scrollbar { display: none; }
+
+    .view-btn {
+      padding: 8px 12px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    /* ── Project Filter ── */
+    .project-filter {
+      padding: 12px 16px;
+    }
+
+    /* ── Tasks Container ── */
     .tasks-container {
-      padding: 20px;
+      padding: 16px;
+    }
+
+    /* ── Empty State ── */
+    .empty-state {
+      padding: 48px 24px;
+    }
+
+    /* ── Modals → Bottom Sheet ── */
+    .modal {
+      align-items: flex-end;
+      padding: 0;
+    }
+
+    .modal-card {
+      border-radius: 20px 20px 0 0;
+      max-height: 92vh;
+      animation: modalBottomSheet 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    @keyframes modalBottomSheet {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-large {
+      max-width: 100%;
+    }
+
+    .modal-header {
+      padding: 20px 20px 16px;
+    }
+
+    .prompt-preview {
+      margin: 16px 20px;
+      max-height: 280px;
     }
   }
 
@@ -1385,6 +1975,24 @@ Generated by VibeCo - Project Management for Developers`;
     overflow-y: auto;
   }
 
+  .prompt-loading {
+    color: #9ca3af;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+  }
+
+  .prompt-loading .dots span {
+    animation: dot-blink 1.2s infinite;
+    opacity: 0;
+  }
+  .prompt-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .prompt-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes dot-blink {
+    0%, 80%, 100% { opacity: 0; }
+    40% { opacity: 1; }
+  }
+
   .prompt-preview pre {
     color: #e5e7eb;
     font-family: 'Courier New', Consolas, monospace;
@@ -1428,7 +2036,7 @@ Generated by VibeCo - Project Management for Developers`;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
     color: white;
     border: none;
     display: flex;
@@ -1439,7 +2047,7 @@ Generated by VibeCo - Project Management for Developers`;
 
   .btn-submit:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 12px rgba(212, 101, 12, 0.4);
   }
 
   .btn-download {
@@ -1460,5 +2068,349 @@ Generated by VibeCo - Project Management for Developers`;
   .btn-download:hover {
     background: #e5e7eb;
     color: #374151;
+  }
+</style>
+
+<style is:global>
+  /* ─── Task Cards (global: JS re-render'da da çalışsın) ── */
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    position: relative;
+  }
+
+  .task-card:hover {
+    border-color: #d4650c;
+    box-shadow: 0 6px 20px rgba(212, 101, 12, 0.2), 0 2px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .task-card.completed {
+    opacity: 0.55;
+    background: #f9fafb;
+  }
+
+  .task-card.completed:hover {
+    transform: none;
+    border-color: #d1d5db;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  }
+
+  .task-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .task-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .task-checkbox-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .task-checkbox {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .checkbox-label {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .task-checkbox:checked + .checkbox-label {
+    background: #d4650c;
+    border-color: #d4650c;
+  }
+
+  .task-checkbox:checked + .checkbox-label::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .task-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    line-height: 1.4;
+    margin: 0 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .task-card.completed .task-text {
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  .task-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .task-project {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .task-project:hover {
+    color: #d4650c;
+  }
+
+  .task-project img {
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .task-date {
+    font-size: 12px;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+
+  .completed-date {
+    color: #48bb78;
+  }
+
+  .btn-task-prompt {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .btn-task-prompt:hover {
+    background: linear-gradient(135deg, #d4650c, #b84c08);
+    border-color: #d4650c;
+    color: white;
+    box-shadow: 0 4px 12px rgba(212, 101, 12, 0.3);
+  }
+
+  .btn-dash-expand {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .btn-dash-expand:hover {
+    background: #e5e7eb;
+    color: #374151;
+  }
+
+  .btn-dash-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+    background: #fff5f5;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .btn-dash-delete:hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #dc2626;
+  }
+
+  .task-detail-dash {
+    width: 100%;
+    flex-basis: 100%;
+    padding: 12px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    margin-top: -4px;
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .task-detail-dash p {
+    margin: 0;
+  }
+
+  /* ─── Trash view ──────────────────────────────────────── */
+  .trash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+  }
+
+  .trash-info {
+    font-size: 13px;
+    color: #92400e;
+    margin: 0;
+  }
+
+  .btn-empty-trash {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    color: #ef4444;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-empty-trash:hover { background: #fecaca; }
+
+  .trash-card { opacity: 0.75; }
+  .trash-card:hover { opacity: 1; transform: none !important; }
+
+  .btn-trash-restore {
+    display: flex; align-items: center; gap: 5px;
+    padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    background: #f0fdf4; border: 1px solid #86efac; color: #16a34a; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-trash-restore:hover { background: #dcfce7; }
+
+  .btn-trash-perm-delete {
+    display: flex; align-items: center; gap: 5px;
+    padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    background: #fff5f5; border: 1px solid #fecaca; color: #ef4444; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-trash-perm-delete:hover { background: #fee2e2; }
+
+  /* ─── Yeni Görev Modal form ───────────────────────────── */
+  .nt-form-group { display: flex; flex-direction: column; gap: 6px; }
+  .nt-label { font-size: 13px; font-weight: 600; color: #374151; }
+  .nt-input, .nt-select {
+    padding: 10px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: white;
+    color: #111827;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+  .nt-input:focus, .nt-select:focus { border-color: #d4650c; }
+
+  .btn-nt-cancel {
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    background: #f3f4f6; border: 1px solid #e5e7eb; color: #6b7280; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-nt-cancel:hover { background: #e5e7eb; }
+
+  .btn-nt-save {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    background: linear-gradient(135deg, #d4650c 0%, #b84c08 100%);
+    color: white; border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-nt-save:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(212,101,12,0.4); }
+
+  @media (max-width: 768px) {
+    .task-card {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    .task-card:hover {
+      transform: none;
+    }
+
+    .task-card-footer {
+      gap: 6px;
+    }
+
+    .btn-task-prompt,
+    .btn-dash-expand,
+    .btn-dash-delete {
+      width: 40px;
+      height: 40px;
+    }
+
+    .task-text {
+      font-size: 13px;
+      white-space: normal;
+    }
+
+    .task-meta {
+      gap: 8px;
+    }
   }
 </style>

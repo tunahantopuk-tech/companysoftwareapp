@@ -14,46 +14,5 @@
       "content": "Modern bir oyun ana menüsü tasarla. Özellikler:\n- Oyunluk logosu\n- Başla butonu (parlak, animasyonlu)\n- Ayarlar\n- Liderlik tablosu\n- Günlük ödüller\n- Arka planda hafif animasyonlar\n- Ses efektleri"
     }
   ],
-  "tasks": [
-    {
-      "id": "1",
-      "title": "Oyun Konsepti ve Mekanikler",
-      "description": "Proje konsepti netleştirildi. Ana oyun mekanikleri tasarlandı ve dokümante edildi.",
-      "completed": true,
-      "createdAt": "2026-06-08",
-      "completedAt": "2026-06-08"
-    },
-    {
-      "id": "2",
-      "title": "İlk Prototip ve Logo",
-      "description": "İlk prototip çalışmaları başlatıldı. Oyunluk logosu tasarımı tamamlandı ve onaylandı.",
-      "completed": true,
-      "createdAt": "2026-06-01",
-      "completedAt": "2026-06-01"
-    },
-    {
-      "id": "3",
-      "title": "Karakter Tasarımları",
-      "description": "Oyun karakterlerinin konsept tasarımları ve animasyonları hazırlanacak. Ana karakter ve NPC tasarımları dahil.",
-      "completed": false,
-      "createdAt": "2026-06-09",
-      "completedAt": null
-    },
-    {
-      "id": "4",
-      "title": "Level Tasarımı ve Gameplay Loop",
-      "description": "Oyunun level yapısı ve gameplay loop'u tasarlanacak. Zorluk dengesi ve ilerleme sistemi belirlenecek.",
-      "completed": false,
-      "createdAt": "2026-06-09",
-      "completedAt": null
-    },
-    {
-      "id": "5",
-      "title": "Ses ve Müzik Entegrasyonu",
-      "description": "Oyun için ses efektleri ve arka plan müziği hazırlanıp entegre edilecek. Ses ayarları menüsü eklenecek.",
-      "completed": false,
-      "createdAt": "2026-06-09",
-      "completedAt": null
-    }
-  ]
+  "tasks": []
 }
