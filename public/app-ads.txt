@@ -160,3 +160,6 @@ triplelift.com, 14716, RESELLER, 6c33edb13117fd86
 pubmatic.com, 159501, RESELLER, 5d62403b186f2ace
 pubmatic.com, 167130, RESELLER, 5d62403b186f2ace
 loopme.com, 9621, RESELLER, 6c8d5f95897a5a3b
+pubmatic.com, 165329, RESELLER, 5d62403b186f2ace
+pubnative.net, 1017792, RESELLER, d641df8625486a7b
+video.unrulymedia.com, 905340553, RESELLER
