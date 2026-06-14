@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#7B2FBE';
+const lastUpdated = '14 Haziran 2026';
+
+const sections = [
+  {
+    title: 'Genel Bilgi',
+    content: 'Oyunluk ("uygulama", "biz"), kullanıcılarının gizliliğini korumayı temel ilke olarak benimser. Bu Gizlilik Politikası; hangi verilerin toplandığını, nasıl kullanıldığını ve haklarınızı açıklamaktadır. Uygulamayı kullanarak bu politikayı kabul etmiş sayılırsınız.',
+    email: 'support@oyunluk.net',
+  },
+  {
+    title: 'Toplanan ve Saklanan Veriler',
+    content: 'Oyunluk herhangi bir arka uç (backend) sunucusu işletmemektedir. Tüm veriler yalnızca cihazınızda saklanır. Cihazınızda saklanan veriler: giriş yönteminiz (Apple, Google veya Misafir), görünen adınız ve e-posta adresiniz, oyun listeleriniz (Oynadığım, Oynayacağım, Favoriler), oynadığınız saatler ve rozet bilgileri, fiyat takibindeki oyunların kimlik numaraları ile uygulama içi görsel önbellekleri (7 gün, otomatik temizlenir). Hiçbir kişisel veriniz Oyunluk sunucularına iletilmemektedir.',
+  },
+  {
+    title: 'Reklam ve ATT (App Tracking Transparency)',
+    content: 'Ücretsiz kullanıcılara Google AdMob aracılığıyla reklam gösterilir. Premium (Oyunluk+) üyelerine reklam gösterilmez. Apple\'ın ATT çerçevesi kapsamında ilk kullanımda cihazınızın reklam kimliğine (IDFA) erişim için izninizi talep ediyoruz. İzni reddetmeniz uygulama deneyiminizi etkilemez.',
+    link: { text: 'Google Gizlilik Politikası ↗', href: 'https://policies.google.com/privacy' },
+  },
+  {
+    title: 'Üçüncü Taraf Hizmetler',
+    content: 'RAWG Video Games Database: Oyun verileri, görseller ve meta bilgiler bu hizmet aracılığıyla çekilmektedir. Steam, Epic Games, GOG ve CheapShark API: Fiyat ve indirim bilgileri bu platformların herkese açık API\'leri aracılığıyla alınmaktadır; kişisel bilgi iletilmez. Google Gemini AI: Asistan Joi\'ye yazdığınız mesajlar Google Gemini API\'sine iletilmektedir. Sign in with Apple ve Google Sign-In: Kimlik doğrulama bu platformlar üzerinden gerçekleşir.',
+  },
+  {
+    title: 'Verilerin Kullanımı',
+    content: 'Toplanan veriler yalnızca şu amaçlarla kullanılır: oyun listelerinizi ve istatistiklerinizi cihazınızda saklamak, Asistan Joi\'nin kişiselleştirilmiş öneriler sunması, profil ekranında rozet ve istatistiklerinizi göstermek, favori oyunlarınızın fiyatı düştüğünde yerel bildirim göndermek. Verileriniz hiçbir şekilde üçüncü taraflarla satılmaz veya pazarlama amaçlı kullanılmaz.',
+  },
+  {
+    title: 'Bildirimler ve Takvim Erişimi',
+    content: 'Fiyat Bildirimleri: Favori oyunlarınızın fiyatı düştüğünde yerel bildirim gönderilmektedir. Bu bildirimler tamamen cihazınızda oluşturulur; herhangi bir sunucuya bağlantı gerektirmez. Takvim Erişimi: Oyun çıkış tarihlerini takviminize eklemek için iOS Takvim uygulamasına erişim talep edilmektedir. Takvim verileriniz üçüncü taraflarla paylaşılmaz.',
+  },
+  {
+    title: 'Çocukların Gizliliği',
+    content: 'Oyunluk, 13 yaş altı çocuklara yönelik değildir. Bilerek 13 yaş altı çocuklardan kişisel veri toplamıyoruz. Böyle bir durumun farkında olursanız lütfen bizimle iletişime geçin.',
+    email: 'support@oyunluk.net',
+  },
+  {
+    title: 'Haklarınız',
+    content: 'Verilerinize erişim: Profil ekranında tüm verileriniz görüntülenebilir. Verileri silme: "Üyeliği Sil" ile tüm verilerinizi kalıcı olarak silebilirsiniz. Bildirimleri kapatma: iOS Ayarlar > Oyunluk > Bildirimler menüsünden. KVKK kapsamındaki haklarınız için support@oyunluk.net adresine başvurabilirsiniz.',
+  },
+  {
+    title: 'Politika Değişiklikleri',
+    content: 'Bu politika zaman zaman güncellenebilir. Önemli değişiklikler uygulama güncellemeleri aracılığıyla duyurulacaktır. Güncel politikaya her zaman uygulama içi Profil > Gizlilik Politikası ekranından veya bu sayfadan ulaşabilirsiniz.',
+  },
+];
+---
+
+<Layout
+  title="Oyunluk — Gizlilik Politikası"
+  description="Oyunluk uygulaması gizlilik politikası. Verilerinizin nasıl işlendiğini öğrenin."
+  ogImage="/images/logo-oyunluk.png"
+>
+  <Header />
+
+  <main class="doc-page">
+
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/oyunluk" class="doc-app-link">
+          <img src="/images/logo-oyunluk.png" alt="Oyunluk" class="doc-app-logo" />
+          <span class="doc-app-name">Oyunluk</span>
+        </a>
+        <h1 class="doc-title">Gizlilik Politikası</h1>
+        <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">Oyunluk olarak gizliliğinize önem veriyoruz. Bu politika, uygulamamızın hangi verileri nasıl işlediğini açıklar.</p>
+      </div>
+    </section>
+
+    <div class="doc-body">
+      {sections.map((s, i) => (
+        <div class="doc-section">
+          <div class="doc-num-wrap" style={`background:${accent}18; border:1px solid ${accent}30;`}>
+            <span class="doc-num" style={`color:${accent};`}>{i + 1}</span>
+          </div>
+          <div class="doc-content">
+            <h2>{s.title}</h2>
+            <p>{s.content}</p>
+            {s.link && (
+              <a href={s.link.href} target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+                {s.link.text}
+              </a>
+            )}
+            {s.email && (
+              <a href={`mailto:${s.email}`} class="doc-link" style={`color:${accent};`}>
+                {s.email}
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+
+      <div class="doc-footer-links">
+        <a href="/oyunluk/terms" style={`color:${accent};`}>Kullanım Koşulları →</a>
+      </div>
+
+      <div class="doc-back">
+        <a href="/oyunluk">← Oyunluk'a Dön</a>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 500px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section:last-of-type { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .doc-content { flex: 1; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 10px;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+  }
+  .doc-link {
+    display: inline-block; margin-top: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-footer-links {
+    margin-top: 48px; text-align: center;
+    font-size: 0.875rem; font-weight: 500;
+  }
+  .doc-footer-links a { text-decoration: none; transition: opacity 0.15s; }
+  .doc-footer-links a:hover { opacity: 0.7; }
+
+  .doc-back { margin-top: 16px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>
