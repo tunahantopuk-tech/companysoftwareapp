@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#7B2FBE';
+
+const sections = [
+  {
+    icon: '🎮',
+    title: 'Uygulama Hakkında',
+    content: 'Oyunluk, oyun severlere özel geliştirilmiş kişisel bir oyun asistanıdır. Oyun kütüphanesi yönetimi, çok mağazalı fiyat takibi, yapay zeka destekli öneri sistemi ve oyunlaştırılmış keşif deneyimi sunar.',
+  },
+  {
+    icon: '🤖',
+    title: 'Asistan Joi',
+    content: 'Joi, Google Gemini API ile güçlendirilmiş oyun öneri asistanıdır. Oynadığın oyunları analiz eder, tür tercihlerine ve platforma göre (PC, PlayStation, Xbox, Nintendo Switch) sana özel öneriler sunar. Ücretsiz kullanıcılara günlük soru limiti uygulanır; Oyunluk+ üyeleri sınırsız Joi kullanımından yararlanır.',
+  },
+  {
+    icon: '🏷️',
+    title: 'Çok Mağazalı Fiyat Takibi',
+    content: 'Steam, Epic Games, GOG ve Humble Store\'daki güncel indirimleri tek ekranda gör. 300\'den fazla fırsat arasından platform ve fiyat aralığına göre filtrele. Favori oyunlarının fiyatı düştüğünde bildirim al.',
+    link: { text: 'CheapShark API ↗', href: 'https://www.cheapshark.com' },
+  },
+  {
+    icon: '🗂️',
+    title: 'Powered by RAWG',
+    content: 'Oyun verileri, görseller ve meta bilgiler RAWG Video Games Database API\'si aracılığıyla sağlanmaktadır. 800.000\'den fazla oyun kataloğuna erişim imkânı sunar.',
+    link: { text: 'rawg.io ↗', href: 'https://rawg.io' },
+  },
+  {
+    icon: '👑',
+    title: 'Oyunluk+',
+    content: 'Oyunluk+ ile reklamlı içerik kaldırılır, Joi asistanı sınırsız kullanılabilir, sınırsız fiyat alarmı kurulabilir ve yeni özelliklere erken erişim sağlanır. Aylık veya yıllık abonelik seçenekleri mevcuttur.',
+  },
+  {
+    icon: '✉️',
+    title: 'İletişim',
+    content: 'Destek ve tüm sorularınız için bize yazabilirsiniz:',
+    email: 'support@oyunluk.net',
+  },
+];
+---
+
+<Layout
+  title="Oyunluk — Hakkında"
+  description="Oyunluk uygulaması hakkında bilgi edinin. Yapay zeka destekli Joi asistanı, çok mağazalı fiyat takibi ve daha fazlası."
+  ogImage="/images/logo-oyunluk.png"
+>
+  <Header />
+
+  <main class="doc-page">
+
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/oyunluk" class="doc-app-link">
+          <img src="/images/logo-oyunluk.png" alt="Oyunluk" class="doc-app-logo" />
+          <span class="doc-app-name">Oyunluk</span>
+        </a>
+        <h1 class="doc-title">Uygulama Hakkında</h1>
+        <p class="doc-intro">Oyun kütüphanenizi yönetin, fırsatları takip edin, yapay zeka destekli Joi ile yeni oyunlar keşfedin.</p>
+      </div>
+    </section>
+
+    <div class="doc-body">
+      {sections.map(s => (
+        <div class="doc-section">
+          <div class="doc-num-wrap" style={`background:${accent}18; border:1px solid ${accent}30;`}>
+            <span class="doc-icon">{s.icon}</span>
+          </div>
+          <div class="doc-content">
+            <h2>{s.title}</h2>
+            <p>{s.content}</p>
+            {s.link && (
+              <a href={s.link.href} target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+                {s.link.text}
+              </a>
+            )}
+            {s.email && (
+              <a href={`mailto:${s.email}`} class="doc-link" style={`color:${accent};`}>
+                {s.email}
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+
+      <div class="doc-footer-note">
+        <p>© 2026 Oyunluk. Tüm hakları saklıdır.</p>
+      </div>
+
+      <div class="doc-back">
+        <a href="/oyunluk">← Oyunluk'a Dön</a>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 500px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section:last-of-type { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-icon { font-size: 1rem; line-height: 1; }
+
+  .doc-content { flex: 1; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 10px;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+  }
+  .doc-link {
+    display: inline-block; margin-top: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-footer-note {
+    padding: 28px 0 0; text-align: center;
+  }
+  .doc-footer-note p {
+    font-size: 0.85rem; color: var(--color-subtle);
+  }
+  .doc-back { margin-top: 16px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>

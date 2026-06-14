@@ -2,18 +2,53 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+
+const storeUrl = 'https://apps.apple.com/app/oyunluk/id6742609980';
+
+const scrollFeatures = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/><path d="M9.1 2.4C7 3.4 5 5.1 3.8 7.3"/><path d="M3 12H1"/></svg>`,
+    title: 'Asistan Joi',
+    sub: 'Oyun Öner, Platform Seç',
+    description: 'Yapay zeka destekli oyun asistanın Joi, oynadığın oyunları analiz eder, oyun türüne ve platforma göre sana özel öneriler sunar.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 9h2m4 0h2M12 7v4"/></svg>`,
+    title: 'Ana Sayfa',
+    sub: 'En Çok Beklenen Oyunlar',
+    description: 'Çıkış tarihi yaklaşan oyunları keşfet, geri sayımı takip et ve oyunları tek tıkla takvimine ekle. Hiçbir çıkışı kaçırma.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+    title: 'Keşfet',
+    sub: 'Platform & Fiyat Filtresi',
+    description: 'PC, PlayStation, Xbox ve Nintendo\'ya göre oyunları listele. Steam, Epic, GOG ve Humble\'daki güncel indirimleri tek ekranda gör.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>`,
+    title: 'Listem',
+    sub: 'Oynayacağım · Oynadım · Favoriler',
+    description: 'Oynamak istediğin oyunları listele, tamamladıklarını işaretle, favorilerini kaydet. Koleksiyonunu görsel ve şık biçimde yönet.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+    title: 'Rozetler',
+    sub: 'Oyna, Kazan, İlerle',
+    description: '18 farklı rozet seni bekliyor. Her oynadığın oyunla yeni rozetler kazan, istatistiklerini takip et ve koleksiyonunu büyüt.',
+  },
+];
 ---
 
 <Layout
-  title="Oyunluk | Company Software App"
-  description="Oyunluk — Geliştirme aşamasında olan yeni uygulamamız. Yakında duyurulacak."
+  title="Oyunluk | Oyun Takip ve Keşif Uygulaması"
+  description="Oyun kütüphanenizi yönetin, yeni oyunlar keşfedin, fiyat indirimleri takip edin. Yapay zeka destekli Joi asistanıyla oyun dünyasını keşfedin. App Store'da ücretsiz."
   ogImage="/images/logo-oyunluk.png"
 >
   <Header />
 
   <main style="padding-top: 56px;">
 
-    <!-- ── Hero ──────────────────────────────── -->
+    <!-- ── Hero ──────────────────────────────────── -->
     <section class="hero-section">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-inner">
@@ -21,16 +56,24 @@ import Footer from '../../components/Footer.astro';
           src="/images/logo-oyunluk.png"
           alt="Oyunluk"
           width="96" height="96"
-          class="hero-logo hero-reveal"
+          class="hero-logo"
         />
         <div>
-          <h1 class="hero-title font-heading hero-reveal hero-reveal-d1">Oyunluk</h1>
-          <p class="hero-desc hero-reveal hero-reveal-d2">
-            Geliştirme aşamasında olan yeni uygulamamız. Daha fazla bilgi yakında paylaşılacak.
+          <h1 class="hero-title font-heading">Oyunluk</h1>
+          <p class="hero-desc">
+            Oyun kütüphanenizi yönetin, yeni oyunlar keşfedin, fiyat indirimleri takip edin.
           </p>
         </div>
-        <span class="badge-dev hero-reveal hero-reveal-d2">Geliştiriliyor</span>
-        <div class="social-row hero-reveal hero-reveal-d3">
+        <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="appstore-badge">
+          <svg class="badge-apple-svg" viewBox="0 0 24 24" fill="white">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+          </svg>
+          <div class="badge-text-wrap">
+            <span class="badge-line1">Download on the</span>
+            <span class="badge-line2">App Store</span>
+          </div>
+        </a>
+        <div class="social-row">
           <a href="#" class="social-btn" aria-label="Oyunluk Instagram" target="_blank" rel="noopener noreferrer">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
@@ -43,116 +86,416 @@ import Footer from '../../components/Footer.astro';
 
     <hr class="page-divider" />
 
-    <!-- ── Yakında bölümü ───────────────────── -->
-    <section class="info-section">
-      <div class="info-inner">
-        <div class="info-card reveal">
-          <p class="info-label">Durum</p>
-          <h2 class="info-heading font-heading">Geliştirme Sürecinde</h2>
-          <p class="info-desc">
-            Oyunluk üzerinde aktif olarak çalışıyoruz. Uygulamanın detaylarını hazır olduğunda burada paylaşacağız. Takipte kalın.
-          </p>
+    <!-- ── Scroll features ────────────────────── -->
+    <section style="max-width: 1152px; margin: 0 auto; padding: 32px 24px;">
+      <div class="scroll-grid">
+
+        <div>
+          {scrollFeatures.map((f, i) => (
+            <div class="scroll-feature" data-index={i} style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 64px 0; max-width: 420px;">
+              <div class="feature-icon-wrap" set:html={f.icon} />
+              <p class="feature-eyebrow">Oyunluk</p>
+              <h2 class="feature-heading font-heading">{f.title}</h2>
+              <p class="feature-sub font-heading">{f.sub}</p>
+              <p class="feature-desc">{f.description}</p>
+            </div>
+          ))}
         </div>
+
+        <!-- Sticky phone -->
+        <div class="phone-sticky-col">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <div class="phone-frame">
+              <!-- Buttons -->
+              <div class="phone-button phone-button-left" style="top: 140px; height: 32px;"></div>
+              <div class="phone-button phone-button-left" style="top: 190px; height: 52px;"></div>
+              <div class="phone-button phone-button-left" style="top: 256px; height: 52px;"></div>
+              <div class="phone-button phone-button-right" style="top: 180px; height: 82px;"></div>
+
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+
+                <!-- Ekran 0: Asistan Joi -->
+                <div class="phone-shot active" data-shot="0">
+                  <img src="/images/oyunluk/screen-0.png" alt="Asistan Joi" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 1: Ana Sayfa -->
+                <div class="phone-shot" data-shot="1">
+                  <img src="/images/oyunluk/screen-1.png" alt="Ana Sayfa" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 2: Keşfet -->
+                <div class="phone-shot" data-shot="2">
+                  <img src="/images/oyunluk/screen-2.png" alt="Keşfet" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 3: Listem -->
+                <div class="phone-shot" data-shot="3">
+                  <img src="/images/oyunluk/screen-3.png" alt="Listem" class="screenshot-img" />
+                </div>
+
+                <!-- Ekran 4: Rozetler -->
+                <div class="phone-shot" data-shot="4">
+                  <img src="/images/oyunluk/screen-4.png" alt="Rozetler" class="screenshot-img" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
+
+    <!-- ── Alt bağlantılar ───────────────────── -->
+    <div class="page-footer-strip">
+      <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="appstore-badge appstore-badge-sm">
+        <svg class="badge-apple-svg" style="width:20px;height:20px;" viewBox="0 0 24 24" fill="white">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+        </svg>
+        <div class="badge-text-wrap">
+          <span class="badge-line1">Download on the</span>
+          <span class="badge-line2" style="font-size:16px;">App Store</span>
+        </div>
+      </a>
+      <div class="page-footer-links">
+        <a href="/oyunluk/about" class="page-footer-link">Hakkında</a>
+        <a href="/oyunluk/privacy" class="page-footer-link">Gizlilik Politikası</a>
+        <a href="/oyunluk/terms" class="page-footer-link">Kullanım Koşulları</a>
+      </div>
+    </div>
 
   </main>
 
   <Footer />
 </Layout>
 
-<script>
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      }
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-
 <style>
   /* ── Hero ───────────────────────────────── */
   .hero-section {
-    position: relative; padding: 88px 24px 80px;
-    text-align: center; overflow: hidden;
+    position: relative;
+    padding: 88px 24px 72px;
+    text-align: center;
+    overflow: hidden;
     background-color: var(--bg-section-alt);
     background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
     background-size: 28px 28px;
-    min-height: 60vh;
-    display: flex; align-items: center; justify-content: center;
   }
   .hero-glow {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.10) 0%, transparent 65%);
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(123,47,190,0.12) 0%, transparent 65%);
   }
   .hero-inner {
     position: relative; z-index: 10;
-    max-width: 600px; margin: 0 auto;
+    max-width: 640px; margin: 0 auto;
     display: flex; flex-direction: column; align-items: center; gap: 24px;
   }
   .hero-logo {
-    width: 96px; height: 96px; border-radius: 22px;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.3); object-fit: contain;
+    width: 96px; height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(123,47,190,0.3);
+    object-fit: contain;
   }
   .hero-title {
-    font-size: clamp(2.5rem, 6vw, 3.75rem); font-weight: 700;
-    color: var(--color-text); margin-bottom: 14px;
-    line-height: 1.08; letter-spacing: -0.02em;
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 14px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
   }
   .hero-desc {
-    font-size: 1.1rem; color: var(--color-muted);
-    line-height: 1.7; max-width: 440px; margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto;
   }
 
-  /* ── Badge ──────────────────────────────── */
-  .badge-dev {
-    display: inline-block;
-    font-size: 12px; font-weight: 700;
-    letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 6px 16px; border-radius: 100px;
-    background: rgba(160,0,32,0.12);
-    color: #D04060;
+  /* ── App Store badge ────────────────────── */
+  .appstore-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #000;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 14px; padding: 10px 22px;
+    color: #fff; text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  :global(:root.light) .badge-dev {
-    background: rgba(160,0,32,0.10);
-    color: #7A0018;
+  .appstore-badge:hover { opacity: 0.84; transform: translateY(-1px); }
+  .badge-apple-svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .badge-text-wrap { display: flex; flex-direction: column; }
+  .badge-line1 { font-size: 10px; color: rgba(255,255,255,0.75); font-family: sans-serif; line-height: 1.2; }
+  .badge-line2 { font-size: 20px; font-weight: 700; font-family: sans-serif; line-height: 1.2; letter-spacing: -0.01em; }
+
+  /* ── Feature icon ────────────────────────── */
+  .feature-icon-wrap {
+    width: 44px; height: 44px;
+    color: #7B2FBE;
+    margin-bottom: 20px;
   }
+  .feature-icon-wrap svg { width: 100%; height: 100%; }
 
   /* ── Social buttons ─────────────────────── */
   .social-row { display: flex; gap: 8px; }
   .social-btn {
     width: 40px; height: 40px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    background: var(--hover-overlay); color: var(--color-muted);
-    text-decoration: none; transition: background 0.15s, color 0.15s;
+    background: var(--hover-overlay);
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
   }
-  .social-btn:hover { background: rgba(160,0,32,0.12); color: #A00020; }
+  .social-btn:hover { background: rgba(123,47,190,0.15); color: #7B2FBE; }
 
   /* ── Divider ─────────────────────────────── */
   .page-divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
 
-  /* ── Info section ────────────────────────── */
-  .info-section { padding: 96px 24px; }
-  .info-inner { max-width: 640px; margin: 0 auto; }
-  .info-card {
-    background: var(--bg-card);
-    border-radius: 28px; padding: 56px 48px;
-    text-align: center; box-shadow: var(--shadow-card);
+  /* ── Feature text ────────────────────────── */
+  .feature-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: #7B2FBE; margin-bottom: 16px;
   }
-  .info-label {
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: #A00020; margin-bottom: 12px;
+  .feature-heading {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700; color: var(--color-text);
+    margin-bottom: 8px; line-height: 1.15;
   }
-  .info-heading {
-    font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700;
-    color: var(--color-text); margin-bottom: 18px;
-    letter-spacing: -0.015em;
+  .feature-sub {
+    font-size: 1.05rem; font-weight: 500;
+    color: #a855f7; margin-bottom: 20px;
   }
-  .info-desc {
-    font-size: 17px; color: var(--color-muted); line-height: 1.7;
+  .feature-desc {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  /* ── Bottom strip ────────────────────────── */
+  .page-footer-strip {
+    max-width: 1152px; margin: 0 auto;
+    padding: 32px 24px 64px;
+    border-top: 1px solid var(--border-faint);
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .page-footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .page-footer-link {
+    font-size: 0.875rem; color: var(--color-subtle); text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .page-footer-link:hover { color: var(--color-text); }
+
+  /* ── Phone mockup ────────────────────────── */
+  .scroll-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media (min-width: 1024px) {
+    .scroll-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+  }
+
+  .phone-sticky-col {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 1024px) {
+    .phone-sticky-col {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .scroll-feature {
+      min-height: auto !important;
+      padding: 32px 0 !important;
+      text-align: center;
+    }
+  }
+
+  /* iPhone frame */
+  .phone-frame {
+    width: 300px;
+    height: 620px;
+    position: relative;
+    background: linear-gradient(145deg, #3a3a3c 0%, #1c1c1e 50%, #2c2c2e 100%);
+    border-radius: 58px;
+    padding: 4px;
+    box-shadow:
+      0 0 0 0.5px rgba(255,255,255,0.05),
+      0 2px 4px rgba(0,0,0,0.2),
+      0 8px 16px rgba(0,0,0,0.25),
+      0 24px 48px rgba(0,0,0,0.35),
+      0 48px 96px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.02),
+      inset 0 1px 2px rgba(255,255,255,0.08);
+  }
+
+  .phone-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 58px;
+    padding: 2px;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(255,255,255,0.05) 25%,
+      transparent 50%,
+      rgba(0,0,0,0.1) 75%,
+      rgba(0,0,0,0.2) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .phone-frame::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0.25) 50%,
+      rgba(255,255,255,0.15) 80%,
+      transparent 100%
+    );
+    border-radius: 0 0 4px 4px;
+    opacity: 0.6;
+  }
+
+  .phone-island {
+    position: absolute;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    width: 126px; height: 37px;
+    background: #000;
+    border-radius: 24px;
+    z-index: 10;
+    box-shadow:
+      inset 0 1px 2px rgba(0,0,0,0.8),
+      inset 0 -1px 1px rgba(255,255,255,0.05),
+      0 2px 8px rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px;
+  }
+  .phone-island::before {
+    content: '';
+    width: 12px; height: 12px;
+    background: radial-gradient(circle, #1a1a2e 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .phone-island::after {
+    content: '';
+    width: 12px; height: 12px;
+    background: radial-gradient(circle, #0a1a2a 0%, #000 70%);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .phone-screen {
+    width: 100%; height: 100%;
+    border-radius: 54px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+    padding: 8px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      inset 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .phone-screen::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.05) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(0,0,0,0.1) 100%
+    );
+    pointer-events: none; z-index: 5; opacity: 0.3;
+  }
+
+  /* Phone Buttons */
+  .phone-button {
+    position: absolute; width: 3px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.1) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(50,50,50,0.6) 100%
+    );
+    border-radius: 0 2px 2px 0;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.5), 1px 0 2px rgba(0,0,0,0.3);
+  }
+  .phone-button-left {
+    left: -3px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg,
+      rgba(50,50,50,0.6) 0%,
+      rgba(100,100,100,0.8) 50%,
+      rgba(255,255,255,0.1) 100%
+    );
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.5), -1px 0 2px rgba(0,0,0,0.3);
+  }
+  .phone-button-right { right: -3px; }
+
+  @media (max-width: 1023px) {
+    .phone-frame { width: 240px; height: 496px; }
+    .phone-island { width: 100px; height: 30px; }
+    .phone-button { display: none; }
+  }
+
+  .phone-shot {
+    position: absolute; inset: 8px;
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 46px; overflow: hidden;
+  }
+  .phone-shot.active { opacity: 1; }
+  .screenshot-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    background: #000;
   }
 </style>
+
+<script>
+  const features = document.querySelectorAll<HTMLElement>('.scroll-feature');
+  const shots = document.querySelectorAll<HTMLElement>('.phone-shot');
+
+  function setActive(index: number) {
+    shots.forEach((s, i) => s.classList.toggle('active', i === index));
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = parseInt((entry.target as HTMLElement).dataset.index ?? '0', 10);
+          setActive(idx);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  features.forEach((f) => observer.observe(f));
+</script>
