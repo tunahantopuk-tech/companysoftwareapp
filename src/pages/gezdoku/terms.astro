@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
 const accent = '#0e7490';
-const lastUpdated = '31 Mayıs 2026';
+const lastUpdated = '7 Temmuz 2026';
 ---
 
 <Layout
@@ -69,43 +69,63 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 3. Uygulama İçi Satın Almalar -->
+      <!-- 3. Hesap ve Kullanıcı Adı -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>3</span>
         </div>
         <div class="doc-content">
-          <h2>Uygulama İçi Satın Almalar ve Reklamlar</h2>
-          <ul class="doc-list">
-            <li>Uygulama, ödüllü reklamlar aracılığıyla oyun içi içerik (kargo, güç) sunmaktadır.</li>
-            <li>Reklam izleme zorunlu değildir; isteğe bağlıdır.</li>
-            <li>Uygulama içi satın almalar yapılmışsa, Apple'ın iade politikası geçerlidir.</li>
-            <li>Reklam karşılığı kazanılan oyun içi ödüller gerçek para değeri taşımaz ve nakde çevrilemez.</li>
-          </ul>
+          <h2>Hesap ve Kullanıcı Adı</h2>
+          <p>Global liderlik tablosuna katılmak için size otomatik olarak anonim bir kimlik atanır ve bir kullanıcı adı seçmeniz istenir. E-posta, telefon veya sosyal hesap girişi gerekmez. Seçtiğiniz kullanıcı adı liderlik tablosunda <strong>herkese açık</strong> gösterilir ve bu addan siz sorumlusunuz.</p>
         </div>
       </div>
 
-      <!-- 4. Kullanıcı Davranışı -->
+      <!-- 4. Kullanıcı İçeriği ve Davranış Kuralları -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>4</span>
         </div>
         <div class="doc-content">
-          <h2>Kullanıcı Davranışı</h2>
-          <p>Aşağıdaki davranışlar yasaktır:</p>
+          <h2>Kullanıcı İçeriği ve Davranış Kuralları</h2>
+          <p>Kullanıcı adları herkese açık olduğundan aşağıdaki içerikleri barındıramaz:</p>
           <ul class="doc-list doc-list-red">
+            <li>Küfür, hakaret, nefret söylemi, cinsel veya rahatsız edici ifadeler</li>
+            <li>Başka bir kişi, marka veya kurumu taklit eden ya da yanıltıcı adlar</li>
+            <li>Reklam, spam veya yasa dışı içerik</li>
+          </ul>
+          <p>Ayrıca aşağıdaki davranışlar yasaktır:</p>
+          <ul class="doc-list doc-list-red">
+            <li>Skorları veya liderlik tablosunu hile/otomasyonla manipüle etmek</li>
             <li>Oyun içi verileri hile yoluyla değiştirmek</li>
-            <li>Lider tablolarını manipüle etmek</li>
-            <li>Uygulamayı başkalarına zarar verecek şekilde kullanmak</li>
             <li>Uygulamanın altyapısına yetkisiz erişim sağlamaya çalışmak</li>
+            <li>Diğer kullanıcılara zarar verecek eylemlerde bulunmak</li>
+          </ul>
+          <p>Uygulamada otomatik bir içerik filtresi ve oyuncuların uygunsuz kullanıcı adlarını bildirebileceği bir <strong>"Rapor Et"</strong> mekanizması bulunur. Bu kuralları ihlal eden kullanıcı adlarını kaldırma ve ilgili hesabın liderlik tablosuna erişimini kısıtlama hakkımızı saklı tutarız.</p>
+        </div>
+      </div>
+
+      <!-- 5. Reklamsız Üyelik, Satın Almalar ve Reklamlar -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>5</span>
+        </div>
+        <div class="doc-content">
+          <h2>Reklamsız Üyelik, Satın Almalar ve Reklamlar</h2>
+          <p><strong>Reklamsız Üyelik</strong>, uygulamadaki tüm reklamları kaldıran isteğe bağlı bir premium aboneliktir. Abonelik <strong>yıllık</strong> olarak sunulur ve App Store üzerinden yönetilir.</p>
+          <ul class="doc-list">
+            <li><strong>Otomatik yenileme:</strong> Abonelik, mevcut dönem bitmeden en az 24 saat önce iptal edilmediği sürece otomatik yenilenir; ücret dönem bitiminden 24 saat önce tahsil edilir.</li>
+            <li><strong>İptal:</strong> App Store &gt; Hesap &gt; Abonelikler menüsünden istediğiniz zaman iptal edebilirsiniz; iptal mevcut dönemin sonunda geçerli olur.</li>
+            <li><strong>İade:</strong> İadeler Apple'ın iade politikasına tabidir.</li>
+            <li>Ücretsiz sürümde Unity Ads ve Google AdMob aracılığıyla reklam gösterilir; ödüllü reklam izlemek isteğe bağlıdır.</li>
+            <li>Reklam karşılığı kazanılan oyun içi ödüller gerçek para değeri taşımaz ve nakde çevrilemez.</li>
           </ul>
         </div>
       </div>
 
-      <!-- 5. Fikri Mülkiyet -->
+      <!-- 6. Fikri Mülkiyet -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>5</span>
+          <span class="doc-num" style={`color:${accent};`}>6</span>
         </div>
         <div class="doc-content">
           <h2>Fikri Mülkiyet</h2>
@@ -113,15 +133,18 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 6. Üçüncü Taraf Hizmetleri -->
+      <!-- 7. Üçüncü Taraf Hizmetleri -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>6</span>
+          <span class="doc-num" style={`color:${accent};`}>7</span>
         </div>
         <div class="doc-content">
           <h2>Üçüncü Taraf Hizmetleri</h2>
-          <p>Uygulama; Unity Ads ve Apple Game Center gibi üçüncü taraf hizmetler içermektedir. Bu hizmetlerin kullanım koşulları kendi sağlayıcılarına aittir:</p>
+          <p>Uygulama; Google Firebase (kimlik doğrulama ve liderlik tablosu), Google AdMob ve Unity Ads (reklam) ile Apple hizmetlerini kullanmaktadır. Bu hizmetlerin kullanım koşulları kendi sağlayıcılarına aittir:</p>
           <div class="doc-links-list">
+            <a href="https://firebase.google.com/terms" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              Google Firebase Koşulları ↗
+            </a>
             <a href="https://unity.com/legal/terms-of-service" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
               Unity Kullanım Koşulları ↗
             </a>
@@ -132,10 +155,10 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 7. Sorumluluk Reddi -->
+      <!-- 8. Sorumluluk Reddi -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>7</span>
+          <span class="doc-num" style={`color:${accent};`}>8</span>
         </div>
         <div class="doc-content">
           <h2>Sorumluluk Reddi</h2>
@@ -147,21 +170,21 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 8. Fesih -->
-      <div class="doc-section">
-        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>8</span>
-        </div>
-        <div class="doc-content">
-          <h2>Fesih</h2>
-          <p>Bu koşulları ihlal etmeniz durumunda lisansınız otomatik olarak sona erer ve uygulamayı kullanma hakkınızı kaybedersiniz.</p>
-        </div>
-      </div>
-
-      <!-- 9. Değişiklikler -->
+      <!-- 9. Fesih -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>9</span>
+        </div>
+        <div class="doc-content">
+          <h2>Fesih</h2>
+          <p>Bu koşulları ihlal etmeniz durumunda lisansınız otomatik olarak sona erer, uygulamayı kullanma hakkınızı kaybedebilir ve hesabınızın liderlik tablosuna erişimi askıya alınabilir.</p>
+        </div>
+      </div>
+
+      <!-- 10. Değişiklikler -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>10</span>
         </div>
         <div class="doc-content">
           <h2>Değişiklikler</h2>
@@ -169,10 +192,10 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 10. Uygulanacak Hukuk -->
+      <!-- 11. Uygulanacak Hukuk -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>10</span>
+          <span class="doc-num" style={`color:${accent};`}>11</span>
         </div>
         <div class="doc-content">
           <h2>Uygulanacak Hukuk</h2>
@@ -180,10 +203,10 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 11. İletişim -->
+      <!-- 12. İletişim -->
       <div class="doc-section doc-section-last">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>11</span>
+          <span class="doc-num" style={`color:${accent};`}>12</span>
         </div>
         <div class="doc-content">
           <h2>İletişim</h2>

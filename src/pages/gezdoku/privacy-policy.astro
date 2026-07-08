@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
 const accent = '#0e7490';
-const lastUpdated = '31 Mayıs 2026';
+const lastUpdated = '7 Temmuz 2026';
 ---
 
 <Layout
@@ -36,7 +36,7 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
         <div class="doc-content">
           <h2>Genel Bakış</h2>
-          <p>GezDoku, kullanıcılarının gizliliğine saygı gösterir. Bu politika, uygulamayı kullandığınızda hangi verilerin işlendiğini açıklar.</p>
+          <p>GezDoku, kullanıcılarının gizliliğine saygı gösterir. Bu politika; uygulamayı kullandığınızda hangi verilerin işlendiğini, nasıl kullanıldığını ve haklarınızı açıklar. Uygulamayı kullanarak bu politikayı kabul etmiş sayılırsınız.</p>
         </div>
       </div>
 
@@ -48,33 +48,71 @@ const lastUpdated = '31 Mayıs 2026';
         <div class="doc-content">
           <h2>Topladığımız Veriler</h2>
           <div class="doc-highlight" style={`background:${accent}08; border:1px solid ${accent}20;`}>
-            <p style={`color:${accent}; font-weight:600;`}>Geliştirici olarak biz hiçbir kişisel veri toplamıyoruz.</p>
+            <p style={`color:${accent}; font-weight:600;`}>Gerçek adınızı, e-postanızı veya sosyal hesabınızı istemeyiz. Kimliğiniz anonimdir.</p>
           </div>
-          <p>Oyun ilerlemeniz (tamamlanan bulmacalar, bakiyeler, rozet durumları), ayarlarınız ve envanter bilgileriniz <strong>yalnızca cihazınızda</strong> saklanır. Bu veriler bizim sunucularımıza gönderilmez.</p>
+          <p><strong>Sizin sağladığınız veriler:</strong></p>
+          <ul class="doc-list">
+            <li><strong>Kullanıcı adı:</strong> Liderlik tablosunda görünmek için seçtiğiniz ad. Bu ad <strong>herkese açık</strong> olarak diğer oyunculara gösterilir.</li>
+            <li><strong>Avatar seçimi:</strong> Profilinizde görünen hazır avatar veya oyun içinde kazandığınız rozet/damga.</li>
+          </ul>
+          <p><strong>Otomatik oluşturulan veriler:</strong></p>
+          <ul class="doc-list">
+            <li><strong>Anonim hesap kimliği:</strong> Liderlik ilerlemenizi cihazınıza bağlamak için Firebase Anonim Kimlik Doğrulama ile rastgele bir anonim kimlik atanır. Bu kimlik gerçek kimliğinizle ilişkilendirilmez.</li>
+            <li><strong>Oyun ilerlemesi ve skorlar:</strong> Günlük seri, maraton aşaması, rozet sayısı ve puanlarınız, global liderlik tablosunu oluşturmak için sunucumuzda (Google Firestore) saklanır.</li>
+          </ul>
+          <p>Oyun ilerlemenizin bir kopyası cihazınızda da tutulur. Kullanıcı adı ve liderlik skorları dışında kişisel veri toplamıyoruz.</p>
         </div>
       </div>
 
-      <!-- 3. Üçüncü Taraf Hizmetleri -->
+      <!-- 3. Reklam ve İzleme İzni (ATT) -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>3</span>
+        </div>
+        <div class="doc-content">
+          <h2>Reklam ve İzleme İzni (ATT)</h2>
+          <p>Ücretsiz kullanıcılara reklam gösterilir; reklamlar Unity LevelPlay mediation katmanı üzerinden <strong>Unity Ads (ironSource)</strong> ve <strong>Google AdMob</strong> tarafından sunulur. <strong>Reklamsız Üyelik</strong> sahiplerine reklam gösterilmez.</p>
+          <p>Apple'ın App Tracking Transparency (ATT) çerçevesi kapsamında, ilk kullanımda cihazınızın reklam kimliğine (IDFA) erişim için izninizi talep ederiz. İzin vermeniz daha alakalı reklamlar gösterilmesini sağlar; reddetmeniz durumunda kişiselleştirilmemiş reklamlar gösterilir ve bu seçim uygulama deneyimini etkilemez.</p>
+          <p class="doc-tip">Reklam takibini devre dışı bırakmak için: <strong>iOS Ayarlar → Gizlilik ve Güvenlik → İzleme → GezDoku</strong> iznini kapatabilirsiniz.</p>
+        </div>
+      </div>
+
+      <!-- 4. Üçüncü Taraf Hizmetleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>4</span>
         </div>
         <div class="doc-content">
           <h2>Üçüncü Taraf Hizmetleri</h2>
           <p>Uygulama aşağıdaki üçüncü taraf hizmetlerini kullanmaktadır. Bu hizmetler kendi gizlilik politikalarına tabidir:</p>
 
           <div class="doc-card">
-            <h3>Unity Ads</h3>
-            <p>Uygulamada ödüllü reklam gösterimi için Unity Ads SDK kullanılmaktadır. Unity Ads; reklam kişiselleştirmesi amacıyla cihaz tanımlayıcıları (IDFA/GAID), IP adresi ve reklam etkileşim verileri toplayabilir.</p>
-            <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
-              unity.com/legal/privacy-policy ↗
+            <h3>Google Firebase (Authentication &amp; Firestore)</h3>
+            <p>Anonim kimlik doğrulama ve liderlik tablosu verileri (kullanıcı adı, avatar, skorlar) bu hizmetle saklanır.</p>
+            <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              firebase.google.com/support/privacy ↗
             </a>
-            <p class="doc-tip">Reklam takibini devre dışı bırakmak için: <strong>iOS Ayarlar → Gizlilik ve Güvenlik → İzleme → GezDoku</strong> iznini kapatabilirsiniz.</p>
           </div>
 
           <div class="doc-card">
-            <h3>Apple Game Center</h3>
-            <p>Lider tabloları ve oyuncu kimlik doğrulaması için Apple Game Center kullanılmaktadır. Bu hizmet Apple'ın gizlilik politikasına tabidir.</p>
+            <h3>Google AdMob</h3>
+            <p>Reklam sunumu için cihaz tanımlayıcıları (IDFA) ve reklam etkileşim verileri işlenebilir.</p>
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              policies.google.com/privacy ↗
+            </a>
+          </div>
+
+          <div class="doc-card">
+            <h3>Unity Ads / ironSource (LevelPlay)</h3>
+            <p>Reklam açık artırması ve sunumu için kullanılır; cihaz tanımlayıcıları ve IP adresi toplayabilir.</p>
+            <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+              unity.com/legal/game-player-and-app-user-privacy-policy ↗
+            </a>
+          </div>
+
+          <div class="doc-card">
+            <h3>Apple (App Store &amp; StoreKit)</h3>
+            <p>Reklamsız Üyelik satın alımları Apple üzerinden gerçekleşir. Ödeme bilgilerinize erişmeyiz; yalnızca aboneliğin aktif olup olmadığını doğrularız.</p>
             <a href="https://www.apple.com/legal/privacy/tr/" target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
               apple.com/legal/privacy ↗
             </a>
@@ -82,58 +120,77 @@ const lastUpdated = '31 Mayıs 2026';
         </div>
       </div>
 
-      <!-- 4. Veri Saklama -->
-      <div class="doc-section">
-        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
-          <span class="doc-num" style={`color:${accent};`}>4</span>
-        </div>
-        <div class="doc-content">
-          <h2>Veri Saklama</h2>
-          <p>Cihazınızda saklanan oyun verileri (ilerleme, ayarlar) uygulamayı sildiğinizde kalıcı olarak silinir. Bulut yedekleme kullanıyorsanız (iCloud) bu veriler Apple altyapısında saklanabilir; bu durum Apple'ın politikasına tabidir.</p>
-        </div>
-      </div>
-
-      <!-- 5. Çocukların Gizliliği -->
+      <!-- 5. Kullanıcı İçeriği ve Denetim -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>5</span>
         </div>
         <div class="doc-content">
-          <h2>Çocukların Gizliliği</h2>
-          <p>Uygulama 4 yaş ve üzeri kullanıcılar için tasarlanmıştır. 13 yaş altı kullanıcılardan bilerek kişisel veri toplamıyoruz. Unity Ads, çocuklara yönelik içeriklerde kişiselleştirilmiş reklam göstermemektedir.</p>
+          <h2>Kullanıcı İçeriği ve Denetim</h2>
+          <p>Kullanıcı adları herkese açık bir içerik olduğundan aşağıdaki denetim önlemlerini uygularız:</p>
+          <ul class="doc-list">
+            <li>Kullanıcı adı seçiminde otomatik bir uygunsuz içerik filtresi çalışır.</li>
+            <li>Her oyuncu, liderlik tablosunda başka bir oyuncuyu <strong>"Rapor Et"</strong> özelliğiyle bildirebilir.</li>
+            <li>Uygunsuz kullanıcı adlarını inceleyip kaldırma veya ilgili hesabı kısıtlama hakkımız saklıdır.</li>
+            <li>Bir kullanıcı rapor edildiğinde, ilgili anonim kimlik ve kullanıcı adı denetim amacıyla saklanır.</li>
+          </ul>
         </div>
       </div>
 
-      <!-- 6. Haklarınız -->
+      <!-- 6. Veri Saklama ve Silme -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>6</span>
         </div>
         <div class="doc-content">
-          <h2>Haklarınız</h2>
-          <ul class="doc-list">
-            <li>Uygulamayı silerek cihazınızdaki tüm yerel verileri kaldırabilirsiniz.</li>
-            <li>iOS Ayarlar üzerinden reklam takip iznini iptal edebilirsiniz.</li>
-            <li>Game Center hesabınızı Apple üzerinden yönetebilirsiniz.</li>
-          </ul>
+          <h2>Veri Saklama ve Silme</h2>
+          <p>Liderlik verileri ve kullanıcı adınız, hesabınız aktif olduğu sürece sunucumuzda saklanır. Verilerinizin silinmesini talep etmek için bizimle iletişime geçebilirsiniz; anonim kimliğinize bağlı liderlik verileriniz ve kullanıcı adı kaydınız makul bir süre içinde silinir.</p>
+          <p>Uygulamayı silmeniz cihazınızdaki yerel verileri kaldırır; sunucudaki liderlik kaydınızı silmek için lütfen bize ulaşın.</p>
         </div>
       </div>
 
-      <!-- 7. Politika Değişiklikleri -->
+      <!-- 7. Çocukların Gizliliği -->
       <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>7</span>
         </div>
         <div class="doc-content">
-          <h2>Politika Değişiklikleri</h2>
-          <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişiklikler olması durumunda bu sayfa güncellenecektir. Uygulamayı kullanmaya devam etmeniz güncel politikayı kabul ettiğiniz anlamına gelir.</p>
+          <h2>Çocukların Gizliliği</h2>
+          <p>GezDoku genel izleyici kitlesine yöneliktir ve bilerek 13 yaş altı çocuklardan kişisel veri toplamaz. 13 yaşından küçük bir çocuğun bize veri sağladığını düşünüyorsanız bizimle iletişime geçiniz.</p>
         </div>
       </div>
 
-      <!-- 8. İletişim -->
-      <div class="doc-section doc-section-last">
+      <!-- 8. Haklarınız -->
+      <div class="doc-section">
         <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
           <span class="doc-num" style={`color:${accent};`}>8</span>
+        </div>
+        <div class="doc-content">
+          <h2>Haklarınız</h2>
+          <ul class="doc-list">
+            <li>Kullanıcı adınızı uygulama içi Ayarlar ekranından değiştirebilirsiniz.</li>
+            <li>E-posta ile başvurarak liderlik verilerinizin silinmesini talep edebilirsiniz.</li>
+            <li>iOS Ayarlar üzerinden reklam izleme (ATT) iznini iptal edebilirsiniz.</li>
+            <li>Uygulamayı silerek cihazınızdaki tüm yerel verileri kaldırabilirsiniz.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 9. Politika Değişiklikleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>9</span>
+        </div>
+        <div class="doc-content">
+          <h2>Politika Değişiklikleri</h2>
+          <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişiklikler olması durumunda "Son güncelleme" tarihi değiştirilecek ve bu sayfa güncellenecektir. Uygulamayı kullanmaya devam etmeniz güncel politikayı kabul ettiğiniz anlamına gelir.</p>
+        </div>
+      </div>
+
+      <!-- 10. İletişim -->
+      <div class="doc-section doc-section-last">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>10</span>
         </div>
         <div class="doc-content">
           <h2>İletişim</h2>
