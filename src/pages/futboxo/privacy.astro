@@ -1,0 +1,309 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#B8891F';
+const lastUpdated = '19 Temmuz 2026';
+---
+
+<Layout
+  title="Futboxo — Gizlilik Politikası"
+  description="Futboxo futbol bilgi oyununun gizlilik politikası."
+  ogImage="/images/Futboxo.png"
+>
+  <Header />
+
+  <main class="doc-page">
+
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/" class="doc-app-link">
+          <img src="/images/Futboxo.png" alt="Futboxo" class="doc-app-logo" />
+          <span class="doc-app-name">Futboxo</span>
+        </a>
+        <h1 class="doc-title">Gizlilik Politikası</h1>
+        <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">Futboxo'da gizliliğine değer veriyoruz. Bu politika, oyunu kullanırken hangi verilerin işlendiğini ve nasıl korunduğunu açıklar.</p>
+      </div>
+    </section>
+
+    <div class="doc-body">
+
+      <!-- 1. Genel Bakış -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>1</span>
+        </div>
+        <div class="doc-content">
+          <h2>Genel Bakış</h2>
+          <p>Futboxo, futbol bilgisini XOX, 3-2-1 ve Futbulcu modlarında yarıştıran bir mobil oyundur. Oyun yalnızca hizmeti sunmak için gereken en az veriyi işler. <strong>Verilerinizi satmıyoruz</strong> ve reklam ağlarıyla paylaşmıyoruz.</p>
+        </div>
+      </div>
+
+      <!-- 2. Topladığımız Veriler -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>2</span>
+        </div>
+        <div class="doc-content">
+          <h2>Topladığımız Veriler</h2>
+          <div class="doc-card">
+            <h3>Hesap ve kimlik doğrulama</h3>
+            <p><strong>Apple ile Giriş</strong> veya <strong>Google ile Giriş</strong> kullanırsanız, sağlayıcıdan benzersiz bir kullanıcı kimliği (ve varsa e-posta adresiniz) alınır. <strong>Misafir girişinde</strong> kişisel kimlik bilgisi alınmaz; yalnızca cihazınıza bağlı anonim bir kimlik oluşturulur.</p>
+          </div>
+          <div class="doc-card">
+            <h3>Profil bilgileri</h3>
+            <p>Seçtiğiniz <strong>kullanıcı adı</strong> ve <strong>avatar</strong>. Bu bilgiler liderlik tablosunda ve online maçlarda diğer oyunculara görünür.</p>
+          </div>
+          <div class="doc-card">
+            <h3>Oyun verileri</h3>
+            <p>Coin bakiyesi, puanlar, maç istatistikleri, klasman (rütbe) ilerlemesi, kart koleksiyonu ve günlük görev ilerlemesi hesabınıza bağlı olarak saklanır.</p>
+          </div>
+          <div class="doc-card">
+            <h3>Çok oyunculu veriler</h3>
+            <p>Online maç sırasında kullanıcı adınız ve oyun hamleleriniz, eşleşme ve gerçek zamanlı senkronizasyon için rakibinizle paylaşılır.</p>
+          </div>
+          <p class="doc-tip"><strong>Not:</strong> Futboxo reklam kimliği (IDFA), konum, kişiler veya cihazınızdaki dosyalara erişim toplamaz.</p>
+        </div>
+      </div>
+
+      <!-- 3. Verileri Nasıl Kullanıyoruz -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>3</span>
+        </div>
+        <div class="doc-content">
+          <h2>Verileri Nasıl Kullanıyoruz</h2>
+          <ul class="doc-list">
+            <li>Hesabınızı oluşturmak ve oturumunuzu sürdürmek</li>
+            <li>İlerlemenizi (coin, kart, istatistik, klasman) kaydetmek ve cihazlar arasında senkronlamak</li>
+            <li>Liderlik tablosunu ve klasman sistemini işletmek</li>
+            <li>Online maçlarda sizi rakiplerle eşleştirmek</li>
+            <li>Hile ve kötüye kullanımı önlemek, hizmeti iyileştirmek</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. Üçüncü Taraf Hizmetleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>4</span>
+        </div>
+        <div class="doc-content">
+          <h2>Üçüncü Taraf Hizmetleri</h2>
+          <p>Futboxo aşağıdaki altyapı hizmetlerini kullanır. Bu sağlayıcıların kendi gizlilik politikaları geçerlidir:</p>
+          <div class="doc-card">
+            <h3>Google Firebase (Google LLC)</h3>
+            <p>Kimlik doğrulama (Authentication), veritabanı (Firestore) ve çok oyunculu senkronizasyon (Realtime Database) için kullanılır. Hesap ve oyun verileriniz Firebase üzerinde güvenli biçimde saklanır.</p>
+          </div>
+          <div class="doc-card">
+            <h3>Apple ile Giriş (Apple Inc.)</h3>
+            <p>Apple hesabınızla giriş yapmayı seçerseniz kimlik doğrulama Apple tarafından sağlanır. Apple, e-postanızı gizleme seçeneği sunar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Reklam ve İzleme -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>5</span>
+        </div>
+        <div class="doc-content">
+          <h2>Reklam ve İzleme</h2>
+          <p>Futboxo <strong>reklam göstermez</strong> ve reklam/izleme amacıyla kimlik toplamaz. Bu nedenle uygulama, izleme izni (App Tracking Transparency) talep etmez.</p>
+        </div>
+      </div>
+
+      <!-- 6. Sanal Öğeler ve Satın Alma -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>6</span>
+        </div>
+        <div class="doc-content">
+          <h2>Sanal Öğeler</h2>
+          <p>Oyun içi <strong>coin</strong> ve kartlar yalnızca oynayarak kazanılan sanal öğelerdir; gerçek parasal değeri yoktur ve gerçek parayla satın alınmaz.</p>
+        </div>
+      </div>
+
+      <!-- 7. Veri Saklama ve Silme -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>7</span>
+        </div>
+        <div class="doc-content">
+          <h2>Veri Saklama ve Silme</h2>
+          <p>Verileriniz hesabınız var olduğu sürece saklanır. Oyundaki <strong>Ayarlar → Hesabı Sil</strong> seçeneğiyle hesabınızı ve tüm verilerinizi (coin, kartlar, istatistikler, klasman) kalıcı olarak silebilirsiniz; bu işlem geri alınamaz. Misafir (anonim) hesap verileri yalnızca cihazınıza bağlıdır ve uygulamayı silerseniz kaybolur.</p>
+        </div>
+      </div>
+
+      <!-- 8. Çocukların Gizliliği -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>8</span>
+        </div>
+        <div class="doc-content">
+          <h2>Çocukların Gizliliği</h2>
+          <p>Futboxo genel bir kitleye yöneliktir ve bilerek 13 yaşından küçük çocuklardan kişisel veri toplamaz. Bir çocuğun bize veri sağladığını düşünüyorsanız lütfen bizimle iletişime geçin, verileri sileriz.</p>
+        </div>
+      </div>
+
+      <!-- 9. Haklarınız -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>9</span>
+        </div>
+        <div class="doc-content">
+          <h2>Haklarınız</h2>
+          <p>Verilerinize erişme, düzeltme ve silinmesini talep etme hakkına sahipsiniz. Hesabınızı doğrudan uygulamadan silebilir veya talepleriniz için bizimle iletişime geçebilirsiniz.</p>
+        </div>
+      </div>
+
+      <!-- 10. Politika Değişiklikleri -->
+      <div class="doc-section">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>10</span>
+        </div>
+        <div class="doc-content">
+          <h2>Politika Değişiklikleri</h2>
+          <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişikliklerde bu sayfadaki "Son güncelleme" tarihi yenilenir.</p>
+        </div>
+      </div>
+
+      <!-- 11. İletişim -->
+      <div class="doc-section doc-section-last">
+        <div class="doc-num-wrap" style={`background:${accent}10; border:1px solid ${accent}25;`}>
+          <span class="doc-num" style={`color:${accent};`}>11</span>
+        </div>
+        <div class="doc-content">
+          <h2>İletişim</h2>
+          <p>Gizlilikle ilgili sorularınız için: <a class="doc-link" style={`color:${accent};`} href="mailto:support@companysoftware.app">support@companysoftware.app</a></p>
+        </div>
+      </div>
+
+      <div class="doc-back">
+        <a href="/futboxo/terms">Kullanım Koşulları →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section-last { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .doc-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 0;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75; margin: 0;
+  }
+  .doc-content strong { color: var(--color-text); font-weight: 600; }
+
+  .doc-card {
+    background: var(--bg-section-alt);
+    border: 1px solid var(--border-faint);
+    border-radius: 14px; padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-card + .doc-card { margin-top: 10px; }
+  .doc-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--color-text); margin: 0;
+  }
+  .doc-card p {
+    font-size: 0.875rem; color: var(--color-muted); line-height: 1.7; margin: 0;
+  }
+  .doc-tip {
+    font-size: 0.8rem !important;
+    color: var(--color-subtle) !important;
+    line-height: 1.6 !important;
+  }
+  .doc-tip strong { color: var(--color-muted); }
+
+  .doc-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .doc-list li {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+    padding-left: 16px; position: relative;
+  }
+  .doc-list li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--color-subtle); font-weight: 700;
+  }
+
+  .doc-link {
+    display: inline-block;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-back { margin-top: 48px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>
