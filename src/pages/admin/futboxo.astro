@@ -13,6 +13,7 @@ import Layout from '../../layouts/Layout.astro';
     <nav class="sekmeler">
       <button class="sekme aktif" data-sekme="duyuru">Duyuru &amp; Kontrol</button>
       <button class="sekme" data-sekme="transfer">Transfer &amp; Oyuncu</button>
+      <button class="sekme" data-sekme="kullanici">Oyuncular &amp; Moderasyon</button>
     </nav>
 
     <!-- ── DUYURU & KONTROL ─────────────────────────────────────────────── -->
@@ -186,6 +187,39 @@ import Layout from '../../layouts/Layout.astro';
         <pre id="patchOnizleme" class="onizleme"></pre>
       </div>
     </section>
+
+    <!-- ── OYUNCULAR & MODERASYON ───────────────────────────────────────── -->
+    <section id="kullanici" class="panel" hidden>
+      <div class="kart uyari" id="kullaniciKapali" hidden>
+        <strong>Kullanıcı yönetimi kapalı.</strong>
+        <span id="kullaniciKapaliMetin"></span>
+      </div>
+
+      <div class="kart">
+        <h2>Durum</h2>
+        <div class="sayaclar">
+          <div class="sayac"><span id="sayacOnline">–</span><small>çevrimiçi</small></div>
+          <div class="sayac"><span id="sayacToplam">–</span><small>toplam oyuncu</small></div>
+          <div class="sayac"><span id="sayacBanli">–</span><small>banlı</small></div>
+        </div>
+        <p class="ipucu">
+          Çevrimiçi sayısı son 5 dakika içinde oyunu açık tutan oyuncuları gösterir.
+          <button id="yenileOzet" class="btn ikincil ufak">Yenile</button>
+        </p>
+        <div id="onlineListe" class="onlineListe"></div>
+      </div>
+
+      <div class="kart">
+        <h2>Oyuncu Ara</h2>
+        <p class="ipucu">
+          İsmin <strong>başından</strong> yaz (Firestore önek araması). Boş bırakırsan
+          en yüksek puanlı oyuncular listelenir.
+        </p>
+        <input id="kAra" placeholder="Oyuncu adı..." autocomplete="off" />
+        <div id="kSonuc" class="kSonuc"></div>
+      </div>
+    </section>
+
   </div>
 </Layout>
 
@@ -480,6 +514,154 @@ import Layout from '../../layouts/Layout.astro';
   $('kopyalaPatch').addEventListener('click', () =>
     navigator.clipboard.writeText(JSON.stringify(patch, null, 1))
       .then(() => ($('patchDurum').textContent = 'Panoya kopyalandı.')));
+
+  // ══ OYUNCULAR & MODERASYON ═══════════════════════════════════════════════
+  let kullaniciHazir: boolean | null = null;
+
+  async function kullaniciIstek(yol: string, secenek?: RequestInit) {
+    const r = await fetch(yol, secenek);
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 503) {
+      kullaniciHazir = false;
+      $('kullaniciKapali').hidden = false;
+      $('kullaniciKapaliMetin').textContent = ' ' + (j.hata || '');
+      return null;
+    }
+    if (!r.ok) throw new Error(j.hata || ('HTTP ' + r.status));
+    kullaniciHazir = true;
+    $('kullaniciKapali').hidden = true;
+    return j;
+  }
+
+  async function ozetYukle() {
+    try {
+      const j = await kullaniciIstek('/api/futboxo-users?mod=ozet');
+      if (!j) return;
+      $('sayacOnline').textContent = j.cevrimici ?? '–';
+      $('sayacToplam').textContent = j.toplam ?? '–';
+      $('sayacBanli').textContent = j.banli ?? '–';
+      const on = await kullaniciIstek('/api/futboxo-users?mod=online');
+      const kutu = $('onlineListe');
+      kutu.textContent = '';
+      if (!on || !on.liste?.length) {
+        kutu.textContent = 'Şu an çevrimiçi oyuncu yok.';
+        kutu.className = 'onlineListe bos';
+        return;
+      }
+      kutu.className = 'onlineListe';
+      on.liste.slice(0, 60).forEach((o: any) => {
+        const d = document.createElement('span');
+        d.className = 'onlineRozet';
+        d.textContent = o.username || o.uid.slice(0, 6);
+        kutu.appendChild(d);
+      });
+    } catch (e: any) {
+      $('kullaniciKapali').hidden = false;
+      $('kullaniciKapaliMetin').textContent = ' ' + e.message;
+    }
+  }
+
+  function oyuncuKarti(o: any) {
+    const k = document.createElement('div');
+    k.className = 'kSatir' + (o.banned ? ' banli' : '');
+
+    const sol = document.createElement('div');
+    sol.className = 'kSol';
+    const ad = document.createElement('div');
+    ad.className = 'kAd';
+    ad.textContent = o.username || '(isimsiz)';
+    if (o.online) {
+      const nokta = document.createElement('span');
+      nokta.className = 'nokta'; nokta.title = 'çevrimiçi';
+      ad.appendChild(nokta);
+    }
+    if (o.banned) {
+      const r = document.createElement('span');
+      r.className = 'banRozet';
+      r.textContent = 'BANLI';
+      ad.appendChild(r);
+    }
+    const alt = document.createElement('div');
+    alt.className = 'kAlt';
+    alt.textContent = `${o.totalPoints} puan · ${o.rankPoints} RP · ${o.coins} coin` +
+      (o.isGuest ? ' · misafir' : '') + ` · ${o.uid.slice(0, 10)}…`;
+    if (o.banned && o.banReason) alt.textContent += ` · sebep: ${o.banReason}`;
+    sol.append(ad, alt);
+
+    const sag = document.createElement('div');
+    sag.className = 'kSag';
+
+    const adBtn = document.createElement('button');
+    adBtn.className = 'btn ikincil ufak';
+    adBtn.textContent = 'İsim değiştir';
+    adBtn.onclick = async () => {
+      const yeni = prompt(`Yeni isim (3-20 karakter):`, o.username);
+      if (!yeni) return;
+      await moderasyon(o.uid, 'rename', { yeniAd: yeni.trim() }, k);
+    };
+
+    const banBtn = document.createElement('button');
+    banBtn.className = 'btn ufak ' + (o.banned ? 'ikincil' : 'tehlike');
+    banBtn.textContent = o.banned ? 'Banı kaldır' : 'Banla';
+    banBtn.onclick = async () => {
+      if (o.banned) {
+        if (!confirm(`${o.username} adlı oyuncunun banı kaldırılsın mı?`)) return;
+        await moderasyon(o.uid, 'unban', {}, k);
+      } else {
+        const sebep = prompt(`${o.username} banlanacak. Sebep (oyuncuya gösterilir):`, 'Kural ihlali');
+        if (sebep === null) return;
+        await moderasyon(o.uid, 'ban', { sebep }, k);
+      }
+    };
+
+    sag.append(adBtn, banBtn);
+    k.append(sol, sag);
+    return k;
+  }
+
+  async function moderasyon(uid: string, islem: string, ek: any, kart: HTMLElement) {
+    const eski = kart.style.opacity;
+    kart.style.opacity = '0.5';
+    try {
+      const j = await kullaniciIstek('/api/futboxo-users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid, islem, ...ek }),
+      });
+      if (j?.ok) { kart.replaceWith(oyuncuKarti(j.oyuncu)); ozetYukle(); }
+    } catch (e: any) {
+      alert('Olmadı: ' + e.message);
+      kart.style.opacity = eski;
+    }
+  }
+
+  async function kullaniciAra() {
+    const q = ($('kAra') as HTMLInputElement).value.trim();
+    const kutu = $('kSonuc');
+    kutu.textContent = 'Aranıyor…';
+    try {
+      const j = await kullaniciIstek('/api/futboxo-users?q=' + encodeURIComponent(q));
+      if (!j) { kutu.textContent = ''; return; }
+      kutu.textContent = '';
+      if (!j.oyuncular?.length) { kutu.textContent = 'Sonuç yok.'; return; }
+      j.oyuncular.forEach((o: any) => kutu.appendChild(oyuncuKarti(o)));
+    } catch (e: any) {
+      kutu.textContent = 'Hata: ' + e.message;
+    }
+  }
+
+  let kZaman: any;
+  $('kAra').addEventListener('input', () => {
+    clearTimeout(kZaman);
+    kZaman = setTimeout(kullaniciAra, 250);
+  });
+  $('yenileOzet').addEventListener('click', ozetYukle);
+
+  // Sekmeye ilk geçişte yükle.
+  document.querySelector('[data-sekme="kullanici"]')?.addEventListener('click', () => {
+    if (kullaniciHazir === null) { ozetYukle(); kullaniciAra(); }
+  });
+
 </script>
 
 <style>
@@ -548,4 +730,30 @@ import Layout from '../../layouts/Layout.astro';
          padding: 7px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
          flex-shrink: 0; }
   .wrap .yamalar .ipucu { margin: 0; }
+
+  .wrap .sayaclar { display: flex; gap: 12px; flex-wrap: wrap; margin: 4px 0 10px; }
+  .wrap .sayac { flex: 1 1 110px; background: #faf8f5; border: 1px solid #e5e0d8; border-radius: 12px;
+           padding: 12px; text-align: center; }
+  .wrap .sayac span { display: block; font-size: 26px; font-weight: 800; line-height: 1.1; }
+  .wrap .sayac small { color: #7a7268; font-size: 12px; }
+  .wrap .onlineListe { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .wrap .onlineListe.bos { color: #7a7268; font-size: 14px; }
+  .wrap .onlineRozet { background: #eef7ee; border: 1px solid #cfe6cf; color: #2c6b2c;
+                 border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+  .wrap .kSonuc { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .wrap .kSatir { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            border: 1px solid #e5e0d8; border-radius: 12px; padding: 10px 12px; background: #fff; }
+  .wrap .kSatir.banli { background: #fdf3f3; border-color: #f0d5d5; }
+  .wrap .kAd { font-weight: 700; display: flex; align-items: center; gap: 7px; }
+  .wrap .kAlt { color: #7a7268; font-size: 12px; margin-top: 2px; }
+  .wrap .kSag { display: flex; gap: 6px; flex-shrink: 0; }
+  .wrap .nokta { width: 8px; height: 8px; border-radius: 50%; background: #3bb35b; display: inline-block; }
+  .wrap .banRozet { background: #c0392b; color: #fff; font-size: 10px; font-weight: 800;
+              padding: 2px 6px; border-radius: 5px; letter-spacing: .04em; }
+  .wrap .btn.ufak { padding: 6px 11px; font-size: 13px; }
+  .wrap .btn.tehlike { background: #c0392b; color: #fff; border-color: #c0392b; }
+  @media (max-width: 560px) {
+    .wrap .kSatir { flex-direction: column; align-items: stretch; }
+    .wrap .kSag { justify-content: flex-end; }
+  }
 </style>
