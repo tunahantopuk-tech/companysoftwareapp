@@ -1,18 +1,17 @@
 {
- "version": 5,
+ "version": 6,
  "patches": [
-  {
-   "id": "rafael_leao",
-   "addTeams": [
-    "galatasaray"
-   ],
-   "rating": 85,
-   "currentTeam": "Galatasaray"
-  },
   {
    "id": "claudio_taffarel",
    "rating": 88,
    "icon": true
+  },
+  {
+   "id": "mohamed_salah",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
   },
   {
    "id": "bruno_guimaraes",
@@ -20,6 +19,13 @@
     "arsenal"
    ],
    "currentTeam": "Arsenal"
+  },
+  {
+   "id": "fabinho_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
   },
   {
    "id": "ibrahima_konate_2",
@@ -69,6 +75,13 @@
     "aston_villa"
    ],
    "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "romelu_lukaku",
+   "addTeams": [
+    "fenerbahce"
+   ],
+   "currentTeam": "Fenerbahçe"
   },
   {
    "id": "youri_tielemans",
@@ -141,6 +154,13 @@
    "currentTeam": "Aston Villa"
   },
   {
+   "id": "leandro_trossard_2",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
    "id": "lutsharel_geertruida_2",
    "addTeams": [
     "psv"
@@ -160,6 +180,14 @@
     "tottenham"
    ],
    "currentTeam": "Tottenham"
+  },
+  {
+   "id": "rafael_leao",
+   "addTeams": [
+    "galatasaray"
+   ],
+   "currentTeam": "Galatasaray",
+   "rating": 85
   },
   {
    "id": "robin_gosens",
@@ -377,6 +405,13 @@
     "rb_leipzig"
    ],
    "currentTeam": "RB Leipzig"
+  },
+  {
+   "id": "ousmane_diomande",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
   },
   {
    "id": "patrick_wimmer_2",
@@ -757,13 +792,6 @@
    "currentTeam": "Trabzonspor"
   },
   {
-   "id": "cheick_diabate_2",
-   "addTeams": [
-    "samsunspor"
-   ],
-   "currentTeam": "Samsunspor"
-  },
-  {
    "id": "daniel_peretz_2",
    "addTeams": [
     "southampton"
@@ -834,11 +862,11 @@
    "currentTeam": "Çorum FK"
   },
   {
-   "id": "savio_2",
+   "id": "unai_gomez",
    "addTeams": [
-    "tottenham"
+    "udinese"
    ],
-   "currentTeam": "Tottenham"
+   "currentTeam": "Udinese"
   },
   {
    "id": "yannik_keitel_2",
@@ -881,6 +909,13 @@
     "konyaspor"
    ],
    "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "ernest_poku",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
   },
   {
    "id": "gabriel_vidovic_2",
@@ -1044,13 +1079,6 @@
    "currentTeam": "SV Elversberg"
   },
   {
-   "id": "cesar_palacios",
-   "addTeams": [
-    "fulham"
-   ],
-   "currentTeam": "Fulham"
-  },
-  {
    "id": "daiki_hashioka_2",
    "addTeams": [
     "borussia_mgladbach"
@@ -1063,6 +1091,13 @@
     "erzurumspor_fk"
    ],
    "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "gonzalo",
+   "addTeams": [
+    "fulham"
+   ],
+   "currentTeam": "Fulham"
   },
   {
    "id": "gokhan_sazdagi",
@@ -1112,6 +1147,13 @@
     "rizespor"
    ],
    "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "carlos_espi",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
   },
   {
    "id": "david_herold",
@@ -1182,13 +1224,6 @@
     "amed_sfk"
    ],
    "currentTeam": "Amed SFK"
-  },
-  {
-   "id": "gonzalo_garcia",
-   "addTeams": [
-    "fulham"
-   ],
-   "currentTeam": "Fulham"
   },
   {
    "id": "jano_horst",
@@ -1289,6 +1324,13 @@
    "currentTeam": "Gaziantep FK"
   },
   {
+   "id": "sidny_cabral",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
    "id": "alex_matos",
    "addTeams": [
     "goztepe"
@@ -1343,6 +1385,13 @@
     "hamburg"
    ],
    "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "mikel_rodriguez",
+   "addTeams": [
+    "alaves"
+   ],
+   "currentTeam": "Deportivo Alavés"
   },
   {
    "id": "moussa_diakite",
@@ -1464,7 +1513,7 @@
    "currentTeam": "Inter Milan"
   },
   {
-   "id": "mohamed_fofana_2",
+   "id": "mohamed_fofana",
    "addTeams": [
     "konyaspor"
    ],
@@ -1589,6 +1638,13 @@
     "al_hilal"
    ],
    "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "rene_muteba",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
   },
   {
    "id": "thiemoko_diarra",
@@ -1750,55 +1806,6 @@
     "fc_koln"
    ],
    "currentTeam": "FC Köln"
-  },
-  {
-   "id": "mohamed_salah",
-   "addTeams": [
-    "trabzonspor"
-   ],
-   "currentTeam": "Trabzonspor"
-  },
-  {
-   "id": "fabinho_2",
-   "addTeams": [
-    "trabzonspor"
-   ],
-   "currentTeam": "Trabzonspor"
-  },
-  {
-   "id": "romelu_lukaku",
-   "addTeams": [
-    "fenerbahce"
-   ],
-   "currentTeam": "Fenerbahçe"
-  },
-  {
-   "id": "leandro_trossard_2",
-   "addTeams": [
-    "besiktas"
-   ],
-   "currentTeam": "Beşiktaş"
-  },
-  {
-   "id": "ousmane_diomande",
-   "addTeams": [
-    "real_madrid"
-   ],
-   "currentTeam": "Real Madrid"
-  },
-  {
-   "id": "ernest_poku",
-   "addTeams": [
-    "besiktas"
-   ],
-   "currentTeam": "Beşiktaş"
-  },
-  {
-   "id": "sidny_cabral",
-   "addTeams": [
-    "trabzonspor"
-   ],
-   "currentTeam": "Trabzonspor"
   }
  ]
 }
