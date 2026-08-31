@@ -1,12 +1,1755 @@
 {
- "version": 3,
+ "version": 4,
  "patches": [
   {
    "id": "rafael_leao",
    "addTeams": [
     "galatasaray"
    ],
-   "rating": 85
+   "rating": 85,
+   "currentTeam": "Galatasaray"
+  },
+  {
+   "id": "claudio_taffarel",
+   "rating": 88,
+   "icon": true
+  },
+  {
+   "id": "bruno_guimaraes",
+   "addTeams": [
+    "arsenal"
+   ],
+   "currentTeam": "Arsenal"
+  },
+  {
+   "id": "ibrahima_konate_2",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "sandro_tonali",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "tijjani_reijnders_2",
+   "addTeams": [
+    "al_qadsiah"
+   ],
+   "currentTeam": "Al Qadsiah"
+  },
+  {
+   "id": "alejandro_garnacho_2",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "emiliano_martinez",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "marc_cucurella_2",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "nicolas_jackson_2",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "youri_tielemans",
+   "addTeams": [
+    "manchester_united"
+   ],
+   "currentTeam": "Manchester United"
+  },
+  {
+   "id": "bernardo_silva",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "brais_mendez_2",
+   "addTeams": [
+    "columbus_crew"
+   ],
+   "currentTeam": "Columbus Crew"
+  },
+  {
+   "id": "davide_frattesi",
+   "addTeams": [
+    "lazio"
+   ],
+   "currentTeam": "Lazio"
+  },
+  {
+   "id": "donyell_malen",
+   "addTeams": [
+    "roma"
+   ],
+   "currentTeam": "AS Roma"
+  },
+  {
+   "id": "exequiel_palacios",
+   "addTeams": [
+    "ipswich_town"
+   ],
+   "currentTeam": "Ipswich Town"
+  },
+  {
+   "id": "ezri_konsa_2",
+   "addTeams": [
+    "arsenal"
+   ],
+   "currentTeam": "Arsenal"
+  },
+  {
+   "id": "filip_kostic",
+   "addTeams": [
+    "psv"
+   ],
+   "currentTeam": "PSV Eindhoven"
+  },
+  {
+   "id": "joey_veerman_2",
+   "addTeams": [
+    "borussia_dortmund"
+   ],
+   "currentTeam": "Borussia Dortmund"
+  },
+  {
+   "id": "joao_gomes_2",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "lutsharel_geertruida_2",
+   "addTeams": [
+    "psv"
+   ],
+   "currentTeam": "PSV Eindhoven"
+  },
+  {
+   "id": "ollie_watkins",
+   "addTeams": [
+    "al_hilal"
+   ],
+   "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "omar_marmoush",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "robin_gosens",
+   "addTeams": [
+    "fc_schalke_04"
+   ],
+   "currentTeam": "FC Schalke 04"
+  },
+  {
+   "id": "thomas_partey",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "andre_gomes_2",
+   "addTeams": [
+    "columbus_crew"
+   ],
+   "currentTeam": "Columbus Crew"
+  },
+  {
+   "id": "dusan_vlahovic",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "francisco_trincao",
+   "addTeams": [
+    "al_ahli"
+   ],
+   "currentTeam": "Al Ahli"
+  },
+  {
+   "id": "john_stones",
+   "addTeams": [
+    "inter_milan"
+   ],
+   "currentTeam": "Inter Milan"
+  },
+  {
+   "id": "leon_goretzka",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "mason_greenwood",
+   "addTeams": [
+    "fenerbahce"
+   ],
+   "currentTeam": "Fenerbahçe"
+  },
+  {
+   "id": "maxence_lacroix",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "morgan_rogers",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "ruslan_malinovskyi_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "savinho",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "carlos_baleba",
+   "addTeams": [
+    "manchester_united"
+   ],
+   "currentTeam": "Manchester United"
+  },
+  {
+   "id": "christos_tzolis_2",
+   "addTeams": [
+    "arsenal"
+   ],
+   "currentTeam": "Arsenal"
+  },
+  {
+   "id": "dilane_bakwa_2",
+   "addTeams": [
+    "lille"
+   ],
+   "currentTeam": "Lille"
+  },
+  {
+   "id": "emmanuel_emegha_2",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "marcos_senesi",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "marten_roon",
+   "addTeams": [
+    "roma"
+   ],
+   "currentTeam": "AS Roma"
+  },
+  {
+   "id": "miguel_gutierrez",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "nathaniel_brown",
+   "addTeams": [
+    "bayern_munich"
+   ],
+   "currentTeam": "Bayern Munich"
+  },
+  {
+   "id": "patson_daka_2",
+   "addTeams": [
+    "hamburg"
+   ],
+   "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "amar_dedic_2",
+   "addTeams": [
+    "newcastle"
+   ],
+   "currentTeam": "Newcastle United"
+  },
+  {
+   "id": "andreas_olsen_2",
+   "addTeams": [
+    "basaksehir"
+   ],
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "danny_welbeck",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "djed_spence",
+   "addTeams": [
+    "inter_milan"
+   ],
+   "currentTeam": "Inter Milan"
+  },
+  {
+   "id": "elliot_anderson",
+   "addTeams": [
+    "manchester_city"
+   ],
+   "currentTeam": "Manchester City"
+  },
+  {
+   "id": "emmanuel_lath_2",
+   "addTeams": [
+    "union_berlin"
+   ],
+   "currentTeam": "Union Berlin"
+  },
+  {
+   "id": "gonçalo_ramos",
+   "addTeams": [
+    "ac_milan"
+   ],
+   "currentTeam": "AC Milan"
+  },
+  {
+   "id": "josef_martinez",
+   "addTeams": [
+    "columbus_crew"
+   ],
+   "currentTeam": "Columbus Crew"
+  },
+  {
+   "id": "leonardo_balerdi_2",
+   "addTeams": [
+    "roma"
+   ],
+   "currentTeam": "AS Roma"
+  },
+  {
+   "id": "maxime_esteve_2",
+   "addTeams": [
+    "rb_leipzig"
+   ],
+   "currentTeam": "RB Leipzig"
+  },
+  {
+   "id": "patrick_wimmer_2",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "salih_ozcan",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "thijs_dallinga_2",
+   "addTeams": [
+    "fc_koln"
+   ],
+   "currentTeam": "FC Köln"
+  },
+  {
+   "id": "albert_gronb_k_2",
+   "addTeams": [
+    "hamburg"
+   ],
+   "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "alexander_nubel",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "daizen_maeda_2",
+   "addTeams": [
+    "ipswich_town"
+   ],
+   "currentTeam": "Ipswich Town"
+  },
+  {
+   "id": "facundo_medina",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "felix_uduokhai",
+   "addTeams": [
+    "union_berlin"
+   ],
+   "currentTeam": "Union Berlin"
+  },
+  {
+   "id": "gabriel_moscardo_2",
+   "addTeams": [
+    "espanyol"
+   ],
+   "currentTeam": "Espanyol"
+  },
+  {
+   "id": "jordan_henderson",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "junior_ebimbe",
+   "addTeams": [
+    "fc_schalke_04"
+   ],
+   "currentTeam": "FC Schalke 04"
+  },
+  {
+   "id": "maximilian_wober_2",
+   "addTeams": [
+    "fc_schalke_04"
+   ],
+   "currentTeam": "FC Schalke 04"
+  },
+  {
+   "id": "rocco_reitz_2",
+   "addTeams": [
+    "rb_leipzig"
+   ],
+   "currentTeam": "RB Leipzig"
+  },
+  {
+   "id": "samu_costa",
+   "addTeams": [
+    "al_nassr"
+   ],
+   "currentTeam": "Al Nassr"
+  },
+  {
+   "id": "sebastiaan_bornauw_2",
+   "addTeams": [
+    "hamburg"
+   ],
+   "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "stefan_posch_2",
+   "addTeams": [
+    "mainz"
+   ],
+   "currentTeam": "Mainz 05"
+  },
+  {
+   "id": "antonio_silva",
+   "addTeams": [
+    "bournemouth"
+   ],
+   "currentTeam": "Bournemouth"
+  },
+  {
+   "id": "callum_wilson",
+   "addTeams": [
+    "brentford"
+   ],
+   "currentTeam": "Brentford"
+  },
+  {
+   "id": "sekou_koita_2",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "valentin_barco_2",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "benie_traore",
+   "addTeams": [
+    "nycfc"
+   ],
+   "currentTeam": "NYCFC"
+  },
+  {
+   "id": "daley_blind",
+   "addTeams": [
+    "ajax"
+   ],
+   "currentTeam": "Ajax"
+  },
+  {
+   "id": "dion_lopy_2",
+   "addTeams": [
+    "al_ittihad"
+   ],
+   "currentTeam": "Al Ittihad"
+  },
+  {
+   "id": "giannis_konstantelias",
+   "addTeams": [
+    "borussia_dortmund"
+   ],
+   "currentTeam": "Borussia Dortmund"
+  },
+  {
+   "id": "jeremy_jacquet_2",
+   "addTeams": [
+    "liverpool"
+   ],
+   "currentTeam": "Liverpool"
+  },
+  {
+   "id": "noah_atubolu",
+   "addTeams": [
+    "eintracht_frankfurt"
+   ],
+   "currentTeam": "Eintracht Frankfurt"
+  },
+  {
+   "id": "sebastiano_esposito_2",
+   "addTeams": [
+    "sassuolo"
+   ],
+   "currentTeam": "Sassuolo"
+  },
+  {
+   "id": "alexander_schwolow_2",
+   "addTeams": [
+    "mainz"
+   ],
+   "currentTeam": "Mainz 05"
+  },
+  {
+   "id": "bazoumana_toure_2",
+   "addTeams": [
+    "newcastle"
+   ],
+   "currentTeam": "Newcastle United"
+  },
+  {
+   "id": "crysencio_summerville",
+   "addTeams": [
+    "al_hilal"
+   ],
+   "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "eric_martel_2",
+   "addTeams": [
+    "mainz"
+   ],
+   "currentTeam": "Mainz 05"
+  },
+  {
+   "id": "geovany_quenda",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "junior_adamu",
+   "addTeams": [
+    "fc_schalke_04"
+   ],
+   "currentTeam": "FC Schalke 04"
+  },
+  {
+   "id": "mateus_fernandes",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "sven_mijnans_2",
+   "addTeams": [
+    "psv"
+   ],
+   "currentTeam": "PSV Eindhoven"
+  },
+  {
+   "id": "tin_jedvaj_2",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "ayyoub_bouaddi",
+   "addTeams": [
+    "manchester_city"
+   ],
+   "currentTeam": "Manchester City"
+  },
+  {
+   "id": "david_costa",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "grischa_promel_2",
+   "addTeams": [
+    "stuttgart"
+   ],
+   "currentTeam": "Stuttgart"
+  },
+  {
+   "id": "ludovit_reis_2",
+   "addTeams": [
+    "werder_bremen"
+   ],
+   "currentTeam": "Werder Bremen"
+  },
+  {
+   "id": "martin_dubravka_2",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "nemanja_gudelj_2",
+   "addTeams": [
+    "getafe"
+   ],
+   "currentTeam": "Getafe"
+  },
+  {
+   "id": "pierre_ekwah",
+   "addTeams": [
+    "auxerre"
+   ],
+   "currentTeam": "Auxerre"
+  },
+  {
+   "id": "sheraldo_becker",
+   "addTeams": [
+    "mainz"
+   ],
+   "currentTeam": "Mainz 05"
+  },
+  {
+   "id": "yannik_engelhardt_2",
+   "addTeams": [
+    "freiburg"
+   ],
+   "currentTeam": "Freiburg"
+  },
+  {
+   "id": "eric_bailly",
+   "addTeams": [
+    "columbus_crew"
+   ],
+   "currentTeam": "Columbus Crew"
+  },
+  {
+   "id": "gift_orban",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "jaidon_anthony",
+   "addTeams": [
+    "brentford"
+   ],
+   "currentTeam": "Brentford"
+  },
+  {
+   "id": "michal_karbownik_2",
+   "addTeams": [
+    "basaksehir"
+   ],
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "zion_suzuki",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "alvaro_rodriguez_2",
+   "addTeams": [
+    "bournemouth"
+   ],
+   "currentTeam": "Bournemouth"
+  },
+  {
+   "id": "berkan_kutlu",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "cedric_itten_2",
+   "addTeams": [
+    "werder_bremen"
+   ],
+   "currentTeam": "Werder Bremen"
+  },
+  {
+   "id": "cenk_ozkacar_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "cheick_diabate_2",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "daniel_peretz_2",
+   "addTeams": [
+    "southampton"
+   ],
+   "currentTeam": "Southampton"
+  },
+  {
+   "id": "emin_bayram_2",
+   "addTeams": [
+    "basaksehir"
+   ],
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "hrvoje_smolcic_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "jon_guridi_3",
+   "addTeams": [
+    "sevilla"
+   ],
+   "currentTeam": "Sevilla"
+  },
+  {
+   "id": "kjell_scherpen_2",
+   "addTeams": [
+    "ipswich_town"
+   ],
+   "currentTeam": "Ipswich Town"
+  },
+  {
+   "id": "lesley_ugochukwu",
+   "addTeams": [
+    "galatasaray"
+   ],
+   "currentTeam": "Galatasaray"
+  },
+  {
+   "id": "maik_nawrocki_2",
+   "addTeams": [
+    "lens"
+   ],
+   "currentTeam": "Lens"
+  },
+  {
+   "id": "miguel_rodriguez_2",
+   "addTeams": [
+    "alaves"
+   ],
+   "currentTeam": "Deportivo Alavés"
+  },
+  {
+   "id": "roger_martinez_2",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "serdar_saatci_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "savio_2",
+   "addTeams": [
+    "tottenham"
+   ],
+   "currentTeam": "Tottenham"
+  },
+  {
+   "id": "yannik_keitel_2",
+   "addTeams": [
+    "augsburg"
+   ],
+   "currentTeam": "Augsburg"
+  },
+  {
+   "id": "abdelhamid_sabiri_2",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "ahmed_kutucu",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "bryan_zaragoza_286639",
+   "addTeams": [
+    "espanyol"
+   ],
+   "currentTeam": "Espanyol"
+  },
+  {
+   "id": "dzenan_pejcinovic_2",
+   "addTeams": [
+    "stuttgart"
+   ],
+   "currentTeam": "Stuttgart"
+  },
+  {
+   "id": "ebrima_colley_2",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "gabriel_vidovic_2",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "gideon_mensah_2",
+   "addTeams": [
+    "fc_koln"
+   ],
+   "currentTeam": "FC Köln"
+  },
+  {
+   "id": "guven_yalcin_2",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "illan_meslier",
+   "addTeams": [
+    "arsenal"
+   ],
+   "currentTeam": "Arsenal"
+  },
+  {
+   "id": "isac_lidberg_2",
+   "addTeams": [
+    "borussia_mgladbach"
+   ],
+   "currentTeam": "Borussia M'gladbach"
+  },
+  {
+   "id": "leo_sauer",
+   "addTeams": [
+    "stuttgart"
+   ],
+   "currentTeam": "Stuttgart"
+  },
+  {
+   "id": "marcos_felipe_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "maurice_krattenmacher_2",
+   "addTeams": [
+    "elversberg"
+   ],
+   "currentTeam": "SV Elversberg"
+  },
+  {
+   "id": "samet_akaydin_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "shea_charles",
+   "addTeams": [
+    "fulham"
+   ],
+   "currentTeam": "Fulham"
+  },
+  {
+   "id": "irfan_egribayat_2",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "denzel_dumfries",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "horatiu_moldovan",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "ignace_brempt",
+   "addTeams": [
+    "sassuolo"
+   ],
+   "currentTeam": "Sassuolo"
+  },
+  {
+   "id": "kennet_eichhorn",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "bilal_boutobba_2",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "chidozie_awaziem",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "dogan_alemdar",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "gauthier_gallon_2",
+   "addTeams": [
+    "le_havre"
+   ],
+   "currentTeam": "Le Havre"
+  },
+  {
+   "id": "hugo_bolin",
+   "addTeams": [
+    "borussia_mgladbach"
+   ],
+   "currentTeam": "Borussia M'gladbach"
+  },
+  {
+   "id": "isak_jensen",
+   "addTeams": [
+    "lorient"
+   ],
+   "currentTeam": "FC Lorient"
+  },
+  {
+   "id": "konstantinos_karetsas",
+   "addTeams": [
+    "borussia_dortmund"
+   ],
+   "currentTeam": "Borussia Dortmund"
+  },
+  {
+   "id": "noel_futkeu",
+   "addTeams": [
+    "elversberg"
+   ],
+   "currentTeam": "SV Elversberg"
+  },
+  {
+   "id": "cesar_palacios",
+   "addTeams": [
+    "fulham"
+   ],
+   "currentTeam": "Fulham"
+  },
+  {
+   "id": "daiki_hashioka_2",
+   "addTeams": [
+    "borussia_mgladbach"
+   ],
+   "currentTeam": "Borussia M'gladbach"
+  },
+  {
+   "id": "ertugrul_taskran",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "gokhan_sazdagi",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "jawad_yamiq_2",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "mio_backhaus_2",
+   "addTeams": [
+    "freiburg"
+   ],
+   "currentTeam": "Freiburg"
+  },
+  {
+   "id": "mory_diaw_2",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "noah_sundberg",
+   "addTeams": [
+    "goztepe"
+   ],
+   "currentTeam": "Göztepe"
+  },
+  {
+   "id": "umut_bozok",
+   "addTeams": [
+    "basaksehir"
+   ],
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "zakaria_ariss",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "david_herold",
+   "addTeams": [
+    "borussia_mgladbach"
+   ],
+   "currentTeam": "Borussia M'gladbach"
+  },
+  {
+   "id": "ivan_chuki",
+   "addTeams": [
+    "werder_bremen"
+   ],
+   "currentTeam": "Werder Bremen"
+  },
+  {
+   "id": "jahmai_simpson_pusey",
+   "addTeams": [
+    "fc_koln"
+   ],
+   "currentTeam": "FC Köln"
+  },
+  {
+   "id": "laurin_ulrich_2",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "mats_rots",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "rodrigo_ribeiro",
+   "addTeams": [
+    "augsburg"
+   ],
+   "currentTeam": "Augsburg"
+  },
+  {
+   "id": "afonso_moreira",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "emersonn_2",
+   "addTeams": [
+    "ipswich_town"
+   ],
+   "currentTeam": "Ipswich Town"
+  },
+  {
+   "id": "fabio_gruber",
+   "addTeams": [
+    "mainz"
+   ],
+   "currentTeam": "Mainz 05"
+  },
+  {
+   "id": "furkan_soyalp_2",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "gonzalo_garcia",
+   "addTeams": [
+    "fulham"
+   ],
+   "currentTeam": "Fulham"
+  },
+  {
+   "id": "jano_horst",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "johan_manzambi",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "kacper_tobiasz",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "kvin_rodrigues_47304",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "mukhtar_ali",
+   "addTeams": [
+    "al_ittihad"
+   ],
+   "currentTeam": "Al Ittihad"
+  },
+  {
+   "id": "nahuel_noll",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "oliver_meier_2",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "yusuf_barasi",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "adam_daghim",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "aleksandar_stankovic",
+   "addTeams": [
+    "inter_milan"
+   ],
+   "currentTeam": "Inter Milan"
+  },
+  {
+   "id": "ayberk_karapo",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "elias_geoffrey_bakatukanda",
+   "addTeams": [
+    "fc_koln"
+   ],
+   "currentTeam": "FC Köln"
+  },
+  {
+   "id": "issa_doumbia",
+   "addTeams": [
+    "sporting_cp"
+   ],
+   "currentTeam": "Sporting CP"
+  },
+  {
+   "id": "kerim_calhanoglu",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "alex_matos",
+   "addTeams": [
+    "goztepe"
+   ],
+   "currentTeam": "Göztepe"
+  },
+  {
+   "id": "alieu_njie",
+   "addTeams": [
+    "fiorentina"
+   ],
+   "currentTeam": "Fiorentina"
+  },
+  {
+   "id": "emre_bilgin_2",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "gabriele_guarino",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "ilyes_hamache",
+   "addTeams": [
+    "fc_schalke_04"
+   ],
+   "currentTeam": "FC Schalke 04"
+  },
+  {
+   "id": "makana_baku",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "marco_palestra",
+   "addTeams": [
+    "chelsea"
+   ],
+   "currentTeam": "Chelsea"
+  },
+  {
+   "id": "martin_adeline",
+   "addTeams": [
+    "hamburg"
+   ],
+   "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "moussa_diakite",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "tanguy_zoukrou",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "erhan_erenturk_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "mathieu_patouillet_2",
+   "addTeams": [
+    "brest"
+   ],
+   "currentTeam": "Stade Brestois"
+  },
+  {
+   "id": "sean_steur",
+   "addTeams": [
+    "newcastle"
+   ],
+   "currentTeam": "Newcastle United"
+  },
+  {
+   "id": "tayyip_sanuc",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "burak_bozan",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "franco_carboni",
+   "addTeams": [
+    "parma"
+   ],
+   "currentTeam": "Parma"
+  },
+  {
+   "id": "kerim_sam_alajbegovic",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "kofi_amoako_2",
+   "addTeams": [
+    "hamburg"
+   ],
+   "currentTeam": "Hamburger SV"
+  },
+  {
+   "id": "nathan_cat",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "abdullah_radif_2",
+   "addTeams": [
+    "al_ahli"
+   ],
+   "currentTeam": "Al Ahli"
+  },
+  {
+   "id": "ali_dembele",
+   "addTeams": [
+    "lecce"
+   ],
+   "currentTeam": "Lecce"
+  },
+  {
+   "id": "faris_abdi_2",
+   "addTeams": [
+    "al_ittihad"
+   ],
+   "currentTeam": "Al Ittihad"
+  },
+  {
+   "id": "francis_onyeka",
+   "addTeams": [
+    "elversberg"
+   ],
+   "currentTeam": "SV Elversberg"
+  },
+  {
+   "id": "hennes_behrens",
+   "addTeams": [
+    "augsburg"
+   ],
+   "currentTeam": "Augsburg"
+  },
+  {
+   "id": "ivan_provedel_2",
+   "addTeams": [
+    "inter_milan"
+   ],
+   "currentTeam": "Inter Milan"
+  },
+  {
+   "id": "mohamed_fofana_2",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "mohammed_al_owais",
+   "addTeams": [
+    "al_hilal"
+   ],
+   "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "mohammed_qahtani",
+   "addTeams": [
+    "al_qadsiah"
+   ],
+   "currentTeam": "Al Qadsiah"
+  },
+  {
+   "id": "naif_masoud",
+   "addTeams": [
+    "al_ahli"
+   ],
+   "currentTeam": "Al Ahli"
+  },
+  {
+   "id": "nihad_mujakic",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "noah_darvich",
+   "addTeams": [
+    "elversberg"
+   ],
+   "currentTeam": "SV Elversberg"
+  },
+  {
+   "id": "noham_kamara",
+   "addTeams": [
+    "lyon"
+   ],
+   "currentTeam": "Lyon"
+  },
+  {
+   "id": "noel_aseko",
+   "addTeams": [
+    "bayern_munich",
+    "eintracht_frankfurt"
+   ],
+   "currentTeam": "Eintracht Frankfurt"
+  },
+  {
+   "id": "oskar_wojcik",
+   "addTeams": [
+    "werder_bremen"
+   ],
+   "currentTeam": "Werder Bremen"
+  },
+  {
+   "id": "sean_dulic",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "siaka_bakayoko",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "viktor_tsygankov_2",
+   "addTeams": [
+    "ajax"
+   ],
+   "currentTeam": "Ajax"
+  },
+  {
+   "id": "baran_gezek",
+   "addTeams": [
+    "alanyaspor"
+   ],
+   "currentTeam": "Alanyaspor"
+  },
+  {
+   "id": "dariusz_stalmach",
+   "addTeams": [
+    "werder_bremen"
+   ],
+   "currentTeam": "Werder Bremen"
+  },
+  {
+   "id": "david_preu_2",
+   "addTeams": [
+    "stuttgart"
+   ],
+   "currentTeam": "Stuttgart"
+  },
+  {
+   "id": "jannik_schuster",
+   "addTeams": [
+    "brentford"
+   ],
+   "currentTeam": "Brentford"
+  },
+  {
+   "id": "luka_duric",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "mohammed_mahzari",
+   "addTeams": [
+    "al_hilal"
+   ],
+   "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "thiemoko_diarra",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "daniel_batz_2",
+   "addTeams": [
+    "borussia_mgladbach"
+   ],
+   "currentTeam": "Borussia M'gladbach"
+  },
+  {
+   "id": "enis_destan_2",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "jakob_jessen",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "mamadou_barry",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "matteo_ruggeri_2",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "tristan_zobel",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "awad_nashri",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "chandrel_massanga",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "luca_erlein",
+   "addTeams": [
+    "bayer_leverkusen"
+   ],
+   "currentTeam": "Bayer Leverkusen"
+  },
+  {
+   "id": "noah_saviolo",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "rakan_kaabi",
+   "addTeams": [
+    "al_ittihad"
+   ],
+   "currentTeam": "Al Ittihad"
+  },
+  {
+   "id": "ali_al_asmari",
+   "addTeams": [
+    "al_shabab"
+   ],
+   "currentTeam": "Al Shabab"
+  },
+  {
+   "id": "alessandro_vogt",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "amadou_cisse",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "keisuke_goto",
+   "addTeams": [
+    "freiburg"
+   ],
+   "currentTeam": "Freiburg"
+  },
+  {
+   "id": "abdullah_al_enezi",
+   "addTeams": [
+    "al_hilal"
+   ],
+   "currentTeam": "Al Hilal"
+  },
+  {
+   "id": "fuat_bavuk",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "hasan_yesilyurt",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "huseyin_bulut",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "konstantin_aleksa",
+   "addTeams": [
+    "hoffenheim"
+   ],
+   "currentTeam": "Hoffenheim"
+  },
+  {
+   "id": "clemens_lippmann",
+   "addTeams": [
+    "paderborn"
+   ],
+   "currentTeam": "SC Paderborn 07"
+  },
+  {
+   "id": "paul_okon_engstler",
+   "addTeams": [
+    "fc_koln"
+   ],
+   "currentTeam": "FC Köln"
   }
  ]
 }
