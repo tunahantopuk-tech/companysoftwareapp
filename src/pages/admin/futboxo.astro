@@ -58,14 +58,31 @@ import Layout from '../../layouts/Layout.astro';
             </label>
             <label>Biçim
               <select id="bStyle">
-                <option value="small">İnce şerit (ana sayfada)</option>
+                <option value="strip">İnce şerit (ana sayfada)</option>
                 <option value="fullscreen">Tam ekran kart</option>
+                <option value="both">İkisi birden</option>
               </select>
             </label>
           </div>
+          <div class="ikili">
+            <label>Gösterim sıklığı
+              <select id="bFreq">
+                <option value="once">Bir kez göster</option>
+                <option value="always">Her açılışta göster</option>
+                <option value="interval">Belirli aralıkla göster</option>
+              </select>
+            </label>
+            <label id="bIntervalAlan">Kaç dakikada bir
+              <input id="bInterval" type="number" min="1" step="1" value="60" />
+            </label>
+          </div>
           <p class="ipucu">
-            Aynı <code>id</code> bir kez gösterilir; kullanıcı kapatınca bir daha çıkmaz.
-            Yeni duyuru için <strong>yeni bir id</strong> ver.
+            <strong>Biçim:</strong> “İkisi birden” seçilirse duyuru önce tam ekran açılır,
+            kapatılınca ana sayfada ince şerit olarak kalır.<br />
+            <strong>Sıklık tam ekranı yönetir.</strong> İnce şerit, kullanıcı kapatana kadar
+            ana sayfada durur. Aynı <code>id</code> gösterim geçmişini taşır —
+            <strong>yeni duyuru için yeni bir id ver</strong>, yoksa eski duyuruyu görmüş
+            kullanıcılara yenisi çıkmayabilir.
           </p>
           <label>Başlık<input id="bTitle" placeholder="Yeni Sezon Başladı" /></label>
           <label>Metin<textarea id="bBody" rows="2" placeholder="178 takım ve 11 lig logosuyla güncellendi."></textarea></label>
@@ -202,10 +219,15 @@ import Layout from '../../layouts/Layout.astro';
     $('updateMessage').value = config.updateMessage || '';
     $('maintenance').checked = !!config.maintenance;
     $('maintenanceMessage').value = config.maintenanceMessage || '';
-    const b = config.banner;
+    // Yeni çoklu alan öncelikli; eski tekil `banner` alanı geriye dönük okunuyor.
+    const b = (Array.isArray(config.banners) && config.banners[0]) || config.banner;
     $('bannerAcik').checked = !!b;
     if (b) {
-      $('bId').value = b.id || ''; $('bStyle').value = b.style || 'small';
+      $('bId').value = b.id || '';
+      // "small" eski ad — şerit demek.
+      $('bStyle').value = (b.style === 'small' ? 'strip' : b.style) || 'strip';
+      $('bFreq').value = b.frequency || 'once';
+      $('bInterval').value = b.intervalMinutes || 60;
       $('bTitle').value = b.title || ''; $('bBody').value = b.body || '';
       $('bImage').value = b.imageURL || ''; $('bBtnText').value = b.buttonText || '';
       $('bBtnUrl').value = b.buttonURL || ''; $('bDismiss').checked = b.dismissible !== false;
@@ -219,19 +241,27 @@ import Layout from '../../layouts/Layout.astro';
       updateMessage: $('updateMessage').value.trim(),
       maintenance: $('maintenance').checked,
       maintenanceMessage: $('maintenanceMessage').value.trim(),
+      // Eski tekil alan artık YAZILMIYOR (null kalıyor); uygulama ikisini de
+      // okuyor, böylece eski sürümdeki cihazlar da bozulmuyor.
       banner: null,
+      banners: [],
     };
     if ($('bannerAcik').checked) {
-      c.banner = {
+      const b: any = {
         id: $('bId').value.trim() || 'duyuru_' + Date.now(),
         style: $('bStyle').value,
+        frequency: $('bFreq').value,
         title: $('bTitle').value.trim(),
         body: $('bBody').value.trim(),
         dismissible: $('bDismiss').checked,
       };
-      if ($('bImage').value.trim()) c.banner.imageURL = $('bImage').value.trim();
-      if ($('bBtnText').value.trim()) c.banner.buttonText = $('bBtnText').value.trim();
-      if ($('bBtnUrl').value.trim()) c.banner.buttonURL = $('bBtnUrl').value.trim();
+      if (b.frequency === 'interval') {
+        b.intervalMinutes = Math.max(1, parseInt($('bInterval').value, 10) || 60);
+      }
+      if ($('bImage').value.trim()) b.imageURL = $('bImage').value.trim();
+      if ($('bBtnText').value.trim()) b.buttonText = $('bBtnText').value.trim();
+      if ($('bBtnUrl').value.trim()) b.buttonURL = $('bBtnUrl').value.trim();
+      c.banners = [b];
     }
     return c;
   }
@@ -241,6 +271,8 @@ import Layout from '../../layouts/Layout.astro';
     $('configOnizleme').textContent = JSON.stringify(c, null, 1);
     $('kapiUyari').hidden = !c.minVersion;
     $('bannerAlan').style.opacity = $('bannerAcik').checked ? '1' : '0.4';
+    // "Kaç dakikada bir" yalnızca aralıklı gösterimde anlamlı.
+    $('bIntervalAlan').style.display = $('bFreq').value === 'interval' ? '' : 'none';
   }
   $('duyuru').addEventListener('input', configGuncelle);
   $('duyuru').addEventListener('change', configGuncelle);
