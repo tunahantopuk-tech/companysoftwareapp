@@ -1,7 +1,14 @@
 {
-  "minVersion": "",
-  "updateMessage": "",
-  "maintenance": false,
-  "maintenanceMessage": "",
-  "banner": null
+ "minVersion": "",
+ "updateMessage": "",
+ "maintenance": false,
+ "maintenanceMessage": "",
+ "banner": {
+  "id": "Duyuru 1",
+  "style": "small",
+  "title": "Yeni Transferler ve Yeni Takımlar !",
+  "body": "31.08.2026 tarihi itibariyle yeni transferler oyunumuza eklenmiştir.\nRafa Leao - Galatasaray",
+  "dismissible": true,
+  "imageURL": "https://www.companysoftware.app/images/Futboxo.png"
+ }
 }
