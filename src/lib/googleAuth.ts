@@ -21,17 +21,53 @@ export const RTDB_URL =
 type ServisHesabi = { client_email: string; private_key: string; project_id?: string };
 
 export function servisHesabi(): ServisHesabi | null {
+  return servisHesabiTani().hesap;
+}
+
+/**
+ * Neden çalışmadığını AYIRT EDEN sürüm.
+ * "tanımlı değil" ile "tanımlı ama JSON bozuk" aynı mesajı verince
+ * hangisi olduğunu anlamak mümkün olmuyordu.
+ */
+export function servisHesabiTani(): { hesap: ServisHesabi | null; sebep: string } {
   const ham = env('FIREBASE_SERVICE_ACCOUNT');
-  if (!ham) return null;
-  try {
-    const j = JSON.parse(ham) as ServisHesabi;
-    if (!j.client_email || !j.private_key) return null;
-    // Vercel'e yapıştırırken satır sonları çoğu zaman "\n" metnine dönüşüyor.
-    j.private_key = j.private_key.replace(/\\n/g, '\n');
-    return j;
-  } catch {
-    return null;
+  if (!ham) {
+    return {
+      hesap: null,
+      sebep:
+        'FIREBASE_SERVICE_ACCOUNT ortam değişkeni sunucuya HİÇ ULAŞMADI. ' +
+        'Vercel → Settings → Environments → Production → Environment Variables ' +
+        'altında bu isimle bir kayıt var mı ve kaydettikten SONRA Redeploy ' +
+        'yaptın mı? (Ortam değişkeni ancak yeni bir deploy ile devreye girer.)',
+    };
   }
+
+  let j: ServisHesabi;
+  try {
+    j = JSON.parse(ham) as ServisHesabi;
+  } catch (e: any) {
+    return {
+      hesap: null,
+      sebep:
+        `Değişken TANIMLI (${ham.length} karakter) ama JSON olarak çözümlenemedi: ` +
+        `${e?.message || e}. İndirdiğin .json dosyasının TAMAMINI, "{" ile başlayıp ` +
+        `"}" ile biten hâliyle yapıştırdığından emin ol.`,
+    };
+  }
+
+  if (!j.client_email || !j.private_key) {
+    return {
+      hesap: null,
+      sebep:
+        'JSON çözümlendi ama içinde client_email veya private_key yok. ' +
+        'Yanlış dosya yapıştırılmış olabilir (bu, Firebase → Proje ayarları → ' +
+        'Hizmet hesapları\'ndan inen anahtar dosyası olmalı).',
+    };
+  }
+
+  // Vercel'e yapıştırırken satır sonları çoğu zaman "\n" metnine dönüşüyor.
+  j.private_key = j.private_key.replace(/\\n/g, '\n');
+  return { hesap: j, sebep: '' };
 }
 
 /** Jeton ~1 saat geçerli; sıcak fonksiyonda yeniden üretmemek için tutuyoruz. */

@@ -2,7 +2,8 @@ import type { APIRoute } from 'astro';
 import { istekYetkiliMi, yetkisiz } from '../../lib/adminAuth';
 import {
   erisimJetonu,
-  servisHesabi,
+
+  servisHesabiTani,
   PROJECT_ID,
   RTDB_URL,
   fsBelgeOku,
@@ -83,18 +84,8 @@ async function cevrimiciler(token: string) {
 export const GET: APIRoute = async ({ request, url }) => {
   if (!(await istekYetkiliMi(request))) return yetkisiz();
 
-  if (!servisHesabi()) {
-    return json(
-      {
-        hazir: false,
-        hata:
-          'FIREBASE_SERVICE_ACCOUNT tanımlı değil. Kullanıcı yönetimi kapalı — ' +
-          'Firebase Console → Proje ayarları → Hizmet hesapları\'ndan özel anahtar ' +
-          'oluşturup Vercel ortam değişkenlerine ekle.',
-      },
-      503
-    );
-  }
+  const tani = servisHesabiTani();
+  if (!tani.hesap) return json({ hazir: false, hata: tani.sebep }, 503);
 
   const token = await erisimJetonu();
   if (!token) return json({ hazir: false, hata: 'Google jetonu alınamadı' }, 502);
@@ -207,9 +198,8 @@ export const GET: APIRoute = async ({ request, url }) => {
 export const POST: APIRoute = async ({ request }) => {
   if (!(await istekYetkiliMi(request))) return yetkisiz();
 
-  if (!servisHesabi()) {
-    return json({ hata: 'FIREBASE_SERVICE_ACCOUNT tanımlı değil — yazma kapalı.' }, 503);
-  }
+  const taniPost = servisHesabiTani();
+  if (!taniPost.hesap) return json({ hata: taniPost.sebep }, 503);
   const token = await erisimJetonu();
   if (!token) return json({ hata: 'Google jetonu alınamadı' }, 502);
 
