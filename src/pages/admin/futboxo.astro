@@ -1,0 +1,429 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Futboxo Yönetimi" description="Futboxo admin">
+  <div class="wrap">
+    <header class="top">
+      <a href="/admin/dashboard" class="geri">← Panel</a>
+      <h1>Futboxo Yönetimi</h1>
+      <span id="yazmaDurum" class="rozet">…</span>
+    </header>
+
+    <nav class="sekmeler">
+      <button class="sekme aktif" data-sekme="duyuru">Duyuru &amp; Kontrol</button>
+      <button class="sekme" data-sekme="transfer">Transfer &amp; Oyuncu</button>
+    </nav>
+
+    <!-- ── DUYURU & KONTROL ─────────────────────────────────────────────── -->
+    <section id="duyuru" class="panel">
+      <div class="kart uyari" id="kapiUyari" hidden>
+        <strong>Dikkat:</strong> Sürüm kapısı açıkken belirttiğin sürümün ALTINDAKİ
+        tüm kullanıcılar oyunu açamaz, güncelleme ekranı görür. Yalnızca kritik
+        hatalarda kullan.
+      </div>
+
+      <div class="kart">
+        <h2>Zorunlu Güncelleme</h2>
+        <p class="ipucu">Boş bırakırsan kapı kapalıdır — kimse kilitlenmez.</p>
+        <label>Minimum sürüm
+          <input id="minVersion" placeholder="örn. 1.5 — boş = kapalı" />
+        </label>
+        <label>Kullanıcıya gösterilecek mesaj
+          <textarea id="updateMessage" rows="2" placeholder="Eşleşme hatası giderildi, lütfen güncelle."></textarea>
+        </label>
+      </div>
+
+      <div class="kart">
+        <h2>Bakım Modu</h2>
+        <label class="satir">
+          <input type="checkbox" id="maintenance" />
+          <span>Bakım modunu aç (herkes bakım ekranı görür)</span>
+        </label>
+        <label>Bakım mesajı
+          <textarea id="maintenanceMessage" rows="2" placeholder="Kısa bir bakım yapıyoruz, birazdan döneceğiz."></textarea>
+        </label>
+      </div>
+
+      <div class="kart">
+        <h2>Duyuru Banner'ı</h2>
+        <label class="satir">
+          <input type="checkbox" id="bannerAcik" />
+          <span>Banner göster</span>
+        </label>
+        <div id="bannerAlan">
+          <div class="ikili">
+            <label>Kimlik (id)
+              <input id="bId" placeholder="duyuru_2026_09" />
+            </label>
+            <label>Biçim
+              <select id="bStyle">
+                <option value="small">İnce şerit (ana sayfada)</option>
+                <option value="fullscreen">Tam ekran kart</option>
+              </select>
+            </label>
+          </div>
+          <p class="ipucu">
+            Aynı <code>id</code> bir kez gösterilir; kullanıcı kapatınca bir daha çıkmaz.
+            Yeni duyuru için <strong>yeni bir id</strong> ver.
+          </p>
+          <label>Başlık<input id="bTitle" placeholder="Yeni Sezon Başladı" /></label>
+          <label>Metin<textarea id="bBody" rows="2" placeholder="178 takım ve 11 lig logosuyla güncellendi."></textarea></label>
+          <label>Görsel adresi (opsiyonel)<input id="bImage" placeholder="https://www.companysoftware.app/futboxo/..." /></label>
+          <div class="ikili">
+            <label>Buton yazısı (opsiyonel)<input id="bBtnText" placeholder="İncele" /></label>
+            <label>Buton adresi (opsiyonel)<input id="bBtnUrl" placeholder="https://..." /></label>
+          </div>
+          <label class="satir">
+            <input type="checkbox" id="bDismiss" checked />
+            <span>Kapatılabilir olsun (tam ekranda kapalı bırakmak App Store kuralına takılabilir)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="eylem">
+        <button id="kaydetConfig" class="btn">Yayınla</button>
+        <button id="kopyalaConfig" class="btn ikincil">JSON'u kopyala</button>
+        <span id="configDurum" class="durum"></span>
+      </div>
+      <pre id="configOnizleme" class="onizleme"></pre>
+    </section>
+
+    <!-- ── TRANSFER & OYUNCU ────────────────────────────────────────────── -->
+    <section id="transfer" class="panel" hidden>
+      <div class="kart">
+        <h2>Oyuncu Ara</h2>
+        <p class="ipucu">
+          En az 3 harf yaz. Bulduğun oyuncuya takım ekleyebilir, yanlış takımı
+          çıkarabilir, güncel takımını ve rating'ini düzeltebilirsin.
+        </p>
+        <input id="arama" placeholder="Rafael Leão, Greenwood, Taffarel..." autocomplete="off" />
+        <div id="sonuclar" class="sonuclar"></div>
+      </div>
+
+      <div class="kart" id="duzenleKart" hidden>
+        <h2 id="duzenleAd">—</h2>
+        <p class="ipucu" id="duzenleMevcut"></p>
+
+        <label>Takım ekle
+          <input id="takimEkle" list="takimListesi" placeholder="galatasaray" autocomplete="off" />
+        </label>
+        <datalist id="takimListesi"></datalist>
+
+        <label>Takım çıkar
+          <input id="takimCikar" list="takimListesi" placeholder="yanlis_takim" autocomplete="off" />
+        </label>
+
+        <div class="ikili">
+          <label>Güncel takım (görünen ad)<input id="guncelTakim" placeholder="Galatasaray" /></label>
+          <label>Rating (opsiyonel)<input id="rating" type="number" placeholder="84" /></label>
+        </div>
+
+        <button id="yamaEkle" class="btn">Listeye ekle</button>
+      </div>
+
+      <div class="kart">
+        <h2>Bekleyen Yamalar</h2>
+        <div id="yamaListe" class="yamalar"></div>
+        <div class="eylem">
+          <button id="kaydetPatch" class="btn">Yayınla</button>
+          <button id="kopyalaPatch" class="btn ikincil">JSON'u kopyala</button>
+          <span id="patchDurum" class="durum"></span>
+        </div>
+        <pre id="patchOnizleme" class="onizleme"></pre>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  // Oturum kontrolü — sunucudan.
+  fetch('/api/admin-login').then((r) => { if (!r.ok) location.href = '/admin'; })
+    .catch(() => { location.href = '/admin'; });
+
+  const $ = (id: string) => document.getElementById(id) as any;
+  let config: any = {};
+  let patch: any = { version: 1, patches: [] };
+  let oyuncular: any[] = [];
+  let takimlar: Record<string, string> = {};
+  let seciliOyuncu: any = null;
+  let yazilabilir = false;
+
+  // ── Sekmeler ──
+  document.querySelectorAll('.sekme').forEach((b) =>
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.sekme').forEach((x) => x.classList.remove('aktif'));
+      b.classList.add('aktif');
+      const hedef = (b as HTMLElement).dataset.sekme;
+      $('duyuru').hidden = hedef !== 'duyuru';
+      $('transfer').hidden = hedef !== 'transfer';
+    })
+  );
+
+  // ── Yükleme ──
+  async function yukle(dosya: string) {
+    const r = await fetch(`/api/futboxo-admin?dosya=${dosya}`);
+    if (!r.ok) throw new Error(`${dosya} okunamadı`);
+    const v = await r.json();
+    yazilabilir = v.yazilabilir;
+    return v.icerik;
+  }
+
+  (async () => {
+    try {
+      config = await yukle('config');
+      patch = await yukle('patch');
+      configDoldur();
+      yamalariCiz();
+      $('yazmaDurum').textContent = yazilabilir ? 'Yayınlama açık' : 'Salt okunur (GITHUB_TOKEN yok)';
+      $('yazmaDurum').className = 'rozet ' + (yazilabilir ? 'yesil' : 'sari');
+    } catch (e: any) {
+      $('yazmaDurum').textContent = 'Yüklenemedi';
+      $('yazmaDurum').className = 'rozet kirmizi';
+    }
+    // Oyuncu indeksi (büyük dosya — arka planda)
+    try {
+      const r = await fetch('/futboxo/players-index.json');
+      const v = await r.json();
+      oyuncular = v.players;
+      takimlar = v.teams;
+      const dl = $('takimListesi');
+      Object.entries(takimlar).forEach(([id, ad]) => {
+        const o = document.createElement('option');
+        o.value = id; o.label = ad as string;
+        dl.appendChild(o);
+      });
+    } catch {}
+  })();
+
+  // ── Config formu ──
+  function configDoldur() {
+    $('minVersion').value = config.minVersion || '';
+    $('updateMessage').value = config.updateMessage || '';
+    $('maintenance').checked = !!config.maintenance;
+    $('maintenanceMessage').value = config.maintenanceMessage || '';
+    const b = config.banner;
+    $('bannerAcik').checked = !!b;
+    if (b) {
+      $('bId').value = b.id || ''; $('bStyle').value = b.style || 'small';
+      $('bTitle').value = b.title || ''; $('bBody').value = b.body || '';
+      $('bImage').value = b.imageURL || ''; $('bBtnText').value = b.buttonText || '';
+      $('bBtnUrl').value = b.buttonURL || ''; $('bDismiss').checked = b.dismissible !== false;
+    }
+    configGuncelle();
+  }
+
+  function configTopla() {
+    const c: any = {
+      minVersion: $('minVersion').value.trim(),
+      updateMessage: $('updateMessage').value.trim(),
+      maintenance: $('maintenance').checked,
+      maintenanceMessage: $('maintenanceMessage').value.trim(),
+      banner: null,
+    };
+    if ($('bannerAcik').checked) {
+      c.banner = {
+        id: $('bId').value.trim() || 'duyuru_' + Date.now(),
+        style: $('bStyle').value,
+        title: $('bTitle').value.trim(),
+        body: $('bBody').value.trim(),
+        dismissible: $('bDismiss').checked,
+      };
+      if ($('bImage').value.trim()) c.banner.imageURL = $('bImage').value.trim();
+      if ($('bBtnText').value.trim()) c.banner.buttonText = $('bBtnText').value.trim();
+      if ($('bBtnUrl').value.trim()) c.banner.buttonURL = $('bBtnUrl').value.trim();
+    }
+    return c;
+  }
+
+  function configGuncelle() {
+    const c = configTopla();
+    $('configOnizleme').textContent = JSON.stringify(c, null, 1);
+    $('kapiUyari').hidden = !c.minVersion;
+    $('bannerAlan').style.opacity = $('bannerAcik').checked ? '1' : '0.4';
+  }
+  $('duyuru').addEventListener('input', configGuncelle);
+  $('duyuru').addEventListener('change', configGuncelle);
+
+  // ── Oyuncu arama ──
+  let zamanlayici: any;
+  $('arama').addEventListener('input', () => {
+    clearTimeout(zamanlayici);
+    zamanlayici = setTimeout(ara, 180);
+  });
+
+  function sadelestir(s: string) {
+    return s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  function ara() {
+    const q = sadelestir($('arama').value.trim());
+    const kutu = $('sonuclar');
+    if (q.length < 3) { kutu.innerHTML = ''; return; }
+    const bulunan = oyuncular.filter((p) => sadelestir(p.n).includes(q)).slice(0, 25);
+    kutu.innerHTML = bulunan.length ? '' : '<p class="ipucu">Sonuç yok.</p>';
+    bulunan.forEach((p) => {
+      const d = document.createElement('button');
+      d.className = 'sonuc';
+      d.innerHTML = `<strong>${p.n}</strong><span>${p.r || '—'} · ${p.c || 'takımsız'}</span>`;
+      d.addEventListener('click', () => sec(p));
+      kutu.appendChild(d);
+    });
+  }
+
+  function sec(p: any) {
+    seciliOyuncu = p;
+    $('duzenleKart').hidden = false;
+    $('duzenleAd').textContent = p.n;
+    const adlar = p.t.map((t: string) => takimlar[t] || t).join(' · ');
+    $('duzenleMevcut').innerHTML =
+      `<code>${p.i}</code> — mevcut takımlar: ${adlar || 'yok'}`;
+    $('takimEkle').value = ''; $('takimCikar').value = '';
+    $('guncelTakim').value = ''; $('rating').value = '';
+    $('duzenleKart').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  $('yamaEkle').addEventListener('click', () => {
+    if (!seciliOyuncu) return;
+    const y: any = { id: seciliOyuncu.i };
+    const ekle = $('takimEkle').value.trim();
+    const cikar = $('takimCikar').value.trim();
+    if (ekle) y.addTeams = [ekle];
+    if (cikar) y.removeTeams = [cikar];
+    if ($('guncelTakim').value.trim()) y.currentTeam = $('guncelTakim').value.trim();
+    if ($('rating').value) y.rating = Number($('rating').value);
+    if (Object.keys(y).length === 1) { alert('En az bir değişiklik gir.'); return; }
+
+    patch.patches = patch.patches.filter((x: any) => x.id !== y.id);
+    patch.patches.push(y);
+    yamalariCiz();
+    $('duzenleKart').hidden = true;
+    seciliOyuncu = null;
+    $('arama').value = ''; $('sonuclar').innerHTML = '';
+  });
+
+  function yamalariCiz() {
+    const kutu = $('yamaListe');
+    if (!patch.patches?.length) {
+      kutu.innerHTML = '<p class="ipucu">Henüz yama yok.</p>';
+    } else {
+      kutu.innerHTML = '';
+      patch.patches.forEach((y: any, i: number) => {
+        const ad = oyuncular.find((p) => p.i === y.id)?.n || y.id;
+        const parcalar: string[] = [];
+        if (y.addTeams) parcalar.push('+ ' + y.addTeams.join(', '));
+        if (y.removeTeams) parcalar.push('− ' + y.removeTeams.join(', '));
+        if (y.currentTeam) parcalar.push('güncel: ' + y.currentTeam);
+        if (y.rating) parcalar.push('rating: ' + y.rating);
+        const d = document.createElement('div');
+        d.className = 'yama';
+        d.innerHTML = `<div><strong>${ad}</strong><span>${parcalar.join(' · ')}</span></div>`;
+        const sil = document.createElement('button');
+        sil.textContent = 'Sil'; sil.className = 'sil';
+        sil.addEventListener('click', () => { patch.patches.splice(i, 1); yamalariCiz(); });
+        d.appendChild(sil);
+        kutu.appendChild(d);
+      });
+    }
+    $('patchOnizleme').textContent = JSON.stringify(patch, null, 1);
+  }
+
+  // ── Kaydetme ──
+  async function yayinla(dosya: string, icerik: any, durumId: string, mesaj: string) {
+    const d = $(durumId);
+    d.textContent = 'Gönderiliyor...'; d.className = 'durum';
+    const r = await fetch('/api/futboxo-admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dosya, icerik, mesaj }),
+    });
+    const v = await r.json().catch(() => ({}));
+    if (r.ok) {
+      d.textContent = `Yayınlandı (${v.commit}). ${v.not || ''}`;
+      d.className = 'durum ok';
+    } else {
+      d.textContent = v.error || 'Hata';
+      d.className = 'durum hata';
+    }
+  }
+
+  $('kaydetConfig').addEventListener('click', () => {
+    const c = configTopla();
+    if (c.minVersion && !confirm(
+      `Sürüm kapısı açılıyor.\n\n${c.minVersion} altındaki TÜM kullanıcılar oyunu açamayacak.\n\nEmin misin?`
+    )) return;
+    if (c.maintenance && !confirm('Bakım modu açılıyor — herkes bakım ekranı görecek. Emin misin?')) return;
+    config = c;
+    yayinla('config', c, 'configDurum', 'Futboxo: duyuru/kontrol güncellendi');
+  });
+
+  $('kaydetPatch').addEventListener('click', () => {
+    patch.version = (Number(patch.version) || 0) + 1;
+    yamalariCiz();
+    yayinla('patch', patch, 'patchDurum', `Futboxo: oyuncu yaması v${patch.version}`);
+  });
+
+  $('kopyalaConfig').addEventListener('click', () =>
+    navigator.clipboard.writeText(JSON.stringify(configTopla(), null, 1))
+      .then(() => ($('configDurum').textContent = 'Panoya kopyalandı.')));
+  $('kopyalaPatch').addEventListener('click', () =>
+    navigator.clipboard.writeText(JSON.stringify(patch, null, 1))
+      .then(() => ($('patchDurum').textContent = 'Panoya kopyalandı.')));
+</script>
+
+<style>
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 80px; }
+  .top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .top h1 { font-size: 24px; margin: 0; flex: 1; }
+  .geri { color: #666; text-decoration: none; font-size: 14px; }
+  .rozet { font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px;
+           background: #eee; color: #666; }
+  .rozet.yesil { background: #e6f7ed; color: #0a7a3d; }
+  .rozet.sari { background: #fff6e0; color: #8a6100; }
+  .rozet.kirmizi { background: #fdeaea; color: #a11; }
+
+  .sekmeler { display: flex; gap: 8px; margin-bottom: 20px; }
+  .sekme { padding: 9px 16px; border: 1px solid #e5e0d8; background: #fff; border-radius: 10px;
+           cursor: pointer; font-size: 14px; font-weight: 600; color: #666; }
+  .sekme.aktif { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  .kart { background: #fff; border: 1px solid #f0ede8; border-radius: 16px;
+          padding: 20px; margin-bottom: 16px; }
+  .kart h2 { font-size: 16px; margin: 0 0 6px; }
+  .kart.uyari { background: #fff8e6; border-color: #f0d9a0; font-size: 13px; }
+
+  label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-top: 12px; }
+  label.satir { display: flex; align-items: center; gap: 9px; font-weight: 500; }
+  input[type=text], input:not([type]), input[type=number], textarea, select {
+    width: 100%; margin-top: 5px; padding: 10px 12px; border: 1px solid #e5e0d8;
+    border-radius: 9px; font: inherit; font-size: 14px; font-weight: 400; }
+  textarea { resize: vertical; }
+  .ikili { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ipucu { font-size: 12px; color: #888; margin: 4px 0 0; }
+  code { background: #f4f2ef; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+
+  .eylem { display: flex; align-items: center; gap: 10px; margin: 16px 0 8px; flex-wrap: wrap; }
+  .btn { padding: 11px 20px; border: none; border-radius: 10px; background: #1a1a1a;
+         color: #fff; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .btn.ikincil { background: #fff; color: #444; border: 1px solid #e5e0d8; }
+  .durum { font-size: 13px; color: #666; }
+  .durum.ok { color: #0a7a3d; } .durum.hata { color: #a11; }
+
+  .onizleme { background: #1a1a1a; color: #b9f; padding: 14px; border-radius: 12px;
+              font-size: 11px; overflow-x: auto; max-height: 220px; }
+
+  .sonuclar { display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
+              max-height: 300px; overflow-y: auto; }
+  .sonuc { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+           padding: 10px 12px; border: 1px solid #eee; border-radius: 9px; background: #fff;
+           cursor: pointer; text-align: left; font: inherit; }
+  .sonuc:hover { border-color: #1a1a1a; }
+  .sonuc span { font-size: 12px; color: #888; }
+
+  .yamalar { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .yama { display: flex; justify-content: space-between; align-items: center;
+          padding: 10px 12px; background: #f8f7f5; border-radius: 9px; }
+  .yama span { display: block; font-size: 12px; color: #777; }
+  .sil { border: none; background: #fdeaea; color: #a11; border-radius: 7px;
+         padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+</style>
