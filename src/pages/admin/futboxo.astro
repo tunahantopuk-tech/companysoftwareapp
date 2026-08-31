@@ -292,7 +292,16 @@ import Layout from '../../layouts/Layout.astro';
     if (cikar) y.removeTeams = [cikar];
     if ($('guncelTakim').value.trim()) y.currentTeam = $('guncelTakim').value.trim();
     if ($('rating').value) y.rating = Number($('rating').value);
-    if (Object.keys(y).length === 1) { alert('En az bir değişiklik gir.'); return; }
+    if (Object.keys(y).length === 1) {
+      alert('Hiçbir alan doldurulmamış.\n\nTransfer için "Takım ekle" alanına takım id\'sini yaz (örn. galatasaray).');
+      return;
+    }
+    // Transfer girilip güncel takım boş bırakıldıysa hatırlat — kart üzerinde
+    // eski takım görünmeye devam eder, kolayca gözden kaçıyor.
+    if (y.addTeams && !y.currentTeam &&
+        !confirm('Takım eklendi ama "Güncel takım" boş.\n\nOyuncunun kartında hâlâ ESKİ takımı görünecek.\n\nYine de ekleyeyim mi?')) {
+      return;
+    }
 
     patch.patches = patch.patches.filter((x: any) => x.id !== y.id);
     patch.patches.push(y);
@@ -412,18 +421,29 @@ import Layout from '../../layouts/Layout.astro';
   .onizleme { background: #1a1a1a; color: #b9f; padding: 14px; border-radius: 12px;
               font-size: 11px; overflow-x: auto; max-height: 220px; }
 
-  .sonuclar { display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
-              max-height: 300px; overflow-y: auto; }
-  .sonuc { display: flex; justify-content: space-between; align-items: center; gap: 10px;
-           padding: 10px 12px; border: 1px solid #eee; border-radius: 9px; background: #fff;
-           cursor: pointer; text-align: left; font: inherit; }
-  .sonuc:hover { border-color: #1a1a1a; }
-  .sonuc span { font-size: 12px; color: #888; }
+</style>
 
-  .yamalar { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-  .yama { display: flex; justify-content: space-between; align-items: center;
-          padding: 10px 12px; background: #f8f7f5; border-radius: 9px; }
-  .yama span { display: block; font-size: 12px; color: #777; }
-  .sil { border: none; background: #fdeaea; color: #a11; border-radius: 7px;
-         padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+<!-- ⚠️ GLOBAL: Bu elemanları JavaScript sonradan üretiyor (arama sonuçları, yama
+     listesi). Astro'nun kapsamlı CSS'i yalnızca şablondaki elemanlara işaret
+     eklediği için, JS ile üretilenler o stilleri ALMIYOR ve stilsiz görünüyordu.
+     Sızıntı olmasın diye hepsi .wrap altına kapatıldı. -->
+<style is:global>
+  .wrap .sonuclar { display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
+              max-height: 300px; overflow-y: auto; }
+  .wrap .sonuc { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+           padding: 10px 12px; border: 1px solid #eee; border-radius: 9px; background: #fff;
+           cursor: pointer; text-align: left; font: inherit; width: 100%; }
+  .wrap .sonuc:hover { border-color: #1a1a1a; }
+  .wrap .sonuc strong { font-size: 14px; }
+  .wrap .sonuc span { font-size: 12px; color: #888; }
+
+  .wrap .yamalar { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .wrap .yama { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+          padding: 12px 14px; background: #f8f7f5; border-radius: 10px; }
+  .wrap .yama strong { display: block; font-size: 14px; margin-bottom: 2px; }
+  .wrap .yama span { display: block; font-size: 12px; color: #777; }
+  .wrap .sil { border: none; background: #fdeaea; color: #a11; border-radius: 7px;
+         padding: 7px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
+         flex-shrink: 0; }
+  .wrap .yamalar .ipucu { margin: 0; }
 </style>
