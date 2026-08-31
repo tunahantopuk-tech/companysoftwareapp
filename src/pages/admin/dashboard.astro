@@ -438,9 +438,10 @@ const completedTasks = allTasks.filter(t => t.completed);
 </Layout>
 
 <script define:vars={{ projects }}>
-  if (sessionStorage.getItem('adminAuth') !== 'true') {
-    window.location.href = '/admin';
-  }
+  // Oturum kontrolü SUNUCUDAN — sessionStorage kurcalanabilir, çerez imzalı.
+  fetch('/api/admin-login').then((r) => {
+    if (!r.ok) window.location.href = '/admin';
+  }).catch(() => { window.location.href = '/admin'; });
 
   // ─── Trash ──────────────────────────────────────────────
   function getTrash() { return JSON.parse(localStorage.getItem('vibeco_trash') || '[]'); }
@@ -966,9 +967,9 @@ const completedTasks = allTasks.filter(t => t.completed);
 
   // Logout
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
-    sessionStorage.removeItem('adminAuth');
-    sessionStorage.removeItem('adminUser');
-    window.location.href = '/admin';
+    fetch('/api/admin-login', { method: 'DELETE' }).finally(() => {
+      window.location.href = '/admin';
+    });
   });
 
   // ─── Mobile Sidebar ─────────────────────────────────────

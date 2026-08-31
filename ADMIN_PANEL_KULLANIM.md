@@ -247,3 +247,40 @@ Sorun yaşarsanız:
 ---
 
 **Not:** Bu sistem tamamen local çalışır ve hiçbir external API kullanmaz. Tüm veriler `data/admin/` klasöründe saklanır.
+
+---
+
+## 🔐 GÜVENLİK GÜNCELLEMESİ (2026-08-31)
+
+Eski giriş **tarayıcı JavaScript'inde** hardcoded `admin`/`admin123` ile çalışıyordu —
+sayfanın kaynağına bakan herkes şifreyi görebiliyordu. Panele Futboxo yönetimi
+(banner yayınlama, oyuncu verisi değiştirme, ileride kullanıcı ban'ı) eklendiği için
+bu kapatıldı.
+
+**Yeni düzen:**
+- Şifre yalnızca Vercel ortam değişkeninde durur, istemciye hiç gitmez.
+- Doğrulama sunucuda (`/api/admin-login`) yapılır.
+- Tarayıcıya imzalı (HMAC), `httpOnly`, `Secure`, `SameSite=Strict` bir çerez döner —
+  JavaScript okuyamaz, içeriği kurcalanamaz. Oturum 8 saat geçerlidir.
+- Panel sayfaları açılışta oturumu SUNUCUYA sorar (`sessionStorage` kontrolü kaldırıldı).
+
+### Gerekli ortam değişkenleri
+
+Vercel → Project → Settings → Environment Variables:
+
+| Anahtar | Değer |
+|---|---|
+| `ADMIN_PASSWORD` | Panele gireceğin şifre (güçlü seç) |
+| `ADMIN_SECRET` | Çerez imzalama anahtarı — uzun ve rastgele bir dize |
+
+`ADMIN_SECRET` üretmek için:
+
+```bash
+openssl rand -hex 32
+```
+
+İkisi de tanımlı değilse giriş **500** döner ve panele girilemez — bu bilinçli:
+yapılandırılmamış bir panel açık kalmasın.
+
+> Not: İleride birden fazla admin gerekirse Firebase Auth + `admin:true` custom claim'e
+> geçilecek (Google ile giriş, 2FA otomatik). Servis hesabı anahtarı geldiğinde yapılabilir.

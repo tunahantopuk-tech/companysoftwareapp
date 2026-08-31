@@ -357,9 +357,10 @@ const completedTasks = tasks.filter(t => t.completed).sort((a, b) =>
 
 <script define:vars={{ project, prompts, tasks }}>
   // Check authentication
-  if (sessionStorage.getItem('adminAuth') !== 'true') {
-    window.location.href = '/admin';
-  }
+  // Oturum kontrolü SUNUCUDAN — sessionStorage kurcalanabilir, çerez imzalı.
+  fetch('/api/admin-login').then((r) => {
+    if (!r.ok) window.location.href = '/admin';
+  }).catch(() => { window.location.href = '/admin'; });
 
   // Load from localStorage and merge
   const storageKey = `vibeco_tasks_${project.id}`;

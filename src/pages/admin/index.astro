@@ -12,17 +12,6 @@ const isProduction = import.meta.env.PROD;
       <p class="login-tagline">Company Software — Proje Yönetimi</p>
       <form id="loginForm" class="login-form">
         <div class="form-group">
-          <label for="username">Kullanıcı Adı</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            autocomplete="username"
-            placeholder="Kullanıcı adınızı girin"
-          />
-        </div>
-        <div class="form-group">
           <label for="password">Şifre</label>
           <input
             type="password"
@@ -41,34 +30,43 @@ const isProduction = import.meta.env.PROD;
 </Layout>
 
 <script>
+  // ⚠️ Şifre burada YOK. Doğrulama sunucuda (/api/admin-login) yapılır ve
+  //    tarayıcıya yalnızca imzalı, httpOnly bir oturum çerezi döner.
+  //    Eski sürümde şifre bu dosyanın içinde açık yazıyordu.
   const form = document.getElementById('loginForm') as HTMLFormElement;
   const errorDiv = document.getElementById('error') as HTMLElement;
+  const buton = form.querySelector('button') as HTMLButtonElement;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorDiv.textContent = '';
+    buton.disabled = true;
+    buton.textContent = 'Kontrol ediliyor...';
 
-    const formData = new FormData(form);
-    const username = formData.get('username') as string;
-    const password = formData.get('password') as string;
-
-    // Simple authentication (you can enhance this)
-    if (username === 'admin' && password === 'admin123') {
-      // Store session
-      sessionStorage.setItem('adminAuth', 'true');
-      sessionStorage.setItem('adminUser', username);
-
-      // Redirect to dashboard
-      window.location.href = '/admin/dashboard';
-    } else {
-      errorDiv.textContent = 'Kullanıcı adı veya şifre hatalı!';
+    const sifre = (new FormData(form).get('password') as string) ?? '';
+    try {
+      const yanit = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: sifre }),
+      });
+      if (yanit.ok) {
+        window.location.href = '/admin/dashboard';
+        return;
+      }
+      const veri = await yanit.json().catch(() => ({}));
+      errorDiv.textContent = veri.error || 'Giriş başarısız.';
+    } catch {
+      errorDiv.textContent = 'Sunucuya ulaşılamadı.';
     }
+    buton.disabled = false;
+    buton.textContent = 'Giriş Yap';
   });
 
-  // Check if already logged in
-  if (sessionStorage.getItem('adminAuth') === 'true') {
-    window.location.href = '/admin/dashboard';
-  }
+  // Zaten oturum açıksa panele geç.
+  fetch('/api/admin-login').then((r) => {
+    if (r.ok) window.location.href = '/admin/dashboard';
+  });
 </script>
 
 <style>
