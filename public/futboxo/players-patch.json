@@ -1,5 +1,5 @@
 {
- "version": 4,
+ "version": 5,
  "patches": [
   {
    "id": "rafael_leao",
@@ -1750,6 +1750,55 @@
     "fc_koln"
    ],
    "currentTeam": "FC Köln"
+  },
+  {
+   "id": "mohamed_salah",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "fabinho_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "romelu_lukaku",
+   "addTeams": [
+    "fenerbahce"
+   ],
+   "currentTeam": "Fenerbahçe"
+  },
+  {
+   "id": "leandro_trossard_2",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "ousmane_diomande",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "ernest_poku",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "sidny_cabral",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
   }
  ]
 }
