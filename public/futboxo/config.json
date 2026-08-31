@@ -12,9 +12,7 @@
    "title": "Yeni Transferler ve Yeni Takımlar !",
    "body": "Sezon Güncellemesi — 31.08.2026 tarihi itibariyle yeni transferler oyunumuza eklenmiştir.",
    "dismissible": true,
-   "imageURL": "https://www.companysoftware.app/images/Futboxo.png",
-   "buttonText": ">>",
-   "buttonURL": "https://www.galatasaray.org/haber/gs-sportif-a-s/rafael-leao-galatasarayda/60848"
+   "imageURL": "https://www.companysoftware.app/images/Futboxo.png"
   },
   {
    "id": "Duyuru 2",
@@ -23,9 +21,7 @@
    "title": "Rafael Leao Galatasaray'da!",
    "body": "Galatasaray Sportif A.Ş. profesyonel futbolcu Rafael Leão’nun transferi konusunda anlaşma sağlandığını resmen duyurdu.",
    "dismissible": true,
-   "imageURL": "https://hlkiurt3.rocketcdn.com/news/40c2d1fef97f4b06a6a52adc4a94b4b2.jpeg",
-   "buttonText": ">>",
-   "buttonURL": "https://www.galatasaray.org/haber/gs-sportif-a-s/rafael-leao-galatasarayda/60848"
+   "imageURL": "https://hlkiurt3.rocketcdn.com/news/40c2d1fef97f4b06a6a52adc4a94b4b2.jpeg"
   }
  ]
 }
