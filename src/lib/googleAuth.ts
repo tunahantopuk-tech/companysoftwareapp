@@ -42,9 +42,25 @@ export function servisHesabiTani(): { hesap: ServisHesabi | null; sebep: string 
     };
   }
 
-  let j: ServisHesabi;
+  // Elle yapıştırılırken en sık görülen iki kaza:
+  //  (a) dosyanın ilk satırı olan tek başına "{" atlanıyor
+  //  (b) son satırdaki "}" atlanıyor
+  // Anahtar gizli olduğu için içeriği ekranda görüp düzeltmek zor; bu yüzden
+  // burada onarmayı deniyoruz. Onarım işe yaramazsa gerçek hata raporlanır.
+  const metin = ham.trim();
+  const adaylar = [metin];
+  if (!metin.startsWith('{')) adaylar.push('{' + metin);
+  if (!metin.endsWith('}')) adaylar.push(metin + '}');
+  if (!metin.startsWith('{') && !metin.endsWith('}')) adaylar.push('{' + metin + '}');
+
+  let j: ServisHesabi | null = null;
+  let sonHata: any = null;
+  for (const aday of adaylar) {
+    try { j = JSON.parse(aday) as ServisHesabi; break; } catch (e) { sonHata = e; }
+  }
+
   try {
-    j = JSON.parse(ham) as ServisHesabi;
+    if (!j) throw sonHata;
   } catch (e: any) {
     return {
       hesap: null,
