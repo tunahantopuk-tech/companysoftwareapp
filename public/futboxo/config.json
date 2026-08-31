@@ -3,12 +3,25 @@
  "updateMessage": "",
  "maintenance": false,
  "maintenanceMessage": "",
- "banner": {
-  "id": "Duyuru 2",
-  "style": "fullscreen",
-  "title": "Yeni Transferler ve Yeni Takımlar !",
-  "body": "31.08.2026 tarihi itibariyle yeni transferler oyunumuza eklenmiştir.\nRafa Leao - Galatasaray",
-  "dismissible": true,
-  "imageURL": "https://www.companysoftware.app/images/Futboxo.png"
- }
+ "banner": null,
+ "banners": [
+  {
+   "id": "Duyuru 1",
+   "style": "fullscreen",
+   "frequency": "always",
+   "title": "Yeni Transferler ve Yeni Takımlar !",
+   "body": "Sezon Güncellemesi — 31.08.2026 tarihi itibariyle yeni transferler oyunumuza eklenmiştir.",
+   "dismissible": true,
+   "imageURL": "https://www.companysoftware.app/images/Futboxo.png"
+  },
+  {
+   "id": "Duyuru 2",
+   "style": "strip",
+   "frequency": "always",
+   "title": "Rafael Leao Galatasaray'da!",
+   "body": "Galatasaray Sportif A.Ş. profesyonel futbolcu Rafael Leão’nun transferi konusunda anlaşma sağlandığını resmen duyurdu.",
+   "dismissible": true,
+   "imageURL": "https://hlkiurt3.rocketcdn.com/news/40c2d1fef97f4b06a6a52adc4a94b4b2.jpeg"
+  }
+ ]
 }
