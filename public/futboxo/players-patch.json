@@ -1,8 +1,11 @@
 {
- "version": 2,
+ "version": 3,
  "patches": [
   {
    "id": "rafael_leao",
+   "addTeams": [
+    "galatasaray"
+   ],
    "rating": 85
   }
  ]
