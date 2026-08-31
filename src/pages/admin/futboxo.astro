@@ -242,8 +242,11 @@ import Layout from '../../layouts/Layout.astro';
       document.querySelectorAll('.sekme').forEach((x) => x.classList.remove('aktif'));
       b.classList.add('aktif');
       const hedef = (b as HTMLElement).dataset.sekme;
-      $('duyuru').hidden = hedef !== 'duyuru';
-      $('transfer').hidden = hedef !== 'transfer';
+      // Bölümleri TEK TEK saymak yerine hepsini gez — yeni sekme eklendiğinde
+      // burayı güncellemeyi unutmak bölümün hiç açılmamasına yol açıyordu.
+      document.querySelectorAll('.panel').forEach((p) => {
+        (p as HTMLElement).hidden = p.id !== hedef;
+      });
     })
   );
 
