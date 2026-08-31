@@ -5,7 +5,7 @@
  "maintenanceMessage": "",
  "banner": {
   "id": "Duyuru 2",
-  "style": "small",
+  "style": "fullscreen",
   "title": "Yeni Transferler ve Yeni Takımlar !",
   "body": "31.08.2026 tarihi itibariyle yeni transferler oyunumuza eklenmiştir.\nRafa Leao - Galatasaray",
   "dismissible": true,
