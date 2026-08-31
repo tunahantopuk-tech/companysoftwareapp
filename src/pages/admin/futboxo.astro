@@ -45,58 +45,94 @@ import Layout from '../../layouts/Layout.astro';
         </label>
       </div>
 
+      <!-- ── TAM EKRAN DUYURU ─────────────────────────────────────────── -->
       <div class="kart">
-        <h2>Duyuru Banner'ı</h2>
+        <h2>Tam Ekran Duyuru</h2>
+        <p class="ipucu">
+          Oyun açılınca ekranın tamamını kaplayan kart. Büyük duyurular için.
+        </p>
         <label class="satir">
-          <input type="checkbox" id="bannerAcik" />
-          <span>Banner göster</span>
+          <input type="checkbox" id="fsAcik" />
+          <span>Tam ekran duyuru göster</span>
         </label>
-        <div id="bannerAlan">
+        <div id="fsAlan">
           <div class="ikili">
             <label>Kimlik (id)
-              <input id="bId" placeholder="duyuru_2026_09" />
+              <input id="fsId" placeholder="tam-ekran-2026-09" />
             </label>
-            <label>Biçim
-              <select id="bStyle">
-                <option value="strip">İnce şerit (ana sayfada)</option>
-                <option value="fullscreen">Tam ekran kart</option>
-                <option value="both">İkisi birden</option>
-              </select>
-            </label>
-          </div>
-          <div class="ikili">
             <label>Gösterim sıklığı
-              <select id="bFreq">
+              <select id="fsFreq">
                 <option value="once">Bir kez göster</option>
                 <option value="always">Her açılışta göster</option>
                 <option value="interval">Belirli aralıkla göster</option>
               </select>
             </label>
-            <label id="bIntervalAlan">Kaç dakikada bir
-              <input id="bInterval" type="number" min="1" step="1" value="60" />
-            </label>
           </div>
-          <p class="ipucu">
-            <strong>Biçim:</strong> “İkisi birden” seçilirse duyuru önce tam ekran açılır,
-            kapatılınca ana sayfada ince şerit olarak kalır.<br />
-            <strong>Sıklık tam ekranı yönetir.</strong> İnce şerit, kullanıcı kapatana kadar
-            ana sayfada durur. Aynı <code>id</code> gösterim geçmişini taşır —
-            <strong>yeni duyuru için yeni bir id ver</strong>, yoksa eski duyuruyu görmüş
-            kullanıcılara yenisi çıkmayabilir.
-          </p>
-          <label>Başlık<input id="bTitle" placeholder="Yeni Sezon Başladı" /></label>
-          <label>Metin<textarea id="bBody" rows="2" placeholder="178 takım ve 11 lig logosuyla güncellendi."></textarea></label>
-          <label>Görsel adresi (opsiyonel)<input id="bImage" placeholder="https://www.companysoftware.app/futboxo/..." /></label>
+          <label id="fsIntervalAlan">Kaç dakikada bir göstersin
+            <input id="fsInterval" type="number" min="1" step="1" value="60" />
+          </label>
+          <label>Başlık<input id="fsTitle" placeholder="Yeni Sezon Başladı" /></label>
+          <label>Metin<textarea id="fsBody" rows="3" placeholder="193 takım ve 11 lig logosuyla güncellendi."></textarea></label>
+          <label>Görsel adresi (opsiyonel)<input id="fsImage" placeholder="https://www.companysoftware.app/futboxo/..." /></label>
           <div class="ikili">
-            <label>Buton yazısı (opsiyonel)<input id="bBtnText" placeholder="İncele" /></label>
-            <label>Buton adresi (opsiyonel)<input id="bBtnUrl" placeholder="https://..." /></label>
+            <label>Buton yazısı (opsiyonel)<input id="fsBtnText" placeholder="İncele" /></label>
+            <label>Buton adresi (opsiyonel)<input id="fsBtnUrl" placeholder="https://..." /></label>
           </div>
           <label class="satir">
-            <input type="checkbox" id="bDismiss" checked />
-            <span>Kapatılabilir olsun (tam ekranda kapalı bırakmak App Store kuralına takılabilir)</span>
+            <input type="checkbox" id="fsDismiss" checked />
+            <span>Kapatılabilir olsun (kapatılamaz bırakmak App Store kuralına takılabilir)</span>
+          </label>
+          <label class="satir">
+            <input type="checkbox" id="fsAyricaSerit" />
+            <span>Kapatılınca ana sayfada ince şerit olarak da kalsın</span>
           </label>
         </div>
       </div>
+
+      <!-- ── İNCE ŞERİT DUYURU ────────────────────────────────────────────── -->
+      <div class="kart">
+        <h2>İnce Şerit Duyuru</h2>
+        <p class="ipucu">
+          Ana sayfada, oyun kartlarının üstünde duran ince satır.
+          <strong>Tam ekrandan bağımsızdır</strong> — ikisine farklı metin yazabilirsin,
+          ikisi aynı anda yayında olabilir. Şerit kalıcıdır: kullanıcı kapatana kadar durur,
+          o yüzden “sıklık” ayarı yoktur.
+        </p>
+        <label class="satir">
+          <input type="checkbox" id="stAcik" />
+          <span>İnce şerit duyuru göster</span>
+        </label>
+        <div id="stAlan">
+          <div class="ikili">
+            <label>Kimlik (id)
+              <input id="stId" placeholder="serit-2026-09" />
+            </label>
+            <label>Kapatınca
+              <select id="stFreq">
+                <option value="once">Bir daha çıkmasın</option>
+                <option value="always">Sonraki açılışta yine çıksın</option>
+              </select>
+            </label>
+          </div>
+          <label>Başlık<input id="stTitle" placeholder="Topluluk Logo Paketi v3.0" /></label>
+          <label>Metin<textarea id="stBody" rows="2" placeholder="193 takım + 11 lig logosu hazır."></textarea></label>
+          <label>Görsel adresi (opsiyonel)<input id="stImage" placeholder="https://www.companysoftware.app/futboxo/..." /></label>
+          <div class="ikili">
+            <label>Buton yazısı (opsiyonel)<input id="stBtnText" placeholder="Aç" /></label>
+            <label>Buton adresi (opsiyonel)<input id="stBtnUrl" placeholder="https://..." /></label>
+          </div>
+          <label class="satir">
+            <input type="checkbox" id="stDismiss" checked />
+            <span>Kapatılabilir olsun</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="ipucu">
+        ⚠️ <strong>Aynı <code>id</code> gösterim geçmişini taşır.</strong> Duyuruyu bir kez
+        kapatmış kullanıcıya aynı id ile bir daha görünmez — yeni duyuru için
+        <strong>yeni bir id</strong> ver.
+      </p>
 
       <div class="eylem">
         <button id="kaydetConfig" class="btn">Yayınla</button>
@@ -219,18 +255,34 @@ import Layout from '../../layouts/Layout.astro';
     $('updateMessage').value = config.updateMessage || '';
     $('maintenance').checked = !!config.maintenance;
     $('maintenanceMessage').value = config.maintenanceMessage || '';
-    // Yeni çoklu alan öncelikli; eski tekil `banner` alanı geriye dönük okunuyor.
-    const b = (Array.isArray(config.banners) && config.banners[0]) || config.banner;
-    $('bannerAcik').checked = !!b;
-    if (b) {
-      $('bId').value = b.id || '';
-      // "small" eski ad — şerit demek.
-      $('bStyle').value = (b.style === 'small' ? 'strip' : b.style) || 'strip';
-      $('bFreq').value = b.frequency || 'once';
-      $('bInterval').value = b.intervalMinutes || 60;
-      $('bTitle').value = b.title || ''; $('bBody').value = b.body || '';
-      $('bImage').value = b.imageURL || ''; $('bBtnText').value = b.buttonText || '';
-      $('bBtnUrl').value = b.buttonURL || ''; $('bDismiss').checked = b.dismissible !== false;
+    // Eski tek-duyuru biçimi de okunur: `banner` alanı veya tek elemanlı `banners`.
+    const hepsi = [
+      ...(Array.isArray(config.banners) ? config.banners : []),
+      ...(config.banner ? [config.banner] : []),
+    ];
+    const bicim = (b: any) => (b.style === 'small' ? 'strip' : b.style || 'strip');
+    const fs = hepsi.find((b: any) => ['fullscreen', 'both'].includes(bicim(b)));
+    const st = hepsi.find((b: any) => ['strip', 'both'].includes(bicim(b)));
+
+    $('fsAcik').checked = !!fs;
+    if (fs) {
+      $('fsId').value = fs.id || '';
+      $('fsFreq').value = fs.frequency || 'once';
+      $('fsInterval').value = fs.intervalMinutes || 60;
+      $('fsTitle').value = fs.title || ''; $('fsBody').value = fs.body || '';
+      $('fsImage').value = fs.imageURL || ''; $('fsBtnText').value = fs.buttonText || '';
+      $('fsBtnUrl').value = fs.buttonURL || ''; $('fsDismiss').checked = fs.dismissible !== false;
+      $('fsAyricaSerit').checked = bicim(fs) === 'both';
+    }
+    // "both" ise şerit bloğu ayrı bir duyuru DEĞİL, aynı duyurunun şerit hâli.
+    const stAyri = st && st !== fs;
+    $('stAcik').checked = !!stAyri;
+    if (stAyri) {
+      $('stId').value = st.id || '';
+      $('stFreq').value = st.frequency === 'always' ? 'always' : 'once';
+      $('stTitle').value = st.title || ''; $('stBody').value = st.body || '';
+      $('stImage').value = st.imageURL || ''; $('stBtnText').value = st.buttonText || '';
+      $('stBtnUrl').value = st.buttonURL || ''; $('stDismiss').checked = st.dismissible !== false;
     }
     configGuncelle();
   }
@@ -242,26 +294,43 @@ import Layout from '../../layouts/Layout.astro';
       maintenance: $('maintenance').checked,
       maintenanceMessage: $('maintenanceMessage').value.trim(),
       // Eski tekil alan artık YAZILMIYOR (null kalıyor); uygulama ikisini de
-      // okuyor, böylece eski sürümdeki cihazlar da bozulmuyor.
+      // okuyor, böylece elle yazılmış eski dosyalar da bozulmuyor.
       banner: null,
       banners: [],
     };
-    if ($('bannerAcik').checked) {
+
+    if ($('fsAcik').checked) {
       const b: any = {
-        id: $('bId').value.trim() || 'duyuru_' + Date.now(),
-        style: $('bStyle').value,
-        frequency: $('bFreq').value,
-        title: $('bTitle').value.trim(),
-        body: $('bBody').value.trim(),
-        dismissible: $('bDismiss').checked,
+        id: $('fsId').value.trim() || 'tam-ekran-' + Date.now(),
+        // "Kapatılınca şerit olarak kalsın" işaretliyse tek duyuru iki yerde görünür.
+        style: $('fsAyricaSerit').checked ? 'both' : 'fullscreen',
+        frequency: $('fsFreq').value,
+        title: $('fsTitle').value.trim(),
+        body: $('fsBody').value.trim(),
+        dismissible: $('fsDismiss').checked,
       };
       if (b.frequency === 'interval') {
-        b.intervalMinutes = Math.max(1, parseInt($('bInterval').value, 10) || 60);
+        b.intervalMinutes = Math.max(1, parseInt($('fsInterval').value, 10) || 60);
       }
-      if ($('bImage').value.trim()) b.imageURL = $('bImage').value.trim();
-      if ($('bBtnText').value.trim()) b.buttonText = $('bBtnText').value.trim();
-      if ($('bBtnUrl').value.trim()) b.buttonURL = $('bBtnUrl').value.trim();
-      c.banners = [b];
+      if ($('fsImage').value.trim()) b.imageURL = $('fsImage').value.trim();
+      if ($('fsBtnText').value.trim()) b.buttonText = $('fsBtnText').value.trim();
+      if ($('fsBtnUrl').value.trim()) b.buttonURL = $('fsBtnUrl').value.trim();
+      c.banners.push(b);
+    }
+
+    if ($('stAcik').checked) {
+      const b: any = {
+        id: $('stId').value.trim() || 'serit-' + Date.now(),
+        style: 'strip',
+        frequency: $('stFreq').value,
+        title: $('stTitle').value.trim(),
+        body: $('stBody').value.trim(),
+        dismissible: $('stDismiss').checked,
+      };
+      if ($('stImage').value.trim()) b.imageURL = $('stImage').value.trim();
+      if ($('stBtnText').value.trim()) b.buttonText = $('stBtnText').value.trim();
+      if ($('stBtnUrl').value.trim()) b.buttonURL = $('stBtnUrl').value.trim();
+      c.banners.push(b);
     }
     return c;
   }
@@ -270,9 +339,10 @@ import Layout from '../../layouts/Layout.astro';
     const c = configTopla();
     $('configOnizleme').textContent = JSON.stringify(c, null, 1);
     $('kapiUyari').hidden = !c.minVersion;
-    $('bannerAlan').style.opacity = $('bannerAcik').checked ? '1' : '0.4';
+    $('fsAlan').style.opacity = $('fsAcik').checked ? '1' : '0.4';
+    $('stAlan').style.opacity = $('stAcik').checked ? '1' : '0.4';
     // "Kaç dakikada bir" yalnızca aralıklı gösterimde anlamlı.
-    $('bIntervalAlan').style.display = $('bFreq').value === 'interval' ? '' : 'none';
+    $('fsIntervalAlan').style.display = $('fsFreq').value === 'interval' ? '' : 'none';
   }
   $('duyuru').addEventListener('input', configGuncelle);
   $('duyuru').addEventListener('change', configGuncelle);
