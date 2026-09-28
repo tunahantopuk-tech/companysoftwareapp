@@ -1,5 +1,5 @@
 {
- "version": 9,
+ "version": 10,
  "patches": [
   {
    "id": "claudio_taffarel",
@@ -411,9 +411,9 @@
   {
    "id": "ousmane_diomande",
    "addTeams": [
-    "real_madrid"
+    "nottingham_forest"
    ],
-   "currentTeam": "Real Madrid"
+   "currentTeam": "Nottingham Forest"
   },
   {
    "id": "patrick_wimmer_2",
@@ -966,7 +966,7 @@
    "addTeams": [
     "corum_fk"
    ],
-   "currentTeam": "Çorum FK"
+   "currentTeam": "Eyüpspor"
   },
   {
    "id": "maurice_krattenmacher_2",
@@ -1255,7 +1255,7 @@
     "genclerbirligi",
     "toulouse"
    ],
-   "currentTeam": "Gaziantep FK"
+   "currentTeam": "Gençlerbirliği"
   },
   {
    "id": "mukhtar_ali",
@@ -1456,9 +1456,10 @@
   {
    "id": "kerim_sam_alajbegovic",
    "addTeams": [
-    "bayer_leverkusen"
+    "bayer_leverkusen",
+    "juventus"
    ],
-   "currentTeam": "Bayer Leverkusen"
+   "currentTeam": "Juventus"
   },
   {
    "id": "kofi_amoako_2",
@@ -1549,7 +1550,7 @@
    "addTeams": [
     "erzurumspor_fk"
    ],
-   "currentTeam": "Eyüpspor"
+   "currentTeam": "Erzurumspor FK"
   },
   {
    "id": "noah_darvich",
@@ -1669,7 +1670,7 @@
    "addTeams": [
     "konyaspor"
    ],
-   "currentTeam": "Hull City"
+   "currentTeam": "Konyaspor"
   },
   {
    "id": "jakob_jessen",
@@ -1992,7 +1993,8 @@
    "id": "enzo_fernandez",
    "addTeams": [
     "manchester_city"
-   ]
+   ],
+   "currentTeam": "Manchester City"
   },
   {
    "id": "dominic_solanke_2",
@@ -2011,7 +2013,8 @@
    "id": "bradley_barcola",
    "addTeams": [
     "liverpool"
-   ]
+   ],
+   "currentTeam": "Liverpool"
   },
   {
    "id": "benoit_badiashile_2",
@@ -2246,7 +2249,8 @@
    "id": "kang_in_lee",
    "addTeams": [
     "atletico_madrid"
-   ]
+   ],
+   "currentTeam": "Atlético Madrid"
   },
   {
    "id": "kalidou_koulibaly",
@@ -2398,7 +2402,8 @@
    "id": "mostafa_mohamed_2",
    "addTeams": [
     "konyaspor"
-   ]
+   ],
+   "currentTeam": "Konyaspor"
   },
   {
    "id": "adama_traore_3",
@@ -2789,7 +2794,8 @@
    "id": "cengiz_under_2",
    "addTeams": [
     "corum_fk"
-   ]
+   ],
+   "currentTeam": "Çorum FK"
   },
   {
    "id": "youssef_en_nesyri",
@@ -2911,7 +2917,7 @@
   },
   {
    "id": "emir_ortakaya_2",
-   "currentTeam": "Eyüpspor"
+   "currentTeam": "Kocaelispor"
   },
   {
    "id": "yasin_ozcan_2",
@@ -3054,7 +3060,10 @@
   },
   {
    "id": "arthur_masuaku",
-   "currentTeam": "Sunderland"
+   "currentTeam": "Konyaspor",
+   "addTeams": [
+    "konyaspor"
+   ]
   },
   {
    "id": "lautaro_giannetti",
@@ -3090,7 +3099,10 @@
   },
   {
    "id": "christ_oulai_2",
-   "currentTeam": "Trabzonspor"
+   "currentTeam": "Fiorentina",
+   "addTeams": [
+    "fiorentina"
+   ]
   },
   {
    "id": "tayfur_bingol",
@@ -3229,6 +3241,606 @@
     "lyon"
    ],
    "currentTeam": "Lyon"
+  },
+  {
+   "id": "yan_diomande_2",
+   "addTeams": [
+    "real_madrid"
+   ],
+   "currentTeam": "Real Madrid"
+  },
+  {
+   "id": "gonzalo_garcia",
+   "addTeams": [
+    "fulham"
+   ],
+   "currentTeam": "Fulham"
+  },
+  {
+   "id": "tarik_muharemovic",
+   "addTeams": [
+    "leeds_united"
+   ],
+   "currentTeam": "Leeds United"
+  },
+  {
+   "id": "santiago_castro",
+   "addTeams": [
+    "roma"
+   ],
+   "currentTeam": "AS Roma"
+  },
+  {
+   "id": "cristian_romero",
+   "addTeams": [
+    "atletico_madrid"
+   ],
+   "currentTeam": "Atlético Madrid"
+  },
+  {
+   "id": "lukas_hornicek",
+   "addTeams": [
+    "newcastle"
+   ],
+   "currentTeam": "Newcastle United"
+  },
+  {
+   "id": "julio_enciso_2",
+   "currentTeam": "Ipswich Town"
+  },
+  {
+   "id": "malick_fofana_2",
+   "addTeams": [
+    "sunderland"
+   ],
+   "currentTeam": "Sunderland"
+  },
+  {
+   "id": "trevoh_chalobah",
+   "addTeams": [
+    "como"
+   ],
+   "currentTeam": "Como"
+  },
+  {
+   "id": "taylor_harwood_bellis",
+   "addTeams": [
+    "aston_villa"
+   ],
+   "currentTeam": "Aston Villa"
+  },
+  {
+   "id": "dayann_methalie",
+   "addTeams": [
+    "sunderland"
+   ],
+   "currentTeam": "Sunderland"
+  },
+  {
+   "id": "zadok_yohanna",
+   "addTeams": [
+    "brighton"
+   ],
+   "currentTeam": "Brighton"
+  },
+  {
+   "id": "dwight_mcneil",
+   "addTeams": [
+    "crystal_palace"
+   ],
+   "currentTeam": "Crystal Palace"
+  },
+  {
+   "id": "daniel_munoz_2",
+   "addTeams": [
+    "nottingham_forest"
+   ],
+   "currentTeam": "Nottingham Forest"
+  },
+  {
+   "id": "arthur_atta_2",
+   "addTeams": [
+    "fiorentina"
+   ],
+   "currentTeam": "Fiorentina"
+  },
+  {
+   "id": "victor_munoz_villanueva",
+   "addTeams": [
+    "liverpool"
+   ],
+   "currentTeam": "Liverpool"
+  },
+  {
+   "id": "samuel_ballet",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "alban_lafont_2",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "ali_bulbul",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "umut_meras",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "rayan_lutin",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "gokhan_gul_2",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "ivan_cedric",
+   "addTeams": [
+    "alanyaspor"
+   ],
+   "currentTeam": "Alanyaspor"
+  },
+  {
+   "id": "eren_altintas",
+   "currentTeam": "Alanyaspor"
+  },
+  {
+   "id": "emre_demir",
+   "addTeams": [
+    "alanyaspor"
+   ],
+   "currentTeam": "Alanyaspor"
+  },
+  {
+   "id": "paolo_fernandes_2",
+   "addTeams": [
+    "alanyaspor"
+   ],
+   "currentTeam": "Alanyaspor"
+  },
+  {
+   "id": "emre_karaal",
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "edin_visca_2",
+   "currentTeam": "Başakşehir"
+  },
+  {
+   "id": "mohamed_fofana_2",
+   "addTeams": [
+    "basaksehir",
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "kassoum_ouattara_2",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "umit_akdag_2",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "ilhan_fakili",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "f_miretti_181808",
+   "addTeams": [
+    "besiktas"
+   ],
+   "currentTeam": "Beşiktaş"
+  },
+  {
+   "id": "goktan_gurpuz_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "berat_ozdemir_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "alexandre_penetra_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "youssoufa_moukoko_2",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "caglar_soyuncu",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "elisha_owusu_2",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "miguel_cardoso",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "festy_ebosele_2",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "ahmed_abdullahi",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "konrad_michalak",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "mete_demir",
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "serdar_dursun",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "halil_dervisoglu",
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "ataberk_dadakdeniz",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "abakar_sylla",
+   "addTeams": [
+    "gaziantep"
+   ],
+   "currentTeam": "Gaziantep FK"
+  },
+  {
+   "id": "salih_ucan_2",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "ousmane_diabate",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "metehan_baltaci",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "tiago_gouveia",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "cheikh_niasse_2",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "victor_orakpo_2",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "gokdeniz_bayrakdar_2",
+   "addTeams": [
+    "goztepe"
+   ],
+   "currentTeam": "Göztepe"
+  },
+  {
+   "id": "marcus_rafferty",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "omer_bayram_2",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "jesurun_rak_sakyi_2",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "metehan_altunbas_2",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "show",
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "matej_maglica_2",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "florian_aye_2",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "onurcan_piri_2",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "ugur_yildiz_2",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "arif_bosluk",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "kaan_akyazi",
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "mucahit_ibrahimoglu",
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "melih_bostan_2",
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "jean_luc_dompe_2",
+   "addTeams": [
+    "konyaspor"
+   ],
+   "currentTeam": "Konyaspor"
+  },
+  {
+   "id": "modibo_sagnan_2",
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "doganay_avci",
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "can_bozdogan_2",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "igor_drapinski",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "samed_onur_2",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "bilal_bayazit_2",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "melih_kabasakal",
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "metehan_mimaroglu_2",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "vedat_muriqi_2",
+   "currentTeam": "Fenerbahçe"
+  },
+  {
+   "id": "deniz_gul",
+   "addTeams": [
+    "galatasaray"
+   ],
+   "currentTeam": "Galatasaray"
+  },
+  {
+   "id": "el_bitshiabu_2",
+   "addTeams": [
+    "galatasaray"
+   ],
+   "currentTeam": "Galatasaray"
+  },
+  {
+   "id": "rayan_raveloson",
+   "addTeams": [
+    "amed_sfk"
+   ],
+   "currentTeam": "Amed SFK"
+  },
+  {
+   "id": "sebastian_borza",
+   "addTeams": [
+    "corum_fk"
+   ],
+   "currentTeam": "Çorum FK"
+  },
+  {
+   "id": "gyrano_kerk",
+   "addTeams": [
+    "erzurumspor_fk"
+   ],
+   "currentTeam": "Erzurumspor FK"
+  },
+  {
+   "id": "yigit_demir",
+   "addTeams": [
+    "eyupspor"
+   ],
+   "currentTeam": "Eyüpspor"
+  },
+  {
+   "id": "rafael_luis",
+   "addTeams": [
+    "genclerbirligi"
+   ],
+   "currentTeam": "Gençlerbirliği"
+  },
+  {
+   "id": "matei_ilie",
+   "addTeams": [
+    "kasimpasa"
+   ],
+   "currentTeam": "Kasımpaşa"
+  },
+  {
+   "id": "habib_keita",
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "tobias_gulliksen",
+   "addTeams": [
+    "kocaelispor"
+   ],
+   "currentTeam": "Kocaelispor"
+  },
+  {
+   "id": "albert_doicaru",
+   "addTeams": [
+    "rizespor"
+   ],
+   "currentTeam": "Çaykur Rizespor"
+  },
+  {
+   "id": "oskar_ohlenschl_ger",
+   "addTeams": [
+    "samsunspor"
+   ],
+   "currentTeam": "Samsunspor"
+  },
+  {
+   "id": "doguhan_simsir",
+   "addTeams": [
+    "trabzonspor"
+   ],
+   "currentTeam": "Trabzonspor"
+  },
+  {
+   "id": "a_diouf_270509",
+   "addTeams": [
+    "fenerbahce"
+   ],
+   "currentTeam": "Fenerbahçe"
   }
  ]
 }
