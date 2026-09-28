@@ -1,5 +1,5 @@
 {
- "version": 8,
+ "version": 9,
  "patches": [
   {
    "id": "claudio_taffarel",
@@ -2386,7 +2386,7 @@
    "addTeams": [
     "paris_fc"
    ],
-   "currentTeam": "Bologna"
+   "currentTeam": "Paris FC"
   },
   {
    "id": "yann_karamoh_2",
@@ -2808,7 +2808,7 @@
    "addTeams": [
     "fc_schalke_04"
    ],
-   "currentTeam": "Fiorentina"
+   "currentTeam": "FC Schalke 04"
   },
   {
    "id": "cenk_tosun",
