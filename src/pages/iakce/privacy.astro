@@ -1,0 +1,198 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const accent = '#B8901F';
+const lastUpdated = '12 Kasım 2026';
+const contactEmail = 'destek@companysoftware.app';
+
+const sections = [
+  {
+    title: 'Kısa Özet',
+    content: 'iAkçe hiçbir kişisel veri toplamaz. Girdiğiniz tüm finansal bilgiler yalnızca kendi cihazınızda ve dilerseniz kendi iCloud hesabınızda saklanır. Geliştirici olarak bu verilere erişimimiz yoktur ve teknik olarak olamaz. Uygulamada kullanıcı hesabı, kayıt veya giriş bulunmaz.',
+  },
+  {
+    title: 'Toplanan Veriler',
+    content: 'Hiçbiri. iAkçe size dair hiçbir bilgiyi geliştiriciye veya üçüncü taraflara göndermez. Uygulamada analitik araçları, reklam ağları, çökme raporlama servisleri veya üçüncü taraf yazılım geliştirme kitleri (SDK) bulunmaz. E-posta adresi, ad, telefon numarası veya cihaz kimliği talep edilmez.',
+  },
+  {
+    title: 'Verileriniz Nerede Saklanır',
+    content: 'Girdiğiniz tüm bilgiler — hesaplar, gelir ve giderler, düzenli ödemeler, krediler, kredi kartları, yatırımlar, bütçeler ve hedefler — cihazınızın yerel veritabanında tutulur. iCloud senkronizasyonunu açarsanız bu veriler sizin kendi iCloud hesabınızın özel alanına yüklenir ve diğer cihazlarınızla senkronize olur. Bu alan Apple tarafından sağlanır, Apple\'ın gizlilik koşullarına tabidir ve geliştiricinin erişimine kapalıdır. iCloud senkronizasyonu isteğe bağlıdır, istediğiniz zaman kapatabilirsiniz. Uygulamayı cihazınızdan silerseniz yerel veriler de silinir.',
+  },
+  {
+    title: 'İnternet Bağlantısı',
+    content: 'iAkçe normal çalışması için internet bağlantısı gerektirmez. Uygulama yalnızca tek bir durumda dışarıya bağlanır: yatırımlarınızın Türk Lirası karşılığını hesaplamak için Türkiye Cumhuriyet Merkez Bankası\'nın herkese açık günlük kur bülteni çekilir. Bu istek yalnızca kur bilgisini indirir; cihazınızdan hiçbir kişisel veya finansal bilgi gönderilmez. Bu özelliği kullanmazsanız uygulama tamamen çevrimdışı çalışır.',
+    link: { text: 'TCMB Günlük Kurlar ↗', href: 'https://www.tcmb.gov.tr/kurlar/today.xml' },
+  },
+  {
+    title: 'Finansal Değerlendirme Özelliği',
+    content: 'Uygulamadaki "Danışman" bölümü, girdiğiniz verilerden otomatik bir değerlendirme üretir. Bu hesaplama tamamen cihazınızın içinde yapılır. Hiçbir veri bulut servislerine, yapay zeka servislerine veya başka bir sunucuya gönderilmez. Bu değerlendirme bilgilendirme amaçlıdır; yatırım, vergi, hukuk veya finans danışmanlığı niteliği taşımaz.',
+  },
+  {
+    title: 'Dışa Aktardığınız Dosyalar',
+    content: 'Uygulama, verilerinizi CSV veya yedek dosyası olarak dışa aktarmanıza imkan verir. Bu dosyaları nereye kaydedeceğinize veya kiminle paylaşacağınıza siz karar verirsiniz. Dışa aktarılan dosyalar cihazınızdan çıktıktan sonra sorumluluk size aittir; geliştiricinin bu dosyalar üzerinde hiçbir görünürlüğü veya denetimi yoktur.',
+  },
+  {
+    title: 'Cihaz İzinleri',
+    content: 'Face ID ve Touch ID: Yalnızca uygulamayı kilitlemek için kullanılır. Biyometrik verileriniz Apple\'ın güvenli donanımında kalır; uygulama bu verilere erişemez, yalnızca doğrulamanın başarılı olup olmadığını öğrenir. Bildirimler: Yalnızca siz bir ödeme hatırlatması kurduğunuzda ve izin verdiğinizde kullanılır. Bildirimler cihazınızda oluşturulur, sunucudan gönderilmez.',
+  },
+  {
+    title: 'Çocukların Gizliliği',
+    content: 'iAkçe çocuklara yönelik bir uygulama değildir ve hiç kimseden, hiçbir yaş grubundan veri toplamaz.',
+  },
+  {
+    title: 'Haklarınız',
+    content: 'Verileriniz zaten yalnızca sizde olduğu için erişim, düzeltme ve silme işlemlerini doğrudan uygulama içinden yapabilirsiniz. Silmek istediğiniz kaydı uygulamada silersiniz; tüm verileri kaldırmak için uygulamayı cihazınızdan silmeniz yeterlidir. iCloud kopyanız için iCloud ayarlarınızı kullanabilirsiniz. KVKK kapsamındaki sorularınız için bizimle iletişime geçebilirsiniz.',
+    email: contactEmail,
+  },
+  {
+    title: 'Politika Değişiklikleri',
+    content: 'Bu politika güncellenirse bu sayfadaki "Son güncelleme" tarihi değişir. Veri toplama uygulamalarımızda esaslı bir değişiklik olursa uygulama güncellemeleri aracılığıyla bilgilendirme yapılır.',
+  },
+];
+---
+
+<Layout
+  title="iAkçe — Gizlilik Politikası"
+  description="iAkçe uygulaması gizlilik politikası. Verileriniz yalnızca cihazınızda saklanır, hiçbir veri toplanmaz."
+  ogImage="/images/logo-iakce.png"
+>
+  <Header />
+
+  <main class="doc-page">
+
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/iakce" class="doc-app-link">
+          <img src="/images/logo-iakce.png" alt="iAkçe" class="doc-app-logo" />
+          <span class="doc-app-name">iAkçe</span>
+        </a>
+        <h1 class="doc-title">Gizlilik Politikası</h1>
+        <p class="doc-date">Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">iAkçe hiçbir veri toplamaz. Finansal bilgileriniz cihazınızdan çıkmaz. Bu politika bunun nasıl sağlandığını açıklar.</p>
+      </div>
+    </section>
+
+    <div class="doc-body">
+      {sections.map((s, i) => (
+        <div class="doc-section">
+          <div class="doc-num-wrap" style={`background:${accent}18; border:1px solid ${accent}30;`}>
+            <span class="doc-num" style={`color:${accent};`}>{i + 1}</span>
+          </div>
+          <div class="doc-content">
+            <h2>{s.title}</h2>
+            <p>{s.content}</p>
+            {s.link && (
+              <a href={s.link.href} target="_blank" rel="noopener noreferrer" class="doc-link" style={`color:${accent};`}>
+                {s.link.text}
+              </a>
+            )}
+            {s.email && (
+              <a href={`mailto:${s.email}`} class="doc-link" style={`color:${accent};`}>
+                {s.email}
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+
+      <div class="doc-footer-links">
+        <a href="/iakce/terms" style={`color:${accent};`}>Kullanım Koşulları →</a>
+      </div>
+
+      <div class="doc-back">
+        <a href="/iakce">← iAkçe'ye Dön</a>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; margin-bottom: 4px;
+  }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text);
+  }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro {
+    font-size: 0.95rem; color: var(--color-muted);
+    line-height: 1.7; max-width: 500px;
+  }
+
+  .doc-body {
+    max-width: 720px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .doc-section {
+    display: flex; gap: 20px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-section:last-of-type { border-bottom: none; }
+
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .doc-content { flex: 1; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--color-text); margin-bottom: 10px;
+  }
+  .doc-content p {
+    font-size: 0.9rem; color: var(--color-muted); line-height: 1.75;
+  }
+  .doc-link {
+    display: inline-block; margin-top: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .doc-link:hover { opacity: 0.7; }
+
+  .doc-footer-links {
+    margin-top: 48px; text-align: center;
+    font-size: 0.875rem; font-weight: 500;
+  }
+  .doc-footer-links a { text-decoration: none; transition: opacity 0.15s; }
+  .doc-footer-links a:hover { opacity: 0.7; }
+
+  .doc-back { margin-top: 16px; text-align: center; }
+  .doc-back a {
+    font-size: 0.875rem; color: var(--color-subtle);
+    text-decoration: none; transition: color 0.15s ease;
+  }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>

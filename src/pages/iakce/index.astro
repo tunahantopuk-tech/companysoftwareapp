@@ -1,0 +1,471 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// App Store'da yayınlandığında buraya gerçek bağlantıyı koy.
+// null kaldığı sürece "Yakında" rozeti gösterilir.
+const storeUrl: string | null = null;
+
+const accent = '#B8901F';
+
+const scrollFeatures = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`,
+    title: 'Özet',
+    sub: 'Net Varlığın Tek Ekranda',
+    description: 'Nakit, banka ve birikim hesaplarının karşısında kart borçların ve kredilerin. Aradaki fark tek rakamda. Harcamalarının hangi kategoriye gittiğini grafikte gör.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
+    title: 'İşlemler',
+    sub: 'Birkaç Dokunuşta Kayıt',
+    description: 'Hızlı giriş için tasarlanmış özel klavye. Kategori, hesap ve tarih tek ekranda. Aylık özet, arama ve filtreleme ile geçmişine istediğin an ulaş.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>`,
+    title: 'Borçlar',
+    sub: 'Krediler, Kartlar, Faturalar',
+    description: 'Kredi taksit planın, kalan anaparan ve bitiş tarihin. Kartlarında ekstre kesim günü, dönem borcu, asgari ödeme ve kullanılabilir limit. Kira, aidat ve faturalar için hatırlatma.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+    title: 'Portföy',
+    sub: 'Altın, Döviz, Hisse, Fon',
+    description: 'Ortalama maliyetin, güncel değerin, kârın ve zararın. Döviz kurları Merkez Bankası bülteninden güncellenir. Kapanmış pozisyonların da kayıtta kalır.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>`,
+    title: 'Danışman',
+    sub: 'Ay Sonunu Nasıl Getireceksin',
+    description: 'Uygulama durumunu değerlendirip en fazla beş maddelik somut bir liste verir: yaklaşan nakit açığı, en pahalı borcun, aşılan bütçeler ve bu hafta atman gereken adım. Hesaplama tamamen cihazında yapılır.',
+  },
+];
+---
+
+<Layout
+  title="iAkçe | Gelir Gider ve Bütçe Takip Uygulaması"
+  description="Gelirini, giderini, kredilerini ve yatırımlarını tek yerde topla. iAkçe durumunu değerlendirip ne yapman gerektiğini söyler. Veriler cihazından çıkmaz."
+  ogImage="/images/logo-iakce.png"
+>
+  <Header />
+
+  <main style="padding-top: 56px;">
+
+    <!-- ── Hero ──────────────────────────────────── -->
+    <section class="hero-section">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <img
+          src="/images/logo-iakce.png"
+          alt="iAkçe"
+          width="96" height="96"
+          class="hero-logo"
+        />
+        <div>
+          <h1 class="hero-title font-heading">iAkçe</h1>
+          <p class="hero-desc">
+            Paranın nereye gittiğini bilmek yetmez. Asıl soru şu: ay sonunu nasıl getireceksin?
+          </p>
+        </div>
+
+        {storeUrl ? (
+          <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="appstore-badge">
+            <svg class="badge-apple-svg" viewBox="0 0 24 24" fill="white">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+            </svg>
+            <div class="badge-text-wrap">
+              <span class="badge-line1">Download on the</span>
+              <span class="badge-line2">App Store</span>
+            </div>
+          </a>
+        ) : (
+          <div class="coming-soon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+            </svg>
+            <span>Yakında App Store'da</span>
+          </div>
+        )}
+
+        <div class="privacy-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Verilerin cihazından çıkmaz. Hesap yok, reklam yok, takip yok.</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="page-divider" />
+
+    <!-- ── Scroll features ────────────────────── -->
+    <section style="max-width: 1152px; margin: 0 auto; padding: 32px 24px;">
+      <div class="scroll-grid">
+
+        <div>
+          {scrollFeatures.map((f, i) => (
+            <div class="scroll-feature" data-index={i} style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 64px 0; max-width: 420px;">
+              <div class="feature-icon-wrap" set:html={f.icon} />
+              <p class="feature-eyebrow">iAkçe</p>
+              <h2 class="feature-heading font-heading">{f.title}</h2>
+              <p class="feature-sub font-heading">{f.sub}</p>
+              <p class="feature-desc">{f.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Sticky phone -->
+        <div class="phone-sticky-col">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <div class="phone-frame">
+              <div class="phone-button phone-button-left" style="top: 140px; height: 32px;"></div>
+              <div class="phone-button phone-button-left" style="top: 190px; height: 52px;"></div>
+              <div class="phone-button phone-button-left" style="top: 256px; height: 52px;"></div>
+              <div class="phone-button phone-button-right" style="top: 180px; height: 82px;"></div>
+
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                {scrollFeatures.map((f, i) => (
+                  <div class={`phone-shot${i === 0 ? ' active' : ''}`} data-shot={i}>
+                    <div class="shot-placeholder">
+                      <span class="shot-placeholder-name">iAkçe</span>
+                      <span class="shot-placeholder-title">{f.title}</span>
+                    </div>
+                    <img
+                      src={`/images/iakce/screen-${i}.png`}
+                      alt={f.title}
+                      class="screenshot-img"
+                      onerror="this.remove()"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Alt bağlantılar ───────────────────── -->
+    <div class="page-footer-strip">
+      {storeUrl && (
+        <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="appstore-badge appstore-badge-sm">
+          <svg class="badge-apple-svg" style="width:20px;height:20px;" viewBox="0 0 24 24" fill="white">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+          </svg>
+          <div class="badge-text-wrap">
+            <span class="badge-line1">Download on the</span>
+            <span class="badge-line2" style="font-size:16px;">App Store</span>
+          </div>
+        </a>
+      )}
+      <div class="page-footer-links">
+        <a href="/iakce/privacy" class="page-footer-link">Gizlilik Politikası</a>
+        <a href="/iakce/terms" class="page-footer-link">Kullanım Koşulları</a>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style define:vars={{ accent: '#B8901F' }}>
+  /* ── Hero ───────────────────────────────── */
+  .hero-section {
+    position: relative;
+    padding: 88px 24px 72px;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--bg-section-alt);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+  .hero-glow {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(184,144,31,0.14) 0%, transparent 65%);
+  }
+  .hero-inner {
+    position: relative; z-index: 10;
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+  }
+  .hero-logo {
+    width: 96px; height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(184,144,31,0.3);
+    object-fit: contain;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 14px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* ── App Store badge ────────────────────── */
+  .appstore-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #000;
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: 14px; padding: 10px 22px;
+    color: #fff; text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .appstore-badge:hover { opacity: 0.84; transform: translateY(-1px); }
+  .badge-apple-svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .badge-text-wrap { display: flex; flex-direction: column; }
+  .badge-line1 { font-size: 10px; color: rgba(255,255,255,0.75); font-family: sans-serif; line-height: 1.2; }
+  .badge-line2 { font-size: 20px; font-weight: 700; font-family: sans-serif; line-height: 1.2; letter-spacing: -0.01em; }
+
+  /* ── Yakında rozeti ─────────────────────── */
+  .coming-soon {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 20px; border-radius: 14px;
+    background: rgba(184,144,31,0.1);
+    border: 1.5px solid rgba(184,144,31,0.32);
+    color: var(--accent);
+    font-size: 0.95rem; font-weight: 600;
+  }
+
+  /* ── Gizlilik şeridi ────────────────────── */
+  .privacy-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--hover-overlay);
+    border: 1px solid var(--border-faint);
+    color: var(--color-muted);
+    font-size: 0.82rem; line-height: 1.4;
+    max-width: 420px; text-align: left;
+  }
+
+  /* ── Feature icon ────────────────────────── */
+  .feature-icon-wrap {
+    width: 44px; height: 44px;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .feature-icon-wrap svg { width: 100%; height: 100%; }
+
+  /* ── Divider ─────────────────────────────── */
+  .page-divider { height: 1px; border: none; background: var(--border-faint); margin: 0; }
+
+  /* ── Feature text ────────────────────────── */
+  .feature-eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .feature-heading {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700; color: var(--color-text);
+    margin-bottom: 8px; line-height: 1.15;
+  }
+  .feature-sub {
+    font-size: 1.05rem; font-weight: 500;
+    color: #D4AF37; margin-bottom: 20px;
+  }
+  .feature-desc {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  /* ── Bottom strip ────────────────────────── */
+  .page-footer-strip {
+    max-width: 1152px; margin: 0 auto;
+    padding: 32px 24px 64px;
+    border-top: 1px solid var(--border-faint);
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .page-footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .page-footer-link {
+    font-size: 0.875rem; color: var(--color-subtle); text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .page-footer-link:hover { color: var(--color-text); }
+
+  /* ── Phone mockup ────────────────────────── */
+  .scroll-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+
+  @media (min-width: 1024px) {
+    .scroll-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+
+  .phone-sticky-col { display: flex; justify-content: center; padding: 40px 0; }
+
+  @media (min-width: 1024px) {
+    .phone-sticky-col {
+      position: sticky; top: 0; align-self: start;
+      height: 100vh; padding: 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .scroll-feature {
+      min-height: auto !important;
+      padding: 32px 0 !important;
+      text-align: center;
+    }
+  }
+
+  .phone-frame {
+    width: 300px; height: 620px; position: relative;
+    background: linear-gradient(145deg, #3a3a3c 0%, #1c1c1e 50%, #2c2c2e 100%);
+    border-radius: 58px; padding: 4px;
+    box-shadow:
+      0 0 0 0.5px rgba(255,255,255,0.05),
+      0 2px 4px rgba(0,0,0,0.2),
+      0 8px 16px rgba(0,0,0,0.25),
+      0 24px 48px rgba(0,0,0,0.35),
+      0 48px 96px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.02),
+      inset 0 1px 2px rgba(255,255,255,0.08);
+  }
+
+  .phone-frame::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: 58px; padding: 2px;
+    background: linear-gradient(135deg,
+      rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 25%,
+      transparent 50%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.2) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .phone-frame::after {
+    content: ''; position: absolute; top: -1px; left: 50%;
+    transform: translateX(-50%);
+    width: 60%; height: 3px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 80%, transparent 100%);
+    border-radius: 0 0 4px 4px; opacity: 0.6;
+  }
+
+  .phone-island {
+    position: absolute; top: 16px; left: 50%;
+    transform: translateX(-50%);
+    width: 126px; height: 37px;
+    background: #000; border-radius: 24px; z-index: 10;
+    box-shadow:
+      inset 0 1px 2px rgba(0,0,0,0.8),
+      inset 0 -1px 1px rgba(255,255,255,0.05),
+      0 2px 8px rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px;
+  }
+  .phone-island::before {
+    content: ''; width: 12px; height: 12px;
+    background: radial-gradient(circle, #1a1a2e 0%, #000 70%);
+    border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .phone-island::after {
+    content: ''; width: 12px; height: 12px;
+    background: radial-gradient(circle, #0a1a2a 0%, #000 70%);
+    border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .phone-screen {
+    width: 100%; height: 100%;
+    border-radius: 54px; overflow: hidden;
+    background: #000; position: relative; padding: 8px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      inset 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .phone-screen::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%,
+      transparent 40%, transparent 60%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none; z-index: 5; opacity: 0.3;
+  }
+
+  .phone-button {
+    position: absolute; width: 3px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%,
+      rgba(100,100,100,0.8) 50%, rgba(50,50,50,0.6) 100%);
+    border-radius: 0 2px 2px 0;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.5), 1px 0 2px rgba(0,0,0,0.3);
+  }
+  .phone-button-left {
+    left: -3px; border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg, rgba(50,50,50,0.6) 0%,
+      rgba(100,100,100,0.8) 50%, rgba(255,255,255,0.1) 100%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.5), -1px 0 2px rgba(0,0,0,0.3);
+  }
+  .phone-button-right { right: -3px; }
+
+  @media (max-width: 1023px) {
+    .phone-frame { width: 240px; height: 496px; }
+    .phone-island { width: 100px; height: 30px; }
+    .phone-button { display: none; }
+  }
+
+  .phone-shot {
+    position: absolute; inset: 8px; opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 46px; overflow: hidden;
+  }
+  .phone-shot.active { opacity: 1; }
+
+  .screenshot-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    background: #000;
+  }
+
+  /* Ekran görüntüsü henüz yoksa görünen yer tutucu */
+  .shot-placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(170deg, #1D2430 0%, #121821 55%, #0B0E14 100%);
+  }
+  .shot-placeholder-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #B8901F;
+  }
+  .shot-placeholder-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: #F5F7FA;
+  }
+</style>
+
+<script>
+  const features = document.querySelectorAll<HTMLElement>('.scroll-feature');
+  const shots = document.querySelectorAll<HTMLElement>('.phone-shot');
+
+  function setActive(index: number) {
+    shots.forEach((s, i) => s.classList.toggle('active', i === index));
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = parseInt((entry.target as HTMLElement).dataset.index ?? '0', 10);
+          setActive(idx);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  features.forEach((f) => observer.observe(f));
+</script>
