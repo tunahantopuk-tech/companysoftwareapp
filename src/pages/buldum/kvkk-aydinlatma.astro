@@ -1,0 +1,60 @@
+---
+import BuldumLegal from '../../components/BuldumLegal.astro';
+import type { LegalSection } from '../../components/BuldumLegal.astro';
+
+const email = 'support@companysoftware.app';
+const mail = `<a href="mailto:${email}">${email}</a>`;
+
+const sections: LegalSection[] = [
+  {
+    title: 'Veri sorumlusu',
+    html: `<p>6698 sayılı Kişisel Verilerin Korunması Kanunu'nun ("KVKK") 10. maddesi uyarınca, veri sorumlusu sıfatıyla Company Software ("Veri Sorumlusu") olarak kişisel verilerini aşağıdaki şekilde işlediğimizi bildiririz.</p>
+<p>İletişim: ${mail}</p>`,
+  },
+  {
+    title: 'İşlenen veriler, amaçlar ve hukuki sebepler',
+    table: {
+      head: ['Veri kategorisi', 'Amaç', 'Hukuki sebep (KVKK m. 5)'],
+      rows: [
+        ['Kimlik ve iletişim (görünen ad, Apple kimliği, e-posta)', 'Üyelik, giriş, hesap güvenliği', 'Sözleşmenin kurulması ve ifası (m. 5/2-c)'],
+        ['İlan ve içerik (ilan bilgisi, bulanıklaştırılmış fotoğraf, mesajlar)', 'Hizmetin sunulması, eşleştirme', 'Sözleşmenin ifası (m. 5/2-c)'],
+        ['Konum (ilan konumu; isteğe bağlı cihaz konumu)', 'Eşleştirme, yakındaki ilanlar, bölge alarmı', 'İlan konumu için sözleşmenin ifası; cihaz konumu için açık rıza (m. 5/1)'],
+        ['Bahşiş için ad ve IBAN', 'Kullanıcının talebiyle karşı tarafa iletilmesi', 'Açık rıza (m. 5/1)'],
+        ['İşlem güvenliği (moderasyon kayıtları, ban özeti, erişim günlükleri)', 'Kötüye kullanımın ve dolandırıcılığın önlenmesi, hukuki taleplere yanıt', 'Meşru menfaat (m. 5/2-f); hukuki yükümlülük (m. 5/2-ç)'],
+        ['Kimliksiz çökme ve kullanım verisi', 'Uygulamanın iyileştirilmesi', 'Kişisel veri niteliği taşıdığı ölçüde meşru menfaat (m. 5/2-f)'],
+      ],
+    },
+  },
+  {
+    title: 'Aktarım',
+    html: `<p>Kişisel verilerin, hizmetin sunulması için veri işleyen sıfatıyla çalıştığımız Supabase'e (sunucular Almanya/Frankfurt) ve giriş ile bildirim için Apple'a aktarılır. Bu aktarımlar KVKK m. 9 kapsamında yurt dışına aktarım niteliğindedir ve KVKK m. 9'da öngörülen şartlara uygun olarak yapılır. Yasal zorunluluk hâlinde yetkili kamu kurumlarına aktarılabilir. Bahşiş bilgileri yalnızca senin seçtiğin karşı kullanıcıya iletilir.</p>`,
+  },
+  {
+    title: 'Toplama yöntemi',
+    html: `<p>Veriler Uygulama üzerinden, senin girdiğin bilgilerle ve Apple ile Giriş aracılığıyla elektronik ortamda toplanır.</p>`,
+  },
+  {
+    title: 'Saklama süreleri',
+    html: `<p><a href="/buldum/gizlilik">Gizlilik Politikası</a>'ndaki tabloda belirtilen süreler uygulanır; süre dolunca veriler silinir, yok edilir ya da anonim hâle getirilir.</p>`,
+  },
+  {
+    title: 'Hakların (KVKK m. 11)',
+    html: `<p>Verinin işlenip işlenmediğini öğrenme; işlenmişse bilgi talep etme; işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme; aktarıldığı üçüncü kişileri bilme; eksik veya yanlış işlenmişse düzeltilmesini isteme; silinmesini veya yok edilmesini isteme; bu işlemlerin aktarılan kişilere bildirilmesini isteme; otomatik sistemlerle analiz sonucu aleyhine bir sonuç çıkmasına itiraz etme; kanuna aykırı işleme nedeniyle zarara uğrarsan zararın giderilmesini talep etme haklarına sahipsin.</p>`,
+  },
+  {
+    title: 'Başvuru',
+    html: `<p>Taleplerini Uygulama'daki hesabına bağlı e-posta adresinden ${mail} adresine iletebilirsin. Başvurular en geç 30 gün içinde ücretsiz yanıtlanır.</p>`,
+  },
+];
+---
+
+<BuldumLegal
+  pageTitle="Buldum — KVKK Aydınlatma Metni"
+  heading="KVKK Aydınlatma Metni"
+  description="Buldum uygulaması 6698 sayılı KVKK kapsamında aydınlatma metni."
+  intro="Kişisel verilerinin hangi amaçla ve hangi hukuki sebeple işlendiği, kimlere aktarıldığı ve hakların."
+  version="2026-12"
+  lastUpdated="24 Kasım 2026"
+  sections={sections}
+  current="kvkk-aydinlatma"
+/>

@@ -1,0 +1,34 @@
+---
+import BuldumLegal from '../../components/BuldumLegal.astro';
+import type { LegalSection } from '../../components/BuldumLegal.astro';
+
+const sections: LegalSection[] = [
+  {
+    title: 'İsteğe bağlıdır',
+    html: `<p>Cihazının konumunu Buldum'la paylaşmak <strong>tamamen isteğe bağlıdır</strong>; rıza vermesen de Uygulama'yı kullanabilirsin.</p>`,
+  },
+  {
+    title: 'Neye rıza veriyorsun',
+    html: `<p>Uygulama açıkken cihazının yaklaşık konumu şu amaçlarla işlenir: yakındaki ilanları göstermek, ilan verirken konumu önermek, bölge alarmlarını çalıştırmak ve teslim noktalarını mesafeye göre sıralamak. Konumun sürekli izlenmez ve arka planda toplanmaz. Bu veri <a href="/buldum/kvkk-aydinlatma">KVKK Aydınlatma Metni</a>'nde belirtilen sağlayıcıya (Supabase, Frankfurt) aktarılır.</p>`,
+  },
+  {
+    title: 'Vermezsen ne olur',
+    html: `<p>İlan verebilir, ilanlara bakabilir, mesajlaşabilir ve teslim yapabilirsin; konumu haritada elle seçersin. Yalnızca otomatik "yakınımda" özellikleri kapalı kalır.</p>`,
+  },
+  {
+    title: 'Geri alma',
+    html: `<p>Rızanı istediğin an Uygulama'da Profil → Gizlilik → "Konum rızasını geri çek" ile ya da iPhone Ayarları'ndan geri alabilirsin. Geri aldığında bundan sonra cihaz konumun işlenmez; daha önce verdiğin ilanların yaklaşık konumu ilan yayında kaldığı sürece kalır.</p>`,
+  },
+];
+---
+
+<BuldumLegal
+  pageTitle="Buldum — Konum için Açık Rıza Metni"
+  heading="Konum için Açık Rıza Metni"
+  description="Buldum uygulamasında cihaz konumunun işlenmesine ilişkin açık rıza metni."
+  intro="Cihaz konumunun hangi amaçla işlendiği, rıza vermezsen ne olacağı ve rızanı nasıl geri alacağın."
+  version="2026-12"
+  lastUpdated="24 Kasım 2026"
+  sections={sections}
+  current="acik-riza-konum"
+/>

@@ -1,0 +1,176 @@
+---
+// Buldum hukuki sayfaları için ortak düzen (gizlilik, kullanıcı sözleşmesi, KVKK, konum rızası).
+// Bölüm içerikleri güvenilir, sabit HTML'dir (yalnızca <strong>, <em>, <a>, <ol>, <ul>, <li>).
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+
+export interface LegalSection {
+  title: string;
+  html?: string;
+  table?: { head: string[]; rows: string[][] };
+  after?: string;
+}
+
+interface Props {
+  pageTitle: string;
+  heading: string;
+  description: string;
+  intro: string;
+  version: string;
+  lastUpdated: string;
+  sections: LegalSection[];
+  current: 'gizlilik' | 'kullanici-sozlesmesi' | 'kvkk-aydinlatma' | 'acik-riza-konum';
+}
+
+const { pageTitle, heading, description, intro, version, lastUpdated, sections, current } = Astro.props;
+const accent = '#C98A1E';
+
+const docs = [
+  { slug: 'kullanici-sozlesmesi', label: 'Kullanıcı Sözleşmesi' },
+  { slug: 'gizlilik', label: 'Gizlilik Politikası' },
+  { slug: 'kvkk-aydinlatma', label: 'KVKK Aydınlatma Metni' },
+  { slug: 'acik-riza-konum', label: 'Konum Açık Rızası' },
+];
+---
+
+<Layout title={pageTitle} description={description} ogImage="/images/logo-buldum.png">
+  <Header />
+
+  <main class="doc-page">
+    <section class="doc-hero">
+      <div class="doc-hero-inner">
+        <a href="/buldum" class="doc-app-link">
+          <img src="/images/logo-buldum.png" alt="Buldum" class="doc-app-logo" />
+          <span class="doc-app-name">Buldum</span>
+        </a>
+        <h1 class="doc-title">{heading}</h1>
+        <p class="doc-date">Sürüm {version} · Son güncelleme: <span style={`color:${accent};`}>{lastUpdated}</span></p>
+        <p class="doc-intro">{intro}</p>
+      </div>
+    </section>
+
+    <div class="doc-body">
+      {sections.map((s, i) => (
+        <div class="doc-section">
+          <div class="doc-num-wrap" style={`background:${accent}18; border:1px solid ${accent}30;`}>
+            <span class="doc-num" style={`color:${accent};`}>{i + 1}</span>
+          </div>
+          <div class="doc-content">
+            <h2>{s.title}</h2>
+            {s.html && <div class="doc-html" set:html={s.html} />}
+            {s.table && (
+              <div class="doc-table-wrap">
+                <table class="doc-table">
+                  <thead><tr>{s.table.head.map((h) => <th>{h}</th>)}</tr></thead>
+                  <tbody>
+                    {s.table.rows.map((r) => (
+                      <tr>{r.map((c, ci) => <td data-label={s.table!.head[ci]}>{c}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {s.after && <div class="doc-html" set:html={s.after} />}
+          </div>
+        </div>
+      ))}
+
+      <nav class="doc-footer-links" aria-label="Buldum belgeleri">
+        {docs.filter((d) => d.slug !== current).map((d) => (
+          <a href={`/buldum/${d.slug}`} style={`color:${accent};`}>{d.label} →</a>
+        ))}
+      </nav>
+
+      <div class="doc-back">
+        <a href="/buldum">← Buldum'a Dön</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style define:vars={{ accent: '#C98A1E' }}>
+  .doc-page { padding-top: 48px; }
+
+  .doc-hero {
+    padding: 64px 24px 56px;
+    text-align: center;
+    background: var(--bg-section-alt);
+    border-bottom: 1px solid var(--border-faint);
+  }
+  .doc-hero-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .doc-app-link { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 4px; }
+  .doc-app-logo { width: 44px; height: 44px; border-radius: 10px; }
+  .doc-app-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--color-text); }
+  .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700; line-height: 1.2; color: var(--color-text);
+  }
+  .doc-date { font-size: 0.875rem; color: var(--color-subtle); }
+  .doc-intro { font-size: 0.95rem; color: var(--color-muted); line-height: 1.7; max-width: 520px; }
+
+  .doc-body { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+  .doc-section { display: flex; gap: 20px; padding: 32px 0; border-bottom: 1px solid var(--border-faint); }
+  .doc-section:last-of-type { border-bottom: none; }
+  .doc-num-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .doc-num { font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; font-weight: 700; }
+  .doc-content { flex: 1; min-width: 0; }
+  .doc-content h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: 10px;
+  }
+  .doc-html :global(p), .doc-html :global(li) { font-size: 0.9rem; color: var(--color-muted); line-height: 1.75; }
+  .doc-html :global(p + p) { margin-top: 10px; }
+  .doc-html :global(strong) { color: var(--color-text); font-weight: 600; }
+  .doc-html :global(ol), .doc-html :global(ul) { margin: 10px 0 0; padding-left: 1.25rem; }
+  .doc-html :global(ol) { list-style: decimal; }
+  .doc-html :global(ul) { list-style: disc; }
+  .doc-html :global(li + li) { margin-top: 6px; }
+  .doc-html :global(a) { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .doc-html :global(a:hover) { opacity: 0.7; }
+  .doc-html + .doc-table-wrap, .doc-table-wrap + .doc-html { margin-top: 14px; }
+
+  .doc-table-wrap { overflow-x: auto; }
+  .doc-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .doc-table th {
+    text-align: left; font-weight: 600; color: var(--color-text);
+    padding: 10px 12px; border-bottom: 1px solid var(--border-faint);
+    background: var(--bg-section-alt);
+  }
+  .doc-table td {
+    vertical-align: top; color: var(--color-muted); line-height: 1.6;
+    padding: 10px 12px; border-bottom: 1px solid var(--border-faint);
+  }
+  @media (max-width: 640px) {
+    .doc-section { gap: 14px; }
+    .doc-table thead { display: none; }
+    .doc-table, .doc-table tbody, .doc-table tr, .doc-table td { display: block; width: 100%; }
+    .doc-table tr { padding: 10px 0; border-bottom: 1px solid var(--border-faint); }
+    .doc-table td { border: none; padding: 3px 0; }
+    .doc-table td::before {
+      content: attr(data-label); display: block;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--color-subtle);
+    }
+  }
+
+  .doc-footer-links {
+    margin-top: 48px; text-align: center; font-size: 0.875rem; font-weight: 500;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px;
+  }
+  .doc-footer-links a { text-decoration: none; transition: opacity 0.15s; }
+  .doc-footer-links a:hover { opacity: 0.7; }
+  .doc-back { margin-top: 16px; text-align: center; }
+  .doc-back a { font-size: 0.875rem; color: var(--color-subtle); text-decoration: none; transition: color 0.15s ease; }
+  .doc-back a:hover { color: var(--color-muted); }
+</style>

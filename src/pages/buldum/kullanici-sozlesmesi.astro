@@ -1,0 +1,86 @@
+---
+import BuldumLegal from '../../components/BuldumLegal.astro';
+import type { LegalSection } from '../../components/BuldumLegal.astro';
+
+const email = 'support@companysoftware.app';
+const mail = `<a href="mailto:${email}">${email}</a>`;
+
+const sections: LegalSection[] = [
+  {
+    title: 'Taraflar',
+    html: `<p>Bu sözleşme, Buldum mobil uygulamasını ("Uygulama") sunan Company Software ("biz") ile Uygulama'ya üye olan kişi ("Kullanıcı", "sen") arasındadır. İletişim: ${mail}</p>`,
+  },
+  {
+    title: 'Kabul ve yaş',
+    html: `<p>Uygulama'yı kullanmak için <strong>18 yaşını doldurmuş olman</strong> gerekir. Üye olurken bu sözleşmeyi okuduğunu ve kabul ettiğini beyan edersin. Üyelik yalnızca Apple ile Giriş üzerinden yapılır; bir kişi tek hesap kullanır.</p>`,
+  },
+  {
+    title: 'Hizmetin niteliği',
+    html: `<p>Buldum, bulunan ve kaybedilen eşyalar için ilan verilmesini, ilanların eşleştirilmesini, kullanıcıların mesajlaşmasını ve eşyanın QR kodla ya da bir teslim noktası üzerinden sahibine ulaştırılmasını kolaylaştıran bir <strong>aracı platformdur</strong>. Biz eşyaları teslim almayız, saklamayız, taşımayız; sahiplik konusunda karar vermeyiz.</p>
+<p>Teslim noktaları (Metro İstanbul, İETT, havalimanları vb.) bağımsız kurumlardır; onların kuralları ve saatleri geçerlidir. Uygulama'daki rehber ve acil hat bilgileri genel yönlendirme niteliğindedir; resmî kurumun güncel açıklaması esastır.</p>`,
+  },
+  {
+    title: 'Bulunan eşyaya dair yasal yükümlülük',
+    html: `<p>Türk Medeni Kanunu'na göre bulunan eşya sahibine ya da kolluk güçlerine bildirilmelidir. Buldum'da ilan vermek bu yükümlülüğün yerini almaz; değerli eşyalar ve kimlik gibi resmî belgeler için resmî bir noktaya teslim etmeni öneririz.</p>`,
+  },
+  {
+    title: 'İlan kuralları',
+    html: `<p>İlan verirken şunlara uymayı kabul edersin:</p>
+<ol>
+  <li>T.C. kimlik, kart ya da hesap (IBAN) numarası paylaşmamak.</li>
+  <li>Yüz ve kişisel bilgi içeren fotoğraf koymamak; kimlik, kart, ehliyet ve pasaport ilanlarında fotoğraf kullanılamaz.</li>
+  <li>Eşyanın ayırt edici detayını ilana yazmamak; sahibini gizli soruyla doğrulamak.</li>
+  <li>Teslimden önce para, ödül ya da kargo ücreti istememek.</li>
+  <li>Eşyayı sahibine dürüstçe ulaştırmak; ulaştıramıyorsan resmî bir noktaya bırakmak.</li>
+</ol>`,
+  },
+  {
+    title: 'Yasak davranışlar',
+    html: `<p>Sahte ilan vermek; başkasının eşyasını sahiplenmeye çalışmak; dolandırıcılık, tehdit, şantaj, taciz, hakaret; Buldum Ekibi'ni ya da bir kurumu taklit etmek; kişisel verileri izinsiz toplamak; Uygulama'yı otomatik araçlarla kullanmak ya da güvenliğini aşmaya çalışmak yasaktır. Bu davranışlar hesabın kapatılmasına ve gerektiğinde yetkili makamlara bildirime yol açabilir.</p>`,
+  },
+  {
+    title: 'Teslim ve güvenlik',
+    html: `<p>Elden teslimde kalabalık ve kamuya açık yerlerde buluşmanı öneririz. Buluşmalar senin kararınla ve sorumluluğunda gerçekleşir; tehdit ya da şantajla karşılaşırsan uzaklaş, 112'yi ara ve Uygulama'dan raporla.</p>`,
+  },
+  {
+    title: 'Teşekkür bahşişi',
+    html: `<p>Eşyasını kaybeden kullanıcı, bulan kişiye <strong>isteğe bağlı</strong> bir teşekkür bahşişi teklif edebilir. Bahşiş seçeneği yalnızca doğrulanmış teslimden (QR ile teslim ya da teslim noktasında "Aldım" onayı) sonra açılır. Bulan kişi kabul ederse adını ve IBAN'ını yalnızca o kullanıcıyla, kendi isteğiyle paylaşır; ödeme kullanıcılar arasında kendi bankaları üzerinden yapılır.</p>
+<p><strong>Para Buldum'dan geçmez</strong>; Buldum bahşişin ödenip ödenmediğini doğrulamaz, garanti etmez ve bahşişle ilgili uyuşmazlıklarda taraf değildir. Bahşiş bir yükümlülük değil, gönüllü bir teşekkürdür. Kamu hizmeti yerinde ya da işyerinde bulunan eşyalar için o yerin sahibi veya kurum bahşiş talep edemez.</p>`,
+  },
+  {
+    title: 'Puanlar ve rozetler',
+    html: `<p>Güven puanı ve rozetler parasal değer taşımaz, devredilemez. Sahte teslimle puan toplamaya yönelik davranışlarda puanlar geri alınabilir.</p>`,
+  },
+  {
+    title: 'Moderasyon',
+    html: `<p>Kurallara aykırı içerikleri kaldırabilir, hesabı uyarabilir, en fazla 7 gün askıya alabilir ya da kalıcı olarak kapatabiliriz. Kalıcı olarak kapatılan hesabın yeniden açılmasını önlemek için Apple hesap kimliğinin geri çevrilemez bir özetini saklarız (ayrıntı: <a href="/buldum/gizlilik">Gizlilik Politikası</a>). Karara itiraz için ${mail} adresine yazabilirsin.</p>`,
+  },
+  {
+    title: 'Sorumluluğun sınırları',
+    html: `<p>Kullanıcıların verdiği ilanların doğruluğunu, eşyanın bulunmasını, teslimin gerçekleşmesini ya da kullanıcılar arasındaki ilişkileri garanti etmeyiz. Yasal olarak sınırlandırılamayan sorumluluklar saklıdır.</p>`,
+  },
+  {
+    title: 'Hesabın kapatılması',
+    html: `<p>Hesabını istediğin an Ayarlar'dan silebilirsin; silme Apple bağlantısını da iptal eder. Saklanması gereken kayıtlar <a href="/buldum/gizlilik">Gizlilik Politikası</a>'ndaki sürelerle sınırlıdır.</p>`,
+  },
+  {
+    title: 'Değişiklikler',
+    html: `<p>Sözleşmeyi güncelleyebiliriz; önemli değişikliklerde Uygulama seni bilgilendirir ve yeniden onay ister.</p>`,
+  },
+  {
+    title: 'Uygulanacak hukuk ve uyuşmazlık',
+    html: `<p>Türk hukuku uygulanır. Tüketici uyuşmazlıklarında tüketici hakem heyetleri ve tüketici mahkemeleri yetkilidir.</p>`,
+  },
+];
+---
+
+<BuldumLegal
+  pageTitle="Buldum — Kullanıcı Sözleşmesi"
+  heading="Kullanıcı Sözleşmesi"
+  description="Buldum kayıp ve bulunan eşya uygulaması kullanıcı sözleşmesi."
+  intro="Buldum'u kullanırken geçerli olan kurallar, hakların ve sorumluluklarımız."
+  version="2026-12"
+  lastUpdated="24 Kasım 2026"
+  sections={sections}
+  current="kullanici-sozlesmesi"
+/>

@@ -1,0 +1,303 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// App Store'da yayınlandığında buraya gerçek bağlantıyı koy.
+// null kaldığı sürece "Geliştiriliyor · Yakında App Store'da" gösterilir.
+const storeUrl: string | null = null;
+
+const accent = '#C98A1E';
+const email = 'support@companysoftware.app';
+
+const steps = [
+  { n: '1', title: 'Bulduğunu paylaş', text: 'Fotoğraf, kategori ve yaklaşık konumla birkaç adımda ilan ver. Ayırt edici detayı yazma; sahibini o detayla doğrularsın.' },
+  { n: '2', title: 'Sahibi bulsun', text: 'Kaybedilen ve bulunan ilanlar eşleştirilir; ilgili kişiye bildirim gider. Sahiplik, yalnızca sahibinin bildiği bir detayla doğrulanır.' },
+  { n: '3', title: 'Güvenle teslim et', text: 'Kamuya açık bir yerde tek kullanımlık QR kodla teslim et ya da eşyayı resmî bir teslim noktasına bırak.' },
+];
+
+const shots = [
+  { src: '/images/buldum/screen-1.jpg', alt: 'Keşfet ekranı: yakındaki bulunan eşyalar' },
+  { src: '/images/buldum/screen-2.jpg', alt: 'İlan detayı ve "Bu benim" talebi' },
+  { src: '/images/buldum/screen-3.jpg', alt: 'Harita ve teslim noktaları' },
+  { src: '/images/buldum/screen-4.jpg', alt: 'QR kodla teslim' },
+  { src: '/images/buldum/screen-5.jpg', alt: 'Acil Hatlar: önce dondur, sonra karar ver' },
+  { src: '/images/buldum/screen-6.jpg', alt: 'Koyu mod' },
+  { src: '/images/buldum/screen-7.jpg', alt: 'Teslimden önce güvenlik hatırlatması' },
+];
+
+const faqs = [
+  {
+    q: 'Buldum nedir?',
+    a: `İstanbul'da kaybolan ve bulunan eşyaları sahibine ulaştırmak için bir uygulama. Bulduğun eşyayı ilan edersin, kaybeden kişi ilanı bulur ya da eşleşme bildirimi alır; sahiplik doğrulandıktan sonra eşya güvenle teslim edilir.`,
+  },
+  {
+    q: 'Nasıl üye olurum?',
+    a: `Apple ile Giriş kullanılır; ayrıca şifre oluşturman gerekmez. Buldum'u kullanmak için 18 yaşını doldurmuş olman gerekir.`,
+  },
+  {
+    q: 'İlanımda konumum görünür mü?',
+    a: `Hayır. İlan konumu herkese yaklaşık olarak (~300 m) gösterilir; kesin konumu ekip dahil kimse göremez. Fotoğraflardaki konum bilgisi silinir.`,
+  },
+  {
+    q: 'Eşyanın bana ait olduğunu nasıl kanıtlarım?',
+    a: `İlanda "Bu benim" dediğinde, eşyayı bulan kişi sana yalnızca gerçek sahibinin bilebileceği bir detayı sorar. Bu yüzden ilan verirken eşyanın ayırt edici detayını ilana yazmamalısın.`,
+  },
+  {
+    q: 'Teslim nasıl yapılır?',
+    a: `Elden teslimde eşyanın sahibi uygulamada tek kullanımlık bir QR kod gösterir, eşyayı bulan kişi bu kodu okutur; okutulamazsa altındaki 6 haneli kod kullanılır. Ayrıca eşyayı Metro İstanbul ve İETT kayıp eşya ofisleri ya da havalimanları gibi resmî teslim noktalarına bırakabilirsin.`,
+  },
+  {
+    q: 'Teslim için buluşmak güvenli mi?',
+    a: `Kalabalık, kameralı ve kamuya açık bir yerde, gündüz buluşmanı öneririz. Teslimden önce para, ödül ya da kargo ücreti isteyen olursa sohbeti raporla. Tehdit hissedersen uzaklaş ve 112'yi ara.`,
+  },
+  {
+    q: 'Kimliğimi veya kartımı kaybettim, ne yapmalıyım?',
+    a: `Önce dondur, sonra karar ver. Uygulamadaki Acil Hatlar bölümünde bankaların ve kurumların resmî hatları tek dokunuşla aranır; kimlik ve ehliyet için Alo 199 ve e-Devlet, İstanbulkart için Alo 153 bilgileri yer alır. Kimlik ve kart ilanlarına güvenlik nedeniyle fotoğraf eklenemez.`,
+  },
+  {
+    q: 'Bahşiş vermek zorunda mıyım?',
+    a: `Hayır, tamamen isteğe bağlıdır. Teşekkür bahşişi seçeneği yalnızca doğrulanmış bir teslimden sonra açılır. Bulan kişi kabul ederse IBAN'ını yalnızca seninle paylaşır ve ödemeyi kendi bankandan yaparsın; para Buldum'dan geçmez.`,
+  },
+  {
+    q: 'Bir kullanıcıyı veya ilanı nasıl şikâyet ederim?',
+    a: `İlan ya da sohbet ekranındaki menüden raporlayabilirsin. Raporlar Buldum ekibi tarafından incelenir; kurallara aykırı içerik kaldırılır ve gerektiğinde hesap askıya alınır ya da kapatılır.`,
+  },
+  {
+    q: 'Hesabımı nasıl silerim?',
+    a: `Uygulamada Ayarlar bölümünden hesabını istediğin an silebilirsin; silme işlemi Apple bağlantısını da iptal eder. Hangi kayıtların ne kadar süre tutulduğu Gizlilik Politikası'nda yazılıdır.`,
+  },
+];
+
+const legal = [
+  { href: '/buldum/kullanici-sozlesmesi', label: 'Kullanıcı Sözleşmesi' },
+  { href: '/buldum/gizlilik', label: 'Gizlilik Politikası' },
+  { href: '/buldum/kvkk-aydinlatma', label: 'KVKK Aydınlatma Metni' },
+  { href: '/buldum/acik-riza-konum', label: 'Konum Açık Rızası' },
+];
+---
+
+<Layout
+  title="Buldum — Kayıp Eşya | Destek"
+  description="Buldum: İstanbul'da kaybolan eşya sahibini bulsun. Destek, sık sorulan sorular, gizlilik ve kullanım koşulları."
+  ogImage="/images/logo-buldum.png"
+>
+  <Header />
+
+  <main style="padding-top: 48px;">
+
+    <!-- ── Hero ───────────────────────────────── -->
+    <section class="hero-section">
+      <div class="hero-glow"></div>
+      <div class="hero-inner">
+        <img src="/images/logo-buldum.png" alt="Buldum" width="96" height="96" class="hero-logo" />
+        <div>
+          <h1 class="hero-title font-heading">Buldum</h1>
+          <p class="hero-desc">Kaybolan eşya sahibini bulsun. Bulduğunu paylaş, sahibini gizli detayla doğrula, güvenle teslim et.</p>
+        </div>
+
+        {storeUrl ? (
+          <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="appstore-badge">
+            <svg class="badge-apple-svg" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/>
+            </svg>
+            <div class="badge-text-wrap">
+              <span class="badge-line1">Download on the</span>
+              <span class="badge-line2">App Store</span>
+            </div>
+          </a>
+        ) : (
+          <div class="coming-soon">
+            <span class="dev-dot" aria-hidden="true"></span>
+            <span>Geliştiriliyor · Yakında App Store'da</span>
+          </div>
+        )}
+
+        <div class="privacy-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Reklam yok, takip yok. Konumun yalnızca yaklaşık gösterilir.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Geliştirme notu ───────────────────── -->
+    <section class="section narrow">
+      <div class="dev-note">
+        <h2 class="font-heading">Uygulama geliştirme aşamasında</h2>
+        <p>Buldum şu anda test ediliyor. İlk sürüm iPhone için App Store'da yayınlanacak; Android ve web sürümleri sonra gelecek. Görüş ve önerilerin için <a href={`mailto:${email}`}>{email}</a> adresine yazabilirsin.</p>
+      </div>
+    </section>
+
+    <!-- ── Nasıl çalışır ─────────────────────── -->
+    <section class="section">
+      <p class="eyebrow">Nasıl çalışır</p>
+      <h2 class="section-title font-heading">Üç adımda sahibine</h2>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step">
+            <span class="step-n">{s.n}</span>
+            <h3 class="font-heading">{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Ekran görüntüleri ─────────────────── -->
+    <section class="section">
+      <p class="eyebrow">Uygulamadan</p>
+      <h2 class="section-title font-heading">Güvenli, sade, hızlı</h2>
+      <div class="shots" tabindex="0" aria-label="Ekran görüntüleri">
+        {shots.map((s) => (
+          <img src={s.src} alt={s.alt} loading="lazy" width="900" height="1956" class="shot" />
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Destek / SSS ──────────────────────── -->
+    <section class="section narrow" id="destek">
+      <p class="eyebrow">Destek</p>
+      <h2 class="section-title font-heading">Sık sorulan sorular</h2>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="contact-card">
+        <h3 class="font-heading">Yanıtını bulamadın mı?</h3>
+        <p>Destek ekibine e-posta ile ulaşabilirsin. Hesabınla ilgili bir konuysa uygulamadaki hesabına bağlı e-posta adresinden yazman işleri hızlandırır.</p>
+        <a href={`mailto:${email}`} class="contact-btn">{email}</a>
+        <p class="contact-note">Acil bir durumda, örneğin tehdit ya da şantajla karşılaşırsan, 112'yi ara.</p>
+      </div>
+    </section>
+
+    <!-- ── Alt bağlantılar ───────────────────── -->
+    <div class="page-footer-strip">
+      <div class="page-footer-links">
+        {legal.map((l) => <a href={l.href} class="page-footer-link">{l.label}</a>)}
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style define:vars={{ accent }}>
+  .hero-section {
+    position: relative;
+    padding: 88px 24px 72px;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--bg-section-alt);
+    background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(232,162,60,0.16) 0%, transparent 65%);
+  }
+  .hero-inner {
+    position: relative; z-index: 10;
+    max-width: 640px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+  }
+  .hero-logo { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 24px 60px rgba(232,162,60,0.3); object-fit: contain; }
+  .hero-title { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 700; color: var(--color-text); line-height: 1.1; }
+  .hero-desc { margin-top: 12px; font-size: 1.05rem; color: var(--color-muted); line-height: 1.7; max-width: 520px; }
+
+  .coming-soon {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border-radius: 999px;
+    background: var(--bg-card); border: 1px solid var(--border-faint);
+    color: var(--color-text); font-size: 0.9rem; font-weight: 500;
+  }
+  .dev-dot { width: 8px; height: 8px; border-radius: 50%; background: #E8A23C; box-shadow: 0 0 0 4px rgba(232,162,60,0.2); }
+  .appstore-badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px;
+    background: #000; color: #fff; border-radius: 12px; text-decoration: none;
+  }
+  .badge-apple-svg { width: 24px; height: 24px; }
+  .badge-text-wrap { display: flex; flex-direction: column; text-align: left; line-height: 1.1; }
+  .badge-line1 { font-size: 11px; }
+  .badge-line2 { font-size: 18px; font-weight: 600; }
+
+  .privacy-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--color-muted);
+  }
+
+  .section { max-width: 1152px; margin: 0 auto; padding: 64px 24px 0; }
+  .section.narrow { max-width: 760px; }
+  .eyebrow { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-align: center; }
+  .section-title { margin-top: 8px; font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; color: var(--color-text); text-align: center; }
+
+  .dev-note {
+    padding: 24px 28px; border-radius: 18px;
+    background: rgba(232,162,60,0.08); border: 1px solid rgba(232,162,60,0.3);
+  }
+  .dev-note h2 { font-size: 1.1rem; font-weight: 600; color: var(--color-text); }
+  .dev-note p { margin-top: 8px; font-size: 0.92rem; color: var(--color-muted); line-height: 1.7; }
+  .dev-note a { color: var(--accent); font-weight: 500; text-decoration: none; }
+
+  .steps { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step { padding: 24px; border-radius: 18px; background: var(--bg-card); box-shadow: var(--shadow-card); }
+  .step-n {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 10px;
+    background: rgba(232,162,60,0.14); color: var(--accent); font-weight: 700; font-size: 0.85rem;
+  }
+  .step h3 { margin-top: 14px; font-size: 1.05rem; font-weight: 600; color: var(--color-text); }
+  .step p { margin-top: 8px; font-size: 0.9rem; color: var(--color-muted); line-height: 1.7; }
+
+  .shots {
+    margin-top: 32px; display: flex; gap: 16px; overflow-x: auto;
+    scroll-snap-type: x mandatory; padding-bottom: 12px;
+  }
+  .shot {
+    flex: 0 0 auto; width: 240px; height: auto; border-radius: 20px;
+    scroll-snap-align: start; box-shadow: var(--shadow-card);
+  }
+
+  .faq { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
+  .faq-item { border-radius: 14px; background: var(--bg-card); box-shadow: var(--shadow-card); padding: 0 20px; }
+  .faq-item summary {
+    cursor: pointer; list-style: none; padding: 18px 0;
+    font-weight: 600; font-size: 0.95rem; color: var(--color-text);
+    display: flex; justify-content: space-between; gap: 16px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; color: var(--accent); font-weight: 600; }
+  .faq-item[open] summary::after { content: '–'; }
+  .faq-item p { padding: 0 0 18px; font-size: 0.9rem; color: var(--color-muted); line-height: 1.75; }
+
+  .contact-card {
+    margin-top: 32px; padding: 28px; border-radius: 18px; text-align: center;
+    background: var(--bg-section-alt); border: 1px solid var(--border-faint);
+  }
+  .contact-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--color-text); }
+  .contact-card p { margin-top: 8px; font-size: 0.9rem; color: var(--color-muted); line-height: 1.7; }
+  .contact-btn {
+    display: inline-block; margin-top: 16px; padding: 12px 22px; border-radius: 999px;
+    background: #E8A23C; color: #12161F; font-weight: 600; text-decoration: none;
+  }
+  .contact-btn:hover { opacity: 0.85; }
+  .contact-note { font-size: 0.82rem !important; }
+
+  .page-footer-strip { max-width: 760px; margin: 0 auto; padding: 56px 24px 72px; }
+  .page-footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px; }
+  .page-footer-link { font-size: 0.875rem; font-weight: 500; color: var(--accent); text-decoration: none; }
+  .page-footer-link:hover { opacity: 0.7; }
+
+  @media (max-width: 768px) {
+    .steps { grid-template-columns: 1fr; }
+    .shot { width: 200px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shots { scroll-behavior: auto; }
+  }
+</style>

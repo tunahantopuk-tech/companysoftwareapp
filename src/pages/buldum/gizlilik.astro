@@ -1,0 +1,60 @@
+---
+import BuldumLegal from '../../components/BuldumLegal.astro';
+import type { LegalSection } from '../../components/BuldumLegal.astro';
+
+const email = 'support@companysoftware.app';
+
+const sections: LegalSection[] = [
+  {
+    title: 'Kısa özet',
+    html: `<p>Buldum mümkün olan en az veriyle çalışır: reklam yok, üçüncü taraf takip aracı yok, veriler Avrupa Birliği'nde (Frankfurt) tutulur.</p>`,
+  },
+  {
+    title: 'Hangi veriler, neden, ne kadar süre',
+    table: {
+      head: ['Veri', 'Neden', 'Ne zaman silinir'],
+      rows: [
+        ['Apple ile Giriş kimliği, e-posta (Apple\'ın gizli e-postası olabilir), görünen ad', 'Hesap açmak ve giriş yapmak', 'Hesap silinince'],
+        ['İlan bilgileri (kategori, açıklama, renk, marka, tarih)', 'İlanı yayınlamak ve eşleştirmek', 'İlan kapandıktan 12 ay sonra; hesap silinince'],
+        ['İlan fotoğrafları (yazılar ve yüzler cihazda bulanıklaştırılır, konum bilgisi silinir)', 'İlanı göstermek', 'İlan kapandıktan 90 gün sonra; sahipsiz yüklemeler 48 saat sonra'],
+        ['İlan konumu', 'Eşleştirme ve harita', 'Herkese ~300 m yaklaşık gösterilir; kesin konumu ekip dahil kimse göremez'],
+        ['Mesajlar', 'Kullanıcıların iletişimi', 'İlgili ilan kapandıktan 12 ay sonra ya da hesap silinince; ekip yalnızca raporlanan mesajları görebilir'],
+        ['Bahşiş için paylaşılan ad ve IBAN', 'Kullanıcının kendi isteğiyle bahşiş alabilmesi', 'Şifreli tutulur, 48 saat sonra silinir; yalnızca karşı taraf görür'],
+        ['Bildirim cihaz anahtarı', 'Bildirim göndermek', 'Hesap silinince ya da bildirim kapatılınca'],
+        ['Bildirim kayıtları', 'Uygulama içi bildirim listesi', '90 gün sonra'],
+        ['Rapor ve moderasyon kayıtları', 'Güvenlik ve kötüye kullanımı önleme', '2 yıl sonra; hesap silinince kimlik takma kimliğe çevrilir'],
+        ['Kalıcı ban özeti (Apple kimliğinin geri çevrilemez özeti)', 'Kapatılan hesabın yeniden açılmasını önlemek', 'Ban kaldırılınca; hesap silinse de ban sürdükçe kalır'],
+        ['Kimliksiz çökme ve kullanım verisi (sürüm, cihaz modeli, olay adı; kimlik yok)', 'Uygulamayı iyileştirmek', 'Çökmeler 90 gün, olaylar 13 ay sonra; Ayarlar\'dan kapatılabilir'],
+        ['Sunucu erişim günlükleri (IP adresi)', 'Altyapının güvenliği', 'Barındırma sağlayıcısında yaklaşık 1 gün'],
+      ],
+    },
+  },
+  {
+    title: 'Yalnızca telefonunda kalanlar',
+    html: `<p>"Bankalarım" listesi, ilan taslakları, toplu taşıma hattı seçimin, rehber ilerlemen ve isteyerek hatırlattığın bahşiş bilgileri sunucuya gönderilmez. Yakındaki karakol ve AVM araması cihazınla Apple Haritalar arasında yapılır.</p>`,
+  },
+  {
+    title: 'Kimlerle paylaşılır',
+    html: `<p>Verini satmayız, reklam için kullanmayız. Hizmeti sunmak için Supabase (veritabanı ve dosya depolama, Frankfurt) ve Apple (giriş ve bildirim) kullanılır. Yasal bir zorunluluk olduğunda yetkili makamlarla paylaşılabilir.</p>`,
+  },
+  {
+    title: 'Hakların',
+    html: `<p>Verine erişme, düzeltme, silme ve itiraz hakların için <a href="/buldum/kvkk-aydinlatma">KVKK Aydınlatma Metni</a>'ne bak. Hesabını Ayarlar'dan anında silebilirsin. Sorularını <a href="mailto:${email}">${email}</a> adresine yazabilirsin.</p>`,
+  },
+  {
+    title: 'Değişiklikler',
+    html: `<p>Politika değişince Uygulama seni bilgilendirir. Son güncelleme tarihi bu sayfanın başında yer alır.</p>`,
+  },
+];
+---
+
+<BuldumLegal
+  pageTitle="Buldum — Gizlilik Politikası"
+  heading="Gizlilik Politikası"
+  description="Buldum gizlilik politikası: hangi veriler, neden ve ne kadar süre tutulur. Reklam ve üçüncü taraf takip yok."
+  intro="Buldum hangi verini, neden ve ne kadar süre tutar; neyi hiç toplamaz."
+  version="2026-12"
+  lastUpdated="24 Kasım 2026"
+  sections={sections}
+  current="gizlilik"
+/>
