@@ -7,6 +7,7 @@ import Footer from './Footer.astro';
 
 export interface LegalSection {
   title: string;
+  id?: string;
   html?: string;
   table?: { head: string[]; rows: string[][] };
   after?: string;
@@ -52,7 +53,7 @@ const docs = [
 
     <div class="doc-body">
       {sections.map((s, i) => (
-        <div class="doc-section">
+        <div class="doc-section" id={s.id}>
           <div class="doc-num-wrap" style={`background:${accent}18; border:1px solid ${accent}30;`}>
             <span class="doc-num" style={`color:${accent};`}>{i + 1}</span>
           </div>
@@ -173,4 +174,5 @@ const docs = [
   .doc-back { margin-top: 16px; text-align: center; }
   .doc-back a { font-size: 0.875rem; color: var(--color-subtle); text-decoration: none; transition: color 0.15s ease; }
   .doc-back a:hover { color: var(--color-muted); }
+  .doc-section { scroll-margin-top: 96px; }
 </style>
