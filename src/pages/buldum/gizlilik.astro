@@ -14,7 +14,7 @@ const sections: LegalSection[] = [
     table: {
       head: ['Veri', 'Neden', 'Ne zaman silinir'],
       rows: [
-        ['Apple ile Giriş kimliği, e-posta (Apple\'ın gizli e-postası olabilir), görünen ad', 'Hesap açmak ve giriş yapmak', 'Hesap silinince'],
+        ['Apple ile Giriş ya da Google ile Giriş kimliği, e-posta (Apple\'ın gizli e-postası olabilir), görünen ad', 'Hesap açmak ve giriş yapmak', 'Hesap silinince'],
         ['İlan bilgileri (kategori, açıklama, renk, marka, tarih)', 'İlanı yayınlamak ve eşleştirmek', 'İlan kapandıktan 12 ay sonra; hesap silinince'],
         ['İlan fotoğrafları (yazılar ve yüzler cihazda bulanıklaştırılır, konum bilgisi silinir)', 'İlanı göstermek', 'İlan kapandıktan 90 gün sonra; sahipsiz yüklemeler 48 saat sonra'],
         ['İlan konumu', 'Eşleştirme ve harita', 'Herkese ~300 m yaklaşık gösterilir; kesin konumu ekip dahil kimse göremez'],
@@ -23,7 +23,7 @@ const sections: LegalSection[] = [
         ['Bildirim cihaz anahtarı', 'Bildirim göndermek', 'Hesap silinince ya da bildirim kapatılınca'],
         ['Bildirim kayıtları', 'Uygulama içi bildirim listesi', '90 gün sonra'],
         ['Rapor ve moderasyon kayıtları', 'Güvenlik ve kötüye kullanımı önleme', '2 yıl sonra; hesap silinince kimlik takma kimliğe çevrilir'],
-        ['Kalıcı ban özeti (Apple kimliğinin geri çevrilemez özeti)', 'Kapatılan hesabın yeniden açılmasını önlemek', 'Ban kaldırılınca; hesap silinse de ban sürdükçe kalır'],
+        ['Kalıcı ban özeti (Apple ya da Google hesap kimliğinin geri çevrilemez özeti)', 'Kapatılan hesabın yeniden açılmasını önlemek', 'Ban kaldırılınca; hesap silinse de ban sürdükçe kalır'],
         ['Kimliksiz çökme ve kullanım verisi (sürüm, cihaz modeli, olay adı; kimlik yok)', 'Uygulamayı iyileştirmek', 'Çökmeler 90 gün, olaylar 13 ay sonra; Ayarlar\'dan kapatılabilir'],
         ['Sunucu erişim günlükleri (IP adresi)', 'Altyapının güvenliği', 'Barındırma sağlayıcısında yaklaşık 1 gün'],
       ],
@@ -35,7 +35,7 @@ const sections: LegalSection[] = [
   },
   {
     title: 'Kimlerle paylaşılır',
-    html: `<p>Verini satmayız, reklam için kullanmayız. Hizmeti sunmak için Supabase (veritabanı ve dosya depolama, Frankfurt) ve Apple (giriş ve bildirim) kullanılır. Yasal bir zorunluluk olduğunda yetkili makamlarla paylaşılabilir.</p>`,
+    html: `<p>Verini satmayız, reklam için kullanmayız. Hizmeti sunmak için Supabase (veritabanı ve dosya depolama, Frankfurt) ve Apple (giriş ve bildirim) ile Google (yalnızca Google ile Giriş'i seçersen giriş) kullanılır. Google'dan yalnızca hesap kimliğin, e-posta adresin ve adın alınır; Google hesabındaki başka hiçbir bilgiye erişilmez. Yasal bir zorunluluk olduğunda yetkili makamlarla paylaşılabilir.</p>`,
   },
   {
     title: 'Hakların',
@@ -54,7 +54,7 @@ const sections: LegalSection[] = [
   description="Buldum gizlilik politikası: hangi veriler, neden ve ne kadar süre tutulur. Reklam ve üçüncü taraf takip yok."
   intro="Buldum hangi verini, neden ve ne kadar süre tutar; neyi hiç toplamaz."
   version="2026-12"
-  lastUpdated="24 Kasım 2026"
+  lastUpdated="25 Kasım 2026"
   sections={sections}
   current="gizlilik"
 />

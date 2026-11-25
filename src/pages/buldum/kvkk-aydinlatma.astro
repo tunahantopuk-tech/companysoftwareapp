@@ -16,7 +16,7 @@ const sections: LegalSection[] = [
     table: {
       head: ['Veri kategorisi', 'Amaç', 'Hukuki sebep (KVKK m. 5)'],
       rows: [
-        ['Kimlik ve iletişim (görünen ad, Apple kimliği, e-posta)', 'Üyelik, giriş, hesap güvenliği', 'Sözleşmenin kurulması ve ifası (m. 5/2-c)'],
+        ['Kimlik ve iletişim (görünen ad, Apple ya da Google hesap kimliği, e-posta)', 'Üyelik, giriş, hesap güvenliği', 'Sözleşmenin kurulması ve ifası (m. 5/2-c)'],
         ['İlan ve içerik (ilan bilgisi, bulanıklaştırılmış fotoğraf, mesajlar)', 'Hizmetin sunulması, eşleştirme', 'Sözleşmenin ifası (m. 5/2-c)'],
         ['Konum (ilan konumu; isteğe bağlı cihaz konumu)', 'Eşleştirme, yakındaki ilanlar, bölge alarmı', 'İlan konumu için sözleşmenin ifası; cihaz konumu için açık rıza (m. 5/1)'],
         ['Bahşiş için ad ve IBAN', 'Kullanıcının talebiyle karşı tarafa iletilmesi', 'Açık rıza (m. 5/1)'],
@@ -27,11 +27,11 @@ const sections: LegalSection[] = [
   },
   {
     title: 'Aktarım',
-    html: `<p>Kişisel verilerin, hizmetin sunulması için veri işleyen sıfatıyla çalıştığımız Supabase'e (sunucular Almanya/Frankfurt) ve giriş ile bildirim için Apple'a aktarılır. Bu aktarımlar KVKK m. 9 kapsamında yurt dışına aktarım niteliğindedir ve KVKK m. 9'da öngörülen şartlara uygun olarak yapılır. Yasal zorunluluk hâlinde yetkili kamu kurumlarına aktarılabilir. Bahşiş bilgileri yalnızca senin seçtiğin karşı kullanıcıya iletilir.</p>`,
+    html: `<p>Kişisel verilerin, hizmetin sunulması için veri işleyen sıfatıyla çalıştığımız Supabase'e (sunucular Almanya/Frankfurt) giriş ile bildirim için Apple'a ve Google ile Giriş'i seçersen giriş için Google'a aktarılır. Bu aktarımlar KVKK m. 9 kapsamında yurt dışına aktarım niteliğindedir ve KVKK m. 9'da öngörülen şartlara uygun olarak yapılır. Yasal zorunluluk hâlinde yetkili kamu kurumlarına aktarılabilir. Bahşiş bilgileri yalnızca senin seçtiğin karşı kullanıcıya iletilir.</p>`,
   },
   {
     title: 'Toplama yöntemi',
-    html: `<p>Veriler Uygulama üzerinden, senin girdiğin bilgilerle ve Apple ile Giriş aracılığıyla elektronik ortamda toplanır.</p>`,
+    html: `<p>Veriler Uygulama üzerinden, senin girdiğin bilgilerle ve Apple ile Giriş ya da Google ile Giriş aracılığıyla elektronik ortamda toplanır.</p>`,
   },
   {
     title: 'Saklama süreleri',
@@ -54,7 +54,7 @@ const sections: LegalSection[] = [
   description="Buldum uygulaması 6698 sayılı KVKK kapsamında aydınlatma metni."
   intro="Kişisel verilerinin hangi amaçla ve hangi hukuki sebeple işlendiği, kimlere aktarıldığı ve hakların."
   version="2026-12"
-  lastUpdated="24 Kasım 2026"
+  lastUpdated="25 Kasım 2026"
   sections={sections}
   current="kvkk-aydinlatma"
 />
