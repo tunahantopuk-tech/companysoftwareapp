@@ -1,0 +1,160 @@
+---
+// Buldum — paylaşılan ilan sayfası (/buldum/ilan/<KOD>).
+// Statik sayfa: vercel.json, /buldum/ilan/<KOD> isteklerini buraya yönlendirir.
+// Kod adres çubuğundan okunur, ilan kartı tarayıcıda get_shared_listing_card RPC'siyle alınır.
+// Yalnızca kamuya açık kart alanları gösterilir; açıklama, sahip ve konum bilgisi yoktur.
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Supabase proje adresi ve YAYINLANABİLİR (publishable/anon) anahtar. Gizli anahtar DEĞİLDİR;
+// uygulamanın içinde de bulunur. Canlı projeye geçince bu iki değer değiştirilecek.
+const SUPABASE_URL = 'https://oreqavvmnlohdjamjrip.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_wb2zEp5DxCsMn0kmUZMLzA_4VwViFmD';
+// App Store bağlantısı yayından sonra doldurulacak; boşken "Yakında App Store'da" yazar.
+const APP_STORE_URL = '';
+---
+
+<Layout title="Buldum'da bir ilan" description="Buldum'da paylaşılan bir kayıp ya da bulunan eşya ilanı. Ayrıntılar için Buldum uygulamasını aç." ogImage="/images/logo-buldum.png">
+  <Header />
+  <main class="share-page">
+    <div class="share-wrap">
+      <a href="/buldum" class="share-brand">
+        <img src="/images/logo-buldum.png" alt="" width="40" height="40" />
+        <span>Buldum</span>
+      </a>
+
+      <article id="card" class="share-card" aria-live="polite">
+        <div id="state-loading" class="share-state">İlan yükleniyor…</div>
+
+        <div id="state-error" class="share-state" hidden>
+          <h1 class="share-title">İlan açılamadı</h1>
+          <p id="error-text" class="share-muted">Bağlantı hatalı olabilir ya da bir sorun oluştu. Biraz sonra yeniden dene.</p>
+        </div>
+
+        <div id="state-ok" hidden>
+          <div class="share-thumb" id="thumb-wrap" hidden>
+            <img id="thumb" alt="" loading="lazy" />
+          </div>
+          <div class="share-body">
+            <div class="share-pills">
+              <span id="type-pill" class="pill"></span>
+              <span id="status-pill" class="pill pill-outline"></span>
+            </div>
+            <h1 id="title" class="share-title"></h1>
+            <p id="meta" class="share-muted"></p>
+            <p class="share-code">İlan kodu: <strong id="code"></strong></p>
+          </div>
+        </div>
+      </article>
+
+      <div class="share-cta">
+        <p class="share-lead">Ayrıntıları görmek, sahibine ulaşmak ya da "Bu benim olabilir" demek için Buldum uygulamasını aç.</p>
+        {APP_STORE_URL
+          ? <a class="btn-primary" href={APP_STORE_URL}>App Store'dan indir</a>
+          : <span class="btn-primary btn-disabled" aria-disabled="true">Yakında App Store'da</span>}
+        <p class="share-hint">Uygulama telefonunda yüklüyse bu bağlantıyı Mesajlar, WhatsApp ya da Notlar'dan açtığında ilan doğrudan uygulamada açılır.</p>
+      </div>
+
+      <p class="share-privacy">Bu sayfada yalnızca ilanın türü, kısa başlığı, kategorisi, bölgesi, günü ve durumu gösterilir. Açıklama, kesin konum ve kişi bilgisi paylaşılmaz. <a href="/buldum/gizlilik">Gizlilik Politikası</a></p>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY }}>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    function show(id) { ['state-loading', 'state-error', 'state-ok'].forEach(function (s) { $(s).hidden = s !== id; }); }
+    function fail(text) { if (text) $('error-text').textContent = text; show('state-error'); }
+
+    var parts = location.pathname.replace(/\/+$/, '').split('/');
+    var raw = decodeURIComponent(parts[parts.length - 1] || '').trim().toUpperCase();
+    if (!/^(BLD|KYB)-[0-9A-Z]{4,12}$/.test(raw)) { fail('Bu bağlantıda geçerli bir ilan kodu yok.'); return; }
+
+    var MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    function formatDay(d) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(d || ''));
+      return m ? (parseInt(m[3], 10) + ' ' + MONTHS[parseInt(m[2], 10) - 1] + ' ' + m[1]) : '';
+    }
+    function cap(s) { s = String(s || ''); return s ? s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1) : ''; }
+
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 10000);
+
+    fetch(SUPABASE_URL + '/rest/v1/rpc/get_shared_listing_card', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY },
+      body: JSON.stringify({ p_code: raw }),
+      signal: ctrl.signal
+    })
+      .then(function (r) {
+        if (r.status === 429) throw new Error('rate');
+        if (!r.ok) throw new Error('http');
+        return r.json();
+      })
+      .then(function (data) {
+        clearTimeout(timer);
+        var row = Array.isArray(data) ? data[0] : data;
+        if (!row || row.status === 'unavailable') { fail('Bu ilan artık yayında değil.'); return; }
+
+        var found = row.type === 'found';
+        var typePill = $('type-pill');
+        typePill.textContent = found ? 'Buldum' : 'Kaybettim';
+        typePill.className = 'pill ' + (found ? 'pill-found' : 'pill-lost');
+
+        var statusText = { open: 'Yayında', reunited: 'Sahibine kavuştu', closed: 'Kapandı' }[row.status] || '';
+        $('status-pill').textContent = statusText;
+        $('status-pill').hidden = !statusText;
+
+        $('title').textContent = row.title || 'İlan';
+        var place = [row.neighborhood, row.district].filter(Boolean).join(', ');
+        var day = formatDay(row.day);
+        var meta = [cap(row.category), place, day ? (found ? day + ' tarihinde bulundu' : day + ' tarihinde kaybedildi') : ''].filter(Boolean).join(' · ');
+        $('meta').textContent = meta;
+        $('code').textContent = row.code || raw;
+        document.title = (row.title ? row.title + ' — ' : '') + 'Buldum';
+
+        if (row.thumb_url && /^https:\/\//.test(row.thumb_url)) {
+          var img = $('thumb');
+          img.onerror = function () { $('thumb-wrap').hidden = true; };
+          img.src = row.thumb_url;
+          $('thumb-wrap').hidden = false;
+        }
+        show('state-ok');
+      })
+      .catch(function (e) {
+        clearTimeout(timer);
+        if (e && e.message === 'rate') fail('Kısa sürede çok fazla istek geldi. Biraz sonra yeniden dene.');
+        else fail();
+      });
+  })();
+</script>
+
+<style>
+  .share-page { background: #F5F2EB; min-height: 70vh; padding: 48px 20px 64px; }
+  .share-wrap { max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+  .share-brand { display: inline-flex; align-items: center; gap: 10px; color: #12161F; font-weight: 600; font-size: 18px; text-decoration: none; }
+  .share-brand img { border-radius: 10px; }
+  .share-card { background: #FBFAF6; border: 1px solid rgba(18,22,31,0.08); border-radius: 22px; overflow: hidden; box-shadow: 0 8px 28px rgba(18,22,31,0.06); }
+  .share-state { padding: 28px 22px; color: #5B6170; }
+  .share-thumb { aspect-ratio: 4 / 3; background: #EDE7DA; }
+  .share-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .share-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .share-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .pill-found { background: #F7E6C4; color: #7A4E07; }
+  .pill-lost { background: #DCE3EE; color: #2C3E5C; }
+  .pill-outline { border: 1px solid rgba(18,22,31,0.16); color: #3A404D; font-weight: 500; }
+  .share-title { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.2; color: #12161F; margin: 0; }
+  .share-muted { color: #5B6170; margin: 0; font-size: 15px; line-height: 1.5; }
+  .share-code { color: #5B6170; margin: 0; font-size: 14px; }
+  .share-code strong { color: #12161F; letter-spacing: 0.02em; }
+  .share-cta { display: flex; flex-direction: column; gap: 12px; }
+  .share-lead { color: #12161F; margin: 0; font-size: 16px; line-height: 1.5; }
+  .btn-primary { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border-radius: 14px; background: #E8A23C; color: #12161F; font-weight: 600; text-decoration: none; padding: 0 20px; }
+  .btn-disabled { opacity: 0.65; cursor: default; }
+  .share-hint { color: #5B6170; margin: 0; font-size: 13px; line-height: 1.5; }
+  .share-privacy { color: #7A808C; font-size: 12px; line-height: 1.5; margin: 0; }
+  .share-privacy a { color: #C98A1E; }
+</style>

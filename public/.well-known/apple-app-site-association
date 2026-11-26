@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["CWY8X7J3F6.app.companysoftware.buldum"],
+        "components": [
+          { "/": "/buldum/ilan/*", "comment": "Paylaşılan Buldum ilanları" }
+        ]
+      }
+    ]
+  }
+}
