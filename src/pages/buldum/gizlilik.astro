@@ -23,6 +23,9 @@ const sections: LegalSection[] = [
         ['İyilik Puanı hareketleri ve hediye çeki talepleri', 'Puan programını yürütmek ve kötüye kullanımı önlemek', 'Puanlar kazanıldıktan 12 ay sonra; hesap silinince. Ekip işlem kayıtları takma kimliğe çevrilir'],
         ['Hediye çeki kodu', 'Kodu yalnızca sana teslim etmek', 'Şifreli tutulur, yalnızca sen görebilirsin; hesap silinince silinir'],
         ['"Sorun bildir" mesajları, isteğe bağlı cihaz bilgisi (sürüm, iOS sürümü, cihaz modeli, dil) ve eklediğin ekran görüntüleri', 'Sorunları çözmek ve sana yanıt vermek', '12 ay sonra; yalnızca ekip görür. Misafir mesajlarında kötüye kullanımı sınırlamak için günlük, geri çevrilemez bir IP özeti tutulur'],
+        ['"Ben buldum" bildirimi (yer, zaman, eşyanın durumu, isteğe bağlı fotoğraf ve not)', 'Bulunan eşyayı sahibine ulaştırmak', 'Yalnızca ilan sahibiyle paylaşılır; herkese açık listelerde, haritada ve aramada gösterilmez. Fotoğraf cihazda bulanıklaştırılır, konum bilgisi silinir. İlan kapanınca ya da hesap silinince silinir'],
+        ['Doğrulama sorusu ve cevabı', 'Teslim noktasındaki eşyanın gerçek sahibine verilmesi', 'Cevap saklanmaz; yalnızca karşılaştırma için geri çevrilemez bir özet tutulur, ekip dahil kimse göremez. Deneme kayıtları ilan kapanınca ya da en geç 90 gün sonra silinir'],
+        ['Teslim kanıtı (isteğe bağlı fotoğraf ve görevli adı)', 'Teslimle ilgili anlaşmazlıkları çözmek', 'Yalnızca ekip ve eşyanın doğrulanmış sahibi görür; ilan kapanınca ya da hesap silinince silinir'],
         ['Bildirim cihaz anahtarı', 'Bildirim göndermek', 'Hesap silinince ya da bildirim kapatılınca'],
         ['Bildirim kayıtları', 'Uygulama içi bildirim listesi', '90 gün sonra'],
         ['Rapor ve moderasyon kayıtları', 'Güvenlik ve kötüye kullanımı önleme', '2 yıl sonra; hesap silinince kimlik takma kimliğe çevrilir'],
@@ -39,6 +42,7 @@ const sections: LegalSection[] = [
   {
     title: 'Kimlerle paylaşılır',
     html: `<p>Verini satmayız, reklam için kullanmayız. Hizmeti sunmak için Supabase (veritabanı ve dosya depolama, Frankfurt) ve Apple (giriş ve bildirim) ile Google (yalnızca Google ile Giriş'i seçersen giriş) kullanılır. Google'dan yalnızca hesap kimliğin, e-posta adresin ve adın alınır; Google hesabındaki başka hiçbir bilgiye erişilmez. Yasal bir zorunluluk olduğunda yetkili makamlarla paylaşılabilir.</p>
+<p>Para iadesi isteyen mesajlar kötüye kullanımı önlemek için otomatik işaretlenir ve ekip tarafından incelenebilir; 1.000 TL üstü bahşiş teklifleri de incelenebilir.</p>
 <p>Bir ilanı paylaştığında oluşan bağlantı (companysoftware.app/buldum/ilan/…) yalnızca ilan kodunu içerir. Bu sayfa herkese yalnızca ilanın türünü, kısa başlığını, kategorisini, ilçe ve semtini, gününü ve durumunu gösterir; açıklama, kesin konum ve kişi bilgisi gösterilmez.</p>
 <p>Teslim noktası verilerinin bir kısmı Wikidata (CC0) ve © OpenStreetMap katkıcıları (ODbL) kaynaklıdır.</p>`,
   },
@@ -59,7 +63,7 @@ const sections: LegalSection[] = [
   description="Buldum gizlilik politikası: hangi veriler, neden ve ne kadar süre tutulur. Reklam ve üçüncü taraf takip yok."
   intro="Buldum hangi verini, neden ve ne kadar süre tutar; neyi hiç toplamaz."
   version="2026-12"
-  lastUpdated="26 Kasım 2026"
+  lastUpdated="27 Kasım 2026"
   sections={sections}
   current="gizlilik"
 />
